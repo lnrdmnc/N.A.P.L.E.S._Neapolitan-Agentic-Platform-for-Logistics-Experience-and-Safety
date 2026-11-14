@@ -6,7 +6,7 @@ Il repository si chiamava in precedenza `CoScienze-TheBigHack2026`.
 
 ## Stato attuale
 
-Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. La web app non c'è ancora; il piano (docs/PIANO.md) è in corso. Il dettaglio è in [docs/STATO.md](docs/STATO.md).
+Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. La web app è in corso. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
 
 ## Come avviare
 
@@ -25,6 +25,7 @@ Serve [uv](https://docs.astral.sh/uv/).
 - `agents/`: modulo agenti in Python (API FastAPI, scenario, test); vedi [agents/README.md](agents/README.md)
 - `contracts/`: contratti tra i moduli; vedi [contracts/README.md](contracts/README.md)
 - `docs/PROGETTO.md`: concept del progetto
+- `docs/PIANO.md`: piano di lavoro (decisioni, architettura, contratti, compiti, orari e tagli)
 - `docs/GUIDA.md`: guida del team (prompt, template, regole per i tre PC)
 - `docs/TEAM.md`: componenti del team, utenti GitHub ed email per i commit
 - `docs/STATO.md`: scadenze, chi lavora su cosa, fatto e compiti liberi
@@ -40,6 +41,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 15:40 | docs | Piano di lavoro in docs/PIANO.md, costruito sul modulo agenti; compiti liberi e orari aggiornati in docs/STATO.md |
 | 2026-11-14 | 15:30 | repo | Tolti i marcatori di conflitto rimasti in README.md e docs/STATO.md |
 | 2026-11-14 | 15:22 | repo | docs/TEAM.md: aggiornata l'email dei commit di Leonardo Monaco |
 | 2026-11-14 | 15:20 | agents | Modulo agenti in Python: cinque agenti, scenario Maradona simulato, registro a hash, indicatori, API e contratto OpenAPI |

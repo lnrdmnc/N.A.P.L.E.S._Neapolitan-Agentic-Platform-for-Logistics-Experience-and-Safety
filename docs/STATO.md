@@ -4,14 +4,18 @@
 
 | Quando          | Cosa                                                          |
 | --------------- | ------------------------------------------------------------- |
-| sab 14/11 14:30 | piano approvato, contratti e moduli definiti                  |
-| sab 14/11 16:30 | simulatore e scenario con Rischio, Mobilità e Orchestratore   |
-| sab 14/11 18:30 | control room, lato utente e indicatori a confronto            |
+| sab 14/11 15:45 | piano su main (era 14:30)                                     |
+| sab 14/11 16:30 | B0 (struttura del backend e contratti nuovi) e scheletro della web app su main |
+| sab 14/11 18:00 | il percorso demo si vede a schermo: linea del tempo, piano con approvazione, avviso sul telefono |
+| sab 14/11 18:30 | controllo: se il traguardo delle 18:00 manca, nessuna funzione nuova nel backend finché non c'è |
+| sab 14/11 19:30 | simulatore a zone nella sessione, mappa, indicatori a confronto |
 | sab 14/11 20:30 | stop lavori: stato salvato, esecuzione demo registrata        |
 | dom 15/11 08:30 | ripresa                                                       |
 | dom 15/11 10:30 | stop alle nuove funzionalità                                  |
 | dom 15/11 11:30 | pacchetto di consegna pronto                                  |
 | dom 15/11 12:00 | consegna                                                      |
+
+Le 20:30, le 8:30 e le 12:00 sono orari ufficiali; gli altri sono traguardi interni, rivisti con il piano (docs/PIANO.md, sezione 8).
 
 ## Consegna: regole che possono escluderci
 
@@ -28,7 +32,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| Piano con moduli, contratti e compiti (docs/PIANO.md) | Leonardo Schiavo | sab 14/11 14:30 | Prompt principale: produce il piano, nessun codice |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | Prima lo scheletro; API degli agenti e contratti da concordare con Leonardo Monaco |
 
 ## Fatto
@@ -39,20 +42,34 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - Checklist di consegna dal regolamento; CLAUDE.md aggiornato a cinque persone. Sottotitolo della challenge verificato sulla pagina italiana: «la città che Ci pensa».
 - Decisioni in docs/PROGETTO.md: web app PWA con due viste, `/control-room` e `/cittadino` (sezione 6.1); gestione degli alert in tre casi con formato CAP semplificato (sezione 6.2). Il piano deve tenerne conto.
 - Modulo agenti in Python (`agents/`): Rischio, Mobilità, Folla, Comunicazione, Orchestratore con regole deterministiche; scenario Maradona simulato; registro a catena di hash; indicatori con e senza coordinamento; API FastAPI (`make agents-run`, porta 8000). Contratto in `contracts/agenti.openapi.json`. 12 test; `make check` ora esegue anche lint e test degli agenti.
+- Piano di lavoro in docs/PIANO.md, costruito sul modulo agenti: decisioni, architettura, contratti da aggiungere, cosa manca rispetto al brief, compiti con dipendenze e prove a mano, orari e tagli. Fonti dati verificate con chiamate reali (INGV, GTFS di ANM ed EAV, Open-Meteo, OSRM): esito nella sezione 10 del piano.
 
 ## Prossimi compiti liberi
 
-- Piano con moduli, contratti e compiti (Prompt principale, `fable` a `max`, plan mode): produce docs/PIANO.md.
-- Stand: fare le domande dello sponsor e degli organizzatori e scrivere le risposte in docs/STAND.md.
-- Chiave del modello: procurarla e metterla in .env.
-- Web app: collegare `/control-room` e `/cittadino` alle API degli agenti (percorso demo in `agents/README.md`).
-- Agenti: dati INGV reali via FDSN con copia in cache, al posto delle scosse simulate quando servono.
-- Agenti: testi dell'Orchestratore e della Comunicazione riformulati con LLM, con cache; mai per le allerte ufficiali (caso A).
-- Agenti: verificare con il team nomi delle stazioni, capacità e soglie in `scenario_maradona.json` e in docs/IPOTESI.md.
+Le schede complete, con file, dipendenze, verifica e prova a mano, sono in docs/PIANO.md, sezione 7. `…/` sta per `agents/src/napoles_agents/`.
+
+Subito, in parallelo:
+
+- **B0** — Struttura del backend e stub dei contratti nuovi (`…/api/`, `…/models/`, `…/bus.py`): divide `api.py` e `models.py` in un file per area e aggiunge la linea del tempo dei messaggi. Blocca quasi tutto il backend: va fatto da chi conosce il modulo agenti, o insieme a lui.
+- **S0** — Simulatore a zone, funzione pura (`…/simulatore.py`).
+- **L0** — Strato LLM: finto, compatibile OpenAI, Anthropic, cache (`…/llm/`).
+- **D1** — Dati: copie in cache e docs/DATI.md, 40 minuti al massimo.
+- **H1** — Persone: stand (docs/STAND.md), chiave del modello e chiave Google Maps in `.env`, nome del team, checkpoint con i mentor.
+- Verificare con il team nomi delle stazioni, capacità e soglie in `scenario_maradona.json` e in docs/IPOTESI.md.
+
+Dopo B0, backend: **B1** simulatore nella sessione (serve S0), **B2** modifica del piano (non in parallelo con B1), **B3** conferma di ricezione, **B4** indicatori con origine (dopo B1), **B5** testi dal modello (serve L0), **F1–F4** fonti INGV, meteo, GTFS, mappe (serve D1), **B6** itinerario del turista, **P1** strumento di prova, **R1** registro su file e comando di verifica.
+
+Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Se avanza tempo: U2, C6, U3, X2, U4.
 
 ## Problemi aperti
 
+- **Da decidere subito, a voce: un solo backend.** La riga della web app parla di un secondo backend in `backend/`; il piano raccomanda che l'API degli agenti serva anche la web app compilata (docs/PIANO.md, sezione 3).
+- Indicatori: i minuti tra evento e avviso e i minuti per decidere oggi sono ipotesi in ingresso, non risultati. Vanno etichettati così finché il compito B4 non li misura nella sessione (docs/PIANO.md, sezione 9).
+- Chiave del modello e chiave Google Maps non ancora in `.env`. Senza la prima la demo usa i testi a regole.
+- Le stime del piano non lasciano margine: alle 18:30 vale la linea di taglio (docs/PIANO.md, sezione 8).
+- Scenario: l'allerta meteo arriva al minuto 85, prima del fischio finale (95); PROGETTO.md la vuole durante il deflusso. Da valutare se spostarla.
+- Dati: il feed GTFS di EAV è etichettato «Prova» nel catalogo e va controllato; la richiesta dei confini dei quartieri a Overpass è stata rifiutata; i termini di Google sulla conservazione delle risposte vanno verificati; il livello di allerta vulcanica va controllato sulla fonte ufficiale.
+- Conflitti su README.md e docs/STATO.md: il 14/11 due commit hanno portato marcatori di conflitto su main, poi tolti. Prima di ogni commit: `git pull --rebase` a cartella pulita, e controllare che non restino righe che iniziano con `<<<<<<<`.
 - `make check` richiede [uv](https://docs.astral.sh/uv/) installato, perché esegue lint e test degli agenti. Va esteso alla web app quando c'è.
 - Su macOS, con il repository sul Desktop sincronizzato, Python ignora il collegamento del pacchetto in `.venv`: test e avvio usano `src` direttamente (già configurato in `pyproject.toml` e nel Makefile).
-- docs/PIANO.md non esiste ancora.
-- Punti aperti del concept: nome del team, titolo definitivo, feed GTFS (linee e tempo reale), stack, API meteo e mappe e chi ha la chiave. L'elenco completo è in docs/PROGETTO.md.
+- Punti aperti del concept: nome del team, titolo definitivo. L'elenco completo è in docs/PROGETTO.md.
