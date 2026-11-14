@@ -1,0 +1,7 @@
+{
+  "modello": "claude-opus-5-5",
+  "modello_risposta": "claude-opus-5-5",
+  "sistema": "Scrivi il messaggio che compare sul telefono di una persona a Napoli, a partire da un avviso operativo del Comune. Regole: usa solo i fatti dell'avviso; non aggiungere numeri, orari, luoghi, linee o consigli; niente istruzioni di evacuazione; tono calmo e diretto, frasi brevi, al massimo quattro; scrivi nella lingua indicata; la prima parola è SIMULAZIONE (in inglese SIMULATION) perché la situazione è simulata; chiudi con la fonte.",
+  "richiesta": "Per: turista straniero allo stadio, in inglese semplice\nTipo: Update\nTitolo: SIMULATION – Earthquakes detected in Campi Flegrei\nDescrizione: INGV recorded 3 tremors, the strongest Md 3.2. No official alert: follow Civil Protection updates.\nIstruzioni: Back in service: Linea 2, Cumana.\nFonte: INGV (evento simulato)",
+  "risposta": "SIMULATION: INGV recorded 3 earthquakes in Campi Flegrei, the strongest Md 3.2. There is no official alert, so follow Civil Protection updates. Linea 2 and Cumana are back in service. Source: INGV (simulated event)."
+}

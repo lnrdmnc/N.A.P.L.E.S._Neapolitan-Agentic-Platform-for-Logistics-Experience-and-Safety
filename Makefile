@@ -1,4 +1,4 @@
-.PHONY: check agents-test agents-run contracts prova verifica-registro demo web-test webapp-test install backend frontend build test-backend lint-frontend
+.PHONY: llm-cache check agents-test agents-run contracts prova verifica-registro demo web-test webapp-test install backend frontend build test-backend lint-frontend
 
 AGENTS_PORT ?= 8001
 
@@ -35,6 +35,10 @@ contracts:
 # Tre prove dello scenario (approva subito, tardi, mai): rapporti in docs/prove/, errore se un controllo fallisce
 prova:
 	cd agents && PYTHONPATH=src uv run --quiet python -m napoles_agents.prova
+
+# Prepara la cache dei testi del modello per il percorso demo (compito K1; serve LLM_API_KEY in .env)
+llm-cache:
+	cd agents && PYTHONPATH=src uv run --quiet $(if $(wildcard .env),--env-file ../.env) python -m napoles_agents.llm.registra
 
 # Verifica del registro su file: agents/var/registro.jsonl, oppure FILE=percorso (compito R1)
 verifica-registro:

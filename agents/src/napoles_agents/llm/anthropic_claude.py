@@ -31,7 +31,7 @@ class ModelloClaude:
             "max_tokens": richiesta.max_token,
             "system": richiesta.sistema,
             "messages": [{"role": "user", "content": richiesta.testo}],
-            "output_config": {"effort": "medium"},
+            "output_config": {"effort": richiesta.effort},
         }
         try:
             if self.nome in CON_RIPIEGO:

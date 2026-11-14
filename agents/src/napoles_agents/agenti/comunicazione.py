@@ -11,8 +11,11 @@ Cessato allarme operativo: quando lo sciame si chiude, un `Cancel` chiude gli av
 Riguarda solo gli aspetti operativi: il rischio vulcanico resta della Protezione Civile.
 """
 
+from concurrent.futures import ThreadPoolExecutor, wait
 from typing import Any
 
+from .. import llm
+from ..llm.controlli import motivo_scarto, pulisci
 from ..luoghi import luogo
 from ..models import Alert, AreaAlert, Caso, Piano, StatoCitta, TipoEvento
 from ..scenario import ora
@@ -243,4 +246,71 @@ def prepara_avvisi(
                     piano_id=piano.id,
                 )
             )
-    return avvisi
+    return con_messaggi_del_modello(avvisi)
+
+
+# --- Testi scritti dal modello (compito B5) -------------------------------------------------
+# Il modello riformula per la persona i campi già decisi a regole; non decide nulla e non tocca
+# mai le allerte ufficiali. I campi CAP restano identici: budget anti-allarme e test non cambiano.
+
+ATTESA_MASSIMA_S = 25
+
+SISTEMA_MESSAGGIO = (
+    "Scrivi il messaggio che compare sul telefono di una persona a Napoli, a partire da un avviso "
+    "operativo del Comune. Regole: usa solo i fatti dell'avviso; non aggiungere numeri, orari, luoghi, "
+    "linee o consigli; niente istruzioni di evacuazione; tono calmo e diretto, frasi brevi, al massimo "
+    "quattro; scrivi nella lingua indicata; la prima parola è SIMULAZIONE (in inglese SIMULATION) "
+    "perché la situazione è simulata; chiudi con la fonte."
+)
+
+PROFILI = {
+    "tifoso": "tifoso allo stadio Maradona, in italiano",
+    "residente": "residente di Fuorigrotta, in italiano",
+    "pendolare": "pendolare che rientra verso l'area flegrea, in italiano",
+    "turista": "turista straniero allo stadio, in inglese semplice",
+}
+
+
+def _fonte_avviso(a: Alert) -> str:
+    return "\n".join(
+        x
+        for x in (
+            f"Per: {PROFILI.get(a.pubblico, a.pubblico)}",
+            f"Tipo: {a.msgType}",
+            f"Titolo: {a.headline}",
+            f"Descrizione: {a.description}",
+            f"Istruzioni: {a.instruction}" if a.instruction else "",
+            f"Fonte: {a.source}",
+        )
+        if x
+    )
+
+
+def _messaggio(servizio: llm.Servizio, a: Alert) -> str | None:
+    fonte = _fonte_avviso(a)
+    risposta = servizio.scrivi(
+        llm.Richiesta(sistema=SISTEMA_MESSAGGIO, testo=fonte, max_token=3000, effort="low")
+    )
+    if risposta is None:
+        return None
+    testo = pulisci(risposta.testo)
+    motivo = motivo_scarto(testo, fonte, prefissi=("SIMULATION",) if a.lingua == "en" else ("SIMULAZIONE",))
+    if motivo:
+        servizio.scarta(f"{a.identifier}: {motivo}")
+        return None
+    return testo
+
+
+def con_messaggi_del_modello(avvisi: list[Alert]) -> list[Alert]:
+    servizio = llm.servizio()
+    da_scrivere = [a for a in avvisi if not a.ufficiale]
+    if not servizio.attivo or not da_scrivere:
+        return avvisi
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        futuri = {a.identifier: pool.submit(_messaggio, servizio, a) for a in da_scrivere}
+        wait(futuri.values(), timeout=ATTESA_MASSIMA_S)
+    testi = {k: f.result() for k, f in futuri.items() if f.done() and not f.exception()}
+    return [
+        a.model_copy(update={"messaggio_modello": testi[a.identifier]}) if testi.get(a.identifier) else a
+        for a in avvisi
+    ]

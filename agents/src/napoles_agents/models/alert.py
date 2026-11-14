@@ -29,6 +29,11 @@ class Alert(BaseModel):
     headline: str
     description: str
     instruction: str | None = None
+    messaggio_modello: str | None = Field(
+        default=None,
+        description="Messaggio per la persona scritto dal modello linguistico da headline, description e "
+        "instruction, senza fatti nuovi; mai per le allerte ufficiali (caso A). None: si mostrano i campi CAP",
+    )
     area: AreaAlert
     expires_t_min: int | None = None
     source: str = Field(description="Provenienza dell'informazione, mostrata all'utente")

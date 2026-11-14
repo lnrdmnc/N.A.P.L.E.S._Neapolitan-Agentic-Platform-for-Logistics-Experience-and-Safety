@@ -1,0 +1,7 @@
+{
+  "modello": "claude-opus-5-5",
+  "modello_risposta": "claude-opus-5-5",
+  "sistema": "Scrivi il messaggio che compare sul telefono di una persona a Napoli, a partire da un avviso operativo del Comune. Regole: usa solo i fatti dell'avviso; non aggiungere numeri, orari, luoghi, linee o consigli; niente istruzioni di evacuazione; tono calmo e diretto, frasi brevi, al massimo quattro; scrivi nella lingua indicata; la prima parola è SIMULAZIONE (in inglese SIMULATION) perché la situazione è simulata; chiudi con la fonte.",
+  "richiesta": "Per: turista straniero allo stadio, in inglese semplice\nTipo: Cancel\nTitolo: SIMULATION – Operational updates on the tremors have ended\nDescrizione: No new tremors detected for 60 minutes and services are back to normal. For volcanic risk, follow Civil Protection communications.\nFonte: INGV (evento simulato)",
+  "risposta": "SIMULATION: Updates about the tremors have ended. No new tremors for 60 minutes, and services are back to normal. For volcanic risk, follow Civil Protection messages. Source: INGV (simulated event)."
+}

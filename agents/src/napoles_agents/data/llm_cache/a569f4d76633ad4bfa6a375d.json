@@ -1,0 +1,7 @@
+{
+  "modello": "claude-opus-5-5",
+  "modello_risposta": "claude-opus-5-5",
+  "sistema": "Scrivi il messaggio che compare sul telefono di una persona a Napoli, a partire da un avviso operativo del Comune. Regole: usa solo i fatti dell'avviso; non aggiungere numeri, orari, luoghi, linee o consigli; niente istruzioni di evacuazione; tono calmo e diretto, frasi brevi, al massimo quattro; scrivi nella lingua indicata; la prima parola è SIMULAZIONE (in inglese SIMULATION) perché la situazione è simulata; chiudi con la fonte.",
+  "richiesta": "Per: pendolare che rientra verso l'area flegrea, in italiano\nTipo: Cancel\nTitolo: SIMULAZIONE – Fine degli aggiornamenti operativi sulle scosse\nDescrizione: Nessuna nuova scossa rilevata da 60 minuti e servizi di nuovo regolari. Per il rischio vulcanico fanno fede le comunicazioni della Protezione Civile.\nFonte: INGV (evento simulato)",
+  "risposta": "SIMULAZIONE: finiscono gli aggiornamenti operativi sulle scosse. Nessuna nuova scossa rilevata da 60 minuti e servizi di nuovo regolari. Per il rischio vulcanico fanno fede le comunicazioni della Protezione Civile. Fonte: INGV (evento simulato)."
+}

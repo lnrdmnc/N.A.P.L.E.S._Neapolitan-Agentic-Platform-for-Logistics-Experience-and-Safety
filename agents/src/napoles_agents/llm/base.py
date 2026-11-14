@@ -11,6 +11,7 @@ class Richiesta:
     sistema: str
     testo: str
     max_token: int = 2000
+    effort: str = "medium"  # low per riformulazioni brevi: più veloce
 
 
 @dataclass(frozen=True)

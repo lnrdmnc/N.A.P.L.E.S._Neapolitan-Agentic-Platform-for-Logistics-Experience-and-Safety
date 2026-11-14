@@ -177,6 +177,7 @@ class Sessione:
         piano.proposte = ricalcolato.proposte
         piano.conflitti = ricalcolato.conflitti
         piano.sintesi = ricalcolato.sintesi
+        piano.sintesi_modello = ricalcolato.sintesi_modello
         piano.affidabilita_minima = ricalcolato.affidabilita_minima
         piano.proposte_escluse = [p for p in tutte if p.id in escluse]
         piano.motivo_modifica = motivo or None

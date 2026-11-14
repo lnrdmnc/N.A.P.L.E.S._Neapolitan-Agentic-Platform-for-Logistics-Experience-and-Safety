@@ -1,0 +1,7 @@
+{
+  "modello": "claude-opus-5-5",
+  "modello_risposta": "claude-opus-5-5",
+  "sistema": "Scrivi il messaggio che compare sul telefono di una persona a Napoli, a partire da un avviso operativo del Comune. Regole: usa solo i fatti dell'avviso; non aggiungere numeri, orari, luoghi, linee o consigli; niente istruzioni di evacuazione; tono calmo e diretto, frasi brevi, al massimo quattro; scrivi nella lingua indicata; la prima parola è SIMULAZIONE (in inglese SIMULATION) perché la situazione è simulata; chiudi con la fonte.",
+  "richiesta": "Per: turista straniero allo stadio, in inglese semplice\nTipo: Update\nTitolo: SIMULATION – Earthquakes detected in Campi Flegrei\nDescrizione: INGV recorded 2 tremors, the strongest Md 3.2. No official alert: follow Civil Protection updates.\nIstruzioni: Cumana and Line 2 are suspended: replacement shuttles from Viale Giochi del Mediterraneo. Stadium exit in turns: Tribuna Posillipo, Tribuna Nisida at 22:20; Distinti at 22:28; Curva A, Curva B at 22:36. Please wait for your turn. Due to the weather alert, avoid underpasses.\nFonte: INGV (evento simulato)",
+  "risposta": "SIMULATION: INGV recorded 2 earthquakes in Campi Flegrei, the strongest Md 3.2.\nThere is no official alert, so follow Civil Protection updates.\nCumana and Line 2 are suspended, with replacement shuttles from Viale Giochi del Mediterraneo.\nSource: INGV (simulated event)."
+}

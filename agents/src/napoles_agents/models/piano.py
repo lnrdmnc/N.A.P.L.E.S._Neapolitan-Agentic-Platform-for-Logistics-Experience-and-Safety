@@ -56,6 +56,11 @@ class Piano(BaseModel):
     proposte: list[Proposta]
     conflitti: list[Conflitto] = Field(default_factory=list)
     sintesi: str
+    sintesi_modello: str | None = Field(
+        default=None,
+        description="Spiegazione del piano scritta dal modello linguistico dagli stessi fatti di `sintesi`; "
+        "None se il modello non c'è o il testo non ha passato i controlli",
+    )
     t_decisione: int | None = None
     affidabilita_minima: Affidabilita | None = Field(
         default=None, description="L'affidabilità più bassa tra le proposte del piano"

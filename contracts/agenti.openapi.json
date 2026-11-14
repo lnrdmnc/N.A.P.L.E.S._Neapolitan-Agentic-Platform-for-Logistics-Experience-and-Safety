@@ -76,6 +76,18 @@
             "title": "Lingua",
             "type": "string"
           },
+          "messaggio_modello": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Messaggio per la persona scritto dal modello linguistico da headline, description e instruction, senza fatti nuovi; mai per le allerte ufficiali (caso A). None: si mostrano i campi CAP",
+            "title": "Messaggio Modello"
+          },
           "msgType": {
             "enum": [
               "Alert",
@@ -1211,6 +1223,18 @@
           "sintesi": {
             "title": "Sintesi",
             "type": "string"
+          },
+          "sintesi_modello": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Spiegazione del piano scritta dal modello linguistico dagli stessi fatti di `sintesi`; None se il modello non c'è o il testo non ha passato i controlli",
+            "title": "Sintesi Modello"
           },
           "stato": {
             "default": "proposto",

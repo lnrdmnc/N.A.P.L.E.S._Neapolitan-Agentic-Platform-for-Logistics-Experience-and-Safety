@@ -54,17 +54,26 @@ class Servizio:
             return None
         with self._lock:
             in_cache = self.cache.leggi(self.modello.nome, richiesta)
-            if in_cache:
-                self._segna("cache")
-                return in_cache
-            try:
-                risposta = self.modello.scrivi(richiesta)
-            except ErroreLLM as e:
-                self._segna("errore", str(e))
-                return None
+        if in_cache:
+            self._segna("cache")
+            return in_cache
+        try:
+            risposta = self.modello.scrivi(richiesta)
+        except ErroreLLM as e:
+            self._segna("errore", str(e))
+            return None
+        with self._lock:
             self.cache.scrivi(self.modello.nome, richiesta, risposta)
-            self._segna("ok")
-            return risposta
+        self._segna("ok")
+        return risposta
+
+    def scarta(self, motivo: str) -> None:
+        """Chi chiama ha scartato il testo nei controlli (llm/controlli.py)."""
+        self._segna("scartato", motivo)
+
+    @property
+    def attivo(self) -> bool:
+        return not isinstance(self.modello, ModelloFinto)
 
 
 _servizio: Servizio | None = None

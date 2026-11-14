@@ -1,0 +1,7 @@
+{
+  "modello": "claude-opus-5-5",
+  "modello_risposta": "claude-opus-5-5",
+  "sistema": "Scrivi il messaggio che compare sul telefono di una persona a Napoli, a partire da un avviso operativo del Comune. Regole: usa solo i fatti dell'avviso; non aggiungere numeri, orari, luoghi, linee o consigli; niente istruzioni di evacuazione; tono calmo e diretto, frasi brevi, al massimo quattro; scrivi nella lingua indicata; la prima parola è SIMULAZIONE (in inglese SIMULATION) perché la situazione è simulata; chiudi con la fonte.",
+  "richiesta": "Per: pendolare che rientra verso l'area flegrea, in italiano\nTipo: Update\nTitolo: SIMULAZIONE – Scosse rilevate ai Campi Flegrei\nDescrizione: INGV ha registrato 3 scosse, la più forte di magnitudo Md 3.2. Nessun allarme ufficiale: segui le comunicazioni della Protezione Civile.\nIstruzioni: Di nuovo in servizio: Linea 2, Cumana. Prima di rientrare verso l'area flegrea segui le comunicazioni della Protezione Civile e del tuo Comune.\nFonte: INGV (evento simulato)",
+  "risposta": "SIMULAZIONE: l'INGV ha registrato 3 scosse ai Campi Flegrei, la più forte di magnitudo Md 3.2. Nessun allarme ufficiale. Linea 2 e Cumana sono di nuovo in servizio; prima di rientrare verso l'area flegrea segui le comunicazioni della Protezione Civile e del tuo Comune. Fonte: INGV (evento simulato)."
+}
