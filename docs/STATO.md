@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| R3 — Scosse simulate ricalcate su uno sciame reale del catalogo INGV (magnitudo, profondità, luoghi, intervalli) | Leonardo Monaco | sab 14/11 20:35 | Tocca `…/data/scenario_maradona.json` (eventi sisma), docs/IPOTESI.md |
 
 ## Fatto
 
