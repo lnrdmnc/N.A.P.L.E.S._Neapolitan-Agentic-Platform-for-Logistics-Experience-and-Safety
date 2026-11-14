@@ -13,6 +13,7 @@ Riguarda solo gli aspetti operativi: il rischio vulcanico resta della Protezione
 
 from typing import Any
 
+from ..luoghi import luogo
 from ..models import Alert, AreaAlert, Caso, Piano, StatoCitta, TipoEvento
 from ..scenario import ora
 
@@ -24,10 +25,6 @@ AREA_FUORIGROTTA = AreaAlert(
     poligono=[(40.8310, 14.1880), (40.8310, 14.2000), (40.8240, 14.2000), (40.8240, 14.1880)],
 )
 AREA_NAPOLI = AreaAlert(descrizione="Comune di Napoli")
-NOMI_PUNTI = {
-    "piazzale_tecchio": "Piazzale Tecchio",
-    "viale_giochi_del_mediterraneo": "Viale Giochi del Mediterraneo",
-}
 
 
 def _azione(piano: Piano, azione: str) -> Any:
@@ -56,7 +53,7 @@ def _istruzioni(piano: Piano, stato: StatoCitta, scenario: dict[str, Any], pubbl
         it.append(f"Di nuovo in servizio: {', '.join(riattivate)}.")
         en.append(f"Back in service: {', '.join(riattivate)}.")
     if navette:
-        punto = NOMI_PUNTI.get(navette.dettagli["punto_carico"], navette.dettagli["punto_carico"])
+        punto = luogo(navette.dettagli["punto_carico"])
         destinazioni = navette.dettagli.get("destinazioni") or []
         if pubblico == "pendolare" and destinazioni:
             it.append(

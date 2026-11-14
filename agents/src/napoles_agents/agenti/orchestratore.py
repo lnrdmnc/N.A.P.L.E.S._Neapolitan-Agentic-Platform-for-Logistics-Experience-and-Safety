@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 
+from ..luoghi import agente, luogo
 from ..models import Affidabilita, Conflitto, Piano, Proposta
 
 # Dalla più alla meno certa: serve a calcolare l'affidabilità minima del piano.
@@ -17,7 +18,7 @@ def pianifica(proposte: list[Proposta], t_min: int, numero: int) -> Piano:
     ordinate = sorted(proposte, key=lambda p: (-p.priorita, p.id))
     finali: list[Proposta] = []
     conflitti: list[Conflitto] = []
-    occupate: dict[str, str] = {}
+    occupate: dict[str, Proposta] = {}
 
     for p in ordinate:
         p = p.model_copy(deep=True)
@@ -25,22 +26,22 @@ def pianifica(proposte: list[Proposta], t_min: int, numero: int) -> Piano:
             if risorsa not in occupate:
                 continue
             alternativa = p.dettagli.get("punto_carico_alternativo")
+            chi = occupate[risorsa]
             if alternativa and alternativa not in occupate:
                 p.risorse = [alternativa if r == risorsa else r for r in p.risorse]
                 p.dettagli["punto_carico"] = alternativa
                 risoluzione = (
-                    f"«{risorsa}» resta a «{occupate[risorsa]}» (priorità più alta); "
-                    f"«{p.id}» si sposta su «{alternativa}»."
+                    f"{luogo(risorsa)} resta a «{chi.titolo}» ({agente(chi.agente.value)}, priorità più "
+                    f"alta); «{p.titolo}» ({agente(p.agente.value)}) si sposta su {luogo(alternativa)}."
                 )
             else:
                 risoluzione = (
-                    f"«{risorsa}» resta a «{occupate[risorsa]}»; «{p.id}» la usa in un secondo momento."
+                    f"{luogo(risorsa)} resta a «{chi.titolo}» ({agente(chi.agente.value)}); "
+                    f"«{p.titolo}» ({agente(p.agente.value)}) la usa in un secondo momento."
                 )
-            conflitti.append(
-                Conflitto(risorsa=risorsa, proposte=[occupate[risorsa], p.id], risoluzione=risoluzione)
-            )
+            conflitti.append(Conflitto(risorsa=risorsa, proposte=[chi.id, p.id], risoluzione=risoluzione))
         for risorsa in p.risorse:
-            occupate.setdefault(risorsa, p.id)
+            occupate.setdefault(risorsa, p)
         finali.append(p)
 
     return Piano(

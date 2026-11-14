@@ -9,6 +9,7 @@ from .agenti.comunicazione import prepara_avvisi
 from .agenti.orchestratore import pianifica
 from .bus import Bus
 from .decisioni import impatto, misure_da_decisioni
+from .luoghi import luogo
 from .models import Alert, Caso, Piano, Proposta, SerieSimulazione, StatoCitta
 from .registro import Registro
 from .ricezione import Ricezioni
@@ -129,11 +130,13 @@ class Sessione:
             if chiave in self._conflitti_visti:
                 continue
             self._conflitti_visti.add(chiave)
+            per_id = {p.id: p for p in piano.proposte}
+            coinvolti = [NOMI_AGENTI[per_id[pid].agente.value] for pid in c.proposte if pid in per_id]
             self._pubblica(
                 da="Orchestratore",
-                a=", ".join(c.proposte),
+                a=", ".join(coinvolti) or "agenti",
                 tipo="conflitto",
-                titolo=f"Conflitto su {c.risorsa}",
+                titolo=f"Conflitto su {luogo(c.risorsa)}",
                 testo=c.risoluzione,
                 rif=piano.id,
             )
