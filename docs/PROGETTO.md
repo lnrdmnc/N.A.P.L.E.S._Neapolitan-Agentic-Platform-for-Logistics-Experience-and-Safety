@@ -101,6 +101,8 @@ Decisione del team (sab 14/11): niente app nativa, che non sta nei tempi. Il pro
 
 Entrambe le viste si usano sia da telefono sia da computer (decisione del 14/11): `/cittadino` nasce per il telefono e su schermo largo dispone i riquadri su più colonne; `/control-room` nasce per il proiettore e su telefono impila i pannelli, con al primo posto lo stato della città e il piano da approvare.
 
+Anche la vista cittadino ha una mappa (decisione del 14/11): stadio, stazioni aperte o chiuse, punti di raccolta e traffico reale, per rendere chiare le indicazioni operative degli avvisi.
+
 Motivi: un solo link per la giuria, nessuna toolchain mobile, demo offline con service worker e cache. Nella demo le due viste stanno affiancate: l'operatore approva e il telefono riceve l'avviso in diretta. Le notifiche push funzionano su Android e, su iPhone, solo con la PWA installata sulla home: il banner nella vista cittadino è il ripiego sempre disponibile. L'app nativa è uno sviluppo futuro.
 
 ## 6.2 Gestione degli alert per eventi catastrofici

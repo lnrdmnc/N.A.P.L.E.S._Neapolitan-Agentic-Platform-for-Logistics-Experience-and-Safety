@@ -8,6 +8,7 @@ import { PartitaRiferimento } from '../components/PartitaRiferimento'
 import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { AlertCard } from './AlertCard'
+import { MappaCittadino } from './MappaCittadino'
 import { MeteoReale } from './MeteoReale'
 import { PartiteMaradona } from './PartiteMaradona'
 import { SceltaProfilo } from './SceltaProfilo'
@@ -57,6 +58,8 @@ export function Cittadino() {
               </>
             )}
           </section>
+
+          <MappaCittadino />
 
           <section className="ct-card ct-card-transit">
             <h2>Traffico e trasporti</h2>
