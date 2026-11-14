@@ -34,7 +34,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
-| L0 — Strato LLM: client Anthropic (SDK ufficiale), finto per i test, cache su file (`…/llm/`) | Leonardo Schiavo | sab 14/11 17:55 | Chiave in `.env` (`LLM_*`); tocca `agents/pyproject.toml` (dipendenza `anthropic`) e aggiunge `GET /api/llm` (contratto) |
 | P1 — Strumento di prova: `make prova` salva tre esecuzioni leggibili in `docs/prove/` | Leonardo Monaco | sab 14/11 18:08 | Tocca `…/prova.py`, nuova cartella `docs/prove/` (solo README versionato), una riga in .gitignore |
 
 ## Fatto
@@ -66,6 +65,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **R1 — Registro su file.** Ogni voce del registro delle decisioni viene scritta subito in `agents/var/registro.jsonl` (una riga JSON per voce; percorso diverso con `NAPOLES_REGISTRO`, file escluso da git). `make verifica-registro` (o `FILE=percorso`) ricalcola la catena di hash senza fidarsi del programma: una riga cambiata, tolta, aggiunta o spostata fa fallire il comando e indica la riga. Provato a mano: «Cumana sospesa» cambiato in «Cumana regolare» alla riga 12 → «Registro ALTERATO alla riga 12». `make prova` scrive lo stesso file. 72 test.
 - **B3 — Conferma di ricezione.** `POST /api/avvisi/{id}/visto` non è più uno stub: conta le conferme vere della vista cittadino, una per telefono (`dispositivo`: identificativo anonimo casuale generato dal telefono, nessun dato personale), solo per avvisi davvero inviati (404 altrimenti), e restituisce la `Ricezione` aggiornata. `GET /api/avvisi/ricezione` dà per ogni avviso `visti_reali` (conteggio vero) e, separati, `consegnati_stimati` e `visti_stimati` (simulati, crescono con i minuti dall'invio). **Contratto: nuovo `ConfermaVisto` come corpo di `/visto`; `Ricezione` ha `pubblico` e `minuti_dall_invio`; `/visto` risponde 200 con la `Ricezione`.** Endpoint spostati in `api/ricezione.py`. 78 test.
 - **C2 — Linea del tempo dei messaggi tra agenti** nella control room (`frontend/src/control-room/MessaggiAgenti.tsx`, `frontend/src/api/useMessaggi.ts`): legge `/api/messaggi` ogni secondo, il più recente in alto; per ogni messaggio ora, tipo con un colore (evento, proposta, conflitto, piano, decisione, avviso), chi parla a chi, titolo, testo su due righe, affidabilità ed etichetta «simulato». Filtri «Tutti», «Solo agenti», «Avvisi». Provato nel browser a 1440 px e da telefono (375 px, senza scorrimento orizzontale): si vedono il conflitto su Piazzale Tecchio risolto dall'Orchestratore e la notizia «evacuate lo stadio» fermata in control room come «non verificata». Nel modulo agenti, conflitti e testi ora usano nomi leggibili (`…/luoghi.py`): «Orchestratore → Folla, Mobilità: Conflitto su Piazzale Tecchio» invece degli identificativi interni.
+- **L0 — Strato LLM** (`…/llm/`): Claude Opus 5.5 con l'SDK ufficiale `anthropic` (ripiego lato server sui rifiuti), modello finto per i test, cache su file in `…/data/llm_cache/`. Se il modello non risponde, rifiuta o tronca, chi chiama riceve `None` e usa il testo a regole. `GET /api/llm` (stato) e `POST /api/llm/prova` (avviso di prova, simulato), provabili da http://localhost:8001/docs. Provato con la chiave vera: avviso in inglese corretto in 6 secondi, seconda volta dalla cache. Sblocca **B5** (testi di Orchestratore e Comunicazione) e **K1**.
 
 ## Prossimi compiti liberi
 
@@ -85,7 +85,6 @@ Dopo le 18:30 vale la linea di taglio di docs/PIANO.md, sezione 8. Chiavi: `.env
 
 Subito, in parallelo:
 
-- **L0** — Strato LLM: finto, compatibile OpenAI, Anthropic, cache (`…/llm/`).
 - **D1** — Dati: copie in cache e docs/DATI.md, 40 minuti al massimo.
 - **H1** — Persone: stand (docs/STAND.md), chiave del modello e chiave Google Maps in `.env`, nome del team, checkpoint con i mentor.
 - Verificare con il team nomi delle stazioni, capacità e soglie in `scenario_maradona.json` e in docs/IPOTESI.md.
@@ -96,6 +95,8 @@ B0 è su main: sbloccati, backend: **B5** testi dal modello (serve L0), **F1–F
 Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Domenica dopo le 10:30: registrazione del video seguendo docs/VIDEO.md. Se avanza tempo: U2, C6, U3, X2, U4.
 
 ## Problemi aperti
+
+- **Contratto cambiato il 14/11 alle 18:15:** `GET /api/llm` (`StatoLLM`) e `POST /api/llm/prova` (`ProvaLLM`). Nuova dipendenza degli agenti: `anthropic` (la installa da sé `uv run`). Compatibile OpenAI non fatto: si usa solo l'SDK di Anthropic.
 
 - **Deciso il 14/11 alle 17:40: la demo può usare la rete** (traffico Google dal vivo, modello linguistico). La cache dei testi del modello resta, per costi e ripetibilità. CLAUDE.md aggiornato.
 

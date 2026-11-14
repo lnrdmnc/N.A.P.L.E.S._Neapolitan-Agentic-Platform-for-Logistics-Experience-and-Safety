@@ -1330,6 +1330,54 @@
         "title": "Proposta",
         "type": "object"
       },
+      "ProvaLLM": {
+        "properties": {
+          "da_cache": {
+            "default": false,
+            "title": "Da Cache",
+            "type": "boolean"
+          },
+          "modello": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modello"
+          },
+          "richiesta": {
+            "title": "Richiesta",
+            "type": "string"
+          },
+          "simulato": {
+            "default": true,
+            "description": "La situazione descritta è simulata",
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "testo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "None se il modello non ha risposto: si userebbe il testo a regole",
+            "title": "Testo"
+          }
+        },
+        "required": [
+          "richiesta",
+          "testo"
+        ],
+        "title": "ProvaLLM",
+        "type": "object"
+      },
       "Ricezione": {
         "description": "Quante persone hanno visto un avviso (compito B3).\n\n`visti_reali` è un conteggio vero delle conferme arrivate in questa sessione.\n`consegnati_stimati` e `visti_stimati` sono stime simulate (docs/IPOTESI.md): `simulato` si\nriferisce a loro.",
         "properties": {
@@ -1516,6 +1564,69 @@
           "livello_vulcanico_campi_flegrei"
         ],
         "title": "StatoCitta",
+        "type": "object"
+      },
+      "StatoLLM": {
+        "properties": {
+          "chiave_configurata": {
+            "title": "Chiave Configurata",
+            "type": "boolean"
+          },
+          "modello": {
+            "title": "Modello",
+            "type": "string"
+          },
+          "provider": {
+            "description": "anthropic oppure finto (nessuna chiave: testi a regole)",
+            "title": "Provider",
+            "type": "string"
+          },
+          "ultima_chiamata_dettaglio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ultima Chiamata Dettaglio"
+          },
+          "ultima_chiamata_esito": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "ok, cache, errore, finto",
+            "title": "Ultima Chiamata Esito"
+          },
+          "ultima_chiamata_ora": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ultima Chiamata Ora"
+          },
+          "voci_in_cache": {
+            "title": "Voci In Cache",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "provider",
+          "modello",
+          "chiave_configurata",
+          "voci_in_cache"
+        ],
+        "title": "StatoLLM",
         "type": "object"
       },
       "StatoLinea": {
@@ -2114,6 +2225,49 @@
         "summary": "Itinerario",
         "tags": [
           "itinerario"
+        ]
+      }
+    },
+    "/api/llm": {
+      "get": {
+        "operationId": "stato_api_llm_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatoLLM"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Stato",
+        "tags": [
+          "llm"
+        ]
+      }
+    },
+    "/api/llm/prova": {
+      "post": {
+        "description": "Scrive un avviso di prova su una situazione simulata fissa. La seconda volta viene dalla cache.",
+        "operationId": "prova_api_llm_prova_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvaLLM"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Prova",
+        "tags": [
+          "llm"
         ]
       }
     },

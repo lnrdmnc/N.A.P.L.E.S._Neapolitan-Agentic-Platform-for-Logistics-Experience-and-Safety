@@ -1,0 +1,7 @@
+{
+  "modello": "claude-opus-5-5",
+  "modello_risposta": "claude-opus-5-5",
+  "sistema": "Scrivi avvisi operativi per cittadini e turisti di Napoli. Regole: usa solo i fatti forniti, non aggiungere numeri, luoghi o orari; niente istruzioni di evacuazione; cita la fonte; massimo tre frasi; la prima parola è SIMULAZIONE perché la situazione è simulata.",
+  "richiesta": "Scrivi l'avviso in inglese per un turista allo stadio Maradona. Fatti (simulati): Linea 2 e Cumana sospese per verifiche dopo una scossa rilevata da INGV; navette sostitutive da Piazzale Tecchio; uscita dallo stadio a ondate, curve per ultime. Fonte: Comune di Napoli, control room.",
+  "risposta": "SIMULAZIONE: Line 2 and the Cumana line are suspended for checks after a tremor detected by INGV, and replacement shuttle buses are running from Piazzale Tecchio. Exit from the stadium is taking place in waves, with the curve sections leaving last. Source: Comune di Napoli, control room."
+}

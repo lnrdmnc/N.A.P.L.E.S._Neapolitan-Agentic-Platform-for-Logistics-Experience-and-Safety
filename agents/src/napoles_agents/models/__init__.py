@@ -10,6 +10,7 @@ from .citta import Evento, StatoCitta, StatoLinea, TipoEvento
 from .contesto import Contesto, EventoSismicoReale, LivelloVulcanico, Meteo
 from .indicatori import ConfrontoIndicatori, Indicatori, Origine
 from .itinerario import Itinerario, Tratta
+from .llm import ProvaLLM, StatoLLM
 from .messaggi import Messaggio, TipoMessaggio
 from .partite import Partita, Partite
 from .piano import Conflitto, Impatto, ImpattoZona, ModificaPiano, Piano, Proposta
@@ -45,10 +46,12 @@ __all__ = [
     "PercorsoTraffico",
     "Piano",
     "Proposta",
+    "ProvaLLM",
     "Pubblico",
     "Ricezione",
     "SerieSimulazione",
     "StatoCitta",
+    "StatoLLM",
     "StatoLinea",
     "StatoRegistro",
     "StatoZona",
