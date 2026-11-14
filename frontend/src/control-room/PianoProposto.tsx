@@ -112,6 +112,71 @@ export function PianoProposto() {
               </>
             )}
           </p>
+
+          {decidibile && (
+            <div className="pp-actions">
+              {modo === 'vista' && (
+                <>
+                  <button className="btn-primary" onClick={onApprova} disabled={occupato}>
+                    Approva
+                  </button>
+                  <button className="btn-secondary" onClick={() => setModo('modifica')} disabled={occupato}>
+                    Modifica
+                  </button>
+                  <button className="btn-danger" onClick={() => setModo('rifiuto')} disabled={occupato}>
+                    Rifiuta
+                  </button>
+                </>
+              )}
+
+              {modo === 'modifica' && (
+                <div className="pp-form">
+                  <p>Seleziona le azioni da escludere. Le allerte ufficiali (caso A) non si possono escludere.</p>
+                  <label>
+                    Motivo (facoltativo)
+                    <input value={motivo} onChange={(e) => setMotivo(e.target.value)} />
+                  </label>
+                  <div className="pp-form-buttons">
+                    <button className="btn-primary" onClick={onModifica} disabled={occupato}>
+                      Conferma modifica
+                    </button>
+                    <button className="btn-ghost" onClick={() => setModo('vista')} disabled={occupato}>
+                      Annulla
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {modo === 'rifiuto' && (
+                <div className="pp-form">
+                  <label>
+                    Motivo del rifiuto
+                    <input value={motivo} onChange={(e) => setMotivo(e.target.value)} required />
+                  </label>
+                  <div className="pp-form-buttons">
+                    <button className="btn-danger" onClick={onRifiuta} disabled={occupato || !motivo.trim()}>
+                      Conferma rifiuto
+                    </button>
+                    <button className="btn-ghost" onClick={() => setModo('vista')} disabled={occupato}>
+                      Annulla
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {esito && (
+            <p className="pp-result" role="status">
+              {esito}
+            </p>
+          )}
+          {errore && (
+            <p className="pp-error" role="alert">
+              {errore}
+            </p>
+          )}
+
           {piano.sintesi_modello ? (
             <div className="pp-summary-model">
               <span className="badge badge-reliable">Spiegazione scritta da Claude · controllata sugli stessi dati</span>
@@ -200,69 +265,6 @@ export function PianoProposto() {
             </div>
           )}
 
-          {decidibile && (
-            <div className="pp-actions">
-              {modo === 'vista' && (
-                <>
-                  <button className="btn-primary" onClick={onApprova} disabled={occupato}>
-                    Approva
-                  </button>
-                  <button className="btn-secondary" onClick={() => setModo('modifica')} disabled={occupato}>
-                    Modifica
-                  </button>
-                  <button className="btn-danger" onClick={() => setModo('rifiuto')} disabled={occupato}>
-                    Rifiuta
-                  </button>
-                </>
-              )}
-
-              {modo === 'modifica' && (
-                <div className="pp-form">
-                  <p>Seleziona le azioni da escludere. Le allerte ufficiali (caso A) non si possono escludere.</p>
-                  <label>
-                    Motivo (facoltativo)
-                    <input value={motivo} onChange={(e) => setMotivo(e.target.value)} />
-                  </label>
-                  <div className="pp-form-buttons">
-                    <button className="btn-primary" onClick={onModifica} disabled={occupato}>
-                      Conferma modifica
-                    </button>
-                    <button className="btn-ghost" onClick={() => setModo('vista')} disabled={occupato}>
-                      Annulla
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {modo === 'rifiuto' && (
-                <div className="pp-form">
-                  <label>
-                    Motivo del rifiuto
-                    <input value={motivo} onChange={(e) => setMotivo(e.target.value)} required />
-                  </label>
-                  <div className="pp-form-buttons">
-                    <button className="btn-danger" onClick={onRifiuta} disabled={occupato || !motivo.trim()}>
-                      Conferma rifiuto
-                    </button>
-                    <button className="btn-ghost" onClick={() => setModo('vista')} disabled={occupato}>
-                      Annulla
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {esito && (
-            <p className="pp-result" role="status">
-              {esito}
-            </p>
-          )}
-          {errore && (
-            <p className="pp-error" role="alert">
-              {errore}
-            </p>
-          )}
         </>
       )}
     </section>

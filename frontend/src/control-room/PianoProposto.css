@@ -188,6 +188,7 @@
   font-size: 13px;
 }
 
+/* Decisions come right under the plan's state: always in view, on every screen */
 .pp-actions {
   display: flex;
   flex-wrap: wrap;
@@ -250,27 +251,4 @@
   background: var(--surface-1);
   color: var(--level-red);
   font-weight: 600;
-}
-
-/* Desktop and projector: the plan scrolls inside its column and the three buttons stay in view,
-   so the operator never has to look for «Approva» and the plan never stretches the other rows. */
-@media (min-width: 1057px) {
-  .pp {
-    align-self: start;
-    position: sticky;
-    top: 0;
-    /* the page header is about 75px tall: the whole panel, buttons included, fits on screen */
-    max-height: calc(100vh - 80px);
-    overflow-y: auto;
-  }
-
-  .pp-actions {
-    position: sticky;
-    bottom: calc(-1 * var(--space-5));
-    margin: 0 calc(-1 * var(--space-5)) calc(-1 * var(--space-5));
-    padding: var(--space-3) var(--space-5) var(--space-5);
-    background: var(--canvas);
-    border-top: 1px solid var(--hairline);
-    z-index: 1;
-  }
 }

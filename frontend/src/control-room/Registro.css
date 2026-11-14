@@ -47,11 +47,13 @@
   padding: 0;
   max-height: 360px;
   overflow-y: auto;
+  position: relative;
 }
 
 .reg-item {
   display: grid;
-  grid-template-columns: auto auto 9em 1fr auto;
+  /* compact at every width: the log sits in a narrow column on desktop too */
+  grid-template-columns: auto auto 1fr;
   gap: var(--space-1) var(--space-3);
   align-items: baseline;
   padding: var(--space-2) 0;
@@ -88,29 +90,23 @@
 }
 
 .reg-text {
+  grid-column: 1 / -1;
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
 .reg-hash {
+  grid-column: 1 / -1;
   font-size: 12px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .reg-foot {
   margin: 0;
   font-size: var(--text-small);
   color: var(--ink-muted);
-}
-
-@media (max-width: 1056px) {
-  .reg-item {
-    grid-template-columns: auto auto 1fr;
-  }
-  .reg-text,
-  .reg-hash {
-    grid-column: 1 / -1;
-  }
 }
 
 @media (max-width: 640px) {
