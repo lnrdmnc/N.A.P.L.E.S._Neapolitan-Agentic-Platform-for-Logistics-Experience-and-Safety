@@ -152,17 +152,20 @@ def prepara_avvisi(
                 if lingua == "it":
                     headline = "SIMULAZIONE – Scosse rilevate ai Campi Flegrei"
                     descrizione = (
-                        f"INGV ha registrato {d['numero_scosse']} scosse, la più forte di magnitudo "
-                        f"Md {d['magnitudo_massima']}. Nessun allarme ufficiale: segui le comunicazioni "
-                        "della Protezione Civile."
-                    )
+                        f"INGV ha registrato una scossa di magnitudo Md {d['magnitudo_massima']}."
+                        if d["numero_scosse"] == 1
+                        else f"INGV ha registrato {d['numero_scosse']} scosse, la più forte di "
+                        f"magnitudo Md {d['magnitudo_massima']}."
+                    ) + " Nessun allarme ufficiale: segui le comunicazioni della Protezione Civile."
                     istruzioni = istruzioni_it
                 else:
                     headline = "SIMULATION – Earthquakes detected in Campi Flegrei"
                     descrizione = (
-                        f"INGV recorded {d['numero_scosse']} tremors, the strongest Md "
-                        f"{d['magnitudo_massima']}. No official alert: follow Civil Protection updates."
-                    )
+                        f"INGV recorded one tremor of magnitude Md {d['magnitudo_massima']}."
+                        if d["numero_scosse"] == 1
+                        else f"INGV recorded {d['numero_scosse']} tremors, the strongest Md "
+                        f"{d['magnitudo_massima']}."
+                    ) + " No official alert: follow Civil Protection updates."
                     istruzioni = istruzioni_en
                 # Budget anti-allarme: niente notifica se per la persona non cambia nulla.
                 if (

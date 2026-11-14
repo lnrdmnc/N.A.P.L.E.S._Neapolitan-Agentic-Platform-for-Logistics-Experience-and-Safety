@@ -63,3 +63,12 @@ def test_pendolare_riceve_navette_per_l_area_flegrea_e_rimando_alla_protezione_c
         testo = f"{a.description} {a.instruction or ''}"
         assert "Protezione Civile" in testo
         assert "evacu" not in testo.lower()
+
+
+def test_una_scossa_al_singolare():
+    s = Sessione()
+    s.avanza(70)
+    s.approva(s.piano_corrente.id)
+    testi = {a.lingua: a.description for a in s.avvisi}
+    assert "una scossa" in testi["it"] and "1 scosse" not in testi["it"]
+    assert "one tremor" in testi["en"]
