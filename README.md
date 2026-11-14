@@ -47,6 +47,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 18:27 | webapp | C4: registro delle decisioni nella control room, con stato della catena e pulsante di verifica |
 | 2026-11-14 | 18:24 | webapp | C5: indicatori con e senza coordinamento nella control room, con l'origine di ogni numero e l'affollamento per zona |
 | 2026-11-14 | 18:15 | agents | B5 e K1: sintesi del piano e messaggi per profilo scritti da Claude, con controlli automatici e cache del percorso demo (`make llm-cache`); nuovi campi `sintesi_modello` e `messaggio_modello` |
 | 2026-11-14 | 18:15 | agents | Strato LLM (L0): Claude Opus 5.5 con SDK ufficiale, cache su file, ripiego sul testo a regole; `GET /api/llm`, `POST /api/llm/prova` |

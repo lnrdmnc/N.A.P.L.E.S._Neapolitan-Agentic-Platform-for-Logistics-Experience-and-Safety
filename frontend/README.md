@@ -2,7 +2,7 @@
 
 Web app PWA di N.A.P.L.E.S. (Vite + React + TypeScript), installabile e funzionante offline.
 
-- `/control-room` (`src/control-room/`): dashboard per il proiettore. Oggi: ora della simulazione, stato della città, linee, eventi con affidabilità. Mappa con traffico reale di Google e tempi dallo stadio (`MappaTraffico.tsx`, etichetta «DATO REALE»). Linea del tempo dei messaggi tra agenti (`MessaggiAgenti.tsx`, C2); indicatori con e senza coordinamento con l'origine di ogni numero (`Indicatori.tsx`, C5). Riquadri in costruzione: mappa a zone (C1), piano (C3), registro (C4).
+- `/control-room` (`src/control-room/`): dashboard per il proiettore. Oggi: ora della simulazione, stato della città, linee, eventi con affidabilità. Mappa con traffico reale di Google e tempi dallo stadio (`MappaTraffico.tsx`, etichetta «DATO REALE»). Linea del tempo dei messaggi tra agenti (`MessaggiAgenti.tsx`, C2); indicatori con e senza coordinamento con l'origine di ogni numero (`Indicatori.tsx`, C5); registro delle decisioni con verifica della catena (`Registro.tsx`, C4). Riquadri in costruzione: mappa a zone (C1), piano (C3).
 - `/cittadino` (`src/cittadino/`): emergenze e avvisi (`AlertCard.tsx`: caso A o B, certezza, fonte, indicazioni operative), traffico e trasporti, partite al Maradona (`PartiteMaradona.tsx`, dato reale da `/api/partite`), meteo (U2). Filtro per profilo e lingua: U1.
 - `/` (`src/home/`): scelta tra le due viste. Una pagina nuova si registra con una riga in `src/routes.ts`.
 - Dati: `src/api/useStato.ts` legge `/api/stato` ogni secondo; `src/api/useLiveEvents.ts` riceve gli eventi da `/api/events`.

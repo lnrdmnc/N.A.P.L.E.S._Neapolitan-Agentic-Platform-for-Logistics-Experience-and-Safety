@@ -1,0 +1,123 @@
+/* C4 · Registro delle decisioni. Uses only the tokens in styles/tokens.css. */
+
+.reg-button {
+  font: inherit;
+  font-size: var(--text-small);
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  background: var(--primary);
+  color: var(--inverse-ink);
+  cursor: pointer;
+}
+
+.reg-button:hover {
+  background: var(--primary-hover);
+}
+
+.reg-button:focus-visible {
+  outline: 2px solid var(--hairline-strong);
+  outline-offset: 2px;
+}
+
+.reg-status {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid;
+}
+
+.reg-status span {
+  font-size: var(--text-small);
+}
+
+.reg-status.is-ok {
+  border-color: var(--level-green);
+  background: #defbe6;
+}
+
+.reg-status.is-broken {
+  border-color: var(--level-red);
+  background: #fff1f1;
+  color: var(--level-red);
+}
+
+.reg-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.reg-item {
+  display: grid;
+  grid-template-columns: auto auto 9em 1fr auto;
+  gap: var(--space-1) var(--space-3);
+  align-items: baseline;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: var(--text-small);
+}
+
+.reg-item.is-broken {
+  background: #fff1f1;
+}
+
+.reg-index,
+.reg-time,
+.reg-hash {
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+}
+
+.reg-kind {
+  font-weight: 600;
+}
+
+.reg-piano_approvato .reg-kind {
+  color: var(--level-green);
+}
+
+.reg-piano_rifiutato .reg-kind,
+.reg-piano_modificato .reg-kind {
+  color: var(--level-orange);
+}
+
+.reg-avviso_inviato .reg-kind {
+  color: var(--level-red);
+}
+
+.reg-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.reg-hash {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.reg-foot {
+  margin: 0;
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+@media (max-width: 1056px) {
+  .reg-item {
+    grid-template-columns: auto auto 1fr;
+  }
+  .reg-text,
+  .reg-hash {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .reg-button {
+    width: 100%;
+  }
+  .reg-list {
+    max-height: none;
+  }
+}
