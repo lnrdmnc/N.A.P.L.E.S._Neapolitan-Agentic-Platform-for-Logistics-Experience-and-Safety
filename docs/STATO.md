@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| Logo nel README, README su come vedere il progetto, pagina iniziale con le foto del golfo | Leonardo Schiavo | sab 14/11 19:36 | Tocca README.md, `frontend/src/home/`, nuove immagini in `docs/img/` e `frontend/public/img/` |
 | Dati più reali: eventi veri a Napoli al posto degli esempi, livelli di allerta vulcanica ufficiali, capienza del Maradona | Leonardo Monaco | sab 14/11 19:10 | Ricerca su fonti ufficiali; tocca `…/data/eventi_napoli.json`, `…/data/scenario_maradona.json`, docs/IPOTESI.md |
 
 ## Fatto
