@@ -892,6 +892,121 @@
         "title": "ModificaPiano",
         "type": "object"
       },
+      "Partita": {
+        "properties": {
+          "casa": {
+            "title": "Casa",
+            "type": "string"
+          },
+          "competizione": {
+            "title": "Competizione",
+            "type": "string"
+          },
+          "data_ora": {
+            "description": "Calcio d'inizio, ISO 8601 in UTC",
+            "title": "Data Ora",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "ospite": {
+            "title": "Ospite",
+            "type": "string"
+          },
+          "stadio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Stadio indicato dalla fonte, se presente",
+            "title": "Stadio"
+          },
+          "stato": {
+            "description": "Stato secondo la fonte: SCHEDULED, TIMED, IN_PLAY, FINISHED…",
+            "title": "Stato",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "data_ora",
+          "casa",
+          "ospite",
+          "competizione",
+          "stato"
+        ],
+        "title": "Partita",
+        "type": "object"
+      },
+      "Partite": {
+        "properties": {
+          "aggiornato_al": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Quando la fonte ha risposto, ISO 8601",
+            "title": "Aggiornato Al"
+          },
+          "copia": {
+            "default": false,
+            "description": "True se i dati vengono dalla copia salvata, non da una risposta fresca",
+            "title": "Copia",
+            "type": "boolean"
+          },
+          "disponibile": {
+            "description": "False se non c'è né una risposta né una copia: nessun dato inventato",
+            "title": "Disponibile",
+            "type": "boolean"
+          },
+          "fonte": {
+            "default": "football-data.org",
+            "title": "Fonte",
+            "type": "string"
+          },
+          "motivo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Perché i dati mancano o non sono freschi",
+            "title": "Motivo"
+          },
+          "partite": {
+            "description": "Partite in casa del Napoli, dalla più vicina",
+            "items": {
+              "$ref": "#/components/schemas/Partita"
+            },
+            "title": "Partite",
+            "type": "array"
+          },
+          "simulato": {
+            "default": false,
+            "title": "Simulato",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "partite",
+          "disponibile"
+        ],
+        "title": "Partite",
+        "type": "object"
+      },
       "PassoSimulazione": {
         "properties": {
           "arrivati": {
@@ -2047,6 +2162,28 @@
         "summary": "Messaggi",
         "tags": [
           "messaggi"
+        ]
+      }
+    },
+    "/api/partite": {
+      "get": {
+        "description": "Prossime partite in casa del Napoli al Maradona; `disponibile=False` se mancano anche le copie.",
+        "operationId": "partite_api_partite_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Partite"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Partite",
+        "tags": [
+          "partite"
         ]
       }
     },

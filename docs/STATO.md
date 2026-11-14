@@ -40,6 +40,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 ## Fatto
 
+- **Contratto: nuovo `GET /api/partite`** (oggetti `Partite`, `Partita`): prossime partite in casa del Napoli al Maradona da football-data.org, dato reale con `copia: true` quando viene dalla copia salvata. Chiave `FOOTBALL_DATA_API_KEY` in `.env`.
 - Preparazione del repository: CLAUDE.md, .gitignore, .env.example, README.md, docs/STATO.md, docs/IPOTESI.md, docs/STAND.md, docs/FEEDBACK.md, Makefile con `make check`.
 - docs/TEAM.md con i componenti del team e regola dei Co-authored-by in CLAUDE.md. Email dei commit di Leonardo Monaco aggiornata il 14/11.
 - docs/PROGETTO.md (concept) e docs/GUIDA.md (guida del team) aggiunti.

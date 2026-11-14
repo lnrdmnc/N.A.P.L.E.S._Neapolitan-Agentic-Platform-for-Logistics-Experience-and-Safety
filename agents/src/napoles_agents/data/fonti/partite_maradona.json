@@ -1,0 +1,55 @@
+{
+  "partite": [
+    {
+      "id": 558527,
+      "data_ora": "2026-11-21T19:45:00Z",
+      "casa": "Napoli",
+      "ospite": "Torino",
+      "competizione": "Serie A",
+      "stato": "TIMED",
+      "stadio": null
+    },
+    {
+      "id": 558508,
+      "data_ora": "2026-12-05T19:45:00Z",
+      "casa": "Napoli",
+      "ospite": "Lecce",
+      "competizione": "Serie A",
+      "stato": "TIMED",
+      "stadio": null
+    },
+    {
+      "id": 575418,
+      "data_ora": "2026-12-08T20:00:00Z",
+      "casa": "Napoli",
+      "ospite": "Club Brugge",
+      "competizione": "UEFA Champions League",
+      "stato": "TIMED",
+      "stadio": null
+    },
+    {
+      "id": 558489,
+      "data_ora": "2026-12-13T19:45:00Z",
+      "casa": "Napoli",
+      "ospite": "Milan",
+      "competizione": "Serie A",
+      "stato": "TIMED",
+      "stadio": null
+    },
+    {
+      "id": 558463,
+      "data_ora": "2027-01-07T19:45:00Z",
+      "casa": "Napoli",
+      "ospite": "Cagliari",
+      "competizione": "Serie A",
+      "stato": "TIMED",
+      "stadio": null
+    }
+  ],
+  "disponibile": true,
+  "aggiornato_al": "2026-11-14T16:54:39.414967+00:00",
+  "copia": false,
+  "motivo": null,
+  "fonte": "football-data.org",
+  "simulato": false
+}

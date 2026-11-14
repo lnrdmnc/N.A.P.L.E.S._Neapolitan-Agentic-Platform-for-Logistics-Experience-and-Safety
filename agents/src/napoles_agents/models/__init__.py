@@ -11,6 +11,7 @@ from .contesto import Contesto, EventoSismicoReale, LivelloVulcanico, Meteo
 from .indicatori import ConfrontoIndicatori, Indicatori, Origine
 from .itinerario import Itinerario, Tratta
 from .messaggi import Messaggio, TipoMessaggio
+from .partite import Partita, Partite
 from .piano import Conflitto, Impatto, ImpattoZona, ModificaPiano, Piano, Proposta
 from .registro import StatoRegistro, VoceRegistro
 from .simulazione import PassoSimulazione, SerieSimulazione, StatoZona
@@ -38,6 +39,8 @@ __all__ = [
     "Meteo",
     "ModificaPiano",
     "Origine",
+    "Partita",
+    "Partite",
     "PassoSimulazione",
     "PercorsoTraffico",
     "Piano",

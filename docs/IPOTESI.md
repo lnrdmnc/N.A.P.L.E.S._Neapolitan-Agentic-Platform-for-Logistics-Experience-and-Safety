@@ -9,6 +9,7 @@
 | Allerta meteo gialla e testo ufficiale | Simulato | Testo inventato ed etichettato «SIMULAZIONE» | Avviso ufficiale inoltrato senza modifiche (caso A) |
 | Post social «crolli a Bagnoli» | Simulato | Inventato per mostrare il caso C | Piano: segnalazione all'operatore, nessun avviso pubblico |
 | Livello di allerta vulcanica dei Campi Flegrei «giallo» | Da verificare | Va controllato sulla fonte ufficiale prima della demo | Contesto in control room |
+| Partite in casa del Napoli = partite allo stadio Maradona | Ipotesi su dato reale | football-data.org (piano gratuito) non indica lo stadio: si usano le partite con il Napoli in casa; se un giorno indica uno stadio diverso, la partita si scarta | Vista cittadino: «Partite al Maradona» |
 | 50.000 spettatori e ripartizione per settore (Curve A e B 12.000, Tribune Posillipo e Nisida 8.000, Distinti 10.000) | Simulato | Ordine di grandezza della capienza; ripartizione inventata | Ondate di deflusso |
 | Capacità persone al minuto: Linea 2 80, Cumana 30, bus ordinari 60, a piedi e con mezzi propri 700, navette 100 | Simulato | Ordini di grandezza ricalibrati il 14/11 alle 16:30 (prima erano 400, 300, 150, 450, 500: gonfiati). Ferro: un treno ogni 10–20 minuti; navette: circa un bus al minuto da un punto di carico. Da verificare con frequenze GTFS e capienze reali | Indicatori con e senza coordinamento |
 | Uscita massima dallo stadio 2.500 persone al minuto | Simulato | Valore di lavoro | Indicatori |

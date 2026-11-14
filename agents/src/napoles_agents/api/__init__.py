@@ -12,6 +12,7 @@ from . import (
     indicatori,
     itinerario,
     messaggi,
+    partite,
     piani,
     registro,
     ricezione,
@@ -34,6 +35,7 @@ ROUTER = [
     contesto.router,
     itinerario.router,
     traffico.router,
+    partite.router,
 ]
 
 app = FastAPI(title="N.A.P.L.E.S. – agenti", version="0.2.0")
