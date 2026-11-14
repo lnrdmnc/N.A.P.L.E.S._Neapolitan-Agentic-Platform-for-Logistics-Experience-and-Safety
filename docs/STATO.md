@@ -34,6 +34,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Script del video pitch (docs/VIDEO.md) | Leonardo Schiavo | sab 14/11 16:15 | Solo testo, massimo 3 minuti |
+| Budget anti-allarme e cessato allarme operativo (agenti) | Leonardo Monaco | sab 14/11 16:31 | Tocca agenti/comunicazione.py, motore.py e lo scenario (riattivazione linee); contratto invariato |
 
 ## Fatto
 
