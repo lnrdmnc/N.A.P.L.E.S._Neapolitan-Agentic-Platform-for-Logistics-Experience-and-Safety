@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| «Cosa visitare» per il turista (al posto dello stub B6/U3): luoghi con coordinate Wikidata e fermate GTFS, consigli che evitano zone affollate e scioperi | Leonardo Monaco | sab 14/11 20:18 | Nuovi `…/data/luoghi_da_visitare.json`, `…/agenti/visite.py`, `…/api/visite.py`, `frontend/src/cittadino/DaVisitare.tsx`; toglie `…/api/itinerario.py` (stub) |
 
 ## Fatto
 
