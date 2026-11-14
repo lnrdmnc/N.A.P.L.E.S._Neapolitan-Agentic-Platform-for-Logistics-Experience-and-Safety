@@ -1,0 +1,88 @@
+/* U1 · Scelta del profilo. Uses only the tokens in styles/tokens.css. */
+
+.pf {
+  width: 100%;
+  background: var(--canvas);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.pf h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.pf h2 span {
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+
+.pf-note {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: var(--text-small);
+}
+
+.pf-options {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: 1fr;
+}
+
+.pf-options button {
+  font: inherit;
+  text-align: left;
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--primary);
+  background: var(--surface-1);
+  color: var(--ink);
+  cursor: pointer;
+  min-height: 56px;
+}
+
+.pf-options button:hover {
+  background: var(--surface-2);
+}
+
+.pf-options button:focus-visible,
+.pf-current button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.pf-options button span {
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+}
+
+.pf-current {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: var(--space-2) var(--space-4);
+  background: var(--canvas);
+  border-left: 4px solid var(--primary);
+}
+
+.pf-current button {
+  font: inherit;
+  font-size: var(--text-small);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--hairline-strong);
+  background: var(--canvas);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .pf-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}

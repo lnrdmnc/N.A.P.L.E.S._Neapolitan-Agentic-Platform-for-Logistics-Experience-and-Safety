@@ -1,11 +1,13 @@
 import { sortAlerts } from '../api/notices'
-import { useAvvisi } from '../api/useAvvisi'
+import { useProfilo } from '../api/profilo'
+import { useAvvisiProfilo } from '../api/useAvvisiProfilo'
 import { useLiveEvents } from '../api/useLiveEvents'
 import { useStato } from '../api/useStato'
 import { LiveStatus } from '../components/LiveStatus'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { AlertCard } from './AlertCard'
 import { PartiteMaradona } from './PartiteMaradona'
+import { SceltaProfilo } from './SceltaProfilo'
 import './Cittadino.css'
 
 // Citizen view: phone first, also usable on tablet and desktop.
@@ -13,7 +15,9 @@ import './Cittadino.css'
 export function Cittadino() {
   const { status, events } = useLiveEvents()
   const { stato } = useStato()
-  const avvisi = sortAlerts(useAvvisi(events.filter((e) => e.kind === 'avvisi').length))
+  const { profilo, scegli } = useProfilo()
+  const en = profilo === 'turista'
+  const avvisi = sortAlerts(useAvvisiProfilo(profilo, events.filter((e) => e.kind === 'avvisi').length))
   const [latest, ...older] = avvisi
 
   return (
@@ -26,13 +30,20 @@ export function Cittadino() {
       </header>
 
       <div className="ct-body">
-        <SimulationBadge label="DEMO · eventi simulati" />
+        <SimulationBadge label={en ? 'DEMO · simulated events' : 'DEMO · eventi simulati'} />
+        <SceltaProfilo profilo={profilo} onScegli={scegli} />
 
         <main className="ct-grid">
           <section className="ct-card ct-card-alerts" aria-labelledby="ct-alerts-title">
-            <h2 id="ct-alerts-title">Emergenze e avvisi</h2>
-            {!latest ? (
-              <p className="ct-muted">Nessun avviso attivo. Gli avvisi compaiono qui solo dopo l'approvazione della control room.</p>
+            <h2 id="ct-alerts-title">{en ? 'Emergencies and alerts' : 'Emergenze e avvisi'}</h2>
+            {!profilo ? (
+              <p className="ct-muted">Scegli chi sei per ricevere i tuoi avvisi. · Choose who you are to get your alerts.</p>
+            ) : !latest ? (
+              <p className="ct-muted">
+                {en
+                  ? 'No active alerts. Alerts appear here only after the control room approves them.'
+                  : "Nessun avviso attivo. Gli avvisi compaiono qui solo dopo l'approvazione della control room."}
+              </p>
             ) : (
               <>
                 <AlertCard alert={latest} featured />
