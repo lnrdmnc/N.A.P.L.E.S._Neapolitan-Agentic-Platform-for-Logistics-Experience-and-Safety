@@ -25,7 +25,7 @@ Prevale sulle ipotesi (CLAUDE.md). Una sezione per checkpoint o prova, la più r
 
 **Tempo reale: cosa manca (al 14/11 alle 18:45)**
 
-1. **Nessuna schermata fa avanzare il tempo dello scenario**: senza un comando nel terminale la demo resta ferma al minuto 0. Serve una regia in control room (avvio, pausa, velocità, ricomincia) con l'orologio che avanza da solo.
+1. ~~Nessuna schermata fa avanzare il tempo dello scenario~~ **Risolto sab 18:51**: regia in control room con orologio che avanza da solo, pausa automatica quando arriva un piano, velocità, salto al prossimo evento, ricomincia.
 2. **Contesto reale non collegato**: eventi INGV reali e meteo reale (compiti F1, F2) sono ancora uno stub, eppure le fonti rispondono (INGV ha registrato Md 2.6 ai Campi Flegrei il 13/11).
 3. Zone del simulatore sulla mappa (C1) non ancora disegnate.
 

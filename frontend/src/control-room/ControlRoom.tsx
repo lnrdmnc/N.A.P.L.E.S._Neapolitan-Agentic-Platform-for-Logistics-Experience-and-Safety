@@ -8,6 +8,7 @@ import { Indicatori } from './Indicatori'
 import { MessaggiAgenti } from './MessaggiAgenti'
 import { Registro } from './Registro'
 import { PianoProposto } from './PianoProposto'
+import { Regia } from './Regia'
 import './ControlRoom.css'
 
 export function ControlRoom() {
@@ -31,6 +32,8 @@ export function ControlRoom() {
           <LiveStatus status={status} inverse />
         </div>
       </header>
+
+      <Regia tMin={stato?.t_min} ora={stato?.ora} />
 
       {error && <p className="cr-banner-error">{error}: avviala con make agents-run</p>}
 

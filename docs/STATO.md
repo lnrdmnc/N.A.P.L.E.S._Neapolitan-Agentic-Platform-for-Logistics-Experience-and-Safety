@@ -32,7 +32,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| Regia del tempo in control room: avvio, pausa, velocità, salto al prossimo evento, ricomincia | Leonardo Monaco | sab 14/11 18:49 | Dal checkpoint (tempo reale). Nuovi `frontend/src/control-room/Regia.tsx` (+ .css) e `frontend/src/api/useRegia.ts`; in `ControlRoom.tsx` una riga |
 
 ## Fatto
 
@@ -71,6 +70,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **C4 — Registro delle decisioni nella control room** (`frontend/src/control-room/Registro.tsx`, `frontend/src/api/useRegistro.ts`): stato della catena in evidenza («Catena integra · N voci» in verde, oppure «Catena ALTERATA dalla voce X» in rosso con la riga evidenziata), pulsante «Verifica la catena», ultime 30 voci con minuto, tipo (evento, piano proposto, approvato, modificato, rifiutato, avviso inviato), descrizione leggibile e impronte «precedente → questa». Provato nel browser a 1440 px e da telefono senza scorrimento orizzontale; lo stato «alterato» provato intercettando la risposta nel browser. Rimanda a `make verifica-registro` per la verifica sul file.
 - **U1 — Vista cittadino per profilo.** Al primo accesso «Chi sei? / Who are you?» con quattro scelte (allo stadio, abito a Fuorigrotta, torno verso Bagnoli o Pozzuoli, I'm visiting Naples), ricordata sul telefono e cambiabile. Gli avvisi arrivano da `/api/avvisi?pubblico=…`: solo i propri più quelli per tutti, senza doppioni. Per il turista tutta la scheda è in inglese, il testo ufficiale resta in italiano con «Official text in Italian, not translated». Ogni avviso mostrato è confermato una volta a `/visto` con un identificativo anonimo casuale del telefono (`crypto.randomUUID`, nessun dato personale). Provato da telefono: il turista vede 2 avvisi, entrambi confermati in control room; il pendolare vede «per Bagnoli e Pozzuoli navette sostitutive». File nuovi: `frontend/src/api/profilo.ts`, `useAvvisiProfilo.ts`, `cittadino/SceltaProfilo.tsx`; `api/useAvvisi.ts` non è più usato dalla vista cittadino.
 - **Online su Google Cloud Run:** https://naples-xbaldcnsma-oc.a.run.app (`/control-room`, `/cittadino`). Si aggiorna con `make deploy` da qualunque PC con gcloud e accesso al progetto `naples-hackathon` (README, «Messa online»; docs/DEPLOY.md). Chiavi in Secret Manager, una sola istanza: la sessione demo è condivisa da chi apre il link.
+- **Regia del tempo in control room** (dal checkpoint: tempo reale). Barra sotto l'intestazione con ▶ Avvia/Riprendi, ⏸ Pausa, +1 min, ⏭ Prossimo evento, ↺ Ricomincia, velocità (1 minuto ogni 2 s, al secondo, veloce) e «Pausa quando arriva un piano», attiva di default: l'orologio dello scenario avanza da solo e si ferma quando l'Orchestratore propone un piano, così l'operatore decide prima che il tempo vada avanti. L'orologio della regia non torna mai indietro (chiedere un minuto precedente al server riavvierebbe lo scenario). Provato nel browser: avvio veloce, pausa automatica alle 21:55 sul piano 001, approvazione con il pulsante di C3 (4 avvisi inviati), ripresa e nuova pausa al minuto 71. File: `frontend/src/api/useRegia.ts`, `frontend/src/control-room/Regia.tsx` (+ .css).
 
 ## Prossimi compiti liberi
 
@@ -101,7 +101,7 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 
 ## Problemi aperti
 
-- **Dal checkpoint delle 14:50 (affidabilità e tempo reale):** nessuna schermata fa avanzare il tempo dello scenario, quindi la demo resta ferma senza il terminale; serve una regia in control room (avvio, pausa, velocità, ricomincia). Contesto reale INGV e meteo (F1, F2) ancora stub. Dettaglio in docs/FEEDBACK.md.
+- **Dal checkpoint delle 14:50 (affidabilità e tempo reale):** la regia del tempo c’è (sab 18:51). Restano il contesto reale INGV e meteo (F1, F2), ancora stub, e la mappa a zone (C1). Dettaglio in docs/FEEDBACK.md.
 - Team: Jacopo Mariello e Angelo Di Bello supportano il gruppo (lavoro senza commit: mentor, stand, prove).
 - La sincronizzazione iCloud del Desktop crea copie «file 2.py» anche nel codice: tolte il 14/11 alle 18:50 (erano identiche e non tracciate) e ora escluse in `.gitignore`. Usare `git add` con i percorsi, non `git add -A`.
 
