@@ -1,1 +1,1 @@
-# The-big-Hack-2026
+# TheBigHack2026
