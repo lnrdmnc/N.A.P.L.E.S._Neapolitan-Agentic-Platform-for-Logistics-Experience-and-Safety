@@ -33,7 +33,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
-| Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
+| Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
 | B1 — Simulatore nella sessione: la mappa segue le decisioni approvate; impatto nel piano | Leonardo Monaco | sab 14/11 17:17 | Tocca motore.py, api/simulazione.py e un nuovo `…/decisioni.py`; contratto invariato |
 
 ## Fatto
@@ -57,6 +57,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **Profilo «pendolare flegreo».** **Contratto: `Alert.pubblico` e `GET /api/avvisi?pubblico=` ammettono anche `pendolare`.** Chi rientra verso l'area flegrea riceve la propria catena di avvisi: navette sostitutive «per Bagnoli e Pozzuoli» (destinazioni simulate), linee di nuovo in servizio, cessato allarme, e sempre «prima di rientrare segui la Protezione Civile e il tuo Comune», senza indicazioni sul rischio. 30 test.
 - **B2 — Modifica del piano.** `POST /api/piano/{id}/modifica` non è più uno stub: l'operatore esclude proposte, il piano passa a «modificato» (si approva o rifiuta come un piano proposto), si ricalcolano conflitti e sintesi, le proposte escluse non generano avvisi; la modifica va nel registro e sul bus. Si può reincludere una proposta rimodificando. Le allerte ufficiali (caso A) non si possono escludere (409); escludere lo sciame non fa partire il cessato allarme. **Contratto: `Piano` ha i campi `proposte_escluse` e `motivo_modifica`.** 38 test.
 - **S0 — Simulatore a zone** (`…/simulatore.py`, `…/data/rete_fuorigrotta.json`). Funzione pura e deterministica, a passi di un minuto: stadio, Piazzale Tecchio, Viale Giochi del Mediterraneo, stazioni Campi Flegrei (L2) e Mostra (Cumana), fermata Marino - Stadio Maradona; coordinate delle fermate dal GTFS ANM. Persone conservate a ogni passo, capienza superata = coda, linee riattivate che tornano a smaltire, persone informate o no. Restituisce già la `SerieSimulazione` del contratto. Risultato sullo scenario: area sgombra in 50 minuti con coordinamento contro 60 senza; le stazioni chiuse non si riempiono mai con coordinamento (senza: fino a 3,7 volte la capienza); picco su Piazzale Tecchio 3,8 contro 5,4 volte la capienza. Non ancora collegato alla sessione: è il compito B1. 47 test.
+- **Traffico reale da Google.** `GET /api/traffico` negli agenti (contratto: modelli `Traffico`, `PercorsoTraffico`, `LivelloTraffico`): tempi in auto dallo stadio verso cinque destinazioni con Google Routes API, mai simulati; in memoria 10 minuti, massimo 150 chiamate al giorno. Pannello «Traffico in tempo reale» nella control room con livello traffico di Google Maps al posto del segnaposto della mappa; `GET /api/config` nel backend per la chiave del browser. Chiavi in `.env` (`MAPS_API_KEY`, `MAPS_JS_API_KEY`), da chiedere in privato a Leonardo Schiavo. `Dockerfile` e docs/DEPLOY.md per Cloud Run: deploy non ancora eseguito.
 
 ## Prossimi compiti liberi
 
@@ -75,6 +76,9 @@ B0 è su main: sbloccati, backend: **B1** simulatore nella sessione (serve S0), 
 Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Domenica dopo le 10:30: registrazione del video seguendo docs/VIDEO.md. Se avanza tempo: U2, C6, U3, X2, U4.
 
 ## Problemi aperti
+
+- **Contratto cambiato il 14/11:** nuovo endpoint `GET /api/traffico` e modelli `Traffico`, `PercorsoTraffico`, `LivelloTraffico`. `make agents-run` e `make backend` ora leggono `.env` se esiste.
+- Disagi del trasporto pubblico: Google non li espone via API e per Napoli non esiste un feed GTFS-RT; nella mappa c'è solo il traffico stradale reale.
 
 - **Da sistemare prima della consegna (controllo del 14/11 sui contenuti che non possono restare):**
   - docs/TEAM.md contiene le email personali di tutti e il repository sarà pubblico: usare l'email `noreply` di GitHub, anche in `git config`.

@@ -6,7 +6,7 @@ Il repository si chiamava in precedenza `CoScienze-TheBigHack2026`.
 
 ## Stato attuale
 
-Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). Lo script del video pitch di 3 minuti è in [docs/VIDEO.md](docs/VIDEO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
+Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). La control room mostra il traffico reale di Google intorno allo stadio (chiavi in `.env`, messa online in [docs/DEPLOY.md](docs/DEPLOY.md)). Lo script del video pitch di 3 minuti è in [docs/VIDEO.md](docs/VIDEO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
 
 ## Come avviare
 
@@ -46,6 +46,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 17:20 | agents, webapp | Traffico reale: `GET /api/traffico` da Google Routes API, mappa con livello traffico in control room, chiave del browser da `/api/config`; Dockerfile e docs/DEPLOY.md per Cloud Run |
 | 2026-11-14 | 17:12 | agents | S0: simulatore a zone di Fuorigrotta, funzione pura con persone conservate, code e linee riattivate |
 | 2026-11-14 | 17:04 | agents | B2: modifica del piano reale (esclusione di proposte, registro, niente esclusione delle allerte ufficiali) |
 | 2026-11-14 | 17:04 | contracts | `Piano` ha `proposte_escluse` e `motivo_modifica` |
