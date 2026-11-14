@@ -5,6 +5,7 @@ aspettano fuori e se ne vanno alla capacità dei mezzi disponibili. Tutti i para
 sono nello scenario e dichiarati in docs/IPOTESI.md.
 """
 
+from copy import deepcopy
 from typing import Any
 
 from .models import ConfrontoIndicatori, Indicatori, TipoEvento
@@ -35,7 +36,13 @@ def _simula(scenario: dict[str, Any], coordinato: bool) -> Indicatori:
         minuti_avviso = sim["senza_coordinamento_minuti_informazione"]
         minuti_decisione = sim["senza_coordinamento_minuti_decisione"]
     navette_pronte = critico + minuti_decisione + navette["minuti_attivazione"]
-    informati_da = critico + minuti_avviso
+    # Con coordinamento l'avviso arriva sul telefono mentre si è ancora sugli spalti.
+    # Senza, le persone scoprono le sospensioni solo dopo l'uscita, davanti alle stazioni chiuse:
+    # il ritardo si conta dal più tardi tra evento e fischio finale.
+    if coordinato:
+        informati_da = critico + minuti_avviso
+    else:
+        informati_da = max(critico, fine) + minuti_avviso
 
     settori = {s["id"]: s["spettatori"] for s in scenario["settori"]}
     if coordinato:
@@ -90,17 +97,46 @@ def _simula(scenario: dict[str, Any], coordinato: bool) -> Indicatori:
     )
 
 
+def sensibilita(scenario: dict[str, Any]) -> list[dict[str, Any]]:
+    """Quanto cambia il risultato se cambiano le ipotesi più discutibili.
+
+    Serve al pitch: il vantaggio va presentato come intervallo, non come numero unico.
+    """
+    righe = []
+    for fattore in (1.0, 1.3, 1.5):
+        for decisione_senza in (10, 20):
+            s = deepcopy(scenario)
+            s["simulazione"]["con_coordinamento_fattore_percorsi_piedi"] = fattore
+            s["simulazione"]["senza_coordinamento_minuti_decisione"] = decisione_senza
+            con, senza = _simula(s, coordinato=True), _simula(s, coordinato=False)
+            righe.append(
+                {
+                    "fattore_percorsi_piedi": fattore,
+                    "decisione_senza_min": decisione_senza,
+                    "deflusso_con": con.deflusso_min,
+                    "deflusso_senza": senza.deflusso_min,
+                    "picco_con": con.picco_attesa_persone,
+                    "picco_senza": senza.picco_attesa_persone,
+                }
+            )
+    return righe
+
+
 def confronta(scenario: dict[str, Any]) -> ConfrontoIndicatori:
     sim = scenario["simulazione"]
     return ConfrontoIndicatori(
         con_coordinamento=_simula(scenario, coordinato=True),
         senza_coordinamento=_simula(scenario, coordinato=False),
         ipotesi=[
-            "Capacità di linee, bus, navette e deflusso a piedi: valori simulati.",
             (
-                "Senza coordinamento le persone scoprono le sospensioni dopo "
-                f"{sim['senza_coordinamento_minuti_informazione']} minuti e nel frattempo la capacità di "
-                "allontanamento si dimezza."
+                "Capacità di linee, bus, navette e deflusso a piedi o con mezzi propri: ordini di grandezza "
+                "simulati, da verificare (docs/IPOTESI.md)."
+            ),
+            (
+                "Senza coordinamento le persone scoprono le sospensioni solo dopo l'uscita, "
+                f"{sim['senza_coordinamento_minuti_informazione']} minuti dopo il fischio finale; nel "
+                "frattempo la capacità di allontanamento si dimezza. Con coordinamento l'avviso arriva "
+                "sul telefono prima dell'uscita."
             ),
             (
                 f"Minuti di decisione: {sim['senza_coordinamento_minuti_decisione']} senza coordinamento, "

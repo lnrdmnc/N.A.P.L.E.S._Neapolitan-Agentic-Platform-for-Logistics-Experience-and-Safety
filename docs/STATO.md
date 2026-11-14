@@ -34,7 +34,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Script del video pitch (docs/VIDEO.md) | Leonardo Schiavo | sab 14/11 16:15 | Solo testo, massimo 3 minuti |
-| Sintesi delle idee (docs/IDEE.md) e numeri credibili nel confronto con e senza coordinamento | Leonardo Monaco | sab 14/11 16:22 | Dal check di 4 agenti esperti di smart city; tocca simulazione.py, scenario e IPOTESI.md |
 
 ## Fatto
 
@@ -47,6 +46,8 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - Piano di lavoro in docs/PIANO.md, costruito sul modulo agenti: decisioni, architettura, contratti da aggiungere, cosa manca rispetto al brief, compiti con dipendenze e prove a mano, orari e tagli. Fonti dati verificate con chiamate reali (INGV, GTFS di ANM ed EAV, Open-Meteo, OSRM): esito nella sezione 10 del piano.
 - **B0** — `models/` e `api/` divisi in un file per area con indice; bus dei messaggi (`bus.py`, `GET /api/messaggi?da_seq=`); `affidabilita_minima` nel piano; `origine` degli indicatori; stub con forma definitiva per simulazione, contesto, itinerario, ricezione e modifica del piano; comandi `make prova` (stampa la linea del tempo) e segnaposto `verifica-registro`, `demo`, `web-test`. **API degli agenti sulla porta 8001**, concordata con Francesco Sannella. Corretto lo sciame sismico che generava avvisi a raffica quando le scosse invecchiavano. 21 test.
 - **W0, scheletro della web app.** `backend/`: gateway FastAPI sulla porta 8000 che serve la PWA compilata, inoltra ogni `/api/*` agli agenti sulla 8001 (`AGENTS_URL`) e, quando l'operatore approva un piano, spinge gli avvisi ai telefoni sul canale in tempo reale (`/api/events`); 9 test. `frontend/`: PWA React + TypeScript, tipi generati da `contracts/agenti.openapi.json`, stile ispirato a IBM Carbon con font in locale. `/control-room` mostra ora, stato della città, linee ed eventi con affidabilità; `/cittadino` mostra linee e avvisi approvati in diretta. Provato nel browser fino all'approvazione del piano al minuto 72. `make check` esteso alla web app; `make install`, `make backend`, `make frontend`, `make build`.
+- **Check di 4 agenti esperti di smart city** (cittadini, turisti, telco e mobilità, giuria): sintesi, idee per stasera, visione per il pitch e tagli motivati in [docs/IDEE.md](IDEE.md).
+- **Numeri credibili.** Corretto il bug per cui il ritardo d'informazione «senza coordinamento» non aveva effetto; capacità ricalibrate su ordini di grandezza realistici (navette 100/min invece di 500, Linea 2 80 invece di 400); tabella di sensibilità in docs/IPOTESI.md e in `make prova`. Nuovo risultato: deflusso 47 → 66 minuti, picco 22.180 → 39.400 persone; anche senza l'ipotesi sui percorsi a piedi il coordinamento vince (58 → 66 minuti). 23 test.
 
 ## Prossimi compiti liberi
 
@@ -59,6 +60,7 @@ Subito, in parallelo:
 - **D1** — Dati: copie in cache e docs/DATI.md, 40 minuti al massimo.
 - **H1** — Persone: stand (docs/STAND.md), chiave del modello e chiave Google Maps in `.env`, nome del team, checkpoint con i mentor.
 - Verificare con il team nomi delle stazioni, capacità e soglie in `scenario_maradona.json` e in docs/IPOTESI.md.
+- Dal check delle idee (docs/IDEE.md), nel modulo agenti, ≤1h ciascuno: **budget anti-allarme** (un avviso ogni N minuti per profilo, conflitto mostrato una volta); **cessato allarme operativo** (`Cancel`); **cornice in inglese per l'allerta ufficiale**; **profilo residente flegreo / pendolare**. Con S0: **presenze aggregate per cella simulate** come input dell'agente Folla.
 
 B0 è su main: sbloccati, backend: **B1** simulatore nella sessione (serve S0), **B2** modifica del piano (non in parallelo con B1), **B3** conferma di ricezione, **B4** indicatori con origine (dopo B1), **B5** testi dal modello (serve L0), **F1–F4** fonti INGV, meteo, GTFS, mappe (serve D1), **B6** itinerario del turista, **P1** strumento di prova, **R1** registro su file e comando di verifica.
 
@@ -68,6 +70,7 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 
 - **Deciso il 14/11: due processi.** `backend/` (porta 8000) è un gateway senza logica: serve la PWA, inoltra agli agenti (porta 8001) e tiene il canale in tempo reale. Per X1 `make demo` deve avviare entrambi.
 - La vista cittadino mostra tutti gli avvisi approvati, per ogni profilo e lingua: il filtro per profilo è il compito U1.
+- PROGETTO.md 6.2 va corretto: il cell broadcast è unidirezionale e non distingue i profili, quindi la conferma di ricezione esiste solo nella PWA; IT-Alert è della Protezione Civile e le informazioni operative passano da un canale separato su adesione (docs/IDEE.md).
 - Indicatori: i minuti tra evento e avviso e i minuti per decidere oggi sono ipotesi in ingresso, non risultati. Vanno etichettati così finché il compito B4 non li misura nella sessione (docs/PIANO.md, sezione 9).
 - Chiave del modello e chiave Google Maps non ancora in `.env`. Senza la prima la demo usa i testi a regole.
 - Le stime del piano non lasciano margine: alle 18:30 vale la linea di taglio (docs/PIANO.md, sezione 8).

@@ -91,6 +91,22 @@ def test_mobilita_senza_sospensioni_non_propone_nulla():
     assert mobilita.proponi(sc.stato(S, 10), S) == []
 
 
+def test_ritardo_informazione_senza_coordinamento_ha_effetto():
+    # Se il ritardo d'informazione non contasse, togliere il dimezzamento non cambierebbe nulla.
+    from copy import deepcopy
+
+    s = deepcopy(S)
+    s["simulazione"]["senza_coordinamento_minuti_informazione"] = 0
+    assert confronta(s).senza_coordinamento.deflusso_min < confronta(S).senza_coordinamento.deflusso_min
+
+
+def test_coordinamento_vince_anche_senza_ipotesi_sui_percorsi_a_piedi():
+    from napoles_agents.simulazione import sensibilita
+
+    for r in sensibilita(S):
+        assert r["deflusso_con"] < r["deflusso_senza"] and r["picco_con"] < r["picco_senza"], r
+
+
 def test_coordinamento_migliora_gli_indicatori():
     c = confronta(S)
     assert c.con_coordinamento.deflusso_min < c.senza_coordinamento.deflusso_min

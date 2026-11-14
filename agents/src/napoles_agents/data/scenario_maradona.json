@@ -14,13 +14,13 @@
     {"id": "distinti", "nome": "Distinti", "spettatori": 10000}
   ],
   "linee": [
-    {"id": "linea2", "nome": "Linea 2 – stazione Campi Flegrei", "capacita_persone_min": 400},
-    {"id": "cumana", "nome": "Cumana – stazione Mostra", "capacita_persone_min": 300},
-    {"id": "bus", "nome": "Bus ordinari Fuorigrotta", "capacita_persone_min": 150},
-    {"id": "piedi", "nome": "Deflusso a piedi verso i quartieri vicini", "capacita_persone_min": 450}
+    {"id": "linea2", "nome": "Linea 2 – stazione Campi Flegrei", "capacita_persone_min": 80},
+    {"id": "cumana", "nome": "Cumana – stazione Mostra", "capacita_persone_min": 30},
+    {"id": "bus", "nome": "Bus ordinari Fuorigrotta", "capacita_persone_min": 60},
+    {"id": "piedi", "nome": "A piedi e con mezzi propri verso i quartieri vicini", "capacita_persone_min": 700}
   ],
   "navette": {
-    "capacita_persone_min": 500,
+    "capacita_persone_min": 100,
     "minuti_attivazione": 12,
     "punto_carico_preferito": "piazzale_tecchio",
     "punto_carico_alternativo": "viale_giochi_del_mediterraneo"
