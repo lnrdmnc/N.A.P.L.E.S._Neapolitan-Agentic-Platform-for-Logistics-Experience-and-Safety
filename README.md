@@ -33,7 +33,7 @@ gcloud config set project <ID_PROGETTO> # una volta per PC
 make deploy
 ```
 
-Pubblica su Google Cloud Run a Milano: un container con agenti e web app, chiavi da `.env` copiate in Secret Manager, account di servizio dedicato, una sola istanza (la sessione demo sta in memoria), spento quando nessuno lo usa. Alla fine stampa gli indirizzi di control room e vista cittadino. Installazione di gcloud, dettagli e soluzione dei problemi in [docs/DEPLOY.md](docs/DEPLOY.md).
+Indirizzo pubblico: **https://naples-coscienze.web.app** (`/control-room`, `/cittadino`). Pubblica su Google Cloud Run a Milano, con l'indirizzo leggibile su Firebase Hosting: un container con agenti e web app, chiavi da `.env` copiate in Secret Manager, account di servizio dedicato, una sola istanza (la sessione demo sta in memoria), spento quando nessuno lo usa. Alla fine stampa gli indirizzi di control room e vista cittadino. Installazione di gcloud, dettagli e soluzione dei problemi in [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Struttura del repository
 
@@ -63,6 +63,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
 | 2026-11-14 | 18:51 | webapp | Regia del tempo in control room: l'orologio dello scenario avanza da solo e si ferma quando arriva un piano |
+| 2026-11-14 | 18:50 | deploy, webapp | Indirizzo pubblico https://naples-coscienze.web.app (Firebase Hosting davanti a Cloud Run); canale in tempo reale diretto su Cloud Run tramite `events_url` in `/api/config` |
 | 2026-11-14 | 18:46 | docs | Checkpoint 1 con i mentor (14:50) in docs/FEEDBACK.md; copie iCloud escluse da git |
 | 2026-11-14 | 18:40 | deploy | `make deploy`: messa online su Cloud Run in un comando, chiavi in Secret Manager, account di servizio dedicato, container senza root, regione Milano |
 | 2026-11-14 | 18:35 | webapp | C3: piano in control room con Approva, Modifica e Rifiuta, sempre visibili su desktop; gli avvisi approvati arrivano in diretta alla vista cittadino; mappa non più allungata |

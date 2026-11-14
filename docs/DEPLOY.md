@@ -19,7 +19,7 @@ Un comando: **`make deploy`**. Lo script (`deploy/deploy.sh`) si rilancia uguale
 
 ## Cosa fa `make deploy`
 
-1. Abilita le API: Cloud Run, Cloud Build, Artifact Registry, Secret Manager, API Keys.
+1. Abilita le API: Cloud Run, Cloud Build, Artifact Registry, Secret Manager, API Keys, Firebase e Firebase Hosting.
 2. Crea l'account di servizio `naples-run`, che può solo leggere i propri segreti (non l'account predefinito, che ha permessi da Editor su tutto il progetto).
 3. Copia `MAPS_API_KEY`, `LLM_API_KEY` e `FOOTBALL_DATA_API_KEY` da `.env` in **Secret Manager**, con una versione nuova solo se il valore è cambiato. Nessuna chiave finisce nell'immagine o nelle variabili in chiaro. `MAPS_JS_API_KEY` resta una variabile: è pubblica per natura e limitata ai siti autorizzati.
 4. Costruisce l'immagine con **Cloud Build** (non serve Docker sul PC). `.gcloudignore` esclude `.env` dal caricamento.
@@ -27,8 +27,11 @@ Un comando: **`make deploy`**. Lo script (`deploy/deploy.sh`) si rilancia uguale
    - `--max-instances 1`: la sessione della demo e il canale in tempo reale stanno nella memoria di un solo processo;
    - `--min-instances 0`: senza visite si spegne e non costa; la prima apertura dopo una pausa impiega qualche secondo;
    - `--timeout 3600`: il canale in tempo reale verso i telefoni resta aperto fino a un'ora (il predefinito è 5 minuti).
-6. Aggiunge l'indirizzo `https://…run.app/*` ai siti autorizzati della chiave Maps del browser, conservando gli altri e le restrizioni sulle API.
-7. Stampa gli indirizzi di control room e vista cittadino.
+6. Pubblica l'indirizzo leggibile **https://naples-coscienze.web.app** su Firebase Hosting (gratuito, stesso progetto): un sito senza file propri che inoltra ogni richiesta al servizio Cloud Run. Nome del sito con `SITO=<nome>`.
+7. Aggiunge ai siti autorizzati della chiave Maps del browser gli indirizzi locali, i due di Cloud Run e i due di Firebase, conservando gli altri e le restrizioni sulle API.
+8. Stampa gli indirizzi di control room e vista cittadino.
+
+**Canale in tempo reale.** Firebase Hosting trattiene le risposte in streaming fino alla fine, quindi il canale `/api/events` non può passare da lì. Il servizio riceve `EVENTS_URL` (l'indirizzo diretto di Cloud Run, prevedibile dal numero di progetto) e `CORS_ORIGINS` (gli indirizzi Firebase): la web app legge `events_url` da `/api/config` e apre il canale direttamente su Cloud Run. Tutte le altre richieste passano da web.app. In locale `events_url` è vuoto e il canale resta sulla stessa origine.
 
 ## Il container
 
@@ -40,7 +43,7 @@ Con l'uso di una demo si resta nelle quote gratuite: Cloud Run (2 milioni di ric
 
 ## Variabili facoltative
 
-`GCP_PROJECT=<id> GCP_REGION=<regione> SERVIZIO=<nome> make deploy` per usare un altro progetto, regione o nome del servizio.
+`GCP_PROJECT=<id> GCP_REGION=<regione> SERVIZIO=<nome> SITO=<nome> make deploy` per usare un altro progetto, regione o nome del servizio.
 
 ## Se qualcosa va storto
 

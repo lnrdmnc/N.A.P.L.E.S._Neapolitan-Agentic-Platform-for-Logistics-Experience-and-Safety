@@ -97,4 +97,10 @@ def test_config_exposes_only_the_browser_maps_key(monkeypatch):
     monkeypatch.setenv("MAPS_JS_API_KEY", "browser-key")
     monkeypatch.setenv("MAPS_API_KEY", "server-key")
     body = TestClient(create_app()).get("/api/config").json()
-    assert body == {"maps_js_api_key": "browser-key"}
+    assert body == {"maps_js_api_key": "browser-key", "events_url": None}
+
+
+def test_config_points_the_live_channel_elsewhere_when_set(monkeypatch):
+    monkeypatch.setenv("EVENTS_URL", "https://naples.example.run.app/api/events")
+    body = TestClient(create_app()).get("/api/config").json()
+    assert body["events_url"] == "https://naples.example.run.app/api/events"

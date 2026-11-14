@@ -4,6 +4,7 @@ Serves the API under /api and, once the frontend is built (frontend/dist), the
 PWA itself: one process and one link for the demo, offline included.
 """
 
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -18,6 +19,8 @@ from app.routes.index import ROUTERS
 
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 DEV_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]
+# Pages served from another origin (Firebase Hosting) that open the live channel here.
+EXTRA_ORIGINS = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
 
 
 def create_app(
@@ -33,7 +36,7 @@ def create_app(
     app = FastAPI(title="N.A.P.L.E.S. API", version="0.1.0", lifespan=lifespan)
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=DEV_ORIGINS,
+        allow_origins=DEV_ORIGINS + EXTRA_ORIGINS,
         allow_methods=["*"],
         allow_headers=["*"],
     )
