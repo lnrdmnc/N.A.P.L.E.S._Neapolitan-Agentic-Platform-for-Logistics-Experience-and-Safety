@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| X1 — `make demo`: un comando avvia agenti, build della PWA e backend, con controlli e indirizzi da aprire | Leonardo Monaco | sab 14/11 20:05 | Tocca Makefile (riga `demo`), nuovo `scripts/demo.py`, README |
 
 ## Fatto
 
