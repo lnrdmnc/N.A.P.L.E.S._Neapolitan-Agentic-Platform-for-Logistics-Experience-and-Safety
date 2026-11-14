@@ -111,10 +111,16 @@ def test_api_contesto_dichiara_lo_stato_delle_fonti():
     # Nei test le fonti sono senza rete (conftest): disponibili=False, nessun dato.
     c = TestClient(app).get("/api/contesto").json()
     assert c["stub"] is False
-    assert {f["nome"] for f in c["fonti"]} == {"INGV FDSN", "Open-Meteo"}
-    assert all(not f["disponibile"] for f in c["fonti"])
+    assert {f["nome"] for f in c["fonti"]} == {
+        "INGV FDSN",
+        "Open-Meteo",
+        "Protezione Civile (livelli di allerta vulcanica)",
+    }
+    fonti = {f["nome"]: f for f in c["fonti"]}
+    assert not fonti["INGV FDSN"]["disponibile"] and not fonti["Open-Meteo"]["disponibile"]
     assert c["eventi_ingv"] == [] and c["meteo"] is None
-    # Livelli ufficiali verificati a mano sulla fonte, con data e indirizzo (data/livelli_vulcanici.json)
+    assert fonti["Protezione Civile (livelli di allerta vulcanica)"]["copia"]
+    # Senza rete e senza copia: il livello verificato a mano, con data e indirizzo della fonte
     livelli = {v["area"]: v for v in c["livelli_vulcanici"]}
     assert set(livelli) == {"Campi Flegrei", "Vesuvio"}
     assert all(v["verificato_il"] and v["url"].startswith("https://") for v in livelli.values())

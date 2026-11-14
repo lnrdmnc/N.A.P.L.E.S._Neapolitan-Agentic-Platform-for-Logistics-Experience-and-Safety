@@ -29,7 +29,7 @@ ROMA = ZoneInfo("Europe/Rome")
 PRIMA_MIN = 90
 DOPO_MIN = 60
 DURATA_PARTITA_MIN = 115
-PERSONE_PARTITA = 50000  # stima: ordine di grandezza della capienza, non il numero di biglietti
+PERSONE_PARTITA = 50000  # stima: circa il 90% dei 54.726 posti del Maradona, non i biglietti venduti
 SOGLIA_ALTO = 20000
 SOGLIA_MEDIO = 5000
 

@@ -1,5 +1,6 @@
 """Napoli oggi e nei prossimi giorni: eventi previsti, zone, orari critici, alternative."""
 
+import json
 import re
 from datetime import UTC, datetime
 
@@ -9,6 +10,7 @@ from fastapi.testclient import TestClient
 from napoles_agents.agenti import calendario
 from napoles_agents.api import app
 from napoles_agents.fonti.partite_football import FontePartite
+from napoles_agents.scenario import DATA
 
 OGGI = datetime(2026, 11, 14, 19, 0, tzinfo=UTC)
 RISPOSTA = {
@@ -25,12 +27,45 @@ RISPOSTA = {
 }
 
 
+# Elenco curato fisso: i test non dipendono dagli eventi veri del momento in eventi_napoli.json.
+CURATI = {
+    "eventi": [
+        {
+            "id": "concerto_verificato",
+            "titolo": "Concerto",
+            "tipo": "concerto",
+            "luogo": "palapartenope",
+            "inizio": "2026-11-15T21:00:00+01:00",
+            "durata_min": 150,
+            "persone_attese": 5000,
+            "fonte": "Sito del locale",
+            "esempio": False,
+        },
+        {
+            "id": "esempio_corteo",
+            "titolo": "Corteo",
+            "tipo": "manifestazione",
+            "luogo": "lungomare",
+            "inizio": "2026-11-16T10:00:00+01:00",
+            "durata_min": 180,
+            "persone_attese": 5000,
+            "fonte": "Esempio",
+            "esempio": True,
+        },
+    ]
+}
+
+
 @pytest.fixture(autouse=True)
 def partite_finte(tmp_path, monkeypatch):
     finta = FontePartite(
         chiave="x", chiamata=lambda _u, _k: RISPOSTA, copia=tmp_path / "p.json", adesso=lambda: OGGI
     )
     monkeypatch.setattr(calendario, "fonte_partite", lambda: finta)
+    carica = calendario._carica
+    monkeypatch.setattr(
+        calendario, "_carica", lambda nome: CURATI if nome == "eventi_napoli" else carica(nome)
+    )
 
 
 def test_eventi_dal_piu_vicino_con_partita_reale_e_esempi_dichiarati():
@@ -40,10 +75,20 @@ def test_eventi_dal_piu_vicino_con_partita_reale_e_esempi_dichiarati():
     partita = next(p for p in r.eventi if p.evento.tipo == "partita")
     assert partita.evento.affidabilita == "ufficiale" and not partita.evento.esempio
     assert partita.evento.inizio.startswith("2026-11-21T20:45")  # ora di Roma
-    for p in r.eventi:
-        if p.evento.esempio:
-            assert p.evento.affidabilita == "non_verificata"
+    affidabilita = {p.evento.id: p.evento.affidabilita for p in r.eventi}
+    assert affidabilita["esempio_corteo"] == "non_verificata"
+    assert affidabilita["concerto_verificato"] == "stimata"  # evento vero, affluenza stimata
     assert any("esempio" in (f.motivo or "") for f in r.fonti)
+
+
+def test_elenco_curato_reale_ha_fonte_e_luoghi_noti():
+    """Il file vero: ogni evento ha una fonte, un luogo con coordinate e nessun esempio nascosto."""
+    eventi = json.loads((DATA / "eventi_napoli.json").read_text(encoding="utf-8"))["eventi"]
+    luoghi = calendario.luoghi()
+    for e in eventi:
+        assert e["fonte"] and e["luogo"] in luoghi
+        datetime.fromisoformat(e["inizio"])
+        assert e["esempio"] or not e["id"].startswith("esempio")
 
 
 def test_finestre_di_arrivo_e_uscita():

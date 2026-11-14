@@ -12,11 +12,14 @@ import pytest
 
 @pytest.fixture(autouse=True)
 def _fonti_reali_senza_rete(tmp_path, monkeypatch):
-    """Nei test le fonti reali (INGV, meteo) non usano mai la rete: rispondono «non disponibile»."""
-    from napoles_agents.fonti import ingv, meteo
+    """Nei test le fonti reali (INGV, meteo, vulcani) non usano mai la rete: rispondono «non disponibile»."""
+    from napoles_agents.fonti import ingv, meteo, vulcani
 
     def senza_rete(*_args, **_kwargs):
         raise OSError("rete disattivata nei test")
 
     monkeypatch.setattr(ingv, "_fonte", ingv.FonteINGV(chiamata=senza_rete, copia=tmp_path / "ingv.json"))
     monkeypatch.setattr(meteo, "_fonte", meteo.FonteMeteo(chiamata=senza_rete, copia=tmp_path / "meteo.json"))
+    monkeypatch.setattr(
+        vulcani, "_fonte", vulcani.FonteVulcani(chiamata=senza_rete, copia=tmp_path / "vulcani.json")
+    )

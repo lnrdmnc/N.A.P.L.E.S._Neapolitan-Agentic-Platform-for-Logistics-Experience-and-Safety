@@ -6,7 +6,7 @@ Il repository si chiamava in precedenza `CoScienze-TheBigHack2026`.
 
 ## Stato attuale
 
-Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). La control room mostra il traffico reale di Google intorno allo stadio (chiavi in `.env`, messa online in [docs/DEPLOY.md](docs/DEPLOY.md)). Lo script del video pitch di 3 minuti è in [docs/VIDEO.md](docs/VIDEO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
+Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). La control room mostra il traffico reale di Google intorno allo stadio (chiavi in `.env`, messa online in [docs/DEPLOY.md](docs/DEPLOY.md)). Il contesto reale (terremoti INGV, meteo, livello di allerta vulcanica ufficiale della Protezione Civile) e i grandi eventi dei prossimi giorni arrivano da fonti vere, con fonte e ora a schermo. Lo script del video pitch di 3 minuti è in [docs/VIDEO.md](docs/VIDEO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
 
 ## Come avviare
 
@@ -62,6 +62,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 19:45 | agents, webapp | Livello di allerta vulcanica ufficiale dal vivo (Protezione Civile), concerti veri al posto degli esempi, capienza reale del Maradona |
 | 2026-11-14 | 19:30 | agents | Luoghi reali: coordinate delle zone da GTFS ANM/EAV e OpenStreetMap, area degli avvisi sul contorno vero dello stadio e sulle fermate vicine |
 | 2026-11-14 | 19:25 | agents, webapp | Contesto reale a schermo: livello vulcanico verificato (Campi Flegrei giallo, Vesuvio verde, fonte INGV-OV), terremoti INGV e meteo veri in control room, meteo vero nella vista cittadino |
 | 2026-11-14 | 19:15 | agents, webapp | «Napoli oggi e nei prossimi giorni»: eventi previsti (partite reali + elenco curato), zone, orari critici, fermate da evitare e alternative |

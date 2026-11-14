@@ -1,0 +1,19 @@
+{
+  "livelli": [
+    {
+      "area": "Campi Flegrei",
+      "livello": "giallo",
+      "fonte": "Dipartimento della Protezione Civile, mappa dei livelli di allerta",
+      "verificato_il": "2026-11-14T18:36:01.256963+00:00",
+      "url": "https://mappe.protezionecivile.gov.it/it/mappe-e-dashboard-rischi/mappa-livelli-di-allerta-vulcani-italia/"
+    },
+    {
+      "area": "Vesuvio",
+      "livello": "verde",
+      "fonte": "Dipartimento della Protezione Civile, mappa dei livelli di allerta",
+      "verificato_il": "2026-11-14T18:36:01.256963+00:00",
+      "url": "https://mappe.protezionecivile.gov.it/it/mappe-e-dashboard-rischi/mappa-livelli-di-allerta-vulcani-italia/"
+    }
+  ],
+  "aggiornato_al": "2026-11-14T18:36:01.256963+00:00"
+}

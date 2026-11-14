@@ -22,6 +22,13 @@ export function ContestoReale() {
   const fonti = Object.fromEntries((contesto?.fonti ?? []).map((f) => [f.nome, f]))
   const ingv = fonti['INGV FDSN']
   const openMeteo = fonti['Open-Meteo']
+  const vulcani = fonti['Protezione Civile (livelli di allerta vulcanica)']
+  const livello = contesto?.livelli_vulcanici[0]
+  const lettura = vulcani?.motivo?.includes('a mano')
+    ? 'verificato a mano su'
+    : vulcani?.copia
+      ? 'copia salvata da'
+      : 'letto da'
 
   return (
     <section className="cr-panel cr-panel-real cx">
@@ -34,6 +41,9 @@ export function ContestoReale() {
         <div className="cx-grid">
           <div className="cx-block">
             <h3>Allerta vulcanica ufficiale</h3>
+            {contesto.livelli_vulcanici.length === 0 && (
+              <p className="cr-todo">Livello non disponibile{vulcani?.motivo ? `: ${vulcani.motivo}` : ''}</p>
+            )}
             <ul className="cx-list">
               {contesto.livelli_vulcanici.map((v) => (
                 <li key={v.area}>
@@ -44,12 +54,14 @@ export function ContestoReale() {
               ))}
             </ul>
             <p className="cx-source">
-              Stabilito dalla Protezione Civile · letto su{' '}
-              <a href={contesto.livelli_vulcanici[0]?.url ?? '#'} target="_blank" rel="noreferrer">
-                Osservatorio Vesuviano – INGV
+              Stabilito dalla Protezione Civile · {lettura}{' '}
+              <a href={livello?.url ?? '#'} target="_blank" rel="noreferrer">
+                {livello?.fonte ?? 'fonte ufficiale'}
               </a>
-              {contesto.livelli_vulcanici[0]?.verificato_il &&
-                ` il ${giorno(contesto.livelli_vulcanici[0].verificato_il)}`}
+              {livello?.verificato_il &&
+                (livello.verificato_il.includes('T')
+                  ? `, ${quando(livello.verificato_il)}`
+                  : ` il ${giorno(livello.verificato_il)}`)}
             </p>
           </div>
 

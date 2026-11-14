@@ -1,38 +1,28 @@
 {
-  "nota": "Elenco curato dal team degli eventi previsti a Napoli (concerti, cortei, manifestazioni). Le partite al Maradona NON vanno qui: arrivano reali da football-data.org. Gli eventi con \"esempio\": true sono dimostrativi e vanno sostituiti con eventi verificati, indicando la fonte (sito del Comune, del locale, della Questura) e mettendo \"esempio\": false.",
+  "nota": "Elenco curato dal team degli eventi previsti a Napoli (concerti, cortei, manifestazioni). Le partite al Maradona NON vanno qui: arrivano reali da football-data.org. Ogni evento ha la sua fonte; \"esempio\": true marca un evento dimostrativo non verificato. Le persone attese sono stime del team (docs/IPOTESI.md): nessuna fonte pubblica dà la capienza del Palapartenope per ogni configurazione.",
+  "verificato_il": "2026-11-14",
   "eventi": [
     {
-      "id": "esempio_concerto_plebiscito",
-      "titolo": "Concerto in Piazza del Plebiscito",
-      "tipo": "concerto",
-      "luogo": "plebiscito",
-      "inizio": "2026-11-15T21:00:00+01:00",
-      "durata_min": 180,
-      "persone_attese": 30000,
-      "fonte": "Esempio dimostrativo inserito dal team: da sostituire con un evento verificato",
-      "esempio": true
-    },
-    {
-      "id": "esempio_corteo_lungomare",
-      "titolo": "Corteo sul Lungomare",
-      "tipo": "manifestazione",
-      "luogo": "lungomare",
-      "inizio": "2026-11-16T10:00:00+01:00",
-      "durata_min": 180,
-      "persone_attese": 5000,
-      "fonte": "Esempio dimostrativo inserito dal team: da sostituire con un evento verificato",
-      "esempio": true
-    },
-    {
-      "id": "esempio_concerto_palapartenope",
-      "titolo": "Concerto al Palapartenope",
+      "id": "masini_palapartenope_20261114",
+      "titolo": "Marco Masini in concerto",
       "tipo": "concerto",
       "luogo": "palapartenope",
-      "inizio": "2026-11-18T21:00:00+01:00",
+      "inizio": "2026-11-14T21:00:00+01:00",
       "durata_min": 150,
-      "persone_attese": 6000,
-      "fonte": "Esempio dimostrativo inserito dal team: da sostituire con un evento verificato",
-      "esempio": true
+      "persone_attese": 5000,
+      "fonte": "Songkick ed EventWorld (biglietti TicketOne)",
+      "esempio": false
+    },
+    {
+      "id": "shiva_palapartenope_20261125",
+      "titolo": "Shiva in concerto",
+      "tipo": "concerto",
+      "luogo": "palapartenope",
+      "inizio": "2026-11-25T21:00:00+01:00",
+      "durata_min": 120,
+      "persone_attese": 5000,
+      "fonte": "Songkick e JamBase",
+      "esempio": false
     }
   ]
 }

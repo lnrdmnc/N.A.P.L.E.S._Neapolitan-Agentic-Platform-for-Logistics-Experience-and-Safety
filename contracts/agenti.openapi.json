@@ -2489,7 +2489,7 @@
     },
     "/api/contesto": {
       "get": {
-        "description": "Ultimi eventi INGV reali (Campi Flegrei, Vesuvio, ultimi 7 giorni) e meteo reale allo stadio.\nOgni fonte dichiara in `fonti` se è disponibile, quando è stata letta e se è una copia salvata.",
+        "description": "Livello di allerta ufficiale (Protezione Civile), ultimi eventi INGV reali (Campi Flegrei,\nVesuvio, ultimi 7 giorni) e meteo reale allo stadio.\nOgni fonte dichiara in `fonti` se è disponibile, quando è stata letta e se è una copia salvata.",
         "operationId": "contesto_api_contesto_get",
         "responses": {
           "200": {

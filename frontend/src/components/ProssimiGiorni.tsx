@@ -29,7 +29,9 @@ function Evento({ p }: { p: EventoPrevisto }) {
       <h3>{e.titolo}</h3>
       <p className="pg-where">
         {e.luogo} · {e.quartiere}
-        {e.persone_attese ? ` · circa ${numero.format(e.persone_attese)} persone` : ''}
+        {e.persone_attese
+          ? ` · circa ${numero.format(e.persone_attese)} persone${e.affidabilita === 'ufficiale' ? '' : ' (stima)'}`
+          : ''}
       </p>
       <div className="pg-tags">
         <span className={`badge pg-level-${i.livello}`}>{LIVELLI[i.livello]}</span>
@@ -37,6 +39,8 @@ function Evento({ p }: { p: EventoPrevisto }) {
           <span className="badge badge-unconfirmed">Esempio, da verificare</span>
         ) : e.affidabilita === 'ufficiale' ? (
           <span className="badge badge-reliable">Dato reale · {e.fonte}</span>
+        ) : e.affidabilita === 'stimata' ? (
+          <span className="badge badge-reliable">In programma · {e.fonte}</span>
         ) : (
           <span className="badge badge-unconfirmed">Da verificare</span>
         )}
