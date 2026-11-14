@@ -179,7 +179,7 @@ export function PianoProposto() {
 
           {piano.sintesi_modello ? (
             <div className="pp-summary-model">
-              <span className="badge badge-reliable">Spiegazione scritta da Claude · controllata sugli stessi dati</span>
+              <span className="badge badge-reliable">Spiegazione scritta dall'AI · controllata sugli stessi dati</span>
               <p className="pp-summary">{piano.sintesi_modello}</p>
               <details className="pp-summary-rules">
                 <summary>Sintesi a regole</summary>

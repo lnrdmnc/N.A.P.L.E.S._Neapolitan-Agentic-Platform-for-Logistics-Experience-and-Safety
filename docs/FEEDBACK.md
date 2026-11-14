@@ -14,7 +14,7 @@ Prevale sulle ipotesi (CLAUDE.md). Una sezione per checkpoint o prova, la più r
 - Allerte ufficiali inoltrate con il testo identico (caso A); notizie non verificate fermate in control room, mai diffuse (caso C); nessuna istruzione di evacuazione.
 - L'operatore approva, modifica o rifiuta ogni piano; le allerte ufficiali non si possono escludere.
 - Registro delle decisioni a catena di hash, verificabile in control room e con `make verifica-registro`.
-- `make prova`: tre esecuzioni con controlli automatici; testi scritti da Claude con controlli e ripiego sul testo a regole (B5).
+- `make prova`: tre esecuzioni con controlli automatici; testi scritti dall'AI con controlli e ripiego sul testo a regole (B5).
 - Ogni dato simulato è etichettato come tale, in control room e sul telefono.
 
 **Tempo reale: cosa c'è**

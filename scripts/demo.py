@@ -28,7 +28,7 @@ RADICE = Path(__file__).resolve().parents[1]
 PORTA_AGENTI = 8001
 PORTA_WEB = 8000
 CHIAVI = {
-    "LLM_API_KEY": "testi scritti da Claude (senza: testi a regole)",
+    "LLM_API_KEY": "testi scritti dall'AI (senza: testi a regole)",
     "MAPS_API_KEY": "traffico reale intorno allo stadio",
     "MAPS_JS_API_KEY": "mappa Google nel browser",
     "FOOTBALL_DATA_API_KEY": "partite dal vivo (senza: copia salvata)",

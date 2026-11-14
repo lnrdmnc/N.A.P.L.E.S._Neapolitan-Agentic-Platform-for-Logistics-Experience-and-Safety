@@ -20,7 +20,7 @@ Challenge 05 «Napoli Agentic City: la città che Ci pensa» (Fastweb + Vodafone
 Il percorso della demo, in tre minuti:
 
 1. Apri la **control room** sul computer e la **vista cittadino** sul telefono, e nella vista cittadino scegli un profilo (tifoso, residente, pendolare, turista in inglese).
-2. Nella control room premi **▶ Avvia** (o **⏭ Prossimo evento**): lo scenario parte dalla prossima partita vera al Maradona e, 70 minuti dopo il calcio d'inizio, arriva uno sciame sismico **simulato** ai Campi Flegrei. Nella linea del tempo gli agenti si scambiano proposte, l'Orchestratore risolve il conflitto su Piazzale Tecchio e presenta il piano, con il grado di certezza di ogni dato e una spiegazione scritta da Claude.
+2. Nella control room premi **▶ Avvia** (o **⏭ Prossimo evento**): lo scenario parte dalla prossima partita vera al Maradona e, 70 minuti dopo il calcio d'inizio, arriva uno sciame sismico **simulato** ai Campi Flegrei. Nella linea del tempo gli agenti si scambiano proposte, l'Orchestratore risolve il conflitto su Piazzale Tecchio e presenta il piano, con il grado di certezza di ogni dato e una spiegazione scritta dall'AI.
 3. Premi **Approva**: in pochi secondi l'avviso arriva sul telefono, scritto per il profilo scelto e sempre con la fonte. Prova anche **Modifica** e **Rifiuta**.
 4. Guarda gli **indicatori con e senza coordinamento** e il **registro delle decisioni**, verificabile.
 
@@ -41,7 +41,7 @@ Ogni dato simulato e ogni ipotesi sono in [docs/IPOTESI.md](docs/IPOTESI.md). N.
 
 ## Stato attuale
 
-Il percorso demo funziona dall'inizio alla fine, online e in locale: regia del tempo, linea del tempo dei messaggi tra agenti, piano con Approva/Modifica/Rifiuta, avvisi per profilo sul telefono in tempo reale, indicatori con e senza coordinamento dal simulatore a zone, registro delle decisioni verificabile. Testi del piano e degli avvisi scritti da Claude con controlli automatici (nessun numero nuovo, nessuna evacuazione, etichetta SIMULAZIONE) e cache; il testo ufficiale non passa mai dal modello. Contesto reale a schermo: traffico Google, terremoti INGV, meteo, livelli vulcanici ufficiali, partite e grandi eventi dei prossimi giorni. Online su https://naples-coscienze.web.app con `make deploy` ([docs/DEPLOY.md](docs/DEPLOY.md)). Script del video pitch in [docs/VIDEO.md](docs/VIDEO.md); dettaglio, compiti aperti e scadenze in [docs/STATO.md](docs/STATO.md).
+Il percorso demo funziona dall'inizio alla fine, online e in locale: regia del tempo, linea del tempo dei messaggi tra agenti, piano con Approva/Modifica/Rifiuta, avvisi per profilo sul telefono in tempo reale, indicatori con e senza coordinamento dal simulatore a zone, registro delle decisioni verificabile. Testi del piano e degli avvisi scritti dall'AI con controlli automatici (nessun numero nuovo, nessuna evacuazione, etichetta SIMULAZIONE) e cache; il testo ufficiale non passa mai dal modello. Contesto reale a schermo: traffico Google, terremoti INGV, meteo, livelli vulcanici ufficiali, partite e grandi eventi dei prossimi giorni. Online su https://naples-coscienze.web.app con `make deploy` ([docs/DEPLOY.md](docs/DEPLOY.md)). Script del video pitch in [docs/VIDEO.md](docs/VIDEO.md); dettaglio, compiti aperti e scadenze in [docs/STATO.md](docs/STATO.md).
 
 ## Come avviare in locale
 
@@ -55,7 +55,7 @@ Servono [uv](https://docs.astral.sh/uv/), Python 3.12+ e Node 22+. Alla prima vo
 - Web app in sviluppo, tre terminali: `make agents-run` (agenti), `make backend` (http://localhost:8000), `make frontend` (http://localhost:5173, si ricarica a ogni modifica).
 - `make build`: compila la PWA in `frontend/dist`, servita dal backend su http://localhost:8000.
 - `make contracts`: rigenera `contracts/agenti.openapi.json` dopo aver cambiato modelli o API.
-- `make llm-cache`: registra i testi di Claude per il percorso demo (serve `LLM_API_KEY` in `.env`).
+- `make llm-cache`: registra i testi dell'AI per il percorso demo (serve `LLM_API_KEY` in `.env`).
 
 **Dove guardare in locale.** La porta 8001 è solo l'API degli agenti (`/docs`, `/api/...`): le pagine web stanno sulla 5173 in sviluppo (http://localhost:5173/control-room e http://localhost:5173/cittadino) o sulla 8000 dopo `make build`.
 
@@ -99,6 +99,7 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 20:20 | webapp, docs | Nei testi visibili «Claude» diventa «AI» o «modello linguistico» (pannello del piano, README, STATO, FEEDBACK, script della demo); codice e configurazione invariati |
 | 2026-11-14 | 20:06 | demo | `make demo`: un comando avvia build, agenti e gateway, con controlli e indirizzi da aprire |
 | 2026-11-14 | 19:58 | agents | Scosse simulate ricalcate sullo sciame reale INGV del 1/8/2026 (magnitudo, profondità, epicentri); tempi compressi dichiarati |
 | 2026-11-14 | 19:55 | agents | Capacità di Linea 2, Cumana e bus calcolate dalle corse vere (GTFS ANM, EAV) al posto degli ordini di grandezza; sensibilità ricalcolata |
@@ -123,8 +124,8 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 | 2026-11-14 | 18:32 | webapp | U1: vista cittadino per profilo (tifoso, residente, pendolare, turista in inglese) e conferma di lettura anonima |
 | 2026-11-14 | 18:27 | webapp | C4: registro delle decisioni nella control room, con stato della catena e pulsante di verifica |
 | 2026-11-14 | 18:24 | webapp | C5: indicatori con e senza coordinamento nella control room, con l'origine di ogni numero e l'affollamento per zona |
-| 2026-11-14 | 18:15 | agents | B5 e K1: sintesi del piano e messaggi per profilo scritti da Claude, con controlli automatici e cache del percorso demo (`make llm-cache`); nuovi campi `sintesi_modello` e `messaggio_modello` |
-| 2026-11-14 | 18:15 | agents | Strato LLM (L0): Claude Opus 5.5 con SDK ufficiale, cache su file, ripiego sul testo a regole; `GET /api/llm`, `POST /api/llm/prova` |
+| 2026-11-14 | 18:15 | agents | B5 e K1: sintesi del piano e messaggi per profilo scritti dall'AI, con controlli automatici e cache del percorso demo (`make llm-cache`); nuovi campi `sintesi_modello` e `messaggio_modello` |
+| 2026-11-14 | 18:15 | agents | Strato LLM (L0): modello linguistico via SDK ufficiale, cache su file, ripiego sul testo a regole; `GET /api/llm`, `POST /api/llm/prova` |
 | 2026-11-14 | 18:10 | agents | P1: `make prova` salva tre prove in docs/prove/ con controlli automatici; corretto «1 scosse» negli avvisi |
 | 2026-11-14 | 18:10 | webapp | Vista cittadino: riquadro «Partite al Maradona» con il calendario reale da football-data.org |
 | 2026-11-14 | 18:00 | agents | Partite reali al Maradona: `GET /api/partite` da football-data.org, con copia per l'offline (nuovo nel contratto) |
