@@ -5,6 +5,7 @@ from enum import StrEnum
 from pydantic import BaseModel, Field
 
 from .base import Affidabilita
+from .partite import Partita
 
 
 class TipoEvento(StrEnum):
@@ -52,3 +53,11 @@ class StatoCitta(BaseModel):
     spettatori: int
     partita_finita: bool
     livello_vulcanico_campi_flegrei: str
+    partita_reale: Partita | None = Field(
+        default=None,
+        description=(
+            "Prossima partita vera in casa al Maradona (football-data.org) su cui si prova lo scenario. "
+            "Squadre, competizione e data sono reali; sciame, folla e chiusure restano simulati. "
+            "None se la fonte non ha partite: nessuna partita inventata."
+        ),
+    )

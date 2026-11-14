@@ -4,6 +4,7 @@ import { useAvvisiProfilo } from '../api/useAvvisiProfilo'
 import { useLiveEvents } from '../api/useLiveEvents'
 import { useStato } from '../api/useStato'
 import { LiveStatus } from '../components/LiveStatus'
+import { PartitaRiferimento } from '../components/PartitaRiferimento'
 import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { AlertCard } from './AlertCard'
@@ -33,6 +34,7 @@ export function Cittadino() {
 
       <div className="ct-body">
         <SimulationBadge label={en ? 'DEMO · simulated events' : 'DEMO · eventi simulati'} />
+        {stato && <PartitaRiferimento partita={stato.partita_reale} en={en} />}
         <SceltaProfilo profilo={profilo} onScegli={scegli} />
 
         <main className="ct-grid">

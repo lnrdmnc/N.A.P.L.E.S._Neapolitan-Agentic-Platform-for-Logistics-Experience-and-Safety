@@ -98,6 +98,7 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 20:00 | agents, webapp | Lo scenario è la prova generale della prossima partita vera al Maradona (oggi Napoli – Torino, sab 21/11): partita reale, sciame simulato |
 | 2026-11-14 | 19:40 | docs, webapp | Logo nel README, sezione «Guarda il progetto all'opera» con il percorso demo e cosa è reale o simulato; pagina iniziale con le foto del golfo, le due viste e i passi della demo |
 | 2026-11-14 | 19:45 | agents, webapp | Livello di allerta vulcanica ufficiale dal vivo (Protezione Civile), concerti veri al posto degli esempi, capienza reale del Maradona |
 | 2026-11-14 | 19:30 | agents | Luoghi reali: coordinate delle zone da GTFS ANM/EAV e OpenStreetMap, area degli avvisi sul contorno vero dello stadio e sulle fermate vicine |

@@ -1823,6 +1823,17 @@
             "title": "Partita Finita",
             "type": "boolean"
           },
+          "partita_reale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Partita"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Prossima partita vera in casa al Maradona (football-data.org) su cui si prova lo scenario. Squadre, competizione e data sono reali; sciame, folla e chiusure restano simulati. None se la fonte non ha partite: nessuna partita inventata."
+          },
           "spettatori": {
             "title": "Spettatori",
             "type": "integer"

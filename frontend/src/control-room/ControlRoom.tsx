@@ -2,6 +2,7 @@ import { useLiveEvents } from '../api/useLiveEvents'
 import { useStato } from '../api/useStato'
 import { Affidabilita } from '../components/Affidabilita'
 import { LiveStatus } from '../components/LiveStatus'
+import { PartitaRiferimento } from '../components/PartitaRiferimento'
 import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { ContestoReale } from './ContestoReale'
@@ -35,6 +36,7 @@ export function ControlRoom() {
         </div>
       </header>
 
+      {stato && <PartitaRiferimento partita={stato.partita_reale} />}
       <Regia tMin={stato?.t_min} ora={stato?.ora} />
 
       {error && <p className="cr-banner-error">{error}: avviala con make agents-run</p>}
@@ -68,7 +70,7 @@ export function ControlRoom() {
                 </div>
               </dl>
               <div className="cr-facts-tags">
-                <SimulationBadge label="spettatori e partita: simulati" />
+                <SimulationBadge label="spettatori e andamento della partita: simulati" />
                 <span className="badge badge-reliable">livello vulcanico: reale, verificato il 14/11</span>
               </div>
               <ul className="cr-lines">

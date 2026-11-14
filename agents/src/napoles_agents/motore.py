@@ -3,6 +3,7 @@
 from pathlib import Path
 from typing import Any
 
+from . import riferimento
 from . import scenario as sc
 from .agenti import AGENTI
 from .agenti.comunicazione import prepara_avvisi
@@ -48,7 +49,9 @@ class Sessione:
 
     @property
     def stato(self) -> StatoCitta:
-        return sc.stato(self.scenario, self.t_min)
+        stato = sc.stato(self.scenario, self.t_min)
+        stato.partita_reale = riferimento.partita_reale()
+        return stato
 
     @property
     def piano_corrente(self) -> Piano | None:
