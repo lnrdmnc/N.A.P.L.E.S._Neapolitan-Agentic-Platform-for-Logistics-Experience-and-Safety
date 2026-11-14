@@ -6,7 +6,7 @@ Il repository si chiamava in precedenza `CoScienze-TheBigHack2026`.
 
 ## Stato attuale
 
-Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
+Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). Lo script del video pitch di 3 minuti è in [docs/VIDEO.md](docs/VIDEO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
 
 ## Come avviare
 
@@ -46,6 +46,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 16:25 | docs | Script del video pitch in docs/VIDEO.md: otto scene entro 3 minuti, con chiusura su app per smartphone e controllo in tempo reale da SIM e telecamere |
 | 2026-11-14 | 16:25 | agents | Numeri credibili: corretto il ritardo d'informazione senza coordinamento, capacità ricalibrate, tabella di sensibilità |
 | 2026-11-14 | 16:25 | docs | docs/IDEE.md: check di 4 agenti esperti di smart city, idee per stasera, visione e tagli motivati |
 | 2026-11-14 | 16:00 | webapp | Scheletro della web app (W0): gateway FastAPI su 8000 verso gli agenti su 8001, canale in tempo reale, PWA React con control room e vista cittadino, tipi generati dal contratto; `make check` esteso alla web app |
