@@ -16,15 +16,6 @@ def test_health():
     assert response.json()["status"] == "ok"
 
 
-def test_publish_test_event_is_labelled_simulated():
-    client = TestClient(create_app())
-    response = client.post("/api/events/test")
-    assert response.status_code == 200
-    body = response.json()
-    assert body["kind"] == "test"
-    assert body["data"]["simulated"] is True
-
-
 def test_bus_delivers_to_every_subscriber():
     local = EventBus()
 

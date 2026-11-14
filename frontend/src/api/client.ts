@@ -22,9 +22,4 @@ async function getJson<T>(path: string): Promise<T> {
 }
 
 export const fetchStato = () => getJson<StatoCitta>('/api/stato')
-
-export async function publishTestEvent(): Promise<LiveEvent> {
-  const response = await fetch('/api/events/test', { method: 'POST' })
-  if (!response.ok) throw new Error(`HTTP ${response.status}`)
-  return response.json()
-}
+export const fetchAvvisi = () => getJson<Alert[]>('/api/avvisi')

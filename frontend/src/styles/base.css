@@ -80,6 +80,11 @@ button {
   border: 1px solid var(--hairline);
 }
 
+.badge-official {
+  background: var(--inverse-canvas);
+  color: var(--inverse-ink);
+}
+
 .badge-unconfirmed {
   background: var(--unconfirmed-bg);
   color: var(--unconfirmed-ink);

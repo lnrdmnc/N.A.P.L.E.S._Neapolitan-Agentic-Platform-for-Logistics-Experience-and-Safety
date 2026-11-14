@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { publishTestEvent } from '../api/client'
 import { useLiveEvents } from '../api/useLiveEvents'
 import { useStato } from '../api/useStato'
 import { Affidabilita } from '../components/Affidabilita'
@@ -7,33 +5,25 @@ import { LiveStatus } from '../components/LiveStatus'
 import { SimulationBadge } from '../components/SimulationBadge'
 import './ControlRoom.css'
 
-// Panels still to build (PIANO.md: C1 map, C2 timeline, C3 plan, C5 indicators).
+// Panels from PROGETTO.md 6.1 still to build, each with its PIANO.md task.
 const TODO_PANELS = [
   { id: 'map', title: 'Mappa', task: 'C1' },
-  { id: 'plan', title: 'Piano proposto', task: 'C3' },
+  { id: 'plan', title: 'Piano proposto', note: 'Approva · Modifica · Rifiuta', task: 'C3' },
+  { id: 'messages', title: 'Messaggi tra agenti', note: 'Rischio, Mobilità, Folla, Comunicazione, Orchestratore', task: 'C2' },
   { id: 'kpi', title: 'Indicatori con e senza coordinamento', task: 'C5' },
+  { id: 'log', title: 'Registro delle decisioni', note: 'Catena di hash verificabile', task: 'C4' },
 ]
 
 export function ControlRoom() {
-  const { status, events } = useLiveEvents()
+  const { status } = useLiveEvents()
   const { stato, error } = useStato()
-  const [testError, setTestError] = useState<string | null>(null)
-
-  const sendTest = async () => {
-    setTestError(null)
-    try {
-      await publishTestEvent()
-    } catch {
-      setTestError('Backend non raggiungibile: avvialo con make backend')
-    }
-  }
 
   return (
     <div className="cr">
       <header className="cr-header">
         <div className="cr-brand">
           <span className="cr-logo">N.A.P.L.E.S.</span>
-          <span className="cr-subtitle">Control room · Comune di Napoli</span>
+          <span className="cr-subtitle">Control room comunale · prototipo</span>
         </div>
         <div className="cr-header-right">
           {stato && (
@@ -52,6 +42,7 @@ export function ControlRoom() {
         {TODO_PANELS.map((panel) => (
           <section key={panel.id} className={`cr-panel cr-panel-${panel.id}`}>
             <h2>{panel.title}</h2>
+            {panel.note && <p className="cr-todo">{panel.note}</p>}
             <span className="badge badge-unconfirmed">In costruzione · {panel.task}</span>
           </section>
         ))}
@@ -76,12 +67,20 @@ export function ControlRoom() {
                   <dd>{stato.livello_vulcanico_campi_flegrei}</dd>
                 </div>
               </dl>
+              <div className="cr-facts-tags">
+                <SimulationBadge label="spettatori e partita: simulati" />
+                <span className="badge badge-unconfirmed">livello vulcanico: da verificare</span>
+              </div>
               <ul className="cr-lines">
                 {stato.linee.map((linea) => (
                   <li key={linea.id} className={linea.attiva ? '' : 'is-down'}>
                     <span className="dot" aria-hidden="true" />
-                    <strong>{linea.nome}</strong>
-                    <span>{linea.attiva ? 'attiva' : `sospesa${linea.motivo ? ` · ${linea.motivo}` : ''}`}</span>
+                    <span className="cr-line-text">
+                      <strong>{linea.nome}</strong>{' '}
+                      <span className="cr-line-state">
+                        {linea.attiva ? 'attiva' : `sospesa${linea.motivo ? ` · ${linea.motivo}` : ''}`}
+                      </span>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -107,29 +106,6 @@ export function ControlRoom() {
           )}
         </section>
 
-        <section className="cr-panel cr-panel-log">
-          <div className="cr-log-head">
-            <h2>Canale in tempo reale</h2>
-            <button className="btn-primary" onClick={sendTest}>
-              Invia evento di prova
-            </button>
-          </div>
-          {testError && <p className="cr-error">{testError}</p>}
-          {events.length === 0 ? (
-            <p className="cr-todo">Nessun messaggio ricevuto.</p>
-          ) : (
-            <ol className="cr-log">
-              {events.map((event) => (
-                <li key={event.id}>
-                  <time>{new Date(event.at).toLocaleTimeString('it-IT')}</time>
-                  <span className="cr-log-kind">{event.kind}</span>
-                  <span className="cr-log-text">{String(event.data.message ?? '')}</span>
-                  {event.data.simulated === true && <SimulationBadge label="simulato" />}
-                </li>
-              ))}
-            </ol>
-          )}
-        </section>
       </main>
     </div>
   )

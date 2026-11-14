@@ -1,7 +1,6 @@
 """Live channel to the browser via Server-Sent Events (SSE).
 
-GET  /api/events       stream: one `data:` line of JSON per event
-POST /api/events/test  publishes a test event, to check the channel end to end
+GET /api/events  stream: one `data:` line of JSON per event (today: `avvisi`, see agents_proxy)
 """
 
 import asyncio
@@ -40,10 +39,3 @@ async def stream(request: Request) -> StreamingResponse:
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
 
-
-@router.post("/test")
-def publish_test() -> dict:
-    return bus.publish(
-        "test",
-        {"message": "Canale in tempo reale attivo", "simulated": True},
-    )

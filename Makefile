@@ -61,11 +61,12 @@ install:
 	$(PY) -m pip install -r backend/requirements.txt
 	cd frontend && npm install
 
-# Web app in sviluppo: gateway su http://localhost:8000 (inoltra agli agenti su $(AGENTS_PORT))
+# Web app in sviluppo: gateway su http://localhost:8000 (inoltra agli agenti su $(AGENTS_PORT)).
+# Ascolta anche sulla rete locale: dal telefono sulla stessa Wi-Fi, http://<IP del PC>:8000
 backend:
-	cd backend && AGENTS_URL=http://127.0.0.1:$(AGENTS_PORT) ../$(PY) -m uvicorn app.main:app --reload --port 8000
+	cd backend && AGENTS_URL=http://127.0.0.1:$(AGENTS_PORT) ../$(PY) -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
-# Frontend con ricarica automatica su http://localhost:5173
+# Frontend con ricarica automatica su http://localhost:5173 (dal telefono: http://<IP del PC>:5173)
 frontend:
 	cd frontend && npm run dev
 

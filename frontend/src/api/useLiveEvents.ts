@@ -20,7 +20,6 @@ export function useLiveEvents() {
       setEvents((previous) => [event, ...previous].slice(0, MAX_EVENTS))
     }
     source.onmessage = onEvent
-    source.addEventListener('test', onEvent)
     source.addEventListener('avvisi', onEvent)
 
     return () => source.close()

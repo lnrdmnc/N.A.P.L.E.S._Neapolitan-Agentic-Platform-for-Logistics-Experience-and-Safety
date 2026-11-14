@@ -1,38 +1,38 @@
-import type { Alert, LiveEvent } from './client'
+import type { Alert } from './client'
 
-export type Notice = {
-  key: string
-  at: string
-  title: string
-  body: string
-  source: string
-  simulated: boolean
+// Italian labels for the CAP fields shown to citizens (contracts/README.md: always show
+// simulato, certainty and source).
+export const CERTAINTY: Record<string, string> = {
+  Observed: 'osservato',
+  Likely: 'probabile',
+  Possible: 'possibile',
+  Unlikely: 'improbabile',
+  Unknown: 'incerto',
 }
 
-// Turns live-channel events into notices for the citizen view.
-// "avvisi" events carry the CAP alerts the agents return when the operator approves a plan.
-export function toNotices(events: LiveEvent[]): Notice[] {
-  return events.flatMap((event) => {
-    if (event.kind === 'avvisi') {
-      const alerts = (event.data.avvisi ?? []) as Alert[]
-      return alerts.map((alert) => ({
-        key: `${event.id}-${alert.identifier}`,
-        at: event.at,
-        title: alert.headline,
-        body: alert.description,
-        source: alert.source,
-        simulated: alert.simulato,
-      }))
-    }
-    return [
-      {
-        key: String(event.id),
-        at: event.at,
-        title: 'Messaggio di prova',
-        body: String(event.data.message ?? ''),
-        source: 'control room N.A.P.L.E.S.',
-        simulated: event.data.simulated === true,
-      },
-    ]
-  })
+export const MSG_TYPE: Record<string, string> = {
+  Alert: 'Avviso',
+  Update: 'Aggiornamento',
+  Cancel: 'Cessato avviso',
+}
+
+export type Level = 'red' | 'orange' | 'yellow' | 'neutral'
+
+export function severityLevel(severity: string): Level {
+  switch (severity) {
+    case 'Extreme':
+    case 'Severe':
+      return 'red'
+    case 'Moderate':
+      return 'orange'
+    case 'Minor':
+      return 'yellow'
+    default:
+      return 'neutral'
+  }
+}
+
+// Newest first: alerts carry the minute they were sent.
+export function sortAlerts(alerts: Alert[]): Alert[] {
+  return [...alerts].sort((a, b) => b.sent_t_min - a.sent_t_min)
 }

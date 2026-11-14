@@ -52,6 +52,8 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **Script del video pitch** in docs/VIDEO.md: otto scene, circa 390 parole di voce, chiusura a 2:57. Chiude con gli sviluppi futuri: app per smartphone e controllo in tempo reale con presenze dalle SIM e telecamere di sicurezza, in forma aggregata e anonima. I numeri degli indicatori (scena 5) restano da inserire dopo l'esecuzione finale.
 - **Budget anti-allarme e cessato allarme operativo.** Un aggiornamento parte solo se per la persona cambiano gravità o istruzioni (la scossa delle 22:26 non notifica più); `Update` «di nuovo in servizio» quando Cumana e Linea 2 ripartono (minuto 130, simulato); `Cancel` per ogni profilo quando lo sciame si chiude (minuto 162), con rimando alla Protezione Civile per il rischio vulcanico. Il conflitto su Piazzale Tecchio compare una sola volta sulla linea del tempo. **Lo scenario ora dura 170 minuti** (prima 150). Contratto invariato. 28 test.
 - **Allerta ufficiale con cornice in inglese per il turista.** Accanto all'originale per tutti parte una versione per il turista: titolo in inglese «SIMULATION – Official alert from … – original Italian text below, not translated», testo ufficiale identico, `references` all'originale. `GET /api/avvisi?pubblico=turista` mostra solo questa versione, senza doppione; residenti e tifosi continuano a ricevere l'originale. Nel contratto cambia solo la descrizione dell'endpoint. 29 test.
+- **Web app adattiva.** Deciso il 14/11: control room e vista cittadino si usano sia da telefono sia da computer (PROGETTO.md 6.1). Provate a 375, 768 e 1440 px con i dati dello scenario, senza scorrimento orizzontale. `make backend` e `make frontend` ascoltano anche sulla rete locale: dal telefono sulla stessa Wi-Fi, `http://<IP del PC>:5173`.
+- **Viste allineate alle specifiche** (PROGETTO.md 6, 6.1, 6.2; contracts/README.md). Vista cittadino: avvisi letti da `/api/avvisi` (restano dopo una ricarica), con indicazioni operative, certezza, fonte, «simulato», caso A «Allarme ufficiale · testo non modificato» o caso B «Evento rilevato · in attesa di comunicazioni ufficiali», colore per gravità. Control room: tolto il pannello di prova del canale; aggiunti i riquadri «Messaggi tra agenti» (C2) e «Registro delle decisioni» (C4). Tolto `POST /api/events/test` (solo sviluppo); intestazione «Control room comunale · prototipo», non più «Comune di Napoli»; etichette «simulati» e «da verificare» su spettatori, partita e livello vulcanico.
 
 ## Prossimi compiti liberi
 
@@ -72,9 +74,15 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 
 ## Problemi aperti
 
+- **Da sistemare prima della consegna (controllo del 14/11 sui contenuti che non possono restare):**
+  - docs/TEAM.md contiene le email personali di tutti e il repository sarà pubblico: usare l'email `noreply` di GitHub, anche in `git config`.
+  - Con il deploy pubblico, `/api/reset`, `/api/avanza` e `/api/piano/…/approva` sarebbero chiamabili da chiunque attraverso il gateway: serve una chiave sulle chiamate che cambiano lo stato o una versione pubblica di sola lettura.
+  - Riquadri «In costruzione» (C1–C5, U2), comandi `make demo`, `web-test`, `verifica-registro` che oggi falliscono, endpoint `stub: true` degli agenti: da completare o togliere.
+  - Testi ufficiali inventati (allerta meteo «Protezione Civile Regione Campania (simulato)»): l'etichetta «simulato» deve restare visibile anche nel video e negli screenshot.
 - **Deciso il 14/11: due processi.** `backend/` (porta 8000) è un gateway senza logica: serve la PWA, inoltra agli agenti (porta 8001) e tiene il canale in tempo reale. Per X1 `make demo` deve avviare entrambi.
 - La vista cittadino mostra tutti gli avvisi approvati, per ogni profilo e lingua: il filtro per profilo è il compito U1.
 - PROGETTO.md 6.2 va corretto: il cell broadcast è unidirezionale e non distingue i profili, quindi la conferma di ricezione esiste solo nella PWA; IT-Alert è della Protezione Civile e le informazioni operative passano da un canale separato su adesione (docs/IDEE.md).
+- Dal telefono via Wi-Fi la pagina si apre, ma installazione come app e funzionamento offline non partono: fuori da `localhost` il browser richiede HTTPS. Per la demo sul telefono serve un certificato locale o un tunnel HTTPS (da decidere in X1).
 - Indicatori: i minuti tra evento e avviso e i minuti per decidere oggi sono ipotesi in ingresso, non risultati. Vanno etichettati così finché il compito B4 non li misura nella sessione (docs/PIANO.md, sezione 9).
 - Chiave del modello e chiave Google Maps non ancora in `.env`. Senza la prima la demo usa i testi a regole.
 - Le stime del piano non lasciano margine: alle 18:30 vale la linea di taglio (docs/PIANO.md, sezione 8).

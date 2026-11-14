@@ -99,6 +99,8 @@ Decisione del team (sab 14/11): niente app nativa, che non sta nei tempi. Il pro
 - **`/control-room`** — dashboard per lo schermo grande e il proiettore: mappa, stato degli agenti, piano proposto dall'Orchestratore, pulsanti Approva / Modifica / Rifiuta, indicatori con e senza coordinamento, registro delle decisioni.
 - **`/cittadino`** — vista mobile, installabile sulla home come un'app: meteo, traffico, avvisi con provenienza; in più, per il turista, storia di Napoli e itinerario.
 
+Entrambe le viste si usano sia da telefono sia da computer (decisione del 14/11): `/cittadino` nasce per il telefono e su schermo largo dispone i riquadri su più colonne; `/control-room` nasce per il proiettore e su telefono impila i pannelli, con al primo posto lo stato della città e il piano da approvare.
+
 Motivi: un solo link per la giuria, nessuna toolchain mobile, demo offline con service worker e cache. Nella demo le due viste stanno affiancate: l'operatore approva e il telefono riceve l'avviso in diretta. Le notifiche push funzionano su Android e, su iPhone, solo con la PWA installata sulla home: il banner nella vista cittadino è il ripiego sempre disponibile. L'app nativa è uno sviluppo futuro.
 
 ## 6.2 Gestione degli alert per eventi catastrofici

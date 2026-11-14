@@ -28,7 +28,9 @@ export default defineConfig({
       },
     }),
   ],
+  // host: true also listens on the local network, so a phone on the same Wi-Fi can open it
   server: {
+    host: true,
     proxy: { '/api': 'http://127.0.0.1:8000' },
   },
 })

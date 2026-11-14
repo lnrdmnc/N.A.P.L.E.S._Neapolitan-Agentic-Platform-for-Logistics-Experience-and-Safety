@@ -1,6 +1,5 @@
+/* Phone first; from 768px the cards sit side by side, from 1200px in three columns. */
 .ct {
-  max-width: 480px;
-  margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,13 +8,26 @@
 }
 
 .ct-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-4);
   background: var(--inverse-canvas);
   color: var(--inverse-ink);
   font-size: var(--text-small);
+}
+
+.ct-header-inner,
+.ct-body {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.ct-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
 }
 
 .ct-logo {
@@ -24,40 +36,91 @@
   letter-spacing: 1px;
 }
 
-.ct-sim {
-  padding: var(--space-3) var(--space-4) 0;
-}
-
-.ct-banner {
-  margin: var(--space-3) var(--space-4) 0;
-  padding: var(--space-4);
-  background: var(--canvas);
-  border-left: 6px solid var(--level-orange);
-}
-
-.ct-banner-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.ct-banner p {
-  margin: var(--space-1) 0;
-  font-size: 18px;
-}
-
-.ct-banner small {
-  color: var(--ink-muted);
-}
-
-.ct-main {
+.ct-body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+}
+
+/* Alert card: the left bar carries the severity (red, orange, yellow) */
+.ct-alert {
+  --alert-level: var(--ink-subtle);
+  padding: var(--space-3) var(--space-4);
+  border-left: 6px solid var(--alert-level);
+  background: var(--surface-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ct-alert-red { --alert-level: var(--level-red); }
+.ct-alert-orange { --alert-level: var(--level-orange); }
+.ct-alert-yellow { --alert-level: var(--level-yellow); }
+
+.ct-alert.is-featured {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-left: 6px solid var(--alert-level);
+}
+
+.ct-alert-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.ct-alert-tags .badge {
+  white-space: normal;
+}
+
+.ct-alert-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ct-alert.is-featured .ct-alert-title {
+  font-size: 20px;
+}
+
+.ct-alert p {
+  margin: 0;
+}
+
+.ct-alert-label {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.ct-alert-instruction {
+  padding: var(--space-3);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+}
+
+.ct-alert.is-featured .ct-alert-instruction {
+  background: var(--surface-1);
+}
+
+.ct-alert-instruction p {
+  margin-top: var(--space-1);
+  font-size: 17px;
+}
+
+.ct-alert-source {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.ct-grid {
+  align-self: stretch;
+  display: grid;
   gap: 1px;
-  margin: var(--space-3) 0;
   background: var(--hairline);
+  border: 1px solid var(--hairline);
+  grid-template-columns: 1fr;
 }
 
 .ct-card {
@@ -66,10 +129,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  min-width: 0;
 }
 
 .ct-card h2 {
   font-size: 20px;
+}
+
+.ct-card-alerts {
+  gap: var(--space-3);
 }
 
 .ct-card .badge {
@@ -89,13 +157,15 @@
 
 .ct-list li {
   display: flex;
+  align-items: center;
   gap: var(--space-3);
   padding: var(--space-2) 0;
   border-bottom: 1px solid var(--hairline);
+  overflow-wrap: anywhere;
 }
 
-.ct-list li {
-  align-items: center;
+.ct-list .dot {
+  flex: none;
 }
 
 .ct-list .dot.is-up {
@@ -107,13 +177,47 @@
 }
 
 .ct-list time {
+  flex: none;
   color: var(--ink-muted);
   font-family: var(--font-mono);
   font-size: 14px;
 }
 
 .ct-footer {
-  padding: var(--space-4);
+  padding: var(--space-2) 0 var(--space-5);
   font-size: 14px;
   color: var(--ink-muted);
+}
+
+@media (min-width: 768px) {
+  .ct-header-inner,
+  .ct-body {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+  .ct-body {
+    padding-top: var(--space-5);
+    gap: var(--space-4);
+  }
+  .ct-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'alerts alerts'
+      'transit weather';
+  }
+  .ct-card {
+    padding: var(--space-5);
+  }
+  .ct-card-alerts { grid-area: alerts; }
+  .ct-card-transit { grid-area: transit; }
+  .ct-card-weather { grid-area: weather; }
+}
+
+@media (min-width: 1200px) {
+  .ct-grid {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      'alerts transit'
+      'alerts weather';
+  }
 }
