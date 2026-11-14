@@ -34,6 +34,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | C3 in corso dalle 18:16: pannello del piano (`control-room/PianoProposto.tsx`). Poi U1. W0 fatto. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
+| C4 — Control room: registro delle decisioni con verifica della catena | Leonardo Monaco | sab 14/11 18:26 | Nuovi `frontend/src/api/useRegistro.ts` e `frontend/src/control-room/Registro.tsx` (+ .css); in `ControlRoom.tsx` solo il segnaposto C4 sostituito. Preso al posto di Jacopo, che può seguire i checkpoint |
 | B5 — Testi di Orchestratore e Comunicazione scritti da Claude, con cache e ripiego sul testo a regole | Leonardo Schiavo | sab 14/11 18:22 | Tocca `…/agenti/orchestratore.py` e `…/agenti/comunicazione.py`; il caso A non si riscrive mai |
 
 ## Fatto
