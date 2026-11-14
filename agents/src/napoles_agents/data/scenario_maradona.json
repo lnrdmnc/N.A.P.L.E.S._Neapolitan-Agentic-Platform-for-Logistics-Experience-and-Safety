@@ -2,7 +2,7 @@
   "id": "maradona_campi_flegrei",
   "titolo": "Partita al Maradona, sciame sismico simulato ai Campi Flegrei",
   "ora_inizio": "20:45",
-  "durata_min": 150,
+  "durata_min": 170,
   "fine_partita_t_min": 95,
   "spettatori": 50000,
   "livello_vulcanico_campi_flegrei": "giallo (da verificare sulla fonte ufficiale)",
@@ -123,6 +123,26 @@
       "fonte": "INGV (evento simulato)",
       "affidabilita": "misurata",
       "magnitudo": 2.8
+    },
+    {
+      "id": "ev_riattiva_linea2",
+      "t_min": 130,
+      "tipo": "riattivazione_linea",
+      "titolo": "Linea 2 di nuovo in servizio dopo le verifiche",
+      "zona": "Fuorigrotta",
+      "fonte": "Gestore del servizio (simulato)",
+      "affidabilita": "ufficiale",
+      "linea": "linea2"
+    },
+    {
+      "id": "ev_riattiva_cumana",
+      "t_min": 130,
+      "tipo": "riattivazione_linea",
+      "titolo": "Cumana di nuovo in servizio dopo le verifiche",
+      "zona": "Fuorigrotta",
+      "fonte": "Gestore del servizio (simulato)",
+      "affidabilita": "ufficiale",
+      "linea": "cumana"
     }
   ]
 }

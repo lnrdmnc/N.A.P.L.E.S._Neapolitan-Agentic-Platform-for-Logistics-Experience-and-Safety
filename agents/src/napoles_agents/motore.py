@@ -30,6 +30,7 @@ class Sessione:
         self._firma: tuple = ()
         self._eventi_visti: set[str] = set()
         self._proposte_viste: dict[str, str] = {}
+        self._conflitti_visti: set[tuple[str, ...]] = set()
         self.avanza(0)
 
     def _pubblica(self, **campi: Any) -> None:
@@ -105,6 +106,11 @@ class Sessione:
             {"piano": piano.id, "azioni": [p.id for p in piano.proposte], "sintesi": piano.sintesi},
         )
         for c in piano.conflitti:
+            # Il piano elenca sempre i suoi conflitti; sulla linea del tempo compaiono una volta sola.
+            chiave = (c.risorsa, *c.proposte)
+            if chiave in self._conflitti_visti:
+                continue
+            self._conflitti_visti.add(chiave)
             self._pubblica(
                 da="Orchestratore",
                 a=", ".join(c.proposte),

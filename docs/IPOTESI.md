@@ -4,6 +4,8 @@
 | --- | --- | --- | --- |
 | Scosse ai Campi Flegrei (Md 3.2, 2.6, 2.8 ai minuti 70, 71, 101) | Simulato | Scelte per lo scenario; formato come gli eventi INGV | Control room: eventi e piano; avvisi del caso B |
 | Sospensione di Cumana e Linea 2 dopo le scosse | Simulato | Plausibile: verifiche dopo un evento sismico; da confermare con i protocolli dei gestori | Stato delle linee, piano, avvisi |
+| Cumana e Linea 2 di nuovo in servizio al minuto 130 (22:55); scenario lungo 170 minuti per mostrare la chiusura dello sciame | Simulato | Scelte per mostrare l'aggiornamento «di nuovo in servizio» e il cessato allarme operativo (minuto 162, 60 minuti dopo l'ultima scossa) | Avvisi: `Update` alle 22:55, `Cancel` alle 23:27 |
+| Budget anti-allarme: un aggiornamento parte solo se cambiano gravità o istruzioni per la persona | Regola del sistema | Scelta di progetto contro la stanchezza da allarmi | La scossa delle 22:26 non genera notifiche |
 | Allerta meteo gialla e testo ufficiale | Simulato | Testo inventato ed etichettato «SIMULAZIONE» | Avviso ufficiale inoltrato senza modifiche (caso A) |
 | Post social «crolli a Bagnoli» | Simulato | Inventato per mostrare il caso C | Piano: segnalazione all'operatore, nessun avviso pubblico |
 | Livello di allerta vulcanica dei Campi Flegrei «giallo» | Da verificare | Va controllato sulla fonte ufficiale prima della demo | Contesto in control room |

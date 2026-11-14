@@ -4,12 +4,19 @@ Regole (docs/PROGETTO.md, 6.2):
 - caso A: l'allerta ufficiale si inoltra con il testo originale, mai riscritta;
 - caso B: evento rilevato, solo informazioni e misure operative, nessuna istruzione di evacuazione;
 - caso C: la notizia non verificata non diventa mai un avviso pubblico.
+
+Budget anti-allarme: un aggiornamento parte solo se cambia qualcosa per la persona
+(gravità o istruzioni operative). Una scossa in più della stessa gravità non genera notifiche.
+Cessato allarme operativo: quando lo sciame si chiude, un `Cancel` chiude gli avvisi del caso B.
+Riguarda solo gli aspetti operativi: il rischio vulcanico resta della Protezione Civile.
 """
 
 from typing import Any
 
-from ..models import Alert, AreaAlert, Caso, Piano, StatoCitta
+from ..models import Alert, AreaAlert, Caso, Piano, StatoCitta, TipoEvento
 from ..scenario import ora
+
+PUBBLICI = (("tifoso", "it"), ("residente", "it"), ("turista", "en"))
 
 SENDER = "N.A.P.L.E.S. – control room comunale (simulazione)"
 AREA_FUORIGROTTA = AreaAlert(
@@ -27,13 +34,27 @@ def _azione(piano: Piano, azione: str) -> Any:
     return next((p for p in piano.proposte if p.azione == azione), None)
 
 
-def _istruzioni(piano: Piano, scenario: dict[str, Any], pubblico: str) -> tuple[str, str]:
+def _linee_riattivate(stato: StatoCitta, scenario: dict[str, Any]) -> list[str]:
+    nomi = {linea["id"]: linea["nome"].split("–")[0].strip() for linea in scenario["linee"]}
+    attive = {linea.id for linea in stato.linee if linea.attiva}
+    return [
+        nomi.get(e.linea, e.linea)
+        for e in stato.eventi
+        if e.tipo == TipoEvento.RIATTIVAZIONE_LINEA and e.linea in attive
+    ]
+
+
+def _istruzioni(piano: Piano, stato: StatoCitta, scenario: dict[str, Any], pubblico: str) -> tuple[str, str]:
     """Istruzioni operative (italiano, inglese) per un profilo."""
     navette = _azione(piano, "attiva_navette")
     ondate = _azione(piano, "deflusso_a_ondate")
     percorsi = _azione(piano, "indica_percorsi_alternativi")
     it: list[str] = []
     en: list[str] = []
+    riattivate = _linee_riattivate(stato, scenario)
+    if riattivate and not navette:
+        it.append(f"Di nuovo in servizio: {', '.join(riattivate)}.")
+        en.append(f"Back in service: {', '.join(riattivate)}.")
     if navette:
         punto = NOMI_PUNTI.get(navette.dettagli["punto_carico"], navette.dettagli["punto_carico"])
         it.append(f"Cumana e Linea 2 sono sospese: navette sostitutive da {punto}.")
@@ -96,10 +117,12 @@ def prepara_avvisi(
         # Caso B: evento rilevato, avvisi per profilo con le misure operative del piano.
         elif p.caso == Caso.B_RILEVATO:
             d = p.dettagli
-            for pubblico, lingua in (("tifoso", "it"), ("residente", "it"), ("turista", "en")):
+            for pubblico, lingua in PUBBLICI:
                 chiave = f"sisma_campi_flegrei_{pubblico}"
                 precedente = ultimo(chiave, pubblico)
-                istruzioni_it, istruzioni_en = _istruzioni(piano, scenario, pubblico)
+                if precedente and precedente.msgType == "Cancel":
+                    precedente = None  # sciame nuovo dopo un cessato allarme: si riparte da «Alert»
+                istruzioni_it, istruzioni_en = _istruzioni(piano, stato, scenario, pubblico)
                 if lingua == "it":
                     headline = "SIMULAZIONE – Scosse rilevate ai Campi Flegrei"
                     descrizione = (
@@ -115,10 +138,11 @@ def prepara_avvisi(
                         f"{d['magnitudo_massima']}. No official alert: follow Civil Protection updates."
                     )
                     istruzioni = istruzioni_en
+                # Budget anti-allarme: niente notifica se per la persona non cambia nulla.
                 if (
                     precedente
-                    and precedente.description == descrizione
-                    and precedente.instruction == istruzioni
+                    and precedente.severity == d["severita"]
+                    and (precedente.instruction or "") == istruzioni
                 ):
                     continue
                 avvisi.append(
@@ -145,4 +169,48 @@ def prepara_avvisi(
                     )
                 )
         # Caso C: nessun avviso pubblico.
+
+    # Cessato allarme operativo: lo sciame non è più nel piano, si chiudono gli avvisi del caso B.
+    if not any(p.caso == Caso.B_RILEVATO for p in piano.proposte):
+        finestra = scenario["soglie_sisma"]["finestra_sciame_min"]
+        servizi_regolari = all(linea.attiva for linea in stato.linee)
+        for pubblico, lingua in PUBBLICI:
+            precedente = ultimo(f"sisma_campi_flegrei_{pubblico}", pubblico)
+            if not precedente or precedente.msgType == "Cancel":
+                continue
+            if lingua == "it":
+                headline = "SIMULAZIONE – Fine degli aggiornamenti operativi sulle scosse"
+                descrizione = (
+                    f"Nessuna nuova scossa rilevata da {finestra} minuti"
+                    + (" e servizi di nuovo regolari." if servizi_regolari else ".")
+                    + " Per il rischio vulcanico fanno fede le comunicazioni della Protezione Civile."
+                )
+            else:
+                headline = "SIMULATION – Operational updates on the tremors have ended"
+                descrizione = (
+                    f"No new tremors detected for {finestra} minutes"
+                    + (" and services are back to normal." if servizi_regolari else ".")
+                    + " For volcanic risk, follow Civil Protection communications."
+                )
+            avvisi.append(
+                Alert(
+                    identifier=f"sisma_campi_flegrei_{pubblico}_{stato.t_min}",
+                    sender=SENDER,
+                    sent_t_min=stato.t_min,
+                    msgType="Cancel",
+                    references=precedente.identifier,
+                    severity="Minor",
+                    urgency="Past",
+                    certainty="Observed",
+                    event="Evento sismico",
+                    headline=headline,
+                    description=descrizione,
+                    area=AREA_FUORIGROTTA,
+                    source=precedente.source,
+                    ufficiale=False,
+                    pubblico=pubblico,
+                    lingua=lingua,
+                    piano_id=piano.id,
+                )
+            )
     return avvisi
