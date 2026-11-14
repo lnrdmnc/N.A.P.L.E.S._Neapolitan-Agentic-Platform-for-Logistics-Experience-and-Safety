@@ -53,6 +53,36 @@ button {
   background: var(--primary-pressed);
 }
 
+.btn-secondary {
+  background: var(--inverse-canvas);
+  color: var(--inverse-ink);
+}
+.btn-secondary:hover {
+  background: #393939;
+}
+
+.btn-danger {
+  background: var(--level-red);
+  color: var(--inverse-ink);
+}
+.btn-danger:hover {
+  background: #b81922;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--primary);
+}
+.btn-ghost:hover {
+  background: var(--surface-2);
+}
+
+button:disabled {
+  background: var(--surface-2);
+  color: var(--ink-subtle);
+  cursor: not-allowed;
+}
+
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;

@@ -32,11 +32,11 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | C3 in corso dalle 18:16: pannello del piano (`control-room/PianoProposto.tsx`). Poi U1. W0 fatto. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
 
 ## Fatto
 
+- **C3, piano in control room** (`control-room/PianoProposto.tsx`). Sintesi dell'Orchestratore, azioni in ordine di priorità con agente, affidabilità e caso A/B/C, conflitti risolti, impatto con e senza piano per zona (con etichetta «stima provvisoria» finché è uno stub). Mostra la spiegazione scritta da Claude (`sintesi_modello`, compito B5) con l'etichetta «Spiegazione scritta da Claude», e la sintesi a regole come ripiego o a richiesta. Pulsanti Approva, Modifica (escludere azioni; il caso A non si esclude) e Rifiuta (con motivo). Provato nel browser il 14/11: modifica con un'azione esclusa, approvazione con 4 avvisi arrivati in diretta alla vista cittadino in un'altra scheda, rifiuto finito nel registro (integro). Su desktop il piano occupa la colonna di destra e scorre al suo interno, con Approva, Modifica e Rifiuta sempre visibili; la mappa ha altezza fissa e non si allunga più con i riquadri vicini (provato a 1920×1080, 1440×900, tablet e telefono).
 - **F5, partite al Maradona.** Vista cittadino: riquadro «Partite al Maradona» con le prossime 3 partite in casa del Napoli, etichetta «DATO REALE · football-data.org» e data dell'aggiornamento (o della copia salvata). Provato con una chiamata vera il 14/11: 5 partite fino al 7/1.
 - **Contratto: nuovo `GET /api/partite`** (oggetti `Partite`, `Partita`): prossime partite in casa del Napoli al Maradona da football-data.org, dato reale con `copia: true` quando viene dalla copia salvata. Chiave `FOOTBALL_DATA_API_KEY` in `.env`.
 - Preparazione del repository: CLAUDE.md, .gitignore, .env.example, README.md, docs/STATO.md, docs/IPOTESI.md, docs/STAND.md, docs/FEEDBACK.md, Makefile con `make check`.

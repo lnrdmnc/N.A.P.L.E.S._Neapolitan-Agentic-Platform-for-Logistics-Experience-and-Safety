@@ -7,12 +7,8 @@ import { MappaTraffico } from './MappaTraffico'
 import { Indicatori } from './Indicatori'
 import { MessaggiAgenti } from './MessaggiAgenti'
 import { Registro } from './Registro'
+import { PianoProposto } from './PianoProposto'
 import './ControlRoom.css'
-
-// Panels from PROGETTO.md 6.1 still to build, each with its PIANO.md task.
-const TODO_PANELS = [
-  { id: 'plan', title: 'Piano proposto', note: 'Approva · Modifica · Rifiuta', task: 'C3' },
-]
 
 export function ControlRoom() {
   const { status } = useLiveEvents()
@@ -43,13 +39,7 @@ export function ControlRoom() {
         <MessaggiAgenti />
         <Indicatori />
         <Registro />
-        {TODO_PANELS.map((panel) => (
-          <section key={panel.id} className={`cr-panel cr-panel-${panel.id}`}>
-            <h2>{panel.title}</h2>
-            {panel.note && <p className="cr-todo">{panel.note}</p>}
-            <span className="badge badge-unconfirmed">In costruzione · {panel.task}</span>
-          </section>
-        ))}
+        <PianoProposto />
 
         <section className="cr-panel cr-panel-city">
           <h2>Stato della città</h2>

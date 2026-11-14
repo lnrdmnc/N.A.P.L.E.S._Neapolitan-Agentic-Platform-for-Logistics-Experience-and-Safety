@@ -45,12 +45,26 @@
   display: grid;
   gap: 1px;
   background: var(--hairline);
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr minmax(420px, 0.85fr);
+  grid-template-rows: auto;
+  align-content: start;
+  /* The plan, where the operator decides, keeps the whole right column. The map takes one
+     row only, so it never stretches to the height of the panels next to it. */
   grid-template-areas:
-    'map city plan'
-    'map messages messages'
-    'events kpi kpi'
-    'events log log';
+    'map map plan'
+    'city events plan'
+    'messages messages plan'
+    'kpi kpi log';
+}
+
+/* Map height is fixed: the panel grows with the row, the map canvas does not. */
+.cr-panel-map .mt-body {
+  flex: none;
+}
+
+.cr-panel-map .mt-map {
+  height: clamp(320px, 45vh, 520px);
+  min-height: 0;
 }
 
 .cr-clock {
@@ -166,7 +180,7 @@
   align-self: flex-start;
 }
 
-.cr-panel-map { grid-area: map; min-height: 460px; }
+.cr-panel-map { grid-area: map; }
 .cr-panel-city { grid-area: city; }
 .cr-panel-plan { grid-area: plan; }
 .cr-panel-events { grid-area: events; }
@@ -223,8 +237,8 @@
     grid-template-areas:
       'city plan'
       'messages messages'
-      'events events'
       'map map'
+      'events events'
       'kpi log';
   }
   .cr-header {
