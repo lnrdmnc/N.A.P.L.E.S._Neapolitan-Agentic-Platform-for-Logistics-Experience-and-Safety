@@ -33,6 +33,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | Prima lo scheletro; API degli agenti e contratti da concordare con Leonardo Monaco |
+| B0 — Struttura del backend e stub dei contratti nuovi; API degli agenti sulla porta 8001 | Leonardo Monaco | sab 14/11 15:40 | Divide api.py e models.py, aggiunge bus dei messaggi e stub; porta 8001 concordata con Francesco Sannella |
 
 ## Fatto
 
