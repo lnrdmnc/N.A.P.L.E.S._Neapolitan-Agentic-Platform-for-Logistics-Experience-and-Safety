@@ -71,8 +71,8 @@ commit. Chi fa il commit si riconosce da `git config user.email`.
 - Ogni evento sismico o di emergenza della demo è simulato ed etichettato come simulazione. Il
   sistema affianca INGV e Protezione Civile, non li sostituisce, e non inventa istruzioni di
   evacuazione. L'operatore approva ogni decisione. Nessun dato personale.
-- Il percorso demo funziona offline: ogni chiamata di rete o a un LLM ha cache o esecuzione
-  registrata.
+- Il percorso demo funziona online (deciso il 14/11): dati reali dal vivo, mai sostituiti da
+  dati inventati se mancano. I testi del modello linguistico hanno cache, per costi e ripetibilità.
 - Chiedi prima di usare servizi a pagamento o dipendenze molto pesanti.
 - Interfaccia e materiali per la giuria in italiano; codice e commit in inglese.
 - Interfaccia con una direzione visiva precisa e coerente, leggibile su un proiettore.

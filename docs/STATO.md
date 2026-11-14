@@ -67,6 +67,18 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 Le schede complete, con file, dipendenze, verifica e prova a mano, sono in docs/PIANO.md, sezione 7. `…/` sta per `agents/src/napoles_agents/`.
 
+**Proposta di Leonardo Schiavo, sab 17:30 (da confermare a voce; poi si prende il compito con la solita riga).** Il backend del percorso demo c'è (B0, B1, B2, B4, S0); mancano le schermate, che sono il traguardo delle 18:00. Un compito per PC, ognuno nel proprio file:
+
+| Chi (proposta) | Compito | Perché adesso |
+| --- | --- | --- |
+| Francesco Sannella | **C3** piano con Approva / Modifica / Rifiuta (B2 è pronto) | Senza approvazione a schermo non c'è demo |
+| Leonardo Monaco | **C2** linea del tempo dei messaggi tra agenti, poi **P1** e **X1** `make demo` | Conosce il bus; C2 è ciò che mostra il coordinamento |
+| Angelo Di Bello | **C5** indicatori con e senza coordinamento, con l'origine di ogni numero (B4 è pronto) | È la «differenza misurabile» che chiede lo sponsor |
+| Jacopo Mariello | **C4** registro delle decisioni, poi **H1**: checkpoint con i mentor, nome del team, domande allo stand | I 2 checkpoint sono obbligatori: senza, il progetto non vale |
+| Leonardo Schiavo | **C1** zone simulate (B1) sopra la mappa del traffico reale, etichettate diversamente; poi messa online (docs/DEPLOY.md) e **L0** se arriva la chiave del modello | La mappa è già sua; reale e simulato nello stesso riquadro vanno distinti |
+
+Dopo le 18:30 vale la linea di taglio di docs/PIANO.md, sezione 8. Chiavi: `.env` si riceve in privato da Leonardo Schiavo, mai su GitHub né in chat di gruppo pubbliche.
+
 Subito, in parallelo:
 
 - **L0** — Strato LLM: finto, compatibile OpenAI, Anthropic, cache (`…/llm/`).
@@ -80,6 +92,8 @@ B0 è su main: sbloccati, backend: **B3** conferma di ricezione, **B5** testi da
 Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Domenica dopo le 10:30: registrazione del video seguendo docs/VIDEO.md. Se avanza tempo: U2, C6, U3, X2, U4.
 
 ## Problemi aperti
+
+- **Deciso il 14/11 alle 17:40: la demo può usare la rete** (traffico Google dal vivo, modello linguistico). La cache dei testi del modello resta, per costi e ripetibilità. CLAUDE.md aggiornato.
 
 - **Contratto cambiato il 14/11:** nuovo endpoint `GET /api/traffico` e modelli `Traffico`, `PercorsoTraffico`, `LivelloTraffico`. `make agents-run` e `make backend` ora leggono `.env` se esiste.
 - Disagi del trasporto pubblico: Google non li espone via API e per Napoli non esiste un feed GTFS-RT; nella mappa c'è solo il traffico stradale reale.
