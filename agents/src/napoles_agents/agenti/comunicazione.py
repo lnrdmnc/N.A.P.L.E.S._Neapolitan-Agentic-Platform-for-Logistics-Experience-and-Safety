@@ -200,7 +200,8 @@ def prepara_avvisi(
         # Caso C: nessun avviso pubblico.
 
     # Cessato allarme operativo: lo sciame non è più nel piano, si chiudono gli avvisi del caso B.
-    if not any(p.caso == Caso.B_RILEVATO for p in piano.proposte):
+    # Se l'operatore ha solo escluso la proposta con «Modifica», lo sciame è ancora in corso: niente Cancel.
+    if not any(p.caso == Caso.B_RILEVATO for p in piano.proposte + piano.proposte_escluse):
         finestra = scenario["soglie_sisma"]["finestra_sciame_min"]
         servizi_regolari = all(linea.attiva for linea in stato.linee)
         for pubblico, lingua in PUBBLICI:

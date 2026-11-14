@@ -47,17 +47,12 @@ def rifiuta(piano_id: str, decisione: Decisione | None = None) -> Piano:
 
 @router.post("/api/piano/{piano_id}/modifica", response_model=Piano)
 def modifica(piano_id: str, modifica: ModificaPiano) -> Piano:
-    """STUB (compito B2): restituisce il piano senza le proposte escluse, ma non lo salva
-    e non lo scrive nel registro. La forma della risposta è quella definitiva."""
-    s = sessione()
+    """L'operatore esclude proposte prima di approvare. Il piano passa a «modificato», resta da
+    approvare o rifiutare, e la modifica finisce nel registro. Si può rimodificare: conta l'ultimo
+    elenco di escluse. Le allerte ufficiali (caso A) non si possono escludere (409)."""
     try:
-        originale = next(p for p in s.piani if p.id == piano_id)
-    except StopIteration:
-        raise HTTPException(404, "Piano inesistente") from None
-    escluse = set(modifica.proposte_escluse)
-    return originale.model_copy(
-        update={
-            "stato": "modificato",
-            "proposte": [p for p in originale.proposte if p.id not in escluse],
-        }
-    )
+        return sessione().modifica(piano_id, modifica.proposte_escluse, modifica.motivo, modifica.operatore)
+    except KeyError as e:
+        raise HTTPException(404, f"Piano o proposta inesistente: {e}") from None
+    except ValueError as e:
+        raise HTTPException(409, str(e)) from None

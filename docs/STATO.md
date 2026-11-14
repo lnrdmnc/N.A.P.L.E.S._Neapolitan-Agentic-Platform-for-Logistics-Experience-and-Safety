@@ -34,7 +34,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
-| B2 — Modifica del piano prima dell'approvazione (non più stub) | Leonardo Monaco | sab 14/11 17:03 | Tocca motore.py, api/piani.py e models/piano.py (campo `proposte_escluse`, commit di contratto dedicato). Poi S0 |
 
 ## Fatto
 
@@ -55,6 +54,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **Web app adattiva.** Deciso il 14/11: control room e vista cittadino si usano sia da telefono sia da computer (PROGETTO.md 6.1). Provate a 375, 768 e 1440 px con i dati dello scenario, senza scorrimento orizzontale. `make backend` e `make frontend` ascoltano anche sulla rete locale: dal telefono sulla stessa Wi-Fi, `http://<IP del PC>:5173`.
 - **Viste allineate alle specifiche** (PROGETTO.md 6, 6.1, 6.2; contracts/README.md). Vista cittadino: avvisi letti da `/api/avvisi` (restano dopo una ricarica), con indicazioni operative, certezza, fonte, «simulato», caso A «Allarme ufficiale · testo non modificato» o caso B «Evento rilevato · in attesa di comunicazioni ufficiali», colore per gravità. Control room: tolto il pannello di prova del canale; aggiunti i riquadri «Messaggi tra agenti» (C2) e «Registro delle decisioni» (C4). Tolto `POST /api/events/test` (solo sviluppo); intestazione «Control room comunale · prototipo», non più «Comune di Napoli»; etichette «simulati» e «da verificare» su spettatori, partita e livello vulcanico.
 - **Profilo «pendolare flegreo».** **Contratto: `Alert.pubblico` e `GET /api/avvisi?pubblico=` ammettono anche `pendolare`.** Chi rientra verso l'area flegrea riceve la propria catena di avvisi: navette sostitutive «per Bagnoli e Pozzuoli» (destinazioni simulate), linee di nuovo in servizio, cessato allarme, e sempre «prima di rientrare segui la Protezione Civile e il tuo Comune», senza indicazioni sul rischio. 30 test.
+- **B2 — Modifica del piano.** `POST /api/piano/{id}/modifica` non è più uno stub: l'operatore esclude proposte, il piano passa a «modificato» (si approva o rifiuta come un piano proposto), si ricalcolano conflitti e sintesi, le proposte escluse non generano avvisi; la modifica va nel registro e sul bus. Si può reincludere una proposta rimodificando. Le allerte ufficiali (caso A) non si possono escludere (409); escludere lo sciame non fa partire il cessato allarme. **Contratto: `Piano` ha i campi `proposte_escluse` e `motivo_modifica`.** 38 test.
 
 ## Prossimi compiti liberi
 
@@ -69,7 +69,7 @@ Subito, in parallelo:
 - Verificare con il team nomi delle stazioni, capacità e soglie in `scenario_maradona.json` e in docs/IPOTESI.md.
 - Dal check delle idee (docs/IDEE.md), con S0: **presenze aggregate per cella simulate** come input dell'agente Folla.
 
-B0 è su main: sbloccati, backend: **B1** simulatore nella sessione (serve S0), **B2** modifica del piano (non in parallelo con B1), **B3** conferma di ricezione, **B4** indicatori con origine (dopo B1), **B5** testi dal modello (serve L0), **F1–F4** fonti INGV, meteo, GTFS, mappe (serve D1), **B6** itinerario del turista, **P1** strumento di prova, **R1** registro su file e comando di verifica.
+B0 è su main: sbloccati, backend: **B1** simulatore nella sessione (serve S0), **B3** conferma di ricezione, **B4** indicatori con origine (dopo B1), **B5** testi dal modello (serve L0), **F1–F4** fonti INGV, meteo, GTFS, mappe (serve D1), **B6** itinerario del turista, **P1** strumento di prova, **R1** registro su file e comando di verifica.
 
 Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Domenica dopo le 10:30: registrazione del video seguendo docs/VIDEO.md. Se avanza tempo: U2, C6, U3, X2, U4.
 

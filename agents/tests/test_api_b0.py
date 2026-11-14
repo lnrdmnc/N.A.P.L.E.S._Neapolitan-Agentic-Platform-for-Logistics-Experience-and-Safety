@@ -80,13 +80,3 @@ def test_stub_rispondono_con_la_forma_del_contratto():
     avviso = client.get("/api/avvisi").json()[0]["identifier"]
     assert client.post(f"/api/avvisi/{avviso}/visto").status_code == 202
     assert client.get("/api/avvisi/ricezione").json()[0]["simulato"] is True
-
-
-def test_modifica_stub_non_cambia_la_sessione():
-    client.post("/api/reset")
-    client.post("/api/avanza", json={"t_min": 72})
-    piano = client.get("/api/piano").json()
-    esclusa = piano["proposte"][0]["id"]
-    mod = client.post(f"/api/piano/{piano['id']}/modifica", json={"proposte_escluse": [esclusa]}).json()
-    assert mod["stato"] == "modificato" and esclusa not in [p["id"] for p in mod["proposte"]]
-    assert client.get("/api/piano").json()["stato"] == "proposto"

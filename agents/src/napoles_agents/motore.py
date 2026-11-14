@@ -7,8 +7,11 @@ from .agenti import AGENTI
 from .agenti.comunicazione import prepara_avvisi
 from .agenti.orchestratore import pianifica
 from .bus import Bus
-from .models import Alert, Piano, Proposta, StatoCitta
+from .models import Alert, Caso, Piano, Proposta, StatoCitta
 from .registro import Registro
+
+# Stati in cui il piano aspetta la decisione dell'operatore.
+IN_ATTESA = ("proposto", "modificato")
 
 NOMI_AGENTI = {
     "rischio": "Rischio",
@@ -96,7 +99,7 @@ class Sessione:
             return
         self._firma = firma
         corrente = self.piano_corrente
-        if corrente and corrente.stato == "proposto":
+        if corrente and corrente.stato in IN_ATTESA:
             corrente.stato = "superato"
         piano = pianifica(proposte, self.t_min, len(self.piani) + 1)
         self.piani.append(piano)
@@ -135,9 +138,56 @@ class Sessione:
                 return p
         raise KeyError(piano_id)
 
+    def modifica(
+        self, piano_id: str, proposte_escluse: list[str], motivo: str = "", operatore: str = "operatore"
+    ) -> Piano:
+        """L'operatore toglie una o più proposte prima di approvare. Il piano resta in attesa
+        di approvazione («modificato»); le proposte tolte non generano avvisi."""
+        piano = self._trova(piano_id)
+        if piano.stato not in IN_ATTESA:
+            raise ValueError(f"Il piano {piano_id} è {piano.stato}: non si può modificare")
+        tutte = piano.proposte + piano.proposte_escluse
+        escluse = set(proposte_escluse)
+        sconosciute = escluse - {p.id for p in tutte}
+        if sconosciute:
+            raise KeyError(", ".join(sorted(sconosciute)))
+        ufficiali = [p.id for p in tutte if p.id in escluse and p.caso == Caso.A_UFFICIALE]
+        if ufficiali:
+            raise ValueError("Le allerte ufficiali non si possono escludere: vanno sempre inoltrate")
+        rimaste = [p for p in tutte if p.id not in escluse]
+        ricalcolato = pianifica(rimaste, piano.t_min, 0)
+        piano.proposte = ricalcolato.proposte
+        piano.conflitti = ricalcolato.conflitti
+        piano.sintesi = ricalcolato.sintesi
+        piano.affidabilita_minima = ricalcolato.affidabilita_minima
+        piano.proposte_escluse = [p for p in tutte if p.id in escluse]
+        piano.motivo_modifica = motivo or None
+        piano.stato = "modificato"
+        titoli = ", ".join(p.titolo for p in piano.proposte_escluse) or "nessuna"
+        self.registro.aggiungi(
+            self.t_min,
+            "piano_modificato",
+            {
+                "piano": piano.id,
+                "operatore": operatore,
+                "escluse": sorted(escluse),
+                "motivo": motivo,
+            },
+        )
+        self._pubblica(
+            da="Operatore",
+            a="Orchestratore",
+            tipo="decisione",
+            titolo=f"Piano {piano.id} modificato",
+            testo=f"Escluse da {operatore}: {titoli}." + (f" Motivo: {motivo}" if motivo else ""),
+            simulato=False,
+            rif=piano.id,
+        )
+        return piano
+
     def approva(self, piano_id: str, operatore: str = "operatore") -> list[Alert]:
         piano = self._trova(piano_id)
-        if piano.stato != "proposto":
+        if piano.stato not in IN_ATTESA:
             raise ValueError(f"Il piano {piano_id} è {piano.stato}: non si può approvare")
         piano.stato = "approvato"
         piano.t_decisione = self.t_min
@@ -177,7 +227,7 @@ class Sessione:
 
     def rifiuta(self, piano_id: str, operatore: str = "operatore", motivo: str = "") -> Piano:
         piano = self._trova(piano_id)
-        if piano.stato != "proposto":
+        if piano.stato not in IN_ATTESA:
             raise ValueError(f"Il piano {piano_id} è {piano.stato}: non si può rifiutare")
         piano.stato = "rifiutato"
         piano.t_decisione = self.t_min
