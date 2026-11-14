@@ -33,8 +33,8 @@ La sessione è una sola per tutti quelli che aprono il link: se qualcuno avanza 
 | Traffico sulle strade e tempi in auto dallo stadio (Google Maps) | Lo sciame sismico e la partita dello scenario |
 | Ultimi terremoti di Campi Flegrei e Vesuvio (INGV) | Il testo dell'allerta ufficiale e il post social non verificato |
 | Meteo allo stadio (Open-Meteo) | La sospensione di Cumana e Linea 2 |
-| Livello di allerta vulcanica ufficiale, verificato sull'Osservatorio Vesuviano | Presenze e flussi di persone (il simulatore a zone) |
-| Partite al Maradona (football-data.org) | Le stime di ricezione degli avvisi |
+| Livello di allerta vulcanica ufficiale (mappa della Protezione Civile, letta dal vivo) | Presenze e flussi di persone (il simulatore a zone) |
+| Partite al Maradona (football-data.org), concerti in calendario, capienza ufficiale dello stadio | Le stime di ricezione degli avvisi |
 | Fermate e coordinate (GTFS ANM ed EAV, OpenStreetMap) | |
 
 Ogni dato simulato e ogni ipotesi sono in [docs/IPOTESI.md](docs/IPOTESI.md). N.A.P.L.E.S. affianca INGV e Protezione Civile, non li sostituisce, e non dà mai istruzioni di evacuazione.
