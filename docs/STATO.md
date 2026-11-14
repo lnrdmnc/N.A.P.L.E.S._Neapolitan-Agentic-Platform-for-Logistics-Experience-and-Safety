@@ -33,12 +33,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
-<<<<<<< Updated upstream
-| Budget anti-allarme e cessato allarme operativo (agenti) | Leonardo Monaco | sab 14/11 16:31 | Tocca agenti/comunicazione.py, motore.py e lo scenario (riattivazione linee); contratto invariato |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
-=======
-| Script del video pitch (docs/VIDEO.md) | Leonardo Schiavo | sab 14/11 16:15 | Solo testo, massimo 3 minuti |
->>>>>>> Stashed changes
 
 ## Fatto
 
@@ -53,11 +48,8 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **W0, scheletro della web app.** `backend/`: gateway FastAPI sulla porta 8000 che serve la PWA compilata, inoltra ogni `/api/*` agli agenti sulla 8001 (`AGENTS_URL`) e, quando l'operatore approva un piano, spinge gli avvisi ai telefoni sul canale in tempo reale (`/api/events`); 9 test. `frontend/`: PWA React + TypeScript, tipi generati da `contracts/agenti.openapi.json`, stile ispirato a IBM Carbon con font in locale. `/control-room` mostra ora, stato della città, linee ed eventi con affidabilità; `/cittadino` mostra linee e avvisi approvati in diretta. Provato nel browser fino all'approvazione del piano al minuto 72. `make check` esteso alla web app; `make install`, `make backend`, `make frontend`, `make build`.
 - **Check di 4 agenti esperti di smart city** (cittadini, turisti, telco e mobilità, giuria): sintesi, idee per stasera, visione per il pitch e tagli motivati in [docs/IDEE.md](IDEE.md).
 - **Numeri credibili.** Corretto il bug per cui il ritardo d'informazione «senza coordinamento» non aveva effetto; capacità ricalibrate su ordini di grandezza realistici (navette 100/min invece di 500, Linea 2 80 invece di 400); tabella di sensibilità in docs/IPOTESI.md e in `make prova`. Nuovo risultato: deflusso 47 → 66 minuti, picco 22.180 → 39.400 persone; anche senza l'ipotesi sui percorsi a piedi il coordinamento vince (58 → 66 minuti). 23 test.
-<<<<<<< Updated upstream
 - **Script del video pitch** in docs/VIDEO.md: otto scene, circa 390 parole di voce, chiusura a 2:57. Chiude con gli sviluppi futuri: app per smartphone e controllo in tempo reale con presenze dalle SIM e telecamere di sicurezza, in forma aggregata e anonima. I numeri degli indicatori (scena 5) restano da inserire dopo l'esecuzione finale.
-=======
 - **Budget anti-allarme e cessato allarme operativo.** Un aggiornamento parte solo se per la persona cambiano gravità o istruzioni (la scossa delle 22:26 non notifica più); `Update` «di nuovo in servizio» quando Cumana e Linea 2 ripartono (minuto 130, simulato); `Cancel` per ogni profilo quando lo sciame si chiude (minuto 162), con rimando alla Protezione Civile per il rischio vulcanico. Il conflitto su Piazzale Tecchio compare una sola volta sulla linea del tempo. **Lo scenario ora dura 170 minuti** (prima 150). Contratto invariato. 28 test.
->>>>>>> Stashed changes
 
 ## Prossimi compiti liberi
 
