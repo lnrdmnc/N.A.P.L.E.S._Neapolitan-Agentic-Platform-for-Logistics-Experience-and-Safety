@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| «Napoli oggi e nei prossimi giorni»: eventi previsti (partite reali + elenco curato), zone interessate, orari critici, percorsi alternativi | Leonardo Monaco | sab 14/11 19:02 | Nuovo agente `…/agenti/calendario.py`, dati `…/data/luoghi_napoli.json` e `…/data/eventi_napoli.json`, `GET /api/napoli/prossimi-giorni` (contratto); riquadri nella vista cittadino e in control room |
 
 ## Fatto
 
