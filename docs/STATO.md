@@ -38,7 +38,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 ## Fatto
 
 - Preparazione del repository: CLAUDE.md, .gitignore, .env.example, README.md, docs/STATO.md, docs/IPOTESI.md, docs/STAND.md, docs/FEEDBACK.md, Makefile con `make check`.
-- docs/TEAM.md con i componenti del team e regola dei Co-authored-by in CLAUDE.md.
+- docs/TEAM.md con i componenti del team e regola dei Co-authored-by in CLAUDE.md. Email dei commit di Leonardo Monaco aggiornata il 14/11.
 - docs/PROGETTO.md (concept) e docs/GUIDA.md (guida del team) aggiunti.
 - Checklist di consegna dal regolamento; CLAUDE.md aggiornato a cinque persone. Sottotitolo della challenge verificato sulla pagina italiana: «la città che Ci pensa».
 - Decisioni in docs/PROGETTO.md: web app PWA con due viste, `/control-room` e `/cittadino` (sezione 6.1); gestione degli alert in tre casi con formato CAP semplificato (sezione 6.2). Il piano deve tenerne conto.
