@@ -6,15 +6,17 @@ Il repository si chiamava in precedenza `CoScienze-TheBigHack2026`.
 
 ## Stato attuale
 
-Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. La web app è in corso. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
+Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
 
 ## Come avviare
 
-Serve [uv](https://docs.astral.sh/uv/).
+Servono [uv](https://docs.astral.sh/uv/), Python 3.12+ e Node 22+. Alla prima volta: `make install` (dipendenze della web app).
 
-- `make check`: file base, `.env` non tracciato, lint e test degli agenti, contratto API allineato.
+- `make check`: file base, `.env` non tracciato, lint e test degli agenti, contratto API allineato, test del backend, lint e build del frontend.
 - `make agents-run`: API degli agenti su http://localhost:8001 (porta concordata con la web app), documentazione su http://localhost:8001/docs.
 - `make prova`: esegue lo scenario approvando ogni piano e stampa la linea del tempo dei messaggi tra agenti.
+- Web app in sviluppo, tre terminali: `make agents-run` (agenti), `make backend` (http://localhost:8000), `make frontend` (http://localhost:5173, si ricarica a ogni modifica).
+- `make build`: compila la PWA in `frontend/dist`, servita dal backend su http://localhost:8000.
 - `make contracts`: rigenera `contracts/agenti.openapi.json` dopo aver cambiato modelli o API.
 
 ## Struttura del repository
@@ -24,6 +26,8 @@ Serve [uv](https://docs.astral.sh/uv/).
 - `Makefile`: `make check`, eseguito prima di ogni commit, e i comandi degli agenti
 - `.env.example`: nomi delle variabili d'ambiente, senza valori
 - `agents/`: modulo agenti in Python (API FastAPI, scenario, test); vedi [agents/README.md](agents/README.md)
+- `backend/`: gateway FastAPI della web app (porta 8000): serve la PWA, inoltra agli agenti, canale in tempo reale; vedi [backend/README.md](backend/README.md)
+- `frontend/`: web app PWA in React, viste `/control-room` e `/cittadino`; vedi [frontend/README.md](frontend/README.md)
 - `contracts/`: contratti tra i moduli; vedi [contracts/README.md](contracts/README.md)
 - `docs/PROGETTO.md`: concept del progetto
 - `docs/PIANO.md`: piano di lavoro (decisioni, architettura, contratti, compiti, orari e tagli)
@@ -42,6 +46,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 16:00 | webapp | Scheletro della web app (W0): gateway FastAPI su 8000 verso gli agenti su 8001, canale in tempo reale, PWA React con control room e vista cittadino, tipi generati dal contratto; `make check` esteso alla web app |
 | 2026-11-14 | 15:45 | agents | B0: models e api divisi per area, bus dei messaggi, stub dei contratti nuovi, `make prova`, API sulla porta 8001 |
 | 2026-11-14 | 15:40 | docs | Piano di lavoro in docs/PIANO.md, costruito sul modulo agenti; compiti liberi e orari aggiornati in docs/STATO.md |
 | 2026-11-14 | 15:30 | repo | Tolti i marcatori di conflitto rimasti in README.md e docs/STATO.md |

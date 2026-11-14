@@ -1,0 +1,119 @@
+.ct {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  font-size: 16px;
+}
+
+.ct-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  background: var(--inverse-canvas);
+  color: var(--inverse-ink);
+  font-size: var(--text-small);
+}
+
+.ct-logo {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.ct-sim {
+  padding: var(--space-3) var(--space-4) 0;
+}
+
+.ct-banner {
+  margin: var(--space-3) var(--space-4) 0;
+  padding: var(--space-4);
+  background: var(--canvas);
+  border-left: 6px solid var(--level-orange);
+}
+
+.ct-banner-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ct-banner p {
+  margin: var(--space-1) 0;
+  font-size: 18px;
+}
+
+.ct-banner small {
+  color: var(--ink-muted);
+}
+
+.ct-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: var(--space-3) 0;
+  background: var(--hairline);
+}
+
+.ct-card {
+  background: var(--canvas);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ct-card h2 {
+  font-size: 20px;
+}
+
+.ct-card .badge {
+  align-self: flex-start;
+}
+
+.ct-muted {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.ct-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ct-list li {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.ct-list li {
+  align-items: center;
+}
+
+.ct-list .dot.is-up {
+  background: var(--level-green);
+}
+
+.ct-list .dot.is-down {
+  background: var(--level-red);
+}
+
+.ct-list time {
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.ct-footer {
+  padding: var(--space-4);
+  font-size: 14px;
+  color: var(--ink-muted);
+}

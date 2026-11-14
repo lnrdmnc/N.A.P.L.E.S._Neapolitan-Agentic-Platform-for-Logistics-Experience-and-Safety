@@ -1,0 +1,40 @@
+.home {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.home h1 {
+  font-size: var(--text-display);
+  font-weight: 300;
+}
+
+.home p {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.home-links {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
+}
+
+.home-links a {
+  background: var(--primary);
+  color: var(--inverse-ink);
+  padding: var(--space-3) var(--space-5);
+  text-decoration: none;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.home-links a:hover {
+  background: var(--primary-hover);
+}

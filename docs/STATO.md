@@ -32,7 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | Prima lo scheletro; API degli agenti e contratti da concordare con Leonardo Monaco |
+| Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 
 ## Fatto
 
@@ -44,6 +44,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - Modulo agenti in Python (`agents/`): Rischio, Mobilità, Folla, Comunicazione, Orchestratore con regole deterministiche; scenario Maradona simulato; registro a catena di hash; indicatori con e senza coordinamento; API FastAPI (`make agents-run`). Contratto in `contracts/agenti.openapi.json`. 12 test; `make check` ora esegue anche lint e test degli agenti.
 - Piano di lavoro in docs/PIANO.md, costruito sul modulo agenti: decisioni, architettura, contratti da aggiungere, cosa manca rispetto al brief, compiti con dipendenze e prove a mano, orari e tagli. Fonti dati verificate con chiamate reali (INGV, GTFS di ANM ed EAV, Open-Meteo, OSRM): esito nella sezione 10 del piano.
 - **B0** — `models/` e `api/` divisi in un file per area con indice; bus dei messaggi (`bus.py`, `GET /api/messaggi?da_seq=`); `affidabilita_minima` nel piano; `origine` degli indicatori; stub con forma definitiva per simulazione, contesto, itinerario, ricezione e modifica del piano; comandi `make prova` (stampa la linea del tempo) e segnaposto `verifica-registro`, `demo`, `web-test`. **API degli agenti sulla porta 8001**, concordata con Francesco Sannella. Corretto lo sciame sismico che generava avvisi a raffica quando le scosse invecchiavano. 21 test.
+- **W0, scheletro della web app.** `backend/`: gateway FastAPI sulla porta 8000 che serve la PWA compilata, inoltra ogni `/api/*` agli agenti sulla 8001 (`AGENTS_URL`) e, quando l'operatore approva un piano, spinge gli avvisi ai telefoni sul canale in tempo reale (`/api/events`); 9 test. `frontend/`: PWA React + TypeScript, tipi generati da `contracts/agenti.openapi.json`, stile ispirato a IBM Carbon con font in locale. `/control-room` mostra ora, stato della città, linee ed eventi con affidabilità; `/cittadino` mostra linee e avvisi approvati in diretta. Provato nel browser fino all'approvazione del piano al minuto 72. `make check` esteso alla web app; `make install`, `make backend`, `make frontend`, `make build`.
 
 ## Prossimi compiti liberi
 
@@ -63,13 +64,14 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 
 ## Problemi aperti
 
-- **Da decidere subito, a voce: un solo backend.** La riga della web app parla di un secondo backend in `backend/`; il piano raccomanda che l'API degli agenti serva anche la web app compilata (docs/PIANO.md, sezione 3). Porta già concordata: API degli agenti su **8001**.
+- **Deciso il 14/11: due processi.** `backend/` (porta 8000) è un gateway senza logica: serve la PWA, inoltra agli agenti (porta 8001) e tiene il canale in tempo reale. Per X1 `make demo` deve avviare entrambi.
+- La vista cittadino mostra tutti gli avvisi approvati, per ogni profilo e lingua: il filtro per profilo è il compito U1.
 - Indicatori: i minuti tra evento e avviso e i minuti per decidere oggi sono ipotesi in ingresso, non risultati. Vanno etichettati così finché il compito B4 non li misura nella sessione (docs/PIANO.md, sezione 9).
 - Chiave del modello e chiave Google Maps non ancora in `.env`. Senza la prima la demo usa i testi a regole.
 - Le stime del piano non lasciano margine: alle 18:30 vale la linea di taglio (docs/PIANO.md, sezione 8).
 - Scenario: l'allerta meteo arriva al minuto 85, prima del fischio finale (95); PROGETTO.md la vuole durante il deflusso. Da valutare se spostarla.
 - Dati: il feed GTFS di EAV è etichettato «Prova» nel catalogo e va controllato; la richiesta dei confini dei quartieri a Overpass è stata rifiutata; i termini di Google sulla conservazione delle risposte vanno verificati; il livello di allerta vulcanica va controllato sulla fonte ufficiale.
 - Conflitti su README.md e docs/STATO.md: il 14/11 due commit hanno portato marcatori di conflitto su main, poi tolti. Prima di ogni commit: `git pull --rebase` a cartella pulita, e controllare che non restino righe che iniziano con `<<<<<<<`.
-- `make check` richiede [uv](https://docs.astral.sh/uv/) installato, perché esegue lint e test degli agenti. Va esteso alla web app quando c'è.
+- `make check` richiede [uv](https://docs.astral.sh/uv/) per gli agenti e `make install` fatto una volta per la web app (venv in `backend/.venv`, pacchetti in `frontend/node_modules`). Su Windows il controllo del contratto ora legge il file in UTF-8.
 - Su macOS, con il repository sul Desktop sincronizzato, Python ignora il collegamento del pacchetto in `.venv`: test e avvio usano `src` direttamente (già configurato in `pyproject.toml` e nel Makefile).
 - Punti aperti del concept: nome del team, titolo definitivo. L'elenco completo è in docs/PROGETTO.md.

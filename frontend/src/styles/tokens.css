@@ -1,0 +1,49 @@
+/*
+  Design tokens, inspired by IBM Carbon (light theme, projector-legible).
+  Provisional until the team agrees on a shared DESIGN.md.
+*/
+:root {
+  --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  --canvas: #ffffff;
+  --surface-1: #f4f4f4;
+  --surface-2: #e0e0e0;
+  --ink: #161616;
+  --ink-muted: #525252;
+  --ink-subtle: #6f6f6f;
+  --hairline: #e0e0e0;
+  --hairline-strong: #161616;
+  --inverse-canvas: #161616;
+  --inverse-ink: #ffffff;
+
+  --primary: #0f62fe;
+  --primary-hover: #0050e6;
+  --primary-pressed: #002d9c;
+
+  /* alert levels: green, yellow, orange, red */
+  --level-green: #24a148;
+  --level-yellow: #f1c21b;
+  --level-orange: #ff832b;
+  --level-red: #da1e28;
+
+  /* simulated / unconfirmed data, always visible */
+  --simulated-bg: #8a3ffc;
+  --simulated-ink: #ffffff;
+  --unconfirmed-bg: #fcf4d6;
+  --unconfirmed-ink: #3d3200;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* projector minimum: body never under 18px on the control room */
+  --text-body: 18px;
+  --text-small: 15px;
+  --text-title: 28px;
+  --text-display: 42px;
+}

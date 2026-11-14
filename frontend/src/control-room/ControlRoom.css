@@ -1,0 +1,202 @@
+.cr {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+}
+
+.cr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding: var(--space-4) var(--space-6);
+  background: var(--inverse-canvas);
+  color: var(--inverse-ink);
+}
+
+.cr-brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.cr-logo {
+  font-size: var(--text-title);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.cr-subtitle {
+  color: #c6c6c6;
+}
+
+.cr-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.cr-grid {
+  flex: 1;
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-areas:
+    'map city plan'
+    'map events events'
+    'kpi kpi log';
+}
+
+.cr-clock {
+  font-family: var(--font-mono);
+  font-size: 22px;
+}
+
+.cr-clock small {
+  font-size: var(--text-small);
+  color: #c6c6c6;
+  margin-left: var(--space-2);
+}
+
+.cr-banner-error {
+  margin: 0;
+  padding: var(--space-3) var(--space-6);
+  background: var(--level-red);
+  color: var(--inverse-ink);
+  font-weight: 600;
+}
+
+.cr-facts {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.cr-facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: var(--space-1);
+}
+
+.cr-facts dt {
+  color: var(--ink-muted);
+}
+
+.cr-facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.cr-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.cr-lines li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cr-lines .dot {
+  background: var(--level-green);
+}
+
+.cr-lines li.is-down .dot {
+  background: var(--level-red);
+}
+
+.cr-lines li.is-down span:last-child {
+  color: var(--level-red);
+  font-weight: 600;
+}
+
+.cr-log-text {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+}
+
+.cr-panel {
+  background: var(--canvas);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 220px;
+}
+
+.cr-panel h2 {
+  font-size: var(--text-title);
+}
+
+.cr-panel .badge {
+  align-self: flex-start;
+}
+
+.cr-panel-map { grid-area: map; min-height: 460px; }
+.cr-panel-city { grid-area: city; }
+.cr-panel-plan { grid-area: plan; }
+.cr-panel-events { grid-area: events; }
+.cr-panel-kpi { grid-area: kpi; }
+.cr-panel-log { grid-area: log; }
+
+.cr-todo {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.cr-log-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.cr-error {
+  margin: 0;
+  color: var(--level-red);
+  font-weight: 600;
+}
+
+.cr-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+}
+
+.cr-log li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.cr-log-kind {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1056px) {
+  .cr-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'city' 'events' 'plan' 'map' 'kpi' 'log';
+  }
+  .cr-header {
+    padding: var(--space-4);
+  }
+}

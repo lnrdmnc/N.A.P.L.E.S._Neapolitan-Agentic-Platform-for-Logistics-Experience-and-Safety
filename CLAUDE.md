@@ -81,7 +81,10 @@ commit. Chi fa il commit si riconosce da `git config user.email`.
   rotto, allega la prova e chiudi con l'elenco di ciò che il team deve provare a mano.
 
 ## Comandi
-Da compilare appena esistono: installazione, avvio della demo, make check.
+- `make install`: dipendenze della web app (una volta). Serve anche uv per gli agenti.
+- `make check`: prima di ogni commit.
+- Web app in sviluppo: `make agents-run` (agenti), `make backend` (porta 8000), `make frontend` (porta 5173).
+- Avvio della demo (`make demo`): da completare nel compito X1.
 
 ## Compact Instructions
 Conserva scadenze, compito in corso, decisioni di architettura, comandi e problemi aperti.
