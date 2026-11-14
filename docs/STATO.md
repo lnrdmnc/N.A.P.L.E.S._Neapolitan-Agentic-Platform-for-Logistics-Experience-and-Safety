@@ -34,6 +34,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
+| R1 — Registro delle decisioni su file e `make verifica-registro` | Leonardo Monaco | sab 14/11 17:31 | Tocca registro.py, api/sessione_corrente.py, prova.py, Makefile (solo il target `verifica-registro`) e .gitignore (`agents/var/`) |
 
 ## Fatto
 
