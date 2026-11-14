@@ -92,6 +92,52 @@ Tutti gli eventi sismici dello scenario sono simulati ed etichettati come tali s
 
 La control room non è un'interfaccia per l'utente finale: è lo strumento con cui l'operatore supervisiona e approva le decisioni degli agenti.
 
+## 6.1 Forma del prototipo: una web app, due viste
+
+Decisione del team (sab 14/11): niente app nativa, che non sta nei tempi. Il prototipo è **una sola web app (PWA)** con due viste sulla stessa base di codice:
+
+- **`/control-room`** — dashboard per lo schermo grande e il proiettore: mappa, stato degli agenti, piano proposto dall'Orchestratore, pulsanti Approva / Modifica / Rifiuta, indicatori con e senza coordinamento, registro delle decisioni.
+- **`/cittadino`** — vista mobile, installabile sulla home come un'app: meteo, traffico, avvisi con provenienza; in più, per il turista, storia di Napoli e itinerario.
+
+Motivi: un solo link per la giuria, nessuna toolchain mobile, demo offline con service worker e cache. Nella demo le due viste stanno affiancate: l'operatore approva e il telefono riceve l'avviso in diretta. Le notifiche push funzionano su Android e, su iPhone, solo con la PWA installata sulla home: il banner nella vista cittadino è il ripiego sempre disponibile. L'app nativa è uno sviluppo futuro.
+
+## 6.2 Gestione degli alert per eventi catastrofici
+
+**Principio:** N.A.P.L.E.S. non emette allarmi ufficiali. In Italia gli allarmi alla popolazione per i grandi rischi, compresa l'attività vulcanica di Vesuvio e Campi Flegrei, passano da **IT-Alert**, il sistema della Protezione Civile basato sul cell broadcast degli operatori mobili. N.A.P.L.E.S. accompagna l'allarme con ciò che manca: le **indicazioni operative** (linee ferme, percorsi, navette, deflusso).
+
+### Tre casi
+
+| Caso | Esempio | Comportamento |
+| --- | --- | --- |
+| **A. Allarme ufficiale ricevuto** | Messaggio IT-Alert o cambio del livello di allerta (simulati) | Inoltrato **senza modifiche**, con la fonte in evidenza; sotto, le informazioni operative. Mai riscritto. |
+| **B. Evento rilevato, nessun allarme ufficiale** | Scossa letta da INGV via FDSN | Mostrato come «evento rilevato, in attesa di comunicazioni ufficiali». Solo misure operative (sospensione di linee secondo i protocolli dei gestori, deflusso a ondate). **Nessuna istruzione di evacuazione.** |
+| **C. Notizia non verificata** | Voce o post sui social | Non rilanciata; al massimo segnalata all'operatore come «non confermata». |
+
+### Flusso
+
+1. **Ingresso:** INGV, bollettini meteo e di criticità, allarmi ufficiali simulati, normalizzati in un unico formato.
+2. **Rischio:** classifica tipo, zona, gravità e affidabilità (ufficiale, misurata, stimata). Le soglie sono configurabili e dichiarate in `docs/IPOTESI.md`, non scritte nel codice.
+3. **Orchestratore:** combina rischio, mobilità e folla, risolve i conflitti, propone il piano.
+4. **Operatore:** approva, modifica o rifiuta. Senza approvazione non parte nulla.
+5. **Comunicazione:** messaggi **per zona** (solo a chi è nell'area) e **per profilo e lingua** (tifoso, residente, turista), sempre con la fonte.
+6. **Registro:** ogni passo nel log a catena di hash.
+
+### Formato: CAP semplificato
+
+I messaggi di allerta seguono una versione JSON semplificata del **Common Alerting Protocol** (CAP, standard OASIS), definita in `contracts/`:
+
+- `msgType`: `Alert`, `Update`, `Cancel` (anche il cessato allarme);
+- `severity`, `urgency`, `certainty` (`certainty` distingue confermato e incerto);
+- `area` (poligono della zona) ed `expires` (scadenza);
+- `sender` e `source` (provenienza).
+
+### Dettagli
+
+- **Livelli vulcanici:** i livelli di allerta a colori di Vesuvio e Campi Flegrei, decisi dalla Protezione Civile, compaiono come stato di contesto nella control room. Il livello attuale va verificato sulla fonte ufficiale prima della demo.
+- **Niente doppioni:** gli eventi dello stesso sciame si uniscono in un aggiornamento (`Update`) invece di più notifiche.
+- **Conferma di ricezione:** la control room mostra quanti utenti hanno visto l'avviso; è un indicatore misurabile.
+- **Canali:** nella demo, notifica push nella PWA e banner nella vista cittadino; in produzione, il cell broadcast degli operatori.
+
 ## 7. Dati e fonti
 
 Nessuna delle fonti sotto è stata ancora verificata dal team su Napoli: la disponibilità, la copertura e i formati vanno controllati nella fase dati.
@@ -159,7 +205,7 @@ Prenotazioni e acquisti dall'assistente, citati dalla traccia, restano fuori dal
 - [ ] Nome del team
 - [ ] Titolo definitivo del progetto
 - [ ] Verifica dei feed GTFS: linee coperte e tempo reale
-- [ ] Scelta dello stack
+- [ ] Scelta dello stack (deciso: web app PWA con due viste, sezione 6.1; restano framework e librerie)
 - [ ] Conferma dello scenario e del sesto passo
 - [ ] API meteo e API di mappe: quale, e chi ha la chiave
 - [ ] Formato delle proposte di ciascun agente
