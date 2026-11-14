@@ -1,0 +1,50 @@
+{
+  "_nota": "Area degli avvisi del caso B: inviluppo convesso del contorno dello stadio (OpenStreetMap, way 22790881) e delle fermate vere vicine (GTFS ANM ed EAV), allargato di 100 m e semplificato (tolleranza 15 m). Calcolata il 14/11/2026. Vedi docs/IPOTESI.md.",
+  "descrizione": "Fuorigrotta – stadio Maradona e fermate vicine (Piazzale Tecchio, Mostra, Marino)",
+  "fonti": [
+    "OpenStreetMap, way 22790881 (contorno dello stadio)",
+    "GTFS Piazzale Tecchio (ANM 5001)",
+    "GTFS Campi Flegrei L2 (ANM 6277)",
+    "GTFS Mostra Cumana (EAV 6804)",
+    "GTFS Marino - Stadio Maradona (ANM 2299)"
+  ],
+  "margine_m": 100,
+  "poligono": [
+    [
+      40.82811,
+      14.19034
+    ],
+    [
+      40.82687,
+      14.19086
+    ],
+    [
+      40.82166,
+      14.19489
+    ],
+    [
+      40.82526,
+      14.19496
+    ],
+    [
+      40.82782,
+      14.19536
+    ],
+    [
+      40.82917,
+      14.19499
+    ],
+    [
+      40.83006,
+      14.1936
+    ],
+    [
+      40.83005,
+      14.19199
+    ],
+    [
+      40.82934,
+      14.19076
+    ]
+  ]
+}

@@ -1,11 +1,11 @@
 {
-  "nota": "Rete semplificata di Fuorigrotta per il simulatore a zone. Capienze, quote modali e capacità sono ipotesi (docs/IPOTESI.md). Coordinate: fermate dal GTFS ANM; stadio, Cumana Mostra e Viale Giochi del Mediterraneo approssimate.",
+  "nota": "Rete semplificata di Fuorigrotta per il simulatore a zone. Capienze, quote modali e capacità sono ipotesi (docs/IPOTESI.md). Coordinate reali: fermate dal GTFS ANM ed EAV, stadio e Viale Giochi del Mediterraneo da OpenStreetMap (verificate il 14/11/2026).",
   "zone": [
-    {"id": "stadio", "nome": "Stadio Maradona", "tipo": "stadio", "lat": 40.8279, "lon": 14.1930, "capienza": 54000, "fonte_coordinate": "approssimata"},
+    {"id": "stadio", "nome": "Stadio Maradona", "tipo": "stadio", "lat": 40.82798, "lon": 14.19289, "capienza": 54000, "fonte_coordinate": "OpenStreetMap, way 22790881 (centro dello stadio)"},
     {"id": "piazzale_tecchio", "nome": "Piazzale Tecchio", "tipo": "piazza", "lat": 40.8227, "lon": 14.1944, "capienza": 6000, "fonte_coordinate": "GTFS ANM, fermata 5001"},
-    {"id": "viale_giochi_del_mediterraneo", "nome": "Viale Giochi del Mediterraneo", "tipo": "strada", "lat": 40.8296, "lon": 14.1902, "capienza": 4000, "fonte_coordinate": "approssimata"},
+    {"id": "viale_giochi_del_mediterraneo", "nome": "Viale Giochi del Mediterraneo", "tipo": "strada", "lat": 40.82199, "lon": 14.17993, "capienza": 4000, "fonte_coordinate": "OpenStreetMap, way 37620822: estremo del viale più vicino allo stadio, a circa 1,1 km (il viale corre verso Bagnoli)"},
     {"id": "stazione_campi_flegrei", "nome": "Stazione Campi Flegrei (Linea 2)", "tipo": "stazione", "lat": 40.8225, "lon": 14.1946, "capienza": 1500, "fonte_coordinate": "GTFS ANM, fermata 6277"},
-    {"id": "stazione_mostra", "nome": "Stazione Mostra (Cumana)", "tipo": "stazione", "lat": 40.8251, "lon": 14.1930, "capienza": 1000, "fonte_coordinate": "approssimata, vicino alla fermata bus 2153 «Tecchio - Mostra»"},
+    {"id": "stazione_mostra", "nome": "Stazione Mostra (Cumana)", "tipo": "stazione", "lat": 40.82469, "lon": 14.19321, "capienza": 1000, "fonte_coordinate": "GTFS EAV, fermata 6804 «Mostra» (Cumana)"},
     {"id": "fermata_marino_stadio", "nome": "Fermata bus Marino - Stadio Maradona", "tipo": "fermata", "lat": 40.8261, "lon": 14.1944, "capienza": 800, "fonte_coordinate": "GTFS ANM, fermata 2299"}
   ],
   "modi": [
