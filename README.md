@@ -62,6 +62,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 18:56 | agents, contracts | F1 + F2: contesto reale in `/api/contesto` (terremoti INGV ai Campi Flegrei e al Vesuvio, meteo Open-Meteo), con stato di ogni fonte e copia di riserva |
 | 2026-11-14 | 18:51 | webapp | Regia del tempo in control room: l'orologio dello scenario avanza da solo e si ferma quando arriva un piano |
 | 2026-11-14 | 18:50 | deploy, webapp | Indirizzo pubblico https://naples-coscienze.web.app (Firebase Hosting davanti a Cloud Run); canale in tempo reale diretto su Cloud Run tramite `events_url` in `/api/config` |
 | 2026-11-14 | 18:46 | docs | Checkpoint 1 con i mentor (14:50) in docs/FEEDBACK.md; copie iCloud escluse da git |

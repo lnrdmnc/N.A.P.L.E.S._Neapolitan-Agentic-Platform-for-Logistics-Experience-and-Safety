@@ -349,6 +349,14 @@
             "title": "Eventi Ingv",
             "type": "array"
           },
+          "fonti": {
+            "description": "Stato di ogni fonte reale usata",
+            "items": {
+              "$ref": "#/components/schemas/StatoFonte"
+            },
+            "title": "Fonti",
+            "type": "array"
+          },
           "livelli_vulcanici": {
             "items": {
               "$ref": "#/components/schemas/LivelloVulcanico"
@@ -1590,6 +1598,53 @@
         "title": "StatoCitta",
         "type": "object"
       },
+      "StatoFonte": {
+        "description": "Da dove viene un dato reale e quanto è fresco: va mostrato accanto al dato.",
+        "properties": {
+          "aggiornato_al": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aggiornato Al"
+          },
+          "copia": {
+            "default": false,
+            "description": "True se è l'ultima copia salvata, perché la fonte non risponde",
+            "title": "Copia",
+            "type": "boolean"
+          },
+          "disponibile": {
+            "title": "Disponibile",
+            "type": "boolean"
+          },
+          "motivo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motivo"
+          },
+          "nome": {
+            "title": "Nome",
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome",
+          "disponibile"
+        ],
+        "title": "StatoFonte",
+        "type": "object"
+      },
       "StatoLLM": {
         "properties": {
           "chiave_configurata": {
@@ -2188,7 +2243,7 @@
     },
     "/api/contesto": {
       "get": {
-        "description": "STUB: nessun dato reale ancora; il livello va verificato sulla fonte ufficiale.",
+        "description": "Ultimi eventi INGV reali (Campi Flegrei, Vesuvio, ultimi 7 giorni) e meteo reale allo stadio.\nOgni fonte dichiara in `fonti` se è disponibile, quando è stata letta e se è una copia salvata.",
         "operationId": "contesto_api_contesto_get",
         "responses": {
           "200": {

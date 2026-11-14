@@ -32,7 +32,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| F1 + F2 — Contesto reale: ultimi eventi INGV (Campi Flegrei, Vesuvio) e meteo Open-Meteo in `/api/contesto` | Leonardo Monaco | sab 14/11 18:54 | Dal checkpoint (tempo reale). Nuovi `…/fonti/ingv.py`, `…/fonti/meteo.py`; tocca `…/api/contesto.py` e `…/models/contesto.py` (contratto: stato di ogni fonte) |
 
 ## Fatto
 
@@ -72,6 +71,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **U1 — Vista cittadino per profilo.** Al primo accesso «Chi sei? / Who are you?» con quattro scelte (allo stadio, abito a Fuorigrotta, torno verso Bagnoli o Pozzuoli, I'm visiting Naples), ricordata sul telefono e cambiabile. Gli avvisi arrivano da `/api/avvisi?pubblico=…`: solo i propri più quelli per tutti, senza doppioni. Per il turista tutta la scheda è in inglese, il testo ufficiale resta in italiano con «Official text in Italian, not translated». Ogni avviso mostrato è confermato una volta a `/visto` con un identificativo anonimo casuale del telefono (`crypto.randomUUID`, nessun dato personale). Provato da telefono: il turista vede 2 avvisi, entrambi confermati in control room; il pendolare vede «per Bagnoli e Pozzuoli navette sostitutive». File nuovi: `frontend/src/api/profilo.ts`, `useAvvisiProfilo.ts`, `cittadino/SceltaProfilo.tsx`; `api/useAvvisi.ts` non è più usato dalla vista cittadino.
 - **Online:** https://naples-coscienze.web.app (`/control-room`, `/cittadino`), Firebase Hosting davanti a Cloud Run. `frontend/src/api/useLiveEvents.ts` ora apre il canale in tempo reale all'indirizzo `events_url` di `/api/config` (online: diretto su Cloud Run, perché Firebase trattiene gli stream; in locale: stessa origine). Si aggiorna con `make deploy` da qualunque PC con gcloud e accesso al progetto `naples-hackathon` (README, «Messa online»; docs/DEPLOY.md). Chiavi in Secret Manager, una sola istanza: la sessione demo è condivisa da chi apre il link.
 - **Regia del tempo in control room** (dal checkpoint: tempo reale). Barra sotto l'intestazione con ▶ Avvia/Riprendi, ⏸ Pausa, +1 min, ⏭ Prossimo evento, ↺ Ricomincia, velocità (1 minuto ogni 2 s, al secondo, veloce) e «Pausa quando arriva un piano», attiva di default: l'orologio dello scenario avanza da solo e si ferma quando l'Orchestratore propone un piano, così l'operatore decide prima che il tempo vada avanti. L'orologio della regia non torna mai indietro (chiedere un minuto precedente al server riavvierebbe lo scenario). Provato nel browser: avvio veloce, pausa automatica alle 21:55 sul piano 001, approvazione con il pulsante di C3 (4 avvisi inviati), ripresa e nuova pausa al minuto 71. File: `frontend/src/api/useRegia.ts`, `frontend/src/control-room/Regia.tsx` (+ .css).
+- **F1 + F2 — Contesto reale** (`…/fonti/ingv.py`, `…/fonti/meteo.py`, `GET /api/contesto` non più stub). Ultimi terremoti reali dell'INGV ai Campi Flegrei e al Vesuvio (7 giorni, servizio FDSN senza chiave, in memoria 2 minuti) e meteo reale allo stadio da Open-Meteo (senza chiave, in memoria 10 minuti). Solo dati veri con `simulato=false`; se una fonte non risponde si usa l'ultima copia salvata in `…/data/fonti/` con la sua data, altrimenti `disponibile=false` e nessun dato inventato. **Contratto: `Contesto.fonti` (`StatoFonte`: nome, disponibile, aggiornato_al, copia, motivo).** Il livello vulcanico ufficiale resta quello dello scenario, marcato «da verificare». Provato dal vivo il 14/11 alle 18:55: INGV Md 2.6 Campi Flegrei (13/11) e Md 2.6 Vesuvio (12/11), meteo 18,1 °C senza pioggia. I test non usano la rete. Manca il riquadro in control room (C6).
 
 ## Prossimi compiti liberi
 
@@ -102,7 +102,7 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 
 ## Problemi aperti
 
-- **Dal checkpoint delle 14:50 (affidabilità e tempo reale):** la regia del tempo c’è (sab 18:51). Restano il contesto reale INGV e meteo (F1, F2), ancora stub, e la mappa a zone (C1). Dettaglio in docs/FEEDBACK.md.
+- **Dal checkpoint delle 14:50 (affidabilità e tempo reale):** la regia del tempo c’è (sab 18:51). INGV e meteo reali ci sono nell'API (F1, F2, sab 18:55); restano il riquadro in control room (C6) e la mappa a zone (C1). Dettaglio in docs/FEEDBACK.md.
 - Team: Jacopo Mariello e Angelo Di Bello supportano il gruppo (lavoro senza commit: mentor, stand, prove).
 - La sincronizzazione iCloud del Desktop crea copie «file 2.py» anche nel codice: tolte il 14/11 alle 18:50 (erano identiche e non tracciate) e ora escluse in `.gitignore`. Usare `git add` con i percorsi, non `git add -A`.
 

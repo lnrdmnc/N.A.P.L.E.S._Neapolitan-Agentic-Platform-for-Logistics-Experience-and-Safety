@@ -7,7 +7,7 @@ e avvisa in docs/STATO.md. Un modello nuovo va nel file della sua area e qui sot
 from .alert import Alert, AreaAlert, ConfermaVisto, Pubblico, Ricezione
 from .base import Affidabilita, Ambito, Caso
 from .citta import Evento, StatoCitta, StatoLinea, TipoEvento
-from .contesto import Contesto, EventoSismicoReale, LivelloVulcanico, Meteo
+from .contesto import Contesto, EventoSismicoReale, LivelloVulcanico, Meteo, StatoFonte
 from .indicatori import ConfrontoIndicatori, Indicatori, Origine
 from .itinerario import Itinerario, Tratta
 from .llm import ProvaLLM, StatoLLM
@@ -51,6 +51,7 @@ __all__ = [
     "Ricezione",
     "SerieSimulazione",
     "StatoCitta",
+    "StatoFonte",
     "StatoLLM",
     "StatoLinea",
     "StatoRegistro",

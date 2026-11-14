@@ -3,6 +3,18 @@
 from pydantic import BaseModel, Field
 
 
+class StatoFonte(BaseModel):
+    """Da dove viene un dato reale e quanto è fresco: va mostrato accanto al dato."""
+
+    nome: str
+    disponibile: bool
+    aggiornato_al: str | None = None
+    copia: bool = Field(
+        default=False, description="True se è l'ultima copia salvata, perché la fonte non risponde"
+    )
+    motivo: str | None = None
+
+
 class LivelloVulcanico(BaseModel):
     area: str
     livello: str
@@ -36,4 +48,5 @@ class Contesto(BaseModel):
     eventi_ingv: list[EventoSismicoReale]
     meteo: Meteo | None = None
     copia_del: str | None = Field(default=None, description="Data della copia in cache usata")
+    fonti: list[StatoFonte] = Field(default_factory=list, description="Stato di ogni fonte reale usata")
     stub: bool = Field(default=False, description="True finché le fonti reali non sono collegate")

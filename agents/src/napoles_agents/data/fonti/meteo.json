@@ -1,0 +1,11 @@
+{
+  "meteo": {
+    "tempo": "2026-11-14T18:45",
+    "temperatura_c": 18.1,
+    "precipitazione_mm": 0.0,
+    "vento_kmh": 7.7,
+    "codice_meteo": 2,
+    "simulato": false
+  },
+  "aggiornato_al": "2026-11-14T17:54:56.422981+00:00"
+}
