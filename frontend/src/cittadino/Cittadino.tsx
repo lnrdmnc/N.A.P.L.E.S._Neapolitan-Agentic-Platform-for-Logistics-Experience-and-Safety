@@ -7,6 +7,7 @@ import { LiveStatus } from '../components/LiveStatus'
 import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { AlertCard } from './AlertCard'
+import { MeteoReale } from './MeteoReale'
 import { PartiteMaradona } from './PartiteMaradona'
 import { SceltaProfilo } from './SceltaProfilo'
 import './Cittadino.css'
@@ -78,10 +79,7 @@ export function Cittadino() {
 
           <ProssimiGiorni variante="cittadino" />
 
-          <section className="ct-card ct-card-weather">
-            <h2>Meteo</h2>
-            <span className="badge badge-unconfirmed">In costruzione · U2</span>
-          </section>
+          <MeteoReale en={en} />
         </main>
 
         <footer className="ct-footer">

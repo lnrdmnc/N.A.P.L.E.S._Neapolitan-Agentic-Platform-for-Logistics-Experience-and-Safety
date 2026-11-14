@@ -1,0 +1,19 @@
+{
+  "_nota": "Livelli di allerta vulcanica ufficiali, stabiliti dal Dipartimento della Protezione Civile. Non esiste un servizio da interrogare: si verificano a mano sulla fonte e si aggiorna la data. Vedi docs/IPOTESI.md.",
+  "livelli": [
+    {
+      "area": "Campi Flegrei",
+      "livello": "giallo",
+      "fonte": "Osservatorio Vesuviano – INGV (livello stabilito dal Dipartimento della Protezione Civile)",
+      "url": "https://www.ov.ingv.it/index.php/monitoraggio-sismico-e-vulcanico/campi-flegrei",
+      "verificato_il": "2026-11-14"
+    },
+    {
+      "area": "Vesuvio",
+      "livello": "verde",
+      "fonte": "Osservatorio Vesuviano – INGV (livello stabilito dal Dipartimento della Protezione Civile)",
+      "url": "https://www.ov.ingv.it/index.php/monitoraggio-sismico-e-vulcanico/vesuvio",
+      "verificato_il": "2026-11-14"
+    }
+  ]
+}

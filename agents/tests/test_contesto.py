@@ -114,4 +114,7 @@ def test_api_contesto_dichiara_lo_stato_delle_fonti():
     assert {f["nome"] for f in c["fonti"]} == {"INGV FDSN", "Open-Meteo"}
     assert all(not f["disponibile"] for f in c["fonti"])
     assert c["eventi_ingv"] == [] and c["meteo"] is None
-    assert "da verificare" in c["livelli_vulcanici"][0]["fonte"]
+    # Livelli ufficiali verificati a mano sulla fonte, con data e indirizzo (data/livelli_vulcanici.json)
+    livelli = {v["area"]: v for v in c["livelli_vulcanici"]}
+    assert set(livelli) == {"Campi Flegrei", "Vesuvio"}
+    assert all(v["verificato_il"] and v["url"].startswith("https://") for v in livelli.values())

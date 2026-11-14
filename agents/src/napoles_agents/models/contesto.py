@@ -20,6 +20,7 @@ class LivelloVulcanico(BaseModel):
     livello: str
     fonte: str
     verificato_il: str | None = Field(default=None, description="Data della verifica sulla fonte ufficiale")
+    url: str | None = Field(default=None, description="Pagina della fonte ufficiale")
 
 
 class EventoSismicoReale(BaseModel):

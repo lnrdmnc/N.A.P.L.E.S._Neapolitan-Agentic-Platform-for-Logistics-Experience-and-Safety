@@ -52,6 +52,7 @@
      row only, so it never stretches to the height of the panels next to it. */
   grid-template-areas:
     'map map plan'
+    'real real plan'
     'city events plan'
     'messages messages plan'
     'kpi kpi log';
@@ -238,6 +239,7 @@
       'city plan'
       'messages messages'
       'map map'
+      'real real'
       'events events'
       'kpi log';
   }
@@ -261,7 +263,7 @@
   }
   .cr-grid {
     grid-template-columns: 1fr;
-    grid-template-areas: 'city' 'plan' 'messages' 'events' 'map' 'kpi' 'log';
+    grid-template-areas: 'city' 'plan' 'messages' 'events' 'map' 'real' 'kpi' 'log';
   }
   .cr-header {
     gap: var(--space-2);

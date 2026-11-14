@@ -250,3 +250,8 @@
       'alerts weather';
   }
 }
+
+.ct-weather-now {
+  margin: 0;
+  font-size: 22px;
+}

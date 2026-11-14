@@ -5,7 +5,7 @@
   "durata_min": 170,
   "fine_partita_t_min": 95,
   "spettatori": 50000,
-  "livello_vulcanico_campi_flegrei": "giallo (da verificare sulla fonte ufficiale)",
+  "livello_vulcanico_campi_flegrei": "giallo",
   "settori": [
     {"id": "curva_a", "nome": "Curva A", "spettatori": 12000},
     {"id": "curva_b", "nome": "Curva B", "spettatori": 12000},

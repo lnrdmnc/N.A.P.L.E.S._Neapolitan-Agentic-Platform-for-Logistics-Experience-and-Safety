@@ -940,6 +940,18 @@
             "title": "Livello",
             "type": "string"
           },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Pagina della fonte ufficiale",
+            "title": "Url"
+          },
           "verificato_il": {
             "anyOf": [
               {

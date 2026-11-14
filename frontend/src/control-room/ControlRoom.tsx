@@ -4,6 +4,7 @@ import { Affidabilita } from '../components/Affidabilita'
 import { LiveStatus } from '../components/LiveStatus'
 import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
+import { ContestoReale } from './ContestoReale'
 import { MappaTraffico } from './MappaTraffico'
 import { Indicatori } from './Indicatori'
 import { MessaggiAgenti } from './MessaggiAgenti'
@@ -40,6 +41,7 @@ export function ControlRoom() {
 
       <main className="cr-grid">
         <MappaTraffico />
+        <ContestoReale />
         <MessaggiAgenti />
         <Indicatori />
         <Registro />
@@ -67,7 +69,7 @@ export function ControlRoom() {
               </dl>
               <div className="cr-facts-tags">
                 <SimulationBadge label="spettatori e partita: simulati" />
-                <span className="badge badge-unconfirmed">livello vulcanico: da verificare</span>
+                <span className="badge badge-reliable">livello vulcanico: reale, verificato il 14/11</span>
               </div>
               <ul className="cr-lines">
                 {stato.linee.map((linea) => (
