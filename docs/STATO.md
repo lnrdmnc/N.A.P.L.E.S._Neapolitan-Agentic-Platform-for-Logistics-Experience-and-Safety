@@ -33,6 +33,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | C3 in corso dalle 18:16: pannello del piano (`control-room/PianoProposto.tsx`). Poi U1. W0 fatto. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
+| U1 — Vista cittadino: scelta del profilo, avvisi del proprio profilo e lingua, conferma di lettura | Leonardo Monaco | sab 14/11 18:30 | Preso al posto di Francesco Sannella, che resta su C3. Nuovi file in `frontend/src/api/` e `frontend/src/cittadino/`; in `Cittadino.tsx` e `AlertCard.tsx` modifiche piccole (filtro per profilo, etichette in inglese per il turista) |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
 
 ## Fatto
