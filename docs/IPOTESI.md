@@ -2,7 +2,7 @@
 
 | Dato o ipotesi | Reale o simulato | Fonte o criterio | Dove si vede nella demo |
 | --- | --- | --- | --- |
-| Scosse ai Campi Flegrei (Md 3.2, 2.6, 2.8 ai minuti 70, 71, 101) | Simulato | Scelte per lo scenario; formato come gli eventi INGV | Control room: eventi e piano; avvisi del caso B |
+| Scosse ai Campi Flegrei (Md 3.1, 3.0, 2.5 ai minuti 70, 71, 101) | Simulato, **ricalcato su uno sciame reale** | Magnitudo, profondità (1,2, 1,1 e 2,7 km) ed epicentri presi dalle scosse reali del catalogo INGV del 1/8/2026 (eventi 46732232, 46732302, 46733192: repliche della Md 4.7 del 31/7). I tempi sono compressi: nella realtà 2 e 118 minuti tra le scosse, nello scenario 1 e 31 | Control room: eventi e piano; avvisi del caso B |
 | Sospensione di Cumana e Linea 2 dopo le scosse | Simulato | Plausibile: verifiche dopo un evento sismico; da confermare con i protocolli dei gestori | Stato delle linee, piano, avvisi |
 | Cumana e Linea 2 di nuovo in servizio al minuto 130 (22:55); scenario lungo 170 minuti per mostrare la chiusura dello sciame | Simulato | Scelte per mostrare l'aggiornamento «di nuovo in servizio» e il cessato allarme operativo (minuto 162, 60 minuti dopo l'ultima scossa) | Avvisi: `Update` alle 22:55, `Cancel` alle 23:27 |
 | Budget anti-allarme: un aggiornamento parte solo se cambiano gravità o istruzioni per la persona | Regola del sistema | Scelta di progetto contro la stanchezza da allarmi | La scossa delle 22:26 non genera notifiche |
@@ -45,7 +45,7 @@ Dal 14/11 alle 17:25 gli indicatori vengono dal **simulatore a zone**, lo stesso
 | 1,3 (valore usato) | 20 min | 51 → 61 | 24.261 → 34.440 |
 | 1,5 | 20 min | 44 → 61 | 20.802 → 34.440 |
 
-Valori ricalcolati il 14/11 alle 20:25 con le capacità delle linee dagli orari veri (R2): bus da 60 a 23 persone al minuto, Linea 2 da 80 a 114. Le conclusioni non cambiano.
+Valori ricalcolati il 14/11 alle 19:55 con le capacità delle linee dagli orari veri (R2): bus da 60 a 23 persone al minuto, Linea 2 da 80 a 114. Le conclusioni non cambiano.
 
 Lettura onesta:
 

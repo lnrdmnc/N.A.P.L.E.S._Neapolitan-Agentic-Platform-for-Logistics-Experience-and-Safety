@@ -98,10 +98,11 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
-| 2026-11-14 | 20:25 | agents | Capacità di Linea 2, Cumana e bus calcolate dalle corse vere (GTFS ANM, EAV) al posto degli ordini di grandezza; sensibilità ricalcolata |
+| 2026-11-14 | 19:58 | agents | Scosse simulate ricalcate sullo sciame reale INGV del 1/8/2026 (magnitudo, profondità, epicentri); tempi compressi dichiarati |
+| 2026-11-14 | 19:55 | agents | Capacità di Linea 2, Cumana e bus calcolate dalle corse vere (GTFS ANM, EAV) al posto degli ordini di grandezza; sensibilità ricalcolata |
 | 2026-11-14 | 19:55 | webapp | Icona del sito dal badge tondo del team (favicon, icone della PWA e di iPhone); titolo della pagina iniziale in Cormorant Garamond Light |
 | 2026-11-14 | 20:10 | webapp | Etichette corrette: in control room «Emergenza simulata · traffico e contesto reali» (prima «nessun evento reale»), nella vista cittadino «emergenze simulate» (accanto ci sono concerti e partite veri) |
-| 2026-11-14 | 20:00 | agents, webapp | Lo scenario è la prova generale della prossima partita vera al Maradona (oggi Napoli – Torino, sab 21/11): partita reale, sciame simulato |
+| 2026-11-14 | 19:50 | agents, webapp | Lo scenario è la prova generale della prossima partita vera al Maradona (oggi Napoli – Torino, sab 21/11): partita reale, sciame simulato |
 | 2026-11-14 | 19:55 | webapp | Mappa nella vista cittadino: traffico reale, stadio, stazioni aperte o chiuse, punti di raccolta, con elenco che resta anche offline |
 | 2026-11-14 | 19:40 | webapp | Niente più testi sovrapposti: livello vulcanico che va a capo nel contesto reale, indicatori e registro uno sotto l'altro su tablet; nella vista cittadino «Napoli oggi e nei prossimi giorni» a tutta larghezza, senza rettangolo grigio |
 | 2026-11-14 | 19:25 | agents | Aggiunto `tzdata`: su Windows gli agenti non partivano («No time zone found with key Europe/Rome») e la web app restava senza dati |

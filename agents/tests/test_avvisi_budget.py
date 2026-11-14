@@ -17,7 +17,7 @@ def _scenario_completo() -> Sessione:
 
 def test_scossa_della_stessa_gravita_non_genera_notifiche():
     s = _scenario_completo()
-    # La scossa Md 2.8 al minuto 101 non cambia gravità né istruzioni: nessun avviso a quel minuto.
+    # La scossa Md 2.5 al minuto 101 non cambia gravità né istruzioni: nessun avviso a quel minuto.
     assert not [a for a in s.avvisi if a.sent_t_min == 101]
 
 

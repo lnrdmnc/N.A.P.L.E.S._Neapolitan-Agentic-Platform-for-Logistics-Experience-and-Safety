@@ -32,12 +32,12 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| R3 — Scosse simulate ricalcate su uno sciame reale del catalogo INGV (magnitudo, profondità, luoghi, intervalli) | Leonardo Monaco | sab 14/11 20:35 | Tocca `…/data/scenario_maradona.json` (eventi sisma), docs/IPOTESI.md |
 
 ## Fatto
 
-- **R2, capacità delle linee dagli orari veri (sab 20:25).** Corse reali tra le 22:20 e le 23:30 dal GTFS ANM (orari 2023): Linea 2 a Campi Flegrei 10 treni → 114 persone al minuto (era 80); bus alle fermate dello stadio 16 corse → 23 (era 60); Cumana ogni 15 minuti (EAV) → 30, capienza per treno stimata. Fonte e calcolo in `…/data/scenario_maradona.json` (`fonte_capacita`) e in docs/IPOTESI.md. Sensibilità ricalcolata: picco −13% / −30%, nessuna folla davanti alle stazioni chiuse; approvare 10 minuti dopo non allunga lo sgombero ma alza il picco. 128 test.
-- **R1, scenario sulla prossima partita vera (sab 20:00).** Lo scenario è la «prova generale» della prossima partita vera in casa al Maradona, letta da football-data.org (`…/riferimento.py`): oggi Napoli – Torino, Serie A, sabato 21/11 alle 20:45, la stessa ora d'inizio dello scenario. In control room e nella vista cittadino (anche in inglese) una striscia «Prova generale per Napoli – Torino» con «Partita reale · football-data.org» e «Scosse, chiusure e folla: simulate». Senza partite dalla fonte: «scenario solo dimostrativo», nessuna partita inventata. **Contratto:** `StatoCitta.partita_reale` (opzionale). 128 test; provato a 1280 px e a 375 px senza scorrimento orizzontale.
+- **R3, scosse simulate ricalcate su uno sciame reale (sab 19:58).** Le tre scosse dello scenario hanno magnitudo, profondità ed epicentri delle repliche reali del 1/8/2026 (catalogo INGV: Md 3.1, 3.0 e 2.5, eventi indicati nella fonte di ogni scossa); restano simulate ed etichettate, con i tempi compressi dichiarati in docs/IPOTESI.md. Gravità invariate, quindi percorso demo, avvisi e indicatori uguali (prove: sgombero 55, 55, 70 minuti). Copione del video aggiornato a Md 3.1. Con la chiave del modello conviene rilanciare `make llm-cache`: i testi in cache citano ancora Md 3.2. 128 test.
+- **R2, capacità delle linee dagli orari veri (sab 19:55).** Corse reali tra le 22:20 e le 23:30 dal GTFS ANM (orari 2023): Linea 2 a Campi Flegrei 10 treni → 114 persone al minuto (era 80); bus alle fermate dello stadio 16 corse → 23 (era 60); Cumana ogni 15 minuti (EAV) → 30, capienza per treno stimata. Fonte e calcolo in `…/data/scenario_maradona.json` (`fonte_capacita`) e in docs/IPOTESI.md. Sensibilità ricalcolata: picco −13% / −30%, nessuna folla davanti alle stazioni chiuse; approvare 10 minuti dopo non allunga lo sgombero ma alza il picco. 128 test.
+- **R1, scenario sulla prossima partita vera (sab 19:50).** Lo scenario è la «prova generale» della prossima partita vera in casa al Maradona, letta da football-data.org (`…/riferimento.py`): oggi Napoli – Torino, Serie A, sabato 21/11 alle 20:45, la stessa ora d'inizio dello scenario. In control room e nella vista cittadino (anche in inglese) una striscia «Prova generale per Napoli – Torino» con «Partita reale · football-data.org» e «Scosse, chiusure e folla: simulate». Senza partite dalla fonte: «scenario solo dimostrativo», nessuna partita inventata. **Contratto:** `StatoCitta.partita_reale` (opzionale). 128 test; provato a 1280 px e a 375 px senza scorrimento orizzontale.
 | R1 — Scenario agganciato alla prossima partita vera al Maradona (football-data.org), sciame sempre simulato | Leonardo Monaco | sab 14/11 19:45 | Tocca `…/scenario.py`, `…/models/citta.py`, intestazione della control room e della vista cittadino |
 
 ## Fatto
@@ -117,7 +117,7 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 
 ## Problemi aperti
 
-- **Contratto cambiato il 14/11 alle 20:00:** campo opzionale `partita_reale` in `StatoCitta` (`GET /api/stato`). Compatibile: chi non lo legge non cambia nulla.
+- **Contratto cambiato il 14/11 alle 19:50:** campo opzionale `partita_reale` in `StatoCitta` (`GET /api/stato`). Compatibile: chi non lo legge non cambia nulla.
 - **Foto del golfo nella pagina iniziale** (`frontend/public/img/golfo-*.jpg`): fonte e licenza non note. Il repository è pubblico: prima della consegna indicare l'autore o sostituirle con foto a licenza libera (per esempio Wikimedia Commons).
 
 - **Dal checkpoint delle 14:50 (affidabilità e tempo reale):** la regia del tempo c’è (sab 18:51). INGV, meteo e livello vulcanico ufficiale reali ci sono nell'API (F1, F2, sab 18:55 e 19:25); restano il riquadro in control room (C6) e la mappa a zone (C1). Dettaglio in docs/FEEDBACK.md.

@@ -65,21 +65,21 @@
       "id": "ev_sisma_1",
       "t_min": 70,
       "tipo": "sisma",
-      "titolo": "Scossa Md 3.2 – Campi Flegrei (Pozzuoli)",
+      "titolo": "Scossa Md 3.1 – Campi Flegrei (Pozzuoli), profondità 1,2 km",
       "zona": "Campi Flegrei",
-      "fonte": "INGV (evento simulato)",
+      "fonte": "INGV (evento simulato, ricalcato sull'evento reale INGV 46732232 del 1/8/2026 alle 03:47)",
       "affidabilita": "misurata",
-      "magnitudo": 3.2
+      "magnitudo": 3.1
     },
     {
       "id": "ev_sisma_2",
       "t_min": 71,
       "tipo": "sisma",
-      "titolo": "Scossa Md 2.6 – Campi Flegrei (Pozzuoli)",
+      "titolo": "Scossa Md 3.0 – Campi Flegrei (Pozzuoli), profondità 1,1 km",
       "zona": "Campi Flegrei",
-      "fonte": "INGV (evento simulato)",
+      "fonte": "INGV (evento simulato, ricalcato sull'evento reale INGV 46732302 del 1/8/2026 alle 03:49)",
       "affidabilita": "misurata",
-      "magnitudo": 2.6
+      "magnitudo": 3.0
     },
     {
       "id": "ev_stop_cumana",
@@ -124,11 +124,11 @@
       "id": "ev_sisma_3",
       "t_min": 101,
       "tipo": "sisma",
-      "titolo": "Scossa Md 2.8 – Campi Flegrei (Pozzuoli)",
+      "titolo": "Scossa Md 2.5 – Campi Flegrei (Pozzuoli), profondità 2,7 km",
       "zona": "Campi Flegrei",
-      "fonte": "INGV (evento simulato)",
+      "fonte": "INGV (evento simulato, ricalcato sull'evento reale INGV 46733192 del 1/8/2026 alle 05:45)",
       "affidabilita": "misurata",
-      "magnitudo": 2.8
+      "magnitudo": 2.5
     },
     {
       "id": "ev_riattiva_linea2",
