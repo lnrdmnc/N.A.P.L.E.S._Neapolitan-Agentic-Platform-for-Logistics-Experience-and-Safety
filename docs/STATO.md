@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| F1 + F2 — Contesto reale: ultimi eventi INGV (Campi Flegrei, Vesuvio) e meteo Open-Meteo in `/api/contesto` | Leonardo Monaco | sab 14/11 18:54 | Dal checkpoint (tempo reale). Nuovi `…/fonti/ingv.py`, `…/fonti/meteo.py`; tocca `…/api/contesto.py` e `…/models/contesto.py` (contratto: stato di ogni fonte) |
 
 ## Fatto
 
