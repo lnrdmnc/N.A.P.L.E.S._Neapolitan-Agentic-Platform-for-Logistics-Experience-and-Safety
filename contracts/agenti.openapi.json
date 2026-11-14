@@ -943,11 +943,30 @@
               }
             ]
           },
+          "motivo_modifica": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motivo Modifica"
+          },
           "proposte": {
             "items": {
               "$ref": "#/components/schemas/Proposta"
             },
             "title": "Proposte",
+            "type": "array"
+          },
+          "proposte_escluse": {
+            "description": "Proposte tolte dall'operatore con «Modifica»: non generano avvisi",
+            "items": {
+              "$ref": "#/components/schemas/Proposta"
+            },
+            "title": "Proposte Escluse",
             "type": "array"
           },
           "sintesi": {
@@ -1931,7 +1950,7 @@
     },
     "/api/piano/{piano_id}/modifica": {
       "post": {
-        "description": "STUB (compito B2): restituisce il piano senza le proposte escluse, ma non lo salva\ne non lo scrive nel registro. La forma della risposta è quella definitiva.",
+        "description": "L'operatore esclude proposte prima di approvare. Il piano passa a «modificato», resta da\napprovare o rifiutare, e la modifica finisce nel registro. Si può rimodificare: conta l'ultimo\nelenco di escluse. Le allerte ufficiali (caso A) non si possono escludere (409).",
         "operationId": "modifica_api_piano__piano_id__modifica_post",
         "parameters": [
           {

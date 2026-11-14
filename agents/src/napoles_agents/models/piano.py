@@ -61,6 +61,10 @@ class Piano(BaseModel):
         default=None, description="L'affidabilità più bassa tra le proposte del piano"
     )
     impatto: Impatto | None = None
+    proposte_escluse: list[Proposta] = Field(
+        default_factory=list, description="Proposte tolte dall'operatore con «Modifica»: non generano avvisi"
+    )
+    motivo_modifica: str | None = None
 
 
 class ModificaPiano(BaseModel):
