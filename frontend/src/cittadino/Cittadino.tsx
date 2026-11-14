@@ -5,6 +5,7 @@ import { useStato } from '../api/useStato'
 import { LiveStatus } from '../components/LiveStatus'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { AlertCard } from './AlertCard'
+import { PartiteMaradona } from './PartiteMaradona'
 import './Cittadino.css'
 
 // Citizen view: phone first, also usable on tablet and desktop.
@@ -60,6 +61,8 @@ export function Cittadino() {
             )}
             <SimulationBadge label="simulato" />
           </section>
+
+          <PartiteMaradona />
 
           <section className="ct-card ct-card-weather">
             <h2>Meteo</h2>
