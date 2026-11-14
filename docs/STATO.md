@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| Mappa nella vista cittadino (stadio, stazioni aperte o chiuse, punti delle navette, traffico reale) | Francesco Sannella | sab 14/11 19:42 | Nuovi `frontend/src/cittadino/MappaCittadino.tsx` e `.css`, una riga in Cittadino.tsx; riusa `api/googleMaps.ts`. Cambio a PROGETTO.md 6.1 concordato |
 | R1 — Scenario agganciato alla prossima partita vera al Maradona (football-data.org), sciame sempre simulato | Leonardo Monaco | sab 14/11 19:45 | Tocca `…/scenario.py`, `…/models/citta.py`, intestazione della control room e della vista cittadino |
 | Logo nel README, README su come vedere il progetto, pagina iniziale con le foto del golfo | Leonardo Schiavo | sab 14/11 19:36 | Tocca README.md, `frontend/src/home/`, nuove immagini in `docs/img/` e `frontend/public/img/` |
 
