@@ -140,6 +140,11 @@
   gap: var(--space-3);
 }
 
+/* On the phone the long list of upcoming events goes last, after the weather */
+.pg-cittadino {
+  order: 1;
+}
+
 .ct-card .badge {
   align-self: flex-start;
 }
@@ -230,7 +235,8 @@
     grid-template-areas:
       'alerts alerts'
       'transit matches'
-      'weather weather';
+      'weather weather'
+      'next next';
   }
   .ct-card {
     padding: var(--space-5);
@@ -239,6 +245,8 @@
   .ct-card-transit { grid-area: transit; }
   .ct-card-weather { grid-area: weather; }
   .ct-card-matches { grid-area: matches; }
+  /* «Napoli oggi e nei prossimi giorni»: full width, never a lone cell beside an empty one */
+  .pg-cittadino { grid-area: next; }
 }
 
 @media (min-width: 1200px) {
@@ -247,7 +255,8 @@
     grid-template-areas:
       'alerts transit'
       'alerts matches'
-      'alerts weather';
+      'alerts weather'
+      'next next';
   }
 }
 

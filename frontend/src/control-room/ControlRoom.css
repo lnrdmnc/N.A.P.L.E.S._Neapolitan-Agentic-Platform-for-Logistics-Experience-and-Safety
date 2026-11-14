@@ -241,7 +241,8 @@
       'map map'
       'real real'
       'events events'
-      'kpi log';
+      'kpi kpi'
+      'log log';
   }
   .cr-header {
     padding: var(--space-4);

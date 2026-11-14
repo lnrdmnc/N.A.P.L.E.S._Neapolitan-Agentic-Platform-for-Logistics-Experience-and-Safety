@@ -40,6 +40,7 @@
 
 .cx-list li {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-2);
   padding: var(--space-2) 0;
@@ -61,7 +62,11 @@
 .cx-value {
   font-family: var(--font-mono);
   font-weight: 600;
-  white-space: nowrap;
+  /* long values such as «giallo (da verificare sulla fonte ufficiale)» wrap instead of
+     running over the area name in narrow columns */
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
 }
 
 .cx-level {

@@ -99,6 +99,7 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
 | 2026-11-14 | 20:00 | agents, webapp | Lo scenario è la prova generale della prossima partita vera al Maradona (oggi Napoli – Torino, sab 21/11): partita reale, sciame simulato |
+| 2026-11-14 | 19:40 | webapp | Niente più testi sovrapposti: livello vulcanico che va a capo nel contesto reale, indicatori e registro uno sotto l'altro su tablet; nella vista cittadino «Napoli oggi e nei prossimi giorni» a tutta larghezza, senza rettangolo grigio |
 | 2026-11-14 | 19:25 | agents | Aggiunto `tzdata`: su Windows gli agenti non partivano («No time zone found with key Europe/Rome») e la web app restava senza dati |
 | 2026-11-14 | 19:40 | docs, webapp | Logo nel README, sezione «Guarda il progetto all'opera» con il percorso demo e cosa è reale o simulato; pagina iniziale con le foto del golfo, le due viste e i passi della demo |
 | 2026-11-14 | 19:45 | agents, webapp | Livello di allerta vulcanica ufficiale dal vivo (Protezione Civile), concerti veri al posto degli esempi, capienza reale del Maradona |
