@@ -14,7 +14,7 @@ Servono [uv](https://docs.astral.sh/uv/), Python 3.12+ e Node 22+. Alla prima vo
 
 - `make check`: file base, `.env` non tracciato, lint e test degli agenti, contratto API allineato, test del backend, lint e build del frontend.
 - `make agents-run`: API degli agenti su http://localhost:8001 (porta concordata con la web app), documentazione su http://localhost:8001/docs.
-- `make prova`: esegue lo scenario approvando ogni piano e stampa la linea del tempo dei messaggi tra agenti.
+- `make prova`: tre prove dello scenario (l'operatore approva subito, tardi, mai) con rapporti leggibili in `docs/prove/`; vedi [docs/prove/README.md](docs/prove/README.md).
 - `make verifica-registro`: verifica il registro delle decisioni scritto dalla demo (`agents/var/registro.jsonl`); con `FILE=percorso` un altro file. Fallisce e indica la riga se qualcosa è stato cambiato a mano.
 - Web app in sviluppo, tre terminali: `make agents-run` (agenti), `make backend` (http://localhost:8000), `make frontend` (http://localhost:5173, si ricarica a ogni modifica).
 - `make build`: compila la PWA in `frontend/dist`, servita dal backend su http://localhost:8000.
@@ -48,6 +48,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
 | 2026-11-14 | 18:15 | agents | Strato LLM (L0): Claude Opus 5.5 con SDK ufficiale, cache su file, ripiego sul testo a regole; `GET /api/llm`, `POST /api/llm/prova` |
+| 2026-11-14 | 18:10 | agents | P1: `make prova` salva tre prove in docs/prove/ con controlli automatici; corretto «1 scosse» negli avvisi |
 | 2026-11-14 | 18:10 | webapp | Vista cittadino: riquadro «Partite al Maradona» con il calendario reale da football-data.org |
 | 2026-11-14 | 18:00 | agents | Partite reali al Maradona: `GET /api/partite` da football-data.org, con copia per l'offline (nuovo nel contratto) |
 | 2026-11-14 | 18:03 | webapp, agents | C2: linea del tempo dei messaggi tra agenti nella control room; nomi leggibili di luoghi e agenti nei conflitti |

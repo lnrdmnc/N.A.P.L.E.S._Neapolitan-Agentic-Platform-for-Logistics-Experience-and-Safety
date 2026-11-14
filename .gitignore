@@ -36,3 +36,7 @@ htmlcov/
 
 # Registro delle decisioni scritto dalla demo (si verifica con make verifica-registro)
 agents/var/
+
+# Rapporti generati da make prova (si rigenerano in un secondo)
+docs/prove/*
+!docs/prove/README.md

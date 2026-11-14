@@ -32,7 +32,7 @@ agents-run:
 contracts:
 	cd agents && PYTHONPATH=src uv run python -m napoles_agents.contratti
 
-# Esegue lo scenario approvando ogni piano e stampa la linea del tempo (completato da P1)
+# Tre prove dello scenario (approva subito, tardi, mai): rapporti in docs/prove/, errore se un controllo fallisce
 prova:
 	cd agents && PYTHONPATH=src uv run --quiet python -m napoles_agents.prova
 
