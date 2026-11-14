@@ -28,7 +28,7 @@ Quattro agenti esperti di smart city hanno letto il repository in sola lettura, 
 | 5 | Veto dell'operatore che cambia la città: Approva, Modifica, Rifiuta cambiano mappa e coda | Giuria | B1 + B2 + C3 | backend + web app |
 | 6 | La notizia falsa fermata: control room e telefono nella stessa inquadratura | Giuria | solo UI | web app |
 | 7 | Presenze aggregate per cella (simulate, soglia di anonimato) come input dell'agente Folla: l'aggancio diretto con Fastweb + Vodafone | Telco | 1–3h | con S0 |
-| 8 | Profilo «residente flegreo / pendolare»: chi torna verso Pozzuoli e Bagnoli con la Cumana sospesa | Cittadini, giuria | ≤1h | agenti |
+| 8 | ✅ Profilo «pendolare flegreo»: chi torna verso Pozzuoli e Bagnoli con la Cumana sospesa | Cittadini, giuria | fatto | agenti |
 
 ## Nel pitch, come visione
 

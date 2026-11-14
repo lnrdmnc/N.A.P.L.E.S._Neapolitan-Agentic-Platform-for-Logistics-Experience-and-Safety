@@ -16,7 +16,7 @@ from typing import Any
 from ..models import Alert, AreaAlert, Caso, Piano, StatoCitta, TipoEvento
 from ..scenario import ora
 
-PUBBLICI = (("tifoso", "it"), ("residente", "it"), ("turista", "en"))
+PUBBLICI = (("tifoso", "it"), ("residente", "it"), ("pendolare", "it"), ("turista", "en"))
 
 SENDER = "N.A.P.L.E.S. – control room comunale (simulazione)"
 AREA_FUORIGROTTA = AreaAlert(
@@ -57,7 +57,14 @@ def _istruzioni(piano: Piano, stato: StatoCitta, scenario: dict[str, Any], pubbl
         en.append(f"Back in service: {', '.join(riattivate)}.")
     if navette:
         punto = NOMI_PUNTI.get(navette.dettagli["punto_carico"], navette.dettagli["punto_carico"])
-        it.append(f"Cumana e Linea 2 sono sospese: navette sostitutive da {punto}.")
+        destinazioni = navette.dettagli.get("destinazioni") or []
+        if pubblico == "pendolare" and destinazioni:
+            it.append(
+                f"Cumana e Linea 2 sono sospese: per {' e '.join(destinazioni)} navette sostitutive "
+                f"da {punto}."
+            )
+        else:
+            it.append(f"Cumana e Linea 2 sono sospese: navette sostitutive da {punto}.")
         en.append(f"Cumana and Line 2 are suspended: replacement shuttles from {punto}.")
     if ondate and pubblico in ("tifoso", "turista"):
         turni = "; ".join(
@@ -74,6 +81,12 @@ def _istruzioni(piano: Piano, stato: StatoCitta, scenario: dict[str, Any], pubbl
     if percorsi and percorsi.dettagli.get("allerta_meteo_attiva"):
         it.append("Per l'allerta meteo evita i sottopassi.")
         en.append("Due to the weather alert, avoid underpasses.")
+    if pubblico == "pendolare":
+        # Chi rientra verso l'area delle scosse: nessuna indicazione sul rischio, si rimanda a chi decide.
+        it.append(
+            "Prima di rientrare verso l'area flegrea segui le comunicazioni della Protezione Civile "
+            "e del tuo Comune."
+        )
     return " ".join(it), " ".join(en)
 
 

@@ -29,6 +29,7 @@ def proponi(stato: StatoCitta, scenario: dict[str, Any]) -> list[Proposta]:
                 "minuti_attivazione": navette["minuti_attivazione"],
                 "punto_carico": navette["punto_carico_preferito"],
                 "punto_carico_alternativo": navette["punto_carico_alternativo"],
+                "destinazioni": navette.get("destinazioni", []),
             },
             risorse=[navette["punto_carico_preferito"]],
             priorita=4,

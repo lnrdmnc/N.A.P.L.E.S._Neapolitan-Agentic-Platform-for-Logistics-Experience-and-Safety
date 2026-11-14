@@ -30,7 +30,7 @@ def test_linee_riattivate_generano_un_aggiornamento():
 def test_cessato_allarme_chiude_ogni_profilo_e_rimanda_alla_protezione_civile():
     s = _scenario_completo()
     cancel = [a for a in s.avvisi if a.msgType == "Cancel"]
-    assert {a.pubblico for a in cancel} == {"tifoso", "residente", "turista"}
+    assert {a.pubblico for a in cancel} == {"tifoso", "residente", "pendolare", "turista"}
     for a in cancel:
         precedente = next(p for p in s.avvisi if p.identifier == a.references)
         assert precedente.pubblico == a.pubblico and precedente.msgType != "Cancel"
@@ -40,7 +40,7 @@ def test_cessato_allarme_chiude_ogni_profilo_e_rimanda_alla_protezione_civile():
 
 def test_ogni_profilo_ha_una_catena_coerente():
     s = _scenario_completo()
-    for pubblico in ("tifoso", "residente", "turista"):
+    for pubblico in ("tifoso", "residente", "pendolare", "turista"):
         catena = [a for a in s.avvisi if a.pubblico == pubblico and a.event == "Evento sismico"]
         assert catena[0].msgType == "Alert" and catena[-1].msgType == "Cancel"
         for prima, dopo in itertools.pairwise(catena):
@@ -52,3 +52,14 @@ def test_conflitto_pubblicato_una_sola_volta_sul_bus():
     conflitti = [m for m in s.bus.messaggi if m.tipo == "conflitto"]
     assert len(conflitti) == 1
     assert sum(1 for p in s.piani if p.conflitti) > 1  # il piano continua a elencarlo
+
+
+def test_pendolare_riceve_navette_per_l_area_flegrea_e_rimando_alla_protezione_civile():
+    s = _scenario_completo()
+    pendolare = [a for a in s.avvisi if a.pubblico == "pendolare"]
+    sospese = next(a for a in pendolare if a.sent_t_min == 72)
+    assert "Bagnoli e Pozzuoli" in sospese.instruction
+    for a in pendolare:
+        testo = f"{a.description} {a.instruction or ''}"
+        assert "Protezione Civile" in testo
+        assert "evacu" not in testo.lower()

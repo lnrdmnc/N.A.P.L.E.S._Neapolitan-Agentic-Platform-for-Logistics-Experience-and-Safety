@@ -34,7 +34,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
-| Profilo «pendolare flegreo» negli avvisi (chi rientra verso Bagnoli e Pozzuoli) | Leonardo Monaco | sab 14/11 16:56 | Contratto: nuovo valore `pendolare` in `Alert.pubblico` (commit dedicato); tocca models/alert.py, api/avvisi.py, agenti/comunicazione.py |
 
 ## Fatto
 
@@ -54,6 +53,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **Allerta ufficiale con cornice in inglese per il turista.** Accanto all'originale per tutti parte una versione per il turista: titolo in inglese «SIMULATION – Official alert from … – original Italian text below, not translated», testo ufficiale identico, `references` all'originale. `GET /api/avvisi?pubblico=turista` mostra solo questa versione, senza doppione; residenti e tifosi continuano a ricevere l'originale. Nel contratto cambia solo la descrizione dell'endpoint. 29 test.
 - **Web app adattiva.** Deciso il 14/11: control room e vista cittadino si usano sia da telefono sia da computer (PROGETTO.md 6.1). Provate a 375, 768 e 1440 px con i dati dello scenario, senza scorrimento orizzontale. `make backend` e `make frontend` ascoltano anche sulla rete locale: dal telefono sulla stessa Wi-Fi, `http://<IP del PC>:5173`.
 - **Viste allineate alle specifiche** (PROGETTO.md 6, 6.1, 6.2; contracts/README.md). Vista cittadino: avvisi letti da `/api/avvisi` (restano dopo una ricarica), con indicazioni operative, certezza, fonte, «simulato», caso A «Allarme ufficiale · testo non modificato» o caso B «Evento rilevato · in attesa di comunicazioni ufficiali», colore per gravità. Control room: tolto il pannello di prova del canale; aggiunti i riquadri «Messaggi tra agenti» (C2) e «Registro delle decisioni» (C4). Tolto `POST /api/events/test` (solo sviluppo); intestazione «Control room comunale · prototipo», non più «Comune di Napoli»; etichette «simulati» e «da verificare» su spettatori, partita e livello vulcanico.
+- **Profilo «pendolare flegreo».** **Contratto: `Alert.pubblico` e `GET /api/avvisi?pubblico=` ammettono anche `pendolare`.** Chi rientra verso l'area flegrea riceve la propria catena di avvisi: navette sostitutive «per Bagnoli e Pozzuoli» (destinazioni simulate), linee di nuovo in servizio, cessato allarme, e sempre «prima di rientrare segui la Protezione Civile e il tuo Comune», senza indicazioni sul rischio. 30 test.
 
 ## Prossimi compiti liberi
 
@@ -66,7 +66,7 @@ Subito, in parallelo:
 - **D1** — Dati: copie in cache e docs/DATI.md, 40 minuti al massimo.
 - **H1** — Persone: stand (docs/STAND.md), chiave del modello e chiave Google Maps in `.env`, nome del team, checkpoint con i mentor.
 - Verificare con il team nomi delle stazioni, capacità e soglie in `scenario_maradona.json` e in docs/IPOTESI.md.
-- Dal check delle idee (docs/IDEE.md), nel modulo agenti, ≤1h ciascuno: **profilo residente flegreo / pendolare**. Con S0: **presenze aggregate per cella simulate** come input dell'agente Folla.
+- Dal check delle idee (docs/IDEE.md), con S0: **presenze aggregate per cella simulate** come input dell'agente Folla.
 
 B0 è su main: sbloccati, backend: **B1** simulatore nella sessione (serve S0), **B2** modifica del piano (non in parallelo con B1), **B3** conferma di ricezione, **B4** indicatori con origine (dopo B1), **B5** testi dal modello (serve L0), **F1–F4** fonti INGV, meteo, GTFS, mappe (serve D1), **B6** itinerario del turista, **P1** strumento di prova, **R1** registro su file e comando di verifica.
 

@@ -46,6 +46,8 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 16:58 | agents | Profilo «pendolare flegreo» negli avvisi: navette per Bagnoli e Pozzuoli, rimando alla Protezione Civile |
+| 2026-11-14 | 16:58 | contracts | `Alert.pubblico` ammette anche `pendolare` |
 | 2026-11-14 | 16:50 | webapp | Viste allineate alle specifiche: avvisi con indicazioni operative, certezza e caso A/B; control room con i riquadri previsti; adattive su telefono, tablet e computer; raggiungibili dal telefono sulla stessa Wi-Fi; tolto l'endpoint di prova del canale, etichette «simulato» e «da verificare» sui dati della control room |
 | 2026-11-14 | 16:45 | agents | Allerta ufficiale con cornice in inglese per il turista, testo ufficiale identico; filtro avvisi per profilo senza doppioni |
 | 2026-11-14 | 16:40 | repo | Tolti i marcatori di conflitto finiti su main con il commit fba8d7e in README.md e docs/STATO.md |

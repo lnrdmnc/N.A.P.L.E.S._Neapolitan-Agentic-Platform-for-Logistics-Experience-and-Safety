@@ -136,7 +136,7 @@ def test_api_percorso_demo():
     assert client.post("/api/avanza", json={"t_min": 72}).json()["linee"][0]["attiva"] is False
     piano = client.get("/api/piano").json()
     avvisi = client.post(f"/api/piano/{piano['id']}/approva").json()
-    assert {a["pubblico"] for a in avvisi} == {"tifoso", "residente", "turista"}
+    assert {a["pubblico"] for a in avvisi} == {"tifoso", "residente", "pendolare", "turista"}
     assert client.get("/api/avvisi", params={"pubblico": "turista"}).json()[0]["lingua"] == "en"
     assert client.get("/api/registro").json()["integro"] is True
     assert client.get("/api/indicatori").status_code == 200

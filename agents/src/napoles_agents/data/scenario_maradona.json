@@ -23,7 +23,8 @@
     "capacita_persone_min": 100,
     "minuti_attivazione": 12,
     "punto_carico_preferito": "piazzale_tecchio",
-    "punto_carico_alternativo": "viale_giochi_del_mediterraneo"
+    "punto_carico_alternativo": "viale_giochi_del_mediterraneo",
+    "destinazioni": ["Bagnoli", "Pozzuoli"]
   },
   "simulazione": {
     "uscita_massima_persone_min": 2500,

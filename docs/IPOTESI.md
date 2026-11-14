@@ -13,6 +13,7 @@
 | Capacità persone al minuto: Linea 2 80, Cumana 30, bus ordinari 60, a piedi e con mezzi propri 700, navette 100 | Simulato | Ordini di grandezza ricalibrati il 14/11 alle 16:30 (prima erano 400, 300, 150, 450, 500: gonfiati). Ferro: un treno ogni 10–20 minuti; navette: circa un bus al minuto da un punto di carico. Da verificare con frequenze GTFS e capienze reali | Indicatori con e senza coordinamento |
 | Uscita massima dallo stadio 2.500 persone al minuto | Simulato | Valore di lavoro | Indicatori |
 | Ondate: tribune subito, Distinti dopo 8 minuti, curve dopo 16 | Simulato | Scelta dell'agente Folla | Avvisi ai tifosi, indicatori |
+| Navette sostitutive con destinazione Bagnoli e Pozzuoli | Simulato | Scelta per il profilo pendolare; percorsi non verificati | Avvisi del profilo «pendolare» |
 | Navette operative 12 minuti dopo la decisione | Simulato | Valore di lavoro | Indicatori |
 | Punti di carico: Piazzale Tecchio, Viale Giochi del Mediterraneo; percorso pedonale via Terracina | Da verificare | Luoghi reali di Fuorigrotta; idoneità non verificata | Piano, conflitto risolto dall'Orchestratore, avvisi |
 | Senza coordinamento: le persone scoprono le sospensioni 15 minuti dopo il fischio finale (davanti alle stazioni chiuse), decisione sulle navette dopo 20; capacità dimezzata finché non sanno | Ipotesi | Scenario di confronto. Fino al 14/11 alle 16:30 il ritardo si contava dalla sospensione (minuto 72) e quindi non aveva mai effetto: corretto | Indicatori «senza coordinamento» |
