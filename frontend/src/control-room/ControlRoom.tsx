@@ -4,13 +4,13 @@ import { Affidabilita } from '../components/Affidabilita'
 import { LiveStatus } from '../components/LiveStatus'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { MappaTraffico } from './MappaTraffico'
+import { Indicatori } from './Indicatori'
 import { MessaggiAgenti } from './MessaggiAgenti'
 import './ControlRoom.css'
 
 // Panels from PROGETTO.md 6.1 still to build, each with its PIANO.md task.
 const TODO_PANELS = [
   { id: 'plan', title: 'Piano proposto', note: 'Approva · Modifica · Rifiuta', task: 'C3' },
-  { id: 'kpi', title: 'Indicatori con e senza coordinamento', task: 'C5' },
   { id: 'log', title: 'Registro delle decisioni', note: 'Catena di hash verificabile', task: 'C4' },
 ]
 
@@ -41,6 +41,7 @@ export function ControlRoom() {
       <main className="cr-grid">
         <MappaTraffico />
         <MessaggiAgenti />
+        <Indicatori />
         {TODO_PANELS.map((panel) => (
           <section key={panel.id} className={`cr-panel cr-panel-${panel.id}`}>
             <h2>{panel.title}</h2>
