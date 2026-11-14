@@ -29,11 +29,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
 | Piano con moduli, contratti e compiti (docs/PIANO.md) | Leonardo Schiavo | sab 14/11 14:30 | Prompt principale: produce il piano, nessun codice |
-<<<<<<< Updated upstream
-| Modulo agenti in Python (agents/) e contratti degli agenti (contracts/) | Leonardo Monaco | sab 14/11 15:10 | Regole deterministiche, LLM solo per i testi con cache; API FastAPI per la web app |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | Prima lo scheletro; API degli agenti e contratti da concordare con Leonardo Monaco |
-=======
->>>>>>> Stashed changes
 
 ## Fatto
 
