@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| Luoghi e fermate dai dati ufficiali GTFS (ANM, EAV): coordinate di stazione Mostra, stadio e Viale Giochi; area degli avvisi sulle fermate vere | Leonardo Schiavo | sab 14/11 19:30 | Tocca `…/data/rete_fuorigrotta.json`, l'area in `…/agenti/comunicazione.py`, docs/IPOTESI.md. Non tocca capienze né scenario (sono nel compito di Leonardo Monaco). Livelli vulcanici già fatti in 186c76b |
 | Dati più reali: eventi veri a Napoli al posto degli esempi, livelli di allerta vulcanica ufficiali, capienza del Maradona | Leonardo Monaco | sab 14/11 19:10 | Ricerca su fonti ufficiali; tocca `…/data/eventi_napoli.json`, `…/data/scenario_maradona.json`, docs/IPOTESI.md |
 
 ## Fatto
