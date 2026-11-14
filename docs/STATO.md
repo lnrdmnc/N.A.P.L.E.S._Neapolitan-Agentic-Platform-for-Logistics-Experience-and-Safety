@@ -32,7 +32,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| Icona del sito (badge tondo del team) e font del titolo nella pagina iniziale | Leonardo Schiavo | sab 14/11 19:52 | Tocca `frontend/index.html`, `frontend/vite.config.ts` (icone della PWA), `frontend/public/`, `frontend/src/home/`, `frontend/package.json` (un font) |
 
 ## Fatto
 
@@ -86,6 +85,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **C6 e U2 — Contesto reale a schermo.** Livello vulcanico verificato il 14/11 sull'Osservatorio Vesuviano – INGV (Campi Flegrei giallo, Vesuvio verde) in `…/data/livelli_vulcanici.json`, letto da `/api/contesto` (**contratto:** `LivelloVulcanico.url`). Control room: riquadro «Contesto reale di oggi» con livelli ufficiali, ultimi terremoti INGV veri e meteo vero allo stadio, separato dallo scenario. Vista cittadino: «Meteo a Fuorigrotta» vero al posto del segnaposto U2. Lo stato della città non dice più «da verificare».
 - **Luoghi reali.** Coordinate delle zone da GTFS ANM ed EAV (Mostra, fermata 6804) e da OpenStreetMap (stadio); nessuna zona è più approssimata. Area degli avvisi del caso B calcolata sul contorno vero dello stadio e sulle fermate vicine (`…/data/area_avvisi.json`) al posto del rettangolo. **Scoperta:** Viale Giochi del Mediterraneo, punto di carico alternativo delle navette nello scenario, è a circa 1,1 km dallo stadio verso Bagnoli, non accanto: coordinate corrette; resta da decidere se è il punto giusto (scenario di Leonardo Monaco).
 - **Logo, README e pagina iniziale.** Logo del team in `docs/img/` e in cima al README; README con «Guarda il progetto all'opera» (link online, percorso demo in quattro passi, tabella reale/simulato) e stato aggiornato; nome del team: CoScienze. Pagina iniziale con le foto del golfo (tramonto e notte in dissolvenza, in `frontend/public/img/`), logo, le due viste spiegate e i passi della demo.
+- **Icona del sito e titolo.** Badge tondo del team come icona della scheda (`favicon.ico` 16/32/48), della PWA (192, 512, maskable) e di iPhone; originale in `docs/img/badge-coscienze.png`. Titolo «N.A.P.L.E.S.» della pagina iniziale in Cormorant Garamond Light (font in locale, `@fontsource/cormorant-garamond`). Passi della demo senza orario fisso: lo scenario segue la prossima partita vera.
 
 ## Prossimi compiti liberi
 

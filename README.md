@@ -20,7 +20,7 @@ Challenge 05 «Napoli Agentic City: la città che Ci pensa» (Fastweb + Vodafone
 Il percorso della demo, in tre minuti:
 
 1. Apri la **control room** sul computer e la **vista cittadino** sul telefono, e nella vista cittadino scegli un profilo (tifoso, residente, pendolare, turista in inglese).
-2. Nella control room premi **▶ Avvia** (o **⏭ Prossimo evento**): alle 21:55 dello scenario arriva uno sciame sismico **simulato** ai Campi Flegrei. Nella linea del tempo gli agenti si scambiano proposte, l'Orchestratore risolve il conflitto su Piazzale Tecchio e presenta il piano, con il grado di certezza di ogni dato e una spiegazione scritta da Claude.
+2. Nella control room premi **▶ Avvia** (o **⏭ Prossimo evento**): lo scenario parte dalla prossima partita vera al Maradona e, 70 minuti dopo il calcio d'inizio, arriva uno sciame sismico **simulato** ai Campi Flegrei. Nella linea del tempo gli agenti si scambiano proposte, l'Orchestratore risolve il conflitto su Piazzale Tecchio e presenta il piano, con il grado di certezza di ogni dato e una spiegazione scritta da Claude.
 3. Premi **Approva**: in pochi secondi l'avviso arriva sul telefono, scritto per il profilo scelto e sempre con la fonte. Prova anche **Modifica** e **Rifiuta**.
 4. Guarda gli **indicatori con e senza coordinamento** e il **registro delle decisioni**, verificabile.
 
@@ -30,11 +30,11 @@ La sessione è una sola per tutti quelli che aprono il link: se qualcuno avanza 
 
 | Reale, dal vivo | Simulato, ed etichettato a schermo |
 | --- | --- |
-| Traffico sulle strade e tempi in auto dallo stadio (Google Maps) | Lo sciame sismico e la partita dello scenario |
+| Traffico sulle strade e tempi in auto dallo stadio (Google Maps) | Lo sciame sismico dello scenario e gli spettatori presenti |
 | Ultimi terremoti di Campi Flegrei e Vesuvio (INGV) | Il testo dell'allerta ufficiale e il post social non verificato |
 | Meteo allo stadio (Open-Meteo) | La sospensione di Cumana e Linea 2 |
 | Livello di allerta vulcanica ufficiale (mappa della Protezione Civile, letta dal vivo) | Presenze e flussi di persone (il simulatore a zone) |
-| Partite al Maradona (football-data.org), concerti in calendario, capienza ufficiale dello stadio | Le stime di ricezione degli avvisi |
+| Partite al Maradona e partita dello scenario (football-data.org), concerti in calendario, capienza ufficiale dello stadio | Le stime di ricezione degli avvisi |
 | Fermate e coordinate (GTFS ANM ed EAV, OpenStreetMap) | |
 
 Ogni dato simulato e ogni ipotesi sono in [docs/IPOTESI.md](docs/IPOTESI.md). N.A.P.L.E.S. affianca INGV e Protezione Civile, non li sostituisce, e non dà mai istruzioni di evacuazione.
@@ -99,6 +99,7 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
 | 2026-11-14 | 20:25 | agents | Capacità di Linea 2, Cumana e bus calcolate dalle corse vere (GTFS ANM, EAV) al posto degli ordini di grandezza; sensibilità ricalcolata |
+| 2026-11-14 | 19:55 | webapp | Icona del sito dal badge tondo del team (favicon, icone della PWA e di iPhone); titolo della pagina iniziale in Cormorant Garamond Light |
 | 2026-11-14 | 20:00 | agents, webapp | Lo scenario è la prova generale della prossima partita vera al Maradona (oggi Napoli – Torino, sab 21/11): partita reale, sciame simulato |
 | 2026-11-14 | 19:55 | webapp | Mappa nella vista cittadino: traffico reale, stadio, stazioni aperte o chiuse, punti di raccolta, con elenco che resta anche offline |
 | 2026-11-14 | 19:40 | webapp | Niente più testi sovrapposti: livello vulcanico che va a capo nel contesto reale, indicatori e registro uno sotto l'altro su tablet; nella vista cittadino «Napoli oggi e nei prossimi giorni» a tutta larghezza, senza rettangolo grigio |

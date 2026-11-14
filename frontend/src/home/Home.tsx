@@ -1,3 +1,4 @@
+import '@fontsource/cormorant-garamond/300.css'
 import { Link } from 'react-router-dom'
 import { SimulationBadge } from '../components/SimulationBadge'
 import './Home.css'
@@ -21,7 +22,7 @@ const VISTE = [
 
 const PASSI = [
   'Apri la control room sul computer e la vista cittadino sul telefono.',
-  'Nella control room avvia lo scenario: alle 21:55 arriva lo sciame sismico simulato e gli agenti propongono un piano.',
+  'Nella control room avvia lo scenario, costruito sulla prossima partita vera al Maradona: 70 minuti dopo il calcio d’inizio arriva uno sciame sismico simulato e gli agenti propongono un piano.',
   'Approva il piano: l’avviso arriva sul telefono in pochi secondi.',
 ]
 
