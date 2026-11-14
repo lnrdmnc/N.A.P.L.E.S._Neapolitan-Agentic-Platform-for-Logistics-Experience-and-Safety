@@ -1,0 +1,92 @@
+/* «Cosa visitare». Uses only the tokens in styles/tokens.css. */
+
+.dv-quando {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  flex-wrap: wrap;
+}
+
+.dv-quando select {
+  min-height: 40px;
+  max-width: 100%;
+  font: inherit;
+}
+
+.dv-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.dv-luogo {
+  --dv-level: var(--level-green);
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--surface-1);
+  border-left: 6px solid var(--dv-level);
+  min-width: 0;
+}
+
+.dv-con_disagi { --dv-level: var(--level-orange); }
+.dv-da_evitare_ora { --dv-level: var(--level-red); }
+
+.dv-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.dv-badge-consigliato { background: var(--level-green); color: var(--inverse-ink); }
+.dv-badge-con_disagi { background: var(--level-orange); color: var(--ink); }
+.dv-badge-da_evitare_ora { background: var(--level-red); color: var(--inverse-ink); }
+
+.dv-descr,
+.dv-motivo {
+  margin: 0;
+  font-size: var(--text-small);
+}
+
+.dv-descr { color: var(--ink-muted); }
+.dv-motivo { font-weight: 600; }
+
+.dv-accessi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-small);
+  display: grid;
+  gap: 2px;
+}
+
+.dv-accessi .is-off {
+  color: var(--ink-muted);
+}
+
+.dv-accessi .is-off .dv-linea {
+  text-decoration: line-through;
+}
+
+.dv-linea { font-weight: 600; }
+
+.dv-tutti {
+  justify-self: start;
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  font: inherit;
+  background: var(--canvas);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+}
+
+.dv-fonte {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-muted);
+}

@@ -78,10 +78,15 @@ def intervallo(orario: str, inizio: datetime, fine: datetime) -> tuple[datetime,
     a = _momento(inizio if not m[7] else fine, m[5], m[6], m[7], m[8])
     if a <= da:
         a += timedelta(days=1)
-    # «…; TPL: intera prestazione del 21/11»: una parte dello sciopero dura tutto quel giorno
-    for gg, mm in INTERA_DEL.findall(testo):
-        a = max(a, inizio.replace(day=int(gg), month=int(mm), hour=0, minute=0) + timedelta(days=1))
     return da, a
+
+
+def giorno_intero_tpl(orario: str, inizio: datetime) -> datetime | None:
+    """«…; *TPL: intera prestazione del 21/11»: la parte TPL dura tutto quel giorno (inizio del giorno)."""
+    m = INTERA_DEL.search(orario.upper())
+    if not m or "TPL" not in orario.upper():
+        return None
+    return inizio.replace(day=int(m[1]), month=int(m[2]), hour=0, minute=0)
 
 
 def tocca_napoli(campi: dict[str, str]) -> bool:
@@ -127,6 +132,19 @@ def converti(xml: bytes) -> list[Sciopero]:
             sindacati=sindacati,
             proclamato_il=campi.get("data proclamazione"),
         )
+        # Sciopero con una parte TPL su un giorno intero: una voce a parte, con il suo orario
+        if (giorno := giorno_intero_tpl(orario, inizio_g)) is not None:
+            base = uniti[chiave]
+            uniti[(giorno.isoformat(), "tpl", categoria)] = base.model_copy(
+                update={
+                    "id": f"{guid}-tpl",
+                    "inizio": giorno.isoformat(),
+                    "fine": (giorno + timedelta(days=1)).isoformat(),
+                    "settore": "Trasporto pubblico locale",
+                    "categoria": f"{categoria} – PARTE TPL",
+                    "sindacati": list(base.sindacati),
+                }
+            )
     return sorted(uniti.values(), key=lambda s: s.inizio)
 
 

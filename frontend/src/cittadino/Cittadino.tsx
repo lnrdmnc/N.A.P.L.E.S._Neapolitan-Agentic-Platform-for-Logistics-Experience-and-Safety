@@ -8,6 +8,7 @@ import { PartitaRiferimento } from '../components/PartitaRiferimento'
 import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { AlertCard } from './AlertCard'
+import { DaVisitare } from './DaVisitare'
 import { MappaCittadino } from './MappaCittadino'
 import { MeteoReale } from './MeteoReale'
 import { PartiteMaradona } from './PartiteMaradona'
@@ -83,6 +84,8 @@ export function Cittadino() {
           <PartiteMaradona />
 
           <ProssimiGiorni variante="cittadino" />
+
+          <DaVisitare en={en} />
 
           <MeteoReale en={en} />
         </main>

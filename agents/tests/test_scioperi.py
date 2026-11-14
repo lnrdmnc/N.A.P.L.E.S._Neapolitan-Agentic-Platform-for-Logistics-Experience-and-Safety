@@ -117,7 +117,7 @@ PARTITA = {
 
 def test_solo_scioperi_che_toccano_napoli_e_doppioni_uniti():
     s = converti(FEED)
-    assert [x.id for x in s] == ["1,2", "3", "7"]  # niente Bari, aereo, generale senza trasporti
+    assert [x.id for x in s] == ["1,2", "3", "7", "7-tpl"]  # niente Bari, aereo, generale senza trasporti
     anm = s[0]
     assert anm.inizio.startswith("2026-11-16T11:00") and anm.fine.startswith("2026-11-16T15:00")
     assert anm.sindacati == ["A", "B"] and anm.affidabilita == "ufficiale" and not anm.simulato
@@ -126,7 +126,10 @@ def test_solo_scioperi_che_toccano_napoli_e_doppioni_uniti():
 def test_orario_su_due_giorni_e_intera_prestazione():
     s = {x.id: x for x in converti(FEED)}
     assert s["3"].inizio.startswith("2026-11-20T21:00") and s["3"].fine.startswith("2026-11-21T20:00")
-    assert s["7"].fine.startswith("2026-11-22T00:00")  # il TPL sciopera tutto il 21/11
+    assert s["7"].fine.startswith("2026-11-21T20:00")  # la parte ferroviaria finisce alle 20
+    tpl = s["7-tpl"]  # la parte TPL è tutto il 21/11, in una voce a parte
+    assert tpl.inizio.startswith("2026-11-21T00:00") and tpl.fine.startswith("2026-11-22T00:00")
+    assert "bus ANM" in calendario.linee_di(tpl)[0]
 
 
 def test_linee_coinvolte_e_alternative_senza_inventare():
@@ -154,7 +157,7 @@ def test_sciopero_durante_l_arrivo_alla_partita(tmp_path, monkeypatch):
     fs = next(p for p in r.scioperi if p.sciopero.id == "3")
     assert any("Napoli" in e and "arrivo" in e for e in fs.eventi_coinvolti)
     assert "verifica sul sito dell'azienda" in fs.consiglio
-    tpl = next(p for p in r.scioperi if p.sciopero.id == "7")
+    tpl = next(p for p in r.scioperi if p.sciopero.id == "7-tpl")
     assert any("arrivo e uscita" in e for e in tpl.eventi_coinvolti)
     assert any(f.nome.startswith("Ministero") and f.disponibile for f in r.fonti)
 
@@ -167,6 +170,6 @@ def test_senza_rete_usa_la_copia_e_poi_nulla(tmp_path):
         raise OSError("giù")
 
     lista, stato = FonteScioperi(chiamata=guasto, copia=copia).leggi()
-    assert stato.copia and len(lista) == 3
+    assert stato.copia and len(lista) == 4
     lista, stato = FonteScioperi(chiamata=guasto, copia=tmp_path / "manca.json").leggi()
     assert lista == [] and not stato.disponibile

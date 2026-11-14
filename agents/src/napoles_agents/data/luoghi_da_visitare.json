@@ -1,0 +1,658 @@
+{
+  "nota": "Luoghi da visitare. Coordinate: OpenStreetMap (© OpenStreetMap contributors, ODbL), via Nominatim, 14/11/2026. Fermate più vicine di metropolitana e funicolare calcolate dal GTFS ANM (orari 2023): distanza in linea d'aria, minuti a piedi = distanza × 1,3 / 80 m al minuto. Descrizioni brevi scritte dal team. Orari di apertura non inclusi: si verificano sul sito ufficiale.",
+  "luoghi": [
+    {
+      "id": "mann",
+      "nome": "Museo Archeologico Nazionale",
+      "name_en": "National Archaeological Museum",
+      "zona": "Centro storico",
+      "descrizione": "Reperti di Pompei ed Ercolano e la collezione Farnese.",
+      "description_en": "Finds from Pompeii and Herculaneum and the Farnese collection.",
+      "lat": 40.85361,
+      "lon": 14.25115,
+      "fonte_coordinate": "OpenStreetMap, relation/3824019",
+      "accessi": [
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Museo",
+          "fermata_gtfs": "6335",
+          "metri": 20,
+          "minuti_a_piedi": 1
+        },
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Cavour",
+          "fermata_gtfs": "6272",
+          "metri": 368,
+          "minuti_a_piedi": 6
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 889,
+          "minuti_a_piedi": 14
+        }
+      ]
+    },
+    {
+      "id": "sansevero",
+      "nome": "Cappella Sansevero",
+      "name_en": "Sansevero Chapel",
+      "zona": "Centro storico",
+      "descrizione": "Cappella del Settecento con il Cristo velato.",
+      "description_en": "18th-century chapel housing the Veiled Christ.",
+      "lat": 40.8493,
+      "lon": 14.25493,
+      "fonte_coordinate": "OpenStreetMap, way/123977918",
+      "accessi": [
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Dante",
+          "fermata_gtfs": "6326",
+          "metri": 412,
+          "minuti_a_piedi": 7
+        },
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Cavour",
+          "fermata_gtfs": "6288",
+          "metri": 676,
+          "minuti_a_piedi": 11
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 860,
+          "minuti_a_piedi": 14
+        }
+      ]
+    },
+    {
+      "id": "duomo",
+      "nome": "Duomo di Napoli",
+      "name_en": "Naples Cathedral",
+      "zona": "Centro storico",
+      "descrizione": "Cattedrale della città, con la cappella del Tesoro di San Gennaro.",
+      "description_en": "The city's cathedral, with the Chapel of the Treasure of San Gennaro.",
+      "lat": 40.85265,
+      "lon": 14.25987,
+      "fonte_coordinate": "OpenStreetMap, way/122982019",
+      "accessi": [
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Cavour",
+          "fermata_gtfs": "6288",
+          "metri": 519,
+          "minuti_a_piedi": 8
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Duomo",
+          "fermata_gtfs": "6349",
+          "metri": 574,
+          "minuti_a_piedi": 9
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 1386,
+          "minuti_a_piedi": 23
+        }
+      ]
+    },
+    {
+      "id": "sotterranea",
+      "nome": "Napoli Sotterranea",
+      "name_en": "Underground Naples",
+      "zona": "Centro storico",
+      "descrizione": "Percorso nel sottosuolo greco-romano sotto il centro storico.",
+      "description_en": "Tour of the Greek and Roman underground beneath the old town.",
+      "lat": 40.85108,
+      "lon": 14.25685,
+      "fonte_coordinate": "OpenStreetMap, node/5126351599",
+      "accessi": [
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Cavour",
+          "fermata_gtfs": "6288",
+          "metri": 506,
+          "minuti_a_piedi": 8
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Museo",
+          "fermata_gtfs": "6323",
+          "metri": 515,
+          "minuti_a_piedi": 8
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 1082,
+          "minuti_a_piedi": 18
+        }
+      ]
+    },
+    {
+      "id": "gesu_nuovo",
+      "nome": "Chiesa del Gesù Nuovo",
+      "name_en": "Church of Gesù Nuovo",
+      "zona": "Centro storico",
+      "descrizione": "Chiesa dalla facciata a bugne di piperno, su piazza del Gesù.",
+      "description_en": "Church with a diamond-point stone façade on Piazza del Gesù.",
+      "lat": 40.84756,
+      "lon": 14.25187,
+      "fonte_coordinate": "OpenStreetMap, way/261249895",
+      "accessi": [
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Dante",
+          "fermata_gtfs": "6326",
+          "metri": 183,
+          "minuti_a_piedi": 3
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 567,
+          "minuti_a_piedi": 9
+        },
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6287",
+          "metri": 623,
+          "minuti_a_piedi": 10
+        }
+      ]
+    },
+    {
+      "id": "santa_chiara",
+      "nome": "Complesso di Santa Chiara",
+      "name_en": "Santa Chiara Complex",
+      "zona": "Centro storico",
+      "descrizione": "Basilica gotica e chiostro maiolicato.",
+      "description_en": "Gothic basilica and majolica-tiled cloister.",
+      "lat": 40.84682,
+      "lon": 14.25291,
+      "fonte_coordinate": "OpenStreetMap, way/261250167",
+      "accessi": [
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Dante",
+          "fermata_gtfs": "6326",
+          "metri": 303,
+          "minuti_a_piedi": 5
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 652,
+          "minuti_a_piedi": 11
+        },
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6287",
+          "metri": 716,
+          "minuti_a_piedi": 12
+        }
+      ]
+    },
+    {
+      "id": "maschio_angioino",
+      "nome": "Castel Nuovo (Maschio Angioino)",
+      "name_en": "Castel Nuovo (Maschio Angioino)",
+      "zona": "Municipio",
+      "descrizione": "Castello medievale affacciato sul porto.",
+      "description_en": "Medieval castle overlooking the port.",
+      "lat": 40.83832,
+      "lon": 14.25373,
+      "fonte_coordinate": "OpenStreetMap, relation/15009683",
+      "accessi": [
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Municipio",
+          "fermata_gtfs": "6330",
+          "metri": 111,
+          "minuti_a_piedi": 2
+        },
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Augusteo",
+          "fermata_gtfs": "6211",
+          "metri": 516,
+          "minuti_a_piedi": 8
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 1206,
+          "minuti_a_piedi": 20
+        }
+      ]
+    },
+    {
+      "id": "palazzo_reale",
+      "nome": "Palazzo Reale",
+      "name_en": "Royal Palace",
+      "zona": "Plebiscito",
+      "descrizione": "Residenza reale con appartamenti storici e giardino.",
+      "description_en": "Royal residence with historic apartments and garden.",
+      "lat": 40.83648,
+      "lon": 14.25032,
+      "fonte_coordinate": "OpenStreetMap, relation/62237",
+      "accessi": [
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Augusteo",
+          "fermata_gtfs": "6211",
+          "metri": 366,
+          "minuti_a_piedi": 6
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Municipio",
+          "fermata_gtfs": "6330",
+          "metri": 423,
+          "minuti_a_piedi": 7
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 1249,
+          "minuti_a_piedi": 20
+        }
+      ]
+    },
+    {
+      "id": "plebiscito",
+      "nome": "Piazza del Plebiscito",
+      "name_en": "Piazza del Plebiscito",
+      "zona": "Plebiscito",
+      "descrizione": "La piazza più grande della città, tra Palazzo Reale e San Francesco di Paola.",
+      "description_en": "The city's largest square, between the Royal Palace and San Francesco di Paola.",
+      "lat": 40.83586,
+      "lon": 14.24857,
+      "fonte_coordinate": "OpenStreetMap, way/27182911",
+      "accessi": [
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Augusteo",
+          "fermata_gtfs": "6211",
+          "metri": 367,
+          "minuti_a_piedi": 6
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Municipio",
+          "fermata_gtfs": "6330",
+          "metri": 576,
+          "minuti_a_piedi": 9
+        },
+        {
+          "linea": "Funicolare di Chiaia",
+          "codice": "F1",
+          "gestore": "ANM",
+          "fermata": "Parco Margherita",
+          "fermata_gtfs": "6201",
+          "metri": 1207,
+          "minuti_a_piedi": 20
+        }
+      ]
+    },
+    {
+      "id": "san_carlo",
+      "nome": "Teatro di San Carlo",
+      "name_en": "Teatro di San Carlo",
+      "zona": "Plebiscito",
+      "descrizione": "Teatro d'opera del 1737, tra i più antichi d'Europa ancora attivi.",
+      "description_en": "Opera house from 1737, among the oldest still active in Europe.",
+      "lat": 40.83737,
+      "lon": 14.24981,
+      "fonte_coordinate": "OpenStreetMap, way/29403569",
+      "accessi": [
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Augusteo",
+          "fermata_gtfs": "6211",
+          "metri": 262,
+          "minuti_a_piedi": 4
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Municipio",
+          "fermata_gtfs": "6330",
+          "metri": 390,
+          "minuti_a_piedi": 6
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 1142,
+          "minuti_a_piedi": 19
+        }
+      ]
+    },
+    {
+      "id": "galleria_umberto",
+      "nome": "Galleria Umberto I",
+      "name_en": "Galleria Umberto I",
+      "zona": "Toledo",
+      "descrizione": "Galleria coperta di fine Ottocento con cupola in vetro e ferro.",
+      "description_en": "Late-19th-century covered arcade with a glass and iron dome.",
+      "lat": 40.83851,
+      "lon": 14.24924,
+      "fonte_coordinate": "OpenStreetMap, way/242286729",
+      "accessi": [
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Augusteo",
+          "fermata_gtfs": "6211",
+          "metri": 146,
+          "minuti_a_piedi": 2
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Municipio",
+          "fermata_gtfs": "6330",
+          "metri": 383,
+          "minuti_a_piedi": 6
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 1006,
+          "minuti_a_piedi": 16
+        }
+      ]
+    },
+    {
+      "id": "castel_ovo",
+      "nome": "Castel dell'Ovo",
+      "name_en": "Castel dell'Ovo",
+      "zona": "Lungomare",
+      "descrizione": "Il castello più antico della città, sull'isolotto di Megaride.",
+      "description_en": "The city's oldest castle, on the islet of Megaride.",
+      "lat": 40.82774,
+      "lon": 14.24803,
+      "fonte_coordinate": "OpenStreetMap, way/338168783",
+      "accessi": [
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Augusteo",
+          "fermata_gtfs": "6211",
+          "metri": 1262,
+          "minuti_a_piedi": 21
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Municipio",
+          "fermata_gtfs": "6330",
+          "metri": 1372,
+          "minuti_a_piedi": 22
+        }
+      ]
+    },
+    {
+      "id": "sant_elmo",
+      "nome": "Castel Sant'Elmo",
+      "name_en": "Castel Sant'Elmo",
+      "zona": "Vomero",
+      "descrizione": "Fortezza a stella con vista sul golfo.",
+      "description_en": "Star-shaped fortress with views over the bay.",
+      "lat": 40.84371,
+      "lon": 14.23925,
+      "fonte_coordinate": "OpenStreetMap, way/29403971",
+      "accessi": [
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Petraio",
+          "fermata_gtfs": "6213",
+          "metri": 271,
+          "minuti_a_piedi": 4
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Morghen",
+          "fermata_gtfs": "6209",
+          "metri": 275,
+          "minuti_a_piedi": 4
+        },
+        {
+          "linea": "Funicolare di Chiaia",
+          "codice": "F1",
+          "gestore": "ANM",
+          "fermata": "Palazzolo",
+          "fermata_gtfs": "6203",
+          "metri": 604,
+          "minuti_a_piedi": 10
+        }
+      ]
+    },
+    {
+      "id": "san_martino",
+      "nome": "Certosa e Museo di San Martino",
+      "name_en": "San Martino Charterhouse and Museum",
+      "zona": "Vomero",
+      "descrizione": "Monastero e museo sulla collina del Vomero.",
+      "description_en": "Monastery and museum on the Vomero hill.",
+      "lat": 40.84316,
+      "lon": 14.24106,
+      "fonte_coordinate": "OpenStreetMap, relation/6451203",
+      "accessi": [
+        {
+          "linea": "Funicolare Centrale",
+          "codice": "F3",
+          "gestore": "ANM",
+          "fermata": "Petraio",
+          "fermata_gtfs": "6213",
+          "metri": 283,
+          "minuti_a_piedi": 5
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Corso Vittorio Emanuele",
+          "fermata_gtfs": "6210",
+          "metri": 346,
+          "minuti_a_piedi": 6
+        },
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6273",
+          "metri": 570,
+          "minuti_a_piedi": 9
+        }
+      ]
+    },
+    {
+      "id": "capodimonte",
+      "nome": "Museo e Real Bosco di Capodimonte",
+      "name_en": "Capodimonte Museum and Royal Park",
+      "zona": "Capodimonte",
+      "descrizione": "Pinacoteca nella reggia borbonica, con il parco.",
+      "description_en": "Picture gallery in the Bourbon palace, with its park.",
+      "lat": 40.86703,
+      "lon": 14.25088,
+      "fonte_coordinate": "OpenStreetMap, relation/9734895",
+      "accessi": [
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Cavour",
+          "fermata_gtfs": "6272",
+          "metri": 1319,
+          "minuti_a_piedi": 21
+        },
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Materdei",
+          "fermata_gtfs": "6336",
+          "metri": 1446,
+          "minuti_a_piedi": 24
+        }
+      ]
+    },
+    {
+      "id": "catacombe",
+      "nome": "Catacombe di San Gennaro",
+      "name_en": "Catacombs of San Gennaro",
+      "zona": "Sanità",
+      "descrizione": "Catacombe paleocristiane nel Rione Sanità.",
+      "description_en": "Early Christian catacombs in the Sanità district.",
+      "lat": 40.86506,
+      "lon": 14.24736,
+      "fonte_coordinate": "OpenStreetMap, node/6022470990",
+      "accessi": [
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Materdei",
+          "fermata_gtfs": "6336",
+          "metri": 1125,
+          "minuti_a_piedi": 18
+        },
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Cavour",
+          "fermata_gtfs": "6272",
+          "metri": 1227,
+          "minuti_a_piedi": 20
+        }
+      ]
+    },
+    {
+      "id": "san_gregorio",
+      "nome": "Via San Gregorio Armeno",
+      "name_en": "Via San Gregorio Armeno",
+      "zona": "Centro storico",
+      "descrizione": "La strada delle botteghe dei presepi.",
+      "description_en": "The street of nativity-scene workshops.",
+      "lat": 40.85041,
+      "lon": 14.25762,
+      "fonte_coordinate": "OpenStreetMap, way/270104863",
+      "accessi": [
+        {
+          "linea": "Linea 1",
+          "codice": "L1",
+          "gestore": "ANM",
+          "fermata": "Duomo",
+          "fermata_gtfs": "6349",
+          "metri": 457,
+          "minuti_a_piedi": 7
+        },
+        {
+          "linea": "Linea 2",
+          "codice": "L2",
+          "gestore": "Trenitalia",
+          "fermata": "Cavour",
+          "fermata_gtfs": "6288",
+          "metri": 599,
+          "minuti_a_piedi": 10
+        },
+        {
+          "linea": "Funicolare di Montesanto",
+          "codice": "F2",
+          "gestore": "ANM",
+          "fermata": "Montesanto",
+          "fermata_gtfs": "6207",
+          "metri": 1113,
+          "minuti_a_piedi": 18
+        }
+      ]
+    }
+  ]
+}

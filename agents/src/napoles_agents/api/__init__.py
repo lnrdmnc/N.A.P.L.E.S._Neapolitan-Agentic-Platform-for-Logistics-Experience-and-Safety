@@ -10,7 +10,6 @@ from . import (
     avvisi,
     contesto,
     indicatori,
-    itinerario,
     llm,
     messaggi,
     napoli,
@@ -21,6 +20,7 @@ from . import (
     sessione,
     simulazione,
     traffico,
+    visite,
 )
 
 PORTA = 8001  # concordata con la web app (Francesco Sannella)
@@ -35,8 +35,8 @@ ROUTER = [
     registro.router,
     simulazione.router,
     contesto.router,
-    itinerario.router,
     napoli.router,
+    visite.router,
     traffico.router,
     partite.router,
     llm.router,

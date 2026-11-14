@@ -75,12 +75,11 @@ def test_indicatori_dichiarano_l_origine():
     assert c["origine"]["minuti_decisione"] == "misurato_in_sessione"
 
 
-def test_stub_rispondono_con_la_forma_del_contratto():
+def test_nessuno_stub_rimasto():
     _percorso_demo()
     assert client.get("/api/simulazione").json()["stub"] is False  # B1: non più stub
     assert client.get("/api/contesto").json()["stub"] is False  # F1, F2: non più stub
-    it = client.get("/api/itinerario").json()
-    assert it["stub"] is True and it["tratte"][0]["percorribile"] is False
+    assert client.get("/api/itinerario").status_code == 404  # stub B6 sostituito da /api/napoli/da-visitare
     avviso = client.get("/api/avvisi").json()[0]["identifier"]
     assert client.post(f"/api/avvisi/{avviso}/visto").json()["visti_reali"] == 1  # B3: non più stub
     assert client.get("/api/avvisi/ricezione").json()[0]["simulato"] is True

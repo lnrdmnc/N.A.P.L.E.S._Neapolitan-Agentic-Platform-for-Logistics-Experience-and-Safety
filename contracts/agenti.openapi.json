@@ -1,6 +1,73 @@
 {
   "components": {
     "schemas": {
+      "Accesso": {
+        "properties": {
+          "codice": {
+            "title": "Codice",
+            "type": "string"
+          },
+          "disponibile": {
+            "default": true,
+            "title": "Disponibile",
+            "type": "boolean"
+          },
+          "fermata": {
+            "title": "Fermata",
+            "type": "string"
+          },
+          "gestore": {
+            "title": "Gestore",
+            "type": "string"
+          },
+          "linea": {
+            "title": "Linea",
+            "type": "string"
+          },
+          "metri": {
+            "description": "Distanza in linea d'aria dal luogo",
+            "title": "Metri",
+            "type": "integer"
+          },
+          "minuti_a_piedi": {
+            "title": "Minuti A Piedi",
+            "type": "integer"
+          },
+          "motivo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Perché la linea può mancare (sciopero)",
+            "title": "Motivo"
+          },
+          "motivo_en": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motivo En"
+          }
+        },
+        "required": [
+          "linea",
+          "codice",
+          "gestore",
+          "fermata",
+          "metri",
+          "minuti_a_piedi"
+        ],
+        "title": "Accesso",
+        "type": "object"
+      },
       "Affidabilita": {
         "description": "Quanto è certa un'informazione: si mostra sempre a schermo.",
         "enum": [
@@ -386,6 +453,50 @@
           "eventi_ingv"
         ],
         "title": "Contesto",
+        "type": "object"
+      },
+      "DaVisitare": {
+        "properties": {
+          "fonti": {
+            "items": {
+              "$ref": "#/components/schemas/StatoFonte"
+            },
+            "title": "Fonti",
+            "type": "array"
+          },
+          "luoghi": {
+            "description": "Prima i consigliati, poi quelli con disagi, poi da evitare",
+            "items": {
+              "$ref": "#/components/schemas/LuogoConsigliato"
+            },
+            "title": "Luoghi",
+            "type": "array"
+          },
+          "momenti": {
+            "description": "Momenti dei prossimi giorni in cui i consigli cambiano",
+            "items": {
+              "$ref": "#/components/schemas/Momento"
+            },
+            "title": "Momenti",
+            "type": "array"
+          },
+          "quando": {
+            "title": "Quando",
+            "type": "string"
+          },
+          "simulato": {
+            "default": false,
+            "title": "Simulato",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "quando",
+          "luoghi",
+          "momenti",
+          "fonti"
+        ],
+        "title": "DaVisitare",
         "type": "object"
       },
       "Decisione": {
@@ -876,46 +987,6 @@
         "title": "Indicatori",
         "type": "object"
       },
-      "Itinerario": {
-        "properties": {
-          "fonte": {
-            "title": "Fonte",
-            "type": "string"
-          },
-          "stub": {
-            "default": false,
-            "description": "True finché l'itinerario non è calcolato davvero",
-            "title": "Stub",
-            "type": "boolean"
-          },
-          "tappe": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Tappe",
-            "type": "array"
-          },
-          "tratte": {
-            "items": {
-              "$ref": "#/components/schemas/Tratta"
-            },
-            "title": "Tratte",
-            "type": "array"
-          },
-          "verificato_al_t_min": {
-            "title": "Verificato Al T Min",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "tappe",
-          "tratte",
-          "fonte",
-          "verificato_al_t_min"
-        ],
-        "title": "Itinerario",
-        "type": "object"
-      },
       "LivelloTraffico": {
         "description": "Soglie sul rapporto tra durata con traffico e senza traffico (docs/IPOTESI.md).",
         "enum": [
@@ -971,6 +1042,91 @@
           "fonte"
         ],
         "title": "LivelloVulcanico",
+        "type": "object"
+      },
+      "LuogoConsigliato": {
+        "properties": {
+          "accessi": {
+            "items": {
+              "$ref": "#/components/schemas/Accesso"
+            },
+            "title": "Accessi",
+            "type": "array"
+          },
+          "description_en": {
+            "title": "Description En",
+            "type": "string"
+          },
+          "descrizione": {
+            "title": "Descrizione",
+            "type": "string"
+          },
+          "fonte_coordinate": {
+            "title": "Fonte Coordinate",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "lon": {
+            "title": "Lon",
+            "type": "number"
+          },
+          "motivi": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Motivi",
+            "type": "array"
+          },
+          "motivi_en": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Motivi En",
+            "type": "array"
+          },
+          "name_en": {
+            "title": "Name En",
+            "type": "string"
+          },
+          "nome": {
+            "title": "Nome",
+            "type": "string"
+          },
+          "stato": {
+            "enum": [
+              "consigliato",
+              "con_disagi",
+              "da_evitare_ora"
+            ],
+            "title": "Stato",
+            "type": "string"
+          },
+          "zona": {
+            "title": "Zona",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "name_en",
+          "zona",
+          "descrizione",
+          "description_en",
+          "lat",
+          "lon",
+          "fonte_coordinate",
+          "accessi",
+          "stato"
+        ],
+        "title": "LuogoConsigliato",
         "type": "object"
       },
       "Messaggio": {
@@ -1121,6 +1277,30 @@
           "proposte_escluse"
         ],
         "title": "ModificaPiano",
+        "type": "object"
+      },
+      "Momento": {
+        "properties": {
+          "etichetta": {
+            "title": "Etichetta",
+            "type": "string"
+          },
+          "label_en": {
+            "title": "Label En",
+            "type": "string"
+          },
+          "quando": {
+            "description": "ISO 8601, ora di Roma",
+            "title": "Quando",
+            "type": "string"
+          }
+        },
+        "required": [
+          "quando",
+          "etichetta",
+          "label_en"
+        ],
+        "title": "Momento",
         "type": "object"
       },
       "NapoliProssimiGiorni": {
@@ -2310,62 +2490,6 @@
         "title": "Traffico",
         "type": "object"
       },
-      "Tratta": {
-        "properties": {
-          "a": {
-            "title": "A",
-            "type": "string"
-          },
-          "alternativa": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Alternativa"
-          },
-          "da": {
-            "title": "Da",
-            "type": "string"
-          },
-          "mezzo": {
-            "title": "Mezzo",
-            "type": "string"
-          },
-          "minuti": {
-            "title": "Minuti",
-            "type": "integer"
-          },
-          "motivo": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Perché non è percorribile: cita il servizio",
-            "title": "Motivo"
-          },
-          "percorribile": {
-            "title": "Percorribile",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "da",
-          "a",
-          "mezzo",
-          "minuti",
-          "percorribile"
-        ],
-        "title": "Tratta",
-        "type": "object"
-      },
       "ValidationError": {
         "properties": {
           "ctx": {
@@ -2685,28 +2809,6 @@
         ]
       }
     },
-    "/api/itinerario": {
-      "get": {
-        "description": "STUB: itinerario fisso; la percorribilità segue solo lo stato delle linee.",
-        "operationId": "itinerario_api_itinerario_get",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Itinerario"
-                }
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "summary": "Itinerario",
-        "tags": [
-          "itinerario"
-        ]
-      }
-    },
     "/api/llm": {
       "get": {
         "operationId": "stato_api_llm_get",
@@ -2795,6 +2897,58 @@
         "summary": "Messaggi",
         "tags": [
           "messaggi"
+        ]
+      }
+    },
+    "/api/napoli/da-visitare": {
+      "get": {
+        "description": "Luoghi da visitare in quel momento: prima i consigliati, poi quelli con disagi per sciopero,\npoi quelli in zone affollate da un evento. Dati reali, mai la simulazione dello scenario.",
+        "operationId": "da_visitare_api_napoli_da_visitare_get",
+        "parameters": [
+          {
+            "description": "ISO 8601; vuoto per adesso",
+            "in": "query",
+            "name": "quando",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "ISO 8601; vuoto per adesso",
+              "title": "Quando"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DaVisitare"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Da Visitare",
+        "tags": [
+          "napoli"
         ]
       }
     },

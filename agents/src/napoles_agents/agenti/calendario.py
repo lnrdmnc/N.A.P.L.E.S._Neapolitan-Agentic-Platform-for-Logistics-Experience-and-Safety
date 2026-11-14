@@ -136,8 +136,10 @@ def linee_di(s: Sciopero) -> tuple[list[str], list[str]]:
     """(coinvolte, non coinvolte), dalla categoria e dal settore come pubblicati dal Ministero."""
     cat = s.categoria.upper()
     anche_tpl = "TPL" in s.orario.upper() or "TRASPORTO PUBBLICO LOCALE" in s.orario.upper()
+    if "PARTE TPL" in cat:
+        return LINEE_ANM + ["Cumana, Circumvesuviana e bus EAV"], []
     if s.settore in {"Ferroviario", "Plurisettoriale"} and "FERROV" in cat and anche_tpl:
-        return LINEE_FS + ["anche il trasporto pubblico locale, come indicato nell'orario"], []
+        return LINEE_FS, []  # la parte TPL è una voce a parte: qui nessuna linea si dichiara fuori
     if "ANM" in cat:
         return LINEE_ANM, ["Linea 2 (Trenitalia)", "Cumana (EAV)"]
     if "EAV" in cat:

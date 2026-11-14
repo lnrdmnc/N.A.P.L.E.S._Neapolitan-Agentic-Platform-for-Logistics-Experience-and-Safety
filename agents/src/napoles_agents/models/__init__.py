@@ -10,7 +10,6 @@ from .calendario import EventoCitta, EventoPrevisto, Finestra, ImpattoEvento, Na
 from .citta import Evento, StatoCitta, StatoLinea, TipoEvento
 from .contesto import Contesto, EventoSismicoReale, LivelloVulcanico, Meteo, StatoFonte
 from .indicatori import ConfrontoIndicatori, Indicatori, Origine
-from .itinerario import Itinerario, Tratta
 from .llm import ProvaLLM, StatoLLM
 from .messaggi import Messaggio, TipoMessaggio
 from .partite import Partita, Partite
@@ -19,8 +18,10 @@ from .registro import StatoRegistro, VoceRegistro
 from .scioperi import Sciopero, ScioperoPrevisto
 from .simulazione import PassoSimulazione, SerieSimulazione, StatoZona
 from .traffico import LivelloTraffico, PercorsoTraffico, Traffico
+from .visite import Accesso, DaVisitare, LuogoConsigliato, Momento
 
 __all__ = [
+    "Accesso",
     "Affidabilita",
     "Alert",
     "Ambito",
@@ -30,6 +31,7 @@ __all__ = [
     "Conflitto",
     "ConfrontoIndicatori",
     "Contesto",
+    "DaVisitare",
     "Evento",
     "EventoCitta",
     "EventoPrevisto",
@@ -39,12 +41,13 @@ __all__ = [
     "ImpattoEvento",
     "ImpattoZona",
     "Indicatori",
-    "Itinerario",
     "LivelloTraffico",
     "LivelloVulcanico",
+    "LuogoConsigliato",
     "Messaggio",
     "Meteo",
     "ModificaPiano",
+    "Momento",
     "NapoliProssimiGiorni",
     "Origine",
     "Partita",
@@ -68,6 +71,5 @@ __all__ = [
     "TipoEvento",
     "TipoMessaggio",
     "Traffico",
-    "Tratta",
     "VoceRegistro",
 ]
