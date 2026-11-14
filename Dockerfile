@@ -1,5 +1,6 @@
-# N.A.P.L.E.S. in un solo container, per Google Cloud Run (docs/DEPLOY.md).
+# N.A.P.L.E.S. in un solo container, per Google Cloud Run (`make deploy`, docs/DEPLOY.md).
 # Agenti su 127.0.0.1:8001 (interni), gateway backend su $PORT con la PWA compilata.
+# Nessuna chiave nell'immagine: arrivano a runtime da Secret Manager.
 
 FROM node:22-slim AS web
 WORKDIR /app
@@ -24,6 +25,12 @@ COPY backend/ backend/
 COPY --from=web /app/frontend/dist frontend/dist
 COPY deploy/start.sh deploy/start.sh
 
+# Utente senza privilegi; può scrivere solo dove servono la cache del modello e il registro.
+RUN useradd --create-home --uid 10001 naples \
+    && mkdir -p agents/var \
+    && chown -R naples:naples agents/var agents/src/napoles_agents/data/llm_cache
+USER naples
+
 ENV PORT=8080
 EXPOSE 8080
-CMD ["sh", "deploy/start.sh"]
+CMD ["bash", "deploy/start.sh"]

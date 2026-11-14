@@ -1,0 +1,13 @@
+# File caricati da `gcloud run deploy --source .` (make deploy). Mai le chiavi.
+.git
+.gitignore
+.env
+.env.*
+**/.venv
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+frontend/dist
+agents/var
+docs

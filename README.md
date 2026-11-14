@@ -19,6 +19,21 @@ Servono [uv](https://docs.astral.sh/uv/), Python 3.12+ e Node 22+. Alla prima vo
 - Web app in sviluppo, tre terminali: `make agents-run` (agenti), `make backend` (http://localhost:8000), `make frontend` (http://localhost:5173, si ricarica a ogni modifica).
 - `make build`: compila la PWA in `frontend/dist`, servita dal backend su http://localhost:8000.
 - `make contracts`: rigenera `contracts/agenti.openapi.json` dopo aver cambiato modelli o API.
+- `make llm-cache`: registra i testi di Claude per il percorso demo (serve `LLM_API_KEY` in `.env`).
+
+**Dove guardare in locale.** La porta 8001 è solo l'API degli agenti (`/docs`, `/api/...`): le pagine web stanno sulla 5173 in sviluppo (http://localhost:5173/control-room e http://localhost:5173/cittadino) o sulla 8000 dopo `make build`.
+
+## Messa online
+
+Un comando, da rilanciare uguale per ogni aggiornamento:
+
+```sh
+gcloud auth login                       # una volta per PC
+gcloud config set project <ID_PROGETTO> # una volta per PC
+make deploy
+```
+
+Pubblica su Google Cloud Run a Milano: un container con agenti e web app, chiavi da `.env` copiate in Secret Manager, account di servizio dedicato, una sola istanza (la sessione demo sta in memoria), spento quando nessuno lo usa. Alla fine stampa gli indirizzi di control room e vista cittadino. Installazione di gcloud, dettagli e soluzione dei problemi in [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Struttura del repository
 
@@ -47,6 +62,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 18:40 | deploy | `make deploy`: messa online su Cloud Run in un comando, chiavi in Secret Manager, account di servizio dedicato, container senza root, regione Milano |
 | 2026-11-14 | 18:35 | webapp | C3: piano in control room con Approva, Modifica e Rifiuta, sempre visibili su desktop; gli avvisi approvati arrivano in diretta alla vista cittadino; mappa non più allungata |
 | 2026-11-14 | 18:32 | webapp | U1: vista cittadino per profilo (tifoso, residente, pendolare, turista in inglese) e conferma di lettura anonima |
 | 2026-11-14 | 18:27 | webapp | C4: registro delle decisioni nella control room, con stato della catena e pulsante di verifica |

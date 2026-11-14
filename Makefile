@@ -1,4 +1,4 @@
-.PHONY: llm-cache check agents-test agents-run contracts prova verifica-registro demo web-test webapp-test install backend frontend build test-backend lint-frontend
+.PHONY: deploy llm-cache check agents-test agents-run contracts prova verifica-registro demo web-test webapp-test install backend frontend build test-backend lint-frontend
 
 AGENTS_PORT ?= 8001
 
@@ -35,6 +35,10 @@ contracts:
 # Tre prove dello scenario (approva subito, tardi, mai): rapporti in docs/prove/, errore se un controllo fallisce
 prova:
 	cd agents && PYTHONPATH=src uv run --quiet python -m napoles_agents.prova
+
+# Messa online su Google Cloud Run in un comando (docs/DEPLOY.md): serve gcloud con accesso fatto
+deploy:
+	bash deploy/deploy.sh
 
 # Prepara la cache dei testi del modello per il percorso demo (compito K1; serve LLM_API_KEY in .env)
 llm-cache:
