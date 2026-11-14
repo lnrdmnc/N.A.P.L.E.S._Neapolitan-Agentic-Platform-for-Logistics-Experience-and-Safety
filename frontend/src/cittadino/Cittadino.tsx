@@ -34,7 +34,7 @@ export function Cittadino() {
       </header>
 
       <div className="ct-body">
-        <SimulationBadge label={en ? 'DEMO · simulated events' : 'DEMO · eventi simulati'} />
+        <SimulationBadge label={en ? 'DEMO · simulated emergencies' : 'DEMO · emergenze simulate'} />
         {stato && <PartitaRiferimento partita={stato.partita_reale} en={en} />}
         <SceltaProfilo profilo={profilo} onScegli={scegli} />
 

@@ -31,7 +31,7 @@ export function ControlRoom() {
               {stato.ora} <small>minuto {stato.t_min}</small>
             </span>
           )}
-          <SimulationBadge label="SIMULAZIONE · nessun evento reale" />
+          <SimulationBadge label="EMERGENZA SIMULATA · traffico e contesto reali" />
           <LiveStatus status={status} inverse />
         </div>
       </header>
