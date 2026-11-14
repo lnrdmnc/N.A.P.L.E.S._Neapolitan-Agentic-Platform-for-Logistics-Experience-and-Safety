@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| Regia del tempo in control room: avvio, pausa, velocità, salto al prossimo evento, ricomincia | Leonardo Monaco | sab 14/11 18:49 | Dal checkpoint (tempo reale). Nuovi `frontend/src/control-room/Regia.tsx` (+ .css) e `frontend/src/api/useRegia.ts`; in `ControlRoom.tsx` una riga |
 
 ## Fatto
 
