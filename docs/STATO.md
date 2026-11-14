@@ -17,6 +17,7 @@
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| Piano con moduli, contratti e compiti (docs/PIANO.md) | Leonardo Schiavo | sab 14/11 14:30 | Prompt principale: produce il piano, nessun codice |
 
 ## Fatto
 
