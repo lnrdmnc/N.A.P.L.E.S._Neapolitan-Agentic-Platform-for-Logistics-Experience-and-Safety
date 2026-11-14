@@ -18,9 +18,13 @@ def test_approvare_subito_tardi_o_mai_cambia_la_citta():
     risultati = {}
     for strategia in ("subito", "tardi", "mai"):
         s = prova.esegui(strategia)
-        risultati[strategia] = (len(s.avvisi), prova._deflusso(s.scenario, s.simulazione()))
+        picco = prova.confronta(s.scenario, s.approvati, s.avvisi).con_coordinamento.picco_attesa_persone
+        risultati[strategia] = (len(s.avvisi), prova._deflusso(s.scenario, s.simulazione()), picco)
     assert risultati["mai"][0] == 0
-    assert risultati["subito"][1] < risultati["tardi"][1] < risultati["mai"][1]
+    # Con le capacità reali delle linee (R2) approvare 10 minuti dopo non allunga lo sgombero,
+    # ma lascia più persone in attesa: decidere subito conta sul picco.
+    assert risultati["subito"][1] <= risultati["tardi"][1] < risultati["mai"][1]
+    assert risultati["subito"][2] < risultati["tardi"][2]
 
 
 def test_strategia_sconosciuta():

@@ -33,10 +33,10 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
 | Icona del sito (badge tondo del team) e font del titolo nella pagina iniziale | Leonardo Schiavo | sab 14/11 19:52 | Tocca `frontend/index.html`, `frontend/vite.config.ts` (icone della PWA), `frontend/public/`, `frontend/src/home/`, `frontend/package.json` (un font) |
-| R2 — Capacità delle linee calcolate dagli orari veri (GTFS ANM ed EAV, orari Linea 2) | Leonardo Monaco | sab 14/11 20:06 | Tocca `…/data/scenario_maradona.json` (capacità delle linee), docs/IPOTESI.md |
 
 ## Fatto
 
+- **R2, capacità delle linee dagli orari veri (sab 20:25).** Corse reali tra le 22:20 e le 23:30 dal GTFS ANM (orari 2023): Linea 2 a Campi Flegrei 10 treni → 114 persone al minuto (era 80); bus alle fermate dello stadio 16 corse → 23 (era 60); Cumana ogni 15 minuti (EAV) → 30, capienza per treno stimata. Fonte e calcolo in `…/data/scenario_maradona.json` (`fonte_capacita`) e in docs/IPOTESI.md. Sensibilità ricalcolata: picco −13% / −30%, nessuna folla davanti alle stazioni chiuse; approvare 10 minuti dopo non allunga lo sgombero ma alza il picco. 128 test.
 - **R1, scenario sulla prossima partita vera (sab 20:00).** Lo scenario è la «prova generale» della prossima partita vera in casa al Maradona, letta da football-data.org (`…/riferimento.py`): oggi Napoli – Torino, Serie A, sabato 21/11 alle 20:45, la stessa ora d'inizio dello scenario. In control room e nella vista cittadino (anche in inglese) una striscia «Prova generale per Napoli – Torino» con «Partita reale · football-data.org» e «Scosse, chiusure e folla: simulate». Senza partite dalla fonte: «scenario solo dimostrativo», nessuna partita inventata. **Contratto:** `StatoCitta.partita_reale` (opzionale). 128 test; provato a 1280 px e a 375 px senza scorrimento orizzontale.
 | R1 — Scenario agganciato alla prossima partita vera al Maradona (football-data.org), sciame sempre simulato | Leonardo Monaco | sab 14/11 19:45 | Tocca `…/scenario.py`, `…/models/citta.py`, intestazione della control room e della vista cittadino |
 

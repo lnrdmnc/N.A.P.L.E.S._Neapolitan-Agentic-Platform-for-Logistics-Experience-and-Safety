@@ -14,9 +14,9 @@
     {"id": "distinti", "nome": "Distinti", "spettatori": 10000}
   ],
   "linee": [
-    {"id": "linea2", "nome": "Linea 2 – stazione Campi Flegrei", "capacita_persone_min": 80},
-    {"id": "cumana", "nome": "Cumana – stazione Mostra", "capacita_persone_min": 30},
-    {"id": "bus", "nome": "Bus ordinari Fuorigrotta", "capacita_persone_min": 60},
+    {"id": "linea2", "nome": "Linea 2 – stazione Campi Flegrei", "capacita_persone_min": 114, "fonte_capacita": "GTFS ANM (orari 2023): 10 treni a Campi Flegrei tra le 22:20 e le 23:30 nelle due direzioni, per circa 800 persone a treno (Trenitalia, ALe 724), diviso 70 minuti"},
+    {"id": "cumana", "nome": "Cumana – stazione Mostra", "capacita_persone_min": 30, "fonte_capacita": "Frequenza reale: un treno ogni 15 minuti tra Montesanto e Bagnoli (EAV, febbraio 2025), circa 9 treni in 70 minuti nelle due direzioni; capienza per treno stimata (circa 230 persone): nessuna fonte pubblica"},
+    {"id": "bus", "nome": "Bus ordinari Fuorigrotta", "capacita_persone_min": 23, "fonte_capacita": "GTFS ANM (orari 2023): 16 corse distinte (R6, 181, 151, N7) alle fermate Marino - Stadio Maradona, Piazzale Tecchio e Tecchio - Mostra tra le 22:20 e le 23:30, per circa 100 persone a bus (stima per un bus da 12 m), diviso 70 minuti"},
     {"id": "piedi", "nome": "A piedi e con mezzi propri verso i quartieri vicini", "capacita_persone_min": 700}
   ],
   "navette": {

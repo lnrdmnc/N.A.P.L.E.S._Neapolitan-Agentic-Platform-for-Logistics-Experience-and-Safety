@@ -15,7 +15,8 @@
 | Capienza del Maradona: 54.726 posti | Reale | SSC Napoli e Wikipedia (le fonti differiscono di pochi posti); 50.000 persone a partita resta una stima, circa il 90% dei posti | Simulatore a zone, «Napoli oggi e nei prossimi giorni» |
 | Partite in casa del Napoli = partite allo stadio Maradona | Ipotesi su dato reale | football-data.org (piano gratuito) non indica lo stadio: si usano le partite con il Napoli in casa; se un giorno indica uno stadio diverso, la partita si scarta | Vista cittadino: «Partite al Maradona» |
 | 50.000 spettatori e ripartizione per settore (Curve A e B 12.000, Tribune Posillipo e Nisida 8.000, Distinti 10.000) | Simulato | Ordine di grandezza della capienza; ripartizione inventata | Ondate di deflusso |
-| Capacità persone al minuto: Linea 2 80, Cumana 30, bus ordinari 60, a piedi e con mezzi propri 700, navette 100 | Simulato | Ordini di grandezza ricalibrati il 14/11 alle 16:30 (prima erano 400, 300, 150, 450, 500: gonfiati). Ferro: un treno ogni 10–20 minuti; navette: circa un bus al minuto da un punto di carico. Da verificare con frequenze GTFS e capienze reali | Indicatori con e senza coordinamento |
+| Capacità delle linee, persone al minuto: Linea 2 114, Cumana 30, bus ordinari 23 | **Calcolate dagli orari veri** (R2, 14/11): numero di corse reale, capienza per mezzo in parte stimata | Corse tra le 22:20 e le 23:30 di un sabato dal GTFS ANM (orari del 2023, gli ultimi disponibili): Linea 2 a Campi Flegrei 10 treni nelle due direzioni × circa 800 persone (Trenitalia, ALe 724); bus 16 corse (R6, 181, 151, N7) alle fermate vicine allo stadio × circa 100 persone (stima, bus da 12 m). Cumana: un treno ogni 15 minuti (EAV, febbraio 2025), capienza per treno stimata. Nel GTFS l'ultima Linea 2 verso Napoli passa alle 23:03 | Stato delle linee, simulatore a zone, indicatori |
+| Capacità a piedi e con mezzi propri 700 persone al minuto, navette 100 | Simulato | Ordini di grandezza ricalibrati il 14/11 alle 16:30 | Simulatore a zone |
 | Uscita massima dallo stadio 2.500 persone al minuto | Simulato | Valore di lavoro | Indicatori |
 | Ondate: tribune subito, Distinti dopo 8 minuti, curve dopo 16 | Simulato | Scelta dell'agente Folla | Avvisi ai tifosi, indicatori |
 | Navette sostitutive con destinazione Bagnoli e Pozzuoli | Simulato | Scelta per il profilo pendolare; percorsi non verificati | Avvisi del profilo «pendolare» |
@@ -39,15 +40,18 @@ Dal 14/11 alle 17:25 gli indicatori vengono dal **simulatore a zone**, lo stesso
 
 | Percorsi a piedi (fattore) | Decisione senza coordinamento | Deflusso con → senza | Picco con → senza |
 | --- | --- | --- | --- |
-| 1,0 (nessun effetto) | 10 min | 64 → 59 | 28.361 → 32.800 |
-| 1,0 (nessun effetto) | 20 min | 64 → 60 | 28.361 → 33.700 |
-| 1,3 (valore usato) | 20 min | 50 → 60 | 23.299 → 33.700 |
-| 1,5 | 20 min | 43 → 60 | 19.840 → 33.700 |
+| 1,0 (nessun effetto) | 10 min | 66 → 60 | 29.323 → 33.540 |
+| 1,0 (nessun effetto) | 20 min | 66 → 61 | 29.323 → 34.440 |
+| 1,3 (valore usato) | 20 min | 51 → 61 | 24.261 → 34.440 |
+| 1,5 | 20 min | 44 → 61 | 20.802 → 34.440 |
+
+Valori ricalcolati il 14/11 alle 20:25 con le capacità delle linee dagli orari veri (R2): bus da 60 a 23 persone al minuto, Linea 2 da 80 a 114. Le conclusioni non cambiano.
 
 Lettura onesta:
 
-- **Robusto, vale con ogni ipotesi:** il coordinamento riduce il picco di persone in attesa (circa −14% anche senza l'ipotesi sui percorsi a piedi, −31% con il valore usato) e **nessuno si ammassa davanti alle stazioni chiuse** (con coordinamento 0; senza, la stazione Campi Flegrei arriva a 5 volte la capienza).
-- **Dipende da un'ipotesi:** lo sgombero più rapido (50 contro 60 minuti) esiste solo se i percorsi pedonali alternativi aumentano davvero la capacità a piedi. Senza quell'effetto il coordinamento non accelera lo sgombero, anzi lo allunga di qualche minuto, perché le ondate fanno uscire le curve più tardi. Va detto.
+- **Robusto, vale con ogni ipotesi:** il coordinamento riduce il picco di persone in attesa (circa −13% anche senza l'ipotesi sui percorsi a piedi, −30% con il valore usato) e **nessuno si ammassa davanti alle stazioni chiuse** (con coordinamento 0; senza, la stazione Campi Flegrei arriva a quasi 4 volte la capienza).
+- **Dipende da un'ipotesi:** lo sgombero più rapido (51 contro 61 minuti) esiste solo se i percorsi pedonali alternativi aumentano davvero la capacità a piedi. Senza quell'effetto il coordinamento non accelera lo sgombero, anzi lo allunga di qualche minuto, perché le ondate fanno uscire le curve più tardi. Va detto.
+- **Decidere subito conta:** se l'operatore approva 10 minuti dopo, lo sgombero non si allunga ma il picco sale (24.261 → 25.031 persone in attesa).
 - Il messaggio corretto per il pitch è quindi **meno affollamento e nessuna folla davanti alle stazioni chiuse**, non «sgomberiamo prima».
 - Nella sessione, appena l'operatore approva un piano dopo la sospensione, il caso «con coordinamento» usa le sue decisioni vere e i tempi diventano «misurati in sessione»; il caso «senza coordinamento» resta un'ipotesi.
 | Ultimi terremoti di Campi Flegrei e Vesuvio (7 giorni) e meteo allo stadio | **Reale**, letto dal vivo | INGV FDSN e Open-Meteo, con copia salvata se la rete manca; mai mescolati alle scosse simulate dello scenario | Control room: «Contesto reale di oggi»; vista cittadino: «Meteo a Fuorigrotta» |
