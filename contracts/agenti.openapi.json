@@ -247,6 +247,25 @@
         "title": "Caso",
         "type": "string"
       },
+      "ConfermaVisto": {
+        "description": "Corpo di `POST /api/avvisi/{id}/visto`, inviato dalla vista cittadino quando l'avviso è a schermo.",
+        "properties": {
+          "dispositivo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Identificativo anonimo generato dal telefono (per esempio un UUID casuale salvato in locale). Nessun dato personale: serve solo a non contare due volte lo stesso telefono.",
+            "title": "Dispositivo"
+          }
+        },
+        "title": "ConfermaVisto",
+        "type": "object"
+      },
       "Conflitto": {
         "properties": {
           "proposte": {
@@ -1197,7 +1216,7 @@
         "type": "object"
       },
       "Ricezione": {
-        "description": "Quante persone hanno visto un avviso (compito B3).",
+        "description": "Quante persone hanno visto un avviso (compito B3).\n\n`visti_reali` è un conteggio vero delle conferme arrivate in questa sessione.\n`consegnati_stimati` e `visti_stimati` sono stime simulate (docs/IPOTESI.md): `simulato` si\nriferisce a loro.",
         "properties": {
           "avviso": {
             "title": "Avviso",
@@ -1206,6 +1225,29 @@
           "consegnati_stimati": {
             "title": "Consegnati Stimati",
             "type": "integer"
+          },
+          "minuti_dall_invio": {
+            "default": 0,
+            "title": "Minuti Dall Invio",
+            "type": "integer"
+          },
+          "pubblico": {
+            "anyOf": [
+              {
+                "enum": [
+                  "tutti",
+                  "tifoso",
+                  "residente",
+                  "pendolare",
+                  "turista"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pubblico"
           },
           "simulato": {
             "default": true,
@@ -1810,7 +1852,7 @@
     },
     "/api/avvisi/ricezione": {
       "get": {
-        "description": "STUB (compito B3): numeri finti, sempre marcati come simulati.",
+        "description": "Per ogni avviso inviato: conferme reali e stime simulate al minuto attuale della sessione.",
         "operationId": "ricezione_api_avvisi_ricezione_get",
         "responses": {
           "200": {
@@ -1830,13 +1872,13 @@
         },
         "summary": "Ricezione",
         "tags": [
-          "avvisi"
+          "ricezione"
         ]
       }
     },
     "/api/avvisi/{avviso_id}/visto": {
       "post": {
-        "description": "STUB (compito B3): accetta la conferma ma non la conta ancora.",
+        "description": "La vista cittadino conferma che l'avviso è stato mostrato. Si contano solo avvisi davvero\ninviati (404 altrimenti) e una sola conferma per `dispositivo`.",
         "operationId": "visto_api_avvisi__avviso_id__visto_post",
         "parameters": [
           {
@@ -1849,14 +1891,29 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ConfermaVisto"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Conferma"
+              }
+            }
+          }
+        },
         "responses": {
-          "202": {
+          "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "title": "Response Visto Api Avvisi  Avviso Id  Visto Post",
-                  "type": "object"
+                  "$ref": "#/components/schemas/Ricezione"
                 }
               }
             },
@@ -1875,7 +1932,7 @@
         },
         "summary": "Visto",
         "tags": [
-          "avvisi"
+          "ricezione"
         ]
       }
     },

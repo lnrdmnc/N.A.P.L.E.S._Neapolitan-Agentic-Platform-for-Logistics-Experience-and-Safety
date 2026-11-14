@@ -40,6 +40,11 @@
     "con_coordinamento_fattore_percorsi_piedi": 1.3,
     "persone_soglia_area_sgombra": 500
   },
+  "ricezione": {
+    "persone_raggiungibili": {"tifoso": 40000, "residente": 15000, "pendolare": 6000, "turista": 4000, "tutti": 65000},
+    "quota_con_app": 0.25,
+    "letti_entro_minuti": [[0, 0.0], [2, 0.4], [5, 0.65], [15, 0.85]]
+  },
   "soglie_sisma": {
     "attenzione_magnitudo": 2.5,
     "moderato_magnitudo": 3.0,

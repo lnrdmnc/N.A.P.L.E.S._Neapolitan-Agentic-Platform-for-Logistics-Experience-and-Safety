@@ -39,10 +39,29 @@ class Alert(BaseModel):
     piano_id: str | None = None
 
 
+class ConfermaVisto(BaseModel):
+    """Corpo di `POST /api/avvisi/{id}/visto`, inviato dalla vista cittadino quando l'avviso è a schermo."""
+
+    dispositivo: str | None = Field(
+        default=None,
+        description=(
+            "Identificativo anonimo generato dal telefono (per esempio un UUID casuale salvato in locale). "
+            "Nessun dato personale: serve solo a non contare due volte lo stesso telefono."
+        ),
+    )
+
+
 class Ricezione(BaseModel):
-    """Quante persone hanno visto un avviso (compito B3)."""
+    """Quante persone hanno visto un avviso (compito B3).
+
+    `visti_reali` è un conteggio vero delle conferme arrivate in questa sessione.
+    `consegnati_stimati` e `visti_stimati` sono stime simulate (docs/IPOTESI.md): `simulato` si
+    riferisce a loro.
+    """
 
     avviso: str
+    pubblico: Pubblico | None = None
+    minuti_dall_invio: int = 0
     visti_reali: int = Field(description="Conferme arrivate dalla vista cittadino in questa sessione")
     visti_stimati: int
     consegnati_stimati: int

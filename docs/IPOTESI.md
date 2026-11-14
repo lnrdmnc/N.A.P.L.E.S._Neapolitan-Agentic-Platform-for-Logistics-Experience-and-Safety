@@ -26,6 +26,7 @@
 | Coordinate delle zone | Reale in parte | Fermate dal GTFS ANM (5001 Piazzale Tecchio, 6277 Campi Flegrei, 2299 Marino - Stadio Maradona); stadio, stazione Mostra e Viale Giochi approssimati | Mappa |
 | Chi è informato lascia le stazioni chiuse e le code oltre la capienza e ripiega su navette e piedi in proporzione alla capacità; chi non è informato aspetta | Ipotesi | Regola di comportamento del simulatore a zone | Code alle stazioni nel caso senza coordinamento |
 | Nella sessione conta solo ciò che è approvato: ondate solo se approvate entro il fischio finale; navette operative 12 minuti dopo l'approvazione; persone informate dal primo avviso approvato con le sospensioni. Senza approvazioni le persone scoprono le sospensioni da sole, 15 minuti dopo il fischio | Ipotesi | Regole di `decisioni.py` | Mappa della sessione, impatto del piano |
+| Ricezione degli avvisi: persone raggiungibili per profilo (tifosi 40.000, residenti 15.000, pendolari 6.000, turisti 4.000, tutti 65.000), quota con l'app 25%, lettura 40% entro 2 minuti, 65% entro 5, 85% entro 15 | Simulato | Valori di lavoro per le stime; le conferme reali dei telefoni in demo sono contate a parte (`visti_reali`) | Control room: ricezione degli avvisi |
 
 ## Sensibilità del confronto
 

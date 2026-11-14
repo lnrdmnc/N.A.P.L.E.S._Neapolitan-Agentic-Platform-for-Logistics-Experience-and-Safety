@@ -11,6 +11,7 @@ from .bus import Bus
 from .decisioni import impatto, misure_da_decisioni
 from .models import Alert, Caso, Piano, Proposta, SerieSimulazione, StatoCitta
 from .registro import Registro
+from .ricezione import Ricezioni
 from .simulatore import simula
 
 # Stati in cui il piano aspetta la decisione dell'operatore.
@@ -34,6 +35,7 @@ class Sessione:
         self.file_registro = file_registro
         self.registro = Registro(file_registro)
         self.bus = Bus()
+        self.ricezioni = Ricezioni()
         self._firma: tuple = ()
         self._eventi_visti: set[str] = set()
         self._proposte_viste: dict[str, str] = {}

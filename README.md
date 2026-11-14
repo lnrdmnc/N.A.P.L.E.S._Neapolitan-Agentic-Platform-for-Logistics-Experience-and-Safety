@@ -47,6 +47,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 17:43 | agents, contracts | B3: conferma di ricezione reale per telefono anonimo e stime dichiarate; `ConfermaVisto` e nuovi campi di `Ricezione` nel contratto |
 | 2026-11-14 | 17:33 | agents | R1: registro delle decisioni scritto su file e `make verifica-registro`, che rileva righe cambiate, tolte o spostate |
 | 2026-11-14 | 17:27 | agents | B4: indicatori dal simulatore a zone, congestione per zona, tempi misurati in sessione; sensibilità rivista con lettura onesta |
 | 2026-11-14 | 17:20 | agents, webapp | Traffico reale: `GET /api/traffico` da Google Routes API, mappa con livello traffico in control room, chiave del browser da `/api/config`; Dockerfile e docs/DEPLOY.md per Cloud Run |
