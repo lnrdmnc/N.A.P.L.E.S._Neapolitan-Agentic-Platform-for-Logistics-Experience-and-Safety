@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| C6 e U2 — Contesto reale a schermo: livello vulcanico verificato, terremoti INGV e meteo veri in control room, meteo vero nella vista cittadino | Leonardo Schiavo | sab 14/11 19:15 | Nuovi `frontend/src/control-room/ContestoReale.tsx`, `frontend/src/cittadino/MeteoReale.tsx`, `frontend/src/api/useContesto.ts`; una riga in ControlRoom.tsx e Cittadino.tsx |
 
 ## Fatto
 
