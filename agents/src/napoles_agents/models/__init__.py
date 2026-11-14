@@ -14,6 +14,7 @@ from .messaggi import Messaggio, TipoMessaggio
 from .piano import Conflitto, Impatto, ImpattoZona, ModificaPiano, Piano, Proposta
 from .registro import StatoRegistro, VoceRegistro
 from .simulazione import PassoSimulazione, SerieSimulazione, StatoZona
+from .traffico import LivelloTraffico, PercorsoTraffico, Traffico
 
 __all__ = [
     "Affidabilita",
@@ -30,12 +31,14 @@ __all__ = [
     "ImpattoZona",
     "Indicatori",
     "Itinerario",
+    "LivelloTraffico",
     "LivelloVulcanico",
     "Messaggio",
     "Meteo",
     "ModificaPiano",
     "Origine",
     "PassoSimulazione",
+    "PercorsoTraffico",
     "Piano",
     "Proposta",
     "Pubblico",
@@ -47,6 +50,7 @@ __all__ = [
     "StatoZona",
     "TipoEvento",
     "TipoMessaggio",
+    "Traffico",
     "Tratta",
     "VoceRegistro",
 ]

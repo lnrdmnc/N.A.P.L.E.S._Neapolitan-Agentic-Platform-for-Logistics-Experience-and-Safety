@@ -38,3 +38,7 @@ Il beneficio va presentato come **intervallo**, non come numero unico. Calcolato
 | 1,5 | 20 min | 41 → 66 | 18.540 → 39.400 |
 
 Lettura onesta: anche senza alcun effetto dei percorsi a piedi il coordinamento riduce il deflusso di circa 7 minuti e il picco di circa il 28%, perché le persone sanno prima dell'uscita che le stazioni sono chiuse. Il tempo di decisione senza coordinamento pesa poco. Il dato più incerto resta il ritardo d'informazione senza coordinamento (15 minuti): è un'ipotesi e va detto.
+| Tempi in auto dallo stadio verso Stazione Centrale, Molo Beverello, Vomero, Pozzuoli e Capodichino | **Reale**, in tempo reale | Google Routes API (`TRAFFIC_AWARE`); se non risponde il pannello lo dice e non mostra numeri | Control room: pannello «Traffico in tempo reale» |
+| Percorsi monitorati e coordinate dei punti di arrivo | Scelta del team | Coordinate approssimate in `agents/src/napoles_agents/data/percorsi_traffico.json` | Pannello traffico |
+| Livello del traffico: scorrevole sotto 1,15 volte il tempo senza traffico, rallentato fino a 1,5, congestionato oltre | Ipotesi | Soglie di lavoro sul rapporto tra le due durate restituite da Google | Colore delle linee e dei pallini nel pannello traffico |
+| Livello traffico sulla mappa (colori delle strade) | **Reale**, in tempo reale | Google Maps JavaScript API, `TrafficLayer` | Mappa della control room |

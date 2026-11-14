@@ -1,0 +1,45 @@
+{
+  "_nota": "Percorsi in auto monitorati intorno allo stadio, scelti dal team. Coordinate approssimate. Vedi docs/IPOTESI.md.",
+  "percorsi": [
+    {
+      "id": "stadio-garibaldi",
+      "nome": "Stadio → Stazione Centrale",
+      "da": "Stadio Maradona",
+      "a": "Piazza Garibaldi",
+      "origine": [40.8280, 14.1930],
+      "destinazione": [40.8526, 14.2723]
+    },
+    {
+      "id": "stadio-municipio",
+      "nome": "Stadio → Molo Beverello",
+      "da": "Stadio Maradona",
+      "a": "Piazza Municipio",
+      "origine": [40.8280, 14.1930],
+      "destinazione": [40.8387, 14.2528]
+    },
+    {
+      "id": "stadio-vomero",
+      "nome": "Stadio → Vomero",
+      "da": "Stadio Maradona",
+      "a": "Piazza Vanvitelli",
+      "origine": [40.8280, 14.1930],
+      "destinazione": [40.8434, 14.2297]
+    },
+    {
+      "id": "stadio-pozzuoli",
+      "nome": "Stadio → Pozzuoli",
+      "da": "Stadio Maradona",
+      "a": "Pozzuoli, porto",
+      "origine": [40.8280, 14.1930],
+      "destinazione": [40.8215, 14.1225]
+    },
+    {
+      "id": "stadio-capodichino",
+      "nome": "Stadio → Aeroporto",
+      "da": "Stadio Maradona",
+      "a": "Aeroporto di Capodichino",
+      "origine": [40.8280, 14.1930],
+      "destinazione": [40.8846, 14.2906]
+    }
+  ]
+}

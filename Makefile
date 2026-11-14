@@ -26,7 +26,7 @@ agents-test:
 
 # API degli agenti per la web app su http://localhost:8001 (documentazione su /docs)
 agents-run:
-	cd agents && uv run uvicorn napoles_agents.api:app --app-dir src --port $(AGENTS_PORT) --reload
+	cd agents && uv run $(if $(wildcard .env),--env-file ../.env) uvicorn napoles_agents.api:app --app-dir src --port $(AGENTS_PORT) --reload
 
 # Rigenera contracts/agenti.openapi.json dai modelli
 contracts:
@@ -64,7 +64,7 @@ install:
 # Web app in sviluppo: gateway su http://localhost:8000 (inoltra agli agenti su $(AGENTS_PORT)).
 # Ascolta anche sulla rete locale: dal telefono sulla stessa Wi-Fi, http://<IP del PC>:8000
 backend:
-	cd backend && AGENTS_URL=http://127.0.0.1:$(AGENTS_PORT) ../$(PY) -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+	cd backend && $(if $(wildcard .env),set -a && . ../.env && set +a &&) AGENTS_URL=http://127.0.0.1:$(AGENTS_PORT) ../$(PY) -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 # Frontend con ricarica automatica su http://localhost:5173 (dal telefono: http://<IP del PC>:5173)
 frontend:

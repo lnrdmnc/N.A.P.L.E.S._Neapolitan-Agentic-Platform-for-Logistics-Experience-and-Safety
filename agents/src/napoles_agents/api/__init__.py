@@ -6,7 +6,18 @@ Un router per area. Per aggiungerne uno: un file in questa cartella e una riga i
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import avvisi, contesto, indicatori, itinerario, messaggi, piani, registro, sessione, simulazione
+from . import (
+    avvisi,
+    contesto,
+    indicatori,
+    itinerario,
+    messaggi,
+    piani,
+    registro,
+    sessione,
+    simulazione,
+    traffico,
+)
 
 PORTA = 8001  # concordata con la web app (Francesco Sannella)
 
@@ -20,6 +31,7 @@ ROUTER = [
     simulazione.router,
     contesto.router,
     itinerario.router,
+    traffico.router,
 ]
 
 app = FastAPI(title="N.A.P.L.E.S. – agenti", version="0.2.0")
