@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| Scioperi dei trasporti ufficiali (Ministero dei Trasporti) nei «prossimi giorni», con alternative | Leonardo Monaco | sab 14/11 20:11 | Nuovo `…/fonti/scioperi.py`; tocca `…/agenti/calendario.py`, `…/models/calendario.py`, `ProssimiGiorni.tsx` |
 
 ## Fatto
 
