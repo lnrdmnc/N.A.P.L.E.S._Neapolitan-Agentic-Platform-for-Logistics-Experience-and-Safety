@@ -48,9 +48,11 @@ llm-cache:
 verifica-registro:
 	@cd agents && PYTHONPATH=src uv run --quiet python -m napoles_agents.registro verifica $(if $(FILE),$(abspath $(FILE)),)
 
-# Demo offline: web app compilata servita dall'API su una sola porta (compito X1)
+# Percorso demo in un comando (compito X1): build della PWA, agenti sulla 8001, gateway sulla 8000
+# che serve la PWA. Legge .env se c'è. Opzioni: ARGS="--apri" (apre la control room), ARGS="--senza-build"
 demo:
-	@echo "demo: da implementare nel compito X1; per ora 'make agents-run' e la web app in sviluppo"; exit 1
+	@test -x "$(PY)" || test -f "$(PY).exe" || { echo "demo: manca backend/.venv, esegui make install"; exit 1; }
+	@$(PY) scripts/demo.py $(ARGS)
 
 # Test nel browser del percorso demo (compito E1)
 web-test:

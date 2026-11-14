@@ -32,10 +32,10 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| X1 — `make demo`: un comando avvia agenti, build della PWA e backend, con controlli e indirizzi da aprire | Leonardo Monaco | sab 14/11 20:05 | Tocca Makefile (riga `demo`), nuovo `scripts/demo.py`, README |
 
 ## Fatto
 
+- **X1, `make demo` (sab 20:06).** Un comando (`scripts/demo.py`, solo libreria standard, anche su Windows): controlla prerequisiti e porte libere, legge `.env` e dice quali chiavi ci sono (mai i valori), compila la PWA, avvia agenti e gateway, riporta lo scenario al minuto 0 e stampa gli indirizzi, anche per il telefono. Se un processo si ferma, si ferma anche l'altro; Ctrl+C chiude tutto. Provato da zero sul Mac con tutte e quattro le chiavi: control room e vista cittadino su http://localhost:8000, stato al minuto 0 con Napoli – Torino. Da provare su Windows.
 - **R3, scosse simulate ricalcate su uno sciame reale (sab 19:58).** Le tre scosse dello scenario hanno magnitudo, profondità ed epicentri delle repliche reali del 1/8/2026 (catalogo INGV: Md 3.1, 3.0 e 2.5, eventi indicati nella fonte di ogni scossa); restano simulate ed etichettate, con i tempi compressi dichiarati in docs/IPOTESI.md. Gravità invariate, quindi percorso demo, avvisi e indicatori uguali (prove: sgombero 55, 55, 70 minuti). Copione del video aggiornato a Md 3.1. Con la chiave del modello conviene rilanciare `make llm-cache`: i testi in cache citano ancora Md 3.2. 128 test.
 - **R2, capacità delle linee dagli orari veri (sab 19:55).** Corse reali tra le 22:20 e le 23:30 dal GTFS ANM (orari 2023): Linea 2 a Campi Flegrei 10 treni → 114 persone al minuto (era 80); bus alle fermate dello stadio 16 corse → 23 (era 60); Cumana ogni 15 minuti (EAV) → 30, capienza per treno stimata. Fonte e calcolo in `…/data/scenario_maradona.json` (`fonte_capacita`) e in docs/IPOTESI.md. Sensibilità ricalcolata: picco −13% / −30%, nessuna folla davanti alle stazioni chiuse; approvare 10 minuti dopo non allunga lo sgombero ma alza il picco. 128 test.
 - **R1, scenario sulla prossima partita vera (sab 19:50).** Lo scenario è la «prova generale» della prossima partita vera in casa al Maradona, letta da football-data.org (`…/riferimento.py`): oggi Napoli – Torino, Serie A, sabato 21/11 alle 20:45, la stessa ora d'inizio dello scenario. In control room e nella vista cittadino (anche in inglese) una striscia «Prova generale per Napoli – Torino» con «Partita reale · football-data.org» e «Scosse, chiusure e folla: simulate». Senza partite dalla fonte: «scenario solo dimostrativo», nessuna partita inventata. **Contratto:** `StatoCitta.partita_reale` (opzionale). 128 test; provato a 1280 px e a 375 px senza scorrimento orizzontale.
@@ -135,7 +135,7 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 - **Da sistemare prima della consegna (controllo del 14/11 sui contenuti che non possono restare):**
   - docs/TEAM.md contiene le email personali di tutti e il repository sarà pubblico: usare l'email `noreply` di GitHub, anche in `git config`.
   - Con il deploy pubblico, `/api/reset`, `/api/avanza` e `/api/piano/…/approva` sarebbero chiamabili da chiunque attraverso il gateway: serve una chiave sulle chiamate che cambiano lo stato o una versione pubblica di sola lettura.
-  - Riquadri «In costruzione» (C1–C5, U2), comandi `make demo`, `web-test`, `verifica-registro` che oggi falliscono, endpoint `stub: true` degli agenti: da completare o togliere.
+  - Comando `make web-test` che oggi fallisce (E1), endpoint `stub: true` degli agenti: da completare o togliere.
   - Testi ufficiali inventati (allerta meteo «Protezione Civile Regione Campania (simulato)»): l'etichetta «simulato» deve restare visibile anche nel video e negli screenshot.
 - **Deciso il 14/11: due processi.** `backend/` (porta 8000) è un gateway senza logica: serve la PWA, inoltra agli agenti (porta 8001) e tiene il canale in tempo reale. Per X1 `make demo` deve avviare entrambi.
 - La vista cittadino mostra tutti gli avvisi approvati, per ogni profilo e lingua: il filtro per profilo è il compito U1.

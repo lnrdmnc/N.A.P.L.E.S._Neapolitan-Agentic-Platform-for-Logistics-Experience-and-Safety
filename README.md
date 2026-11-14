@@ -49,6 +49,7 @@ Servono [uv](https://docs.astral.sh/uv/), Python 3.12+ e Node 22+. Alla prima vo
 
 - `make check`: file base, `.env` non tracciato, lint e test degli agenti, contratto API allineato, test del backend, lint e build del frontend.
 - `make agents-run`: API degli agenti su http://localhost:8001 (porta concordata con la web app), documentazione su http://localhost:8001/docs.
+- `make demo`: **avvia tutto il percorso demo con un comando**: compila la PWA, avvia agenti (8001) e gateway (8000), riporta lo scenario al minuto 0, dice quali chiavi di `.env` sono configurate e stampa gli indirizzi (anche per il telefono sulla stessa Wi-Fi). Ctrl+C ferma tutto. `make demo ARGS="--apri"` apre anche la control room.
 - `make prova`: tre prove dello scenario (l'operatore approva subito, tardi, mai) con rapporti leggibili in `docs/prove/`; vedi [docs/prove/README.md](docs/prove/README.md).
 - `make verifica-registro`: verifica il registro delle decisioni scritto dalla demo (`agents/var/registro.jsonl`); con `FILE=percorso` un altro file. Fallisce e indica la riga se qualcosa è stato cambiato a mano.
 - Web app in sviluppo, tre terminali: `make agents-run` (agenti), `make backend` (http://localhost:8000), `make frontend` (http://localhost:5173, si ricarica a ogni modifica).
@@ -98,6 +99,7 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 20:06 | demo | `make demo`: un comando avvia build, agenti e gateway, con controlli e indirizzi da aprire |
 | 2026-11-14 | 19:58 | agents | Scosse simulate ricalcate sullo sciame reale INGV del 1/8/2026 (magnitudo, profondità, epicentri); tempi compressi dichiarati |
 | 2026-11-14 | 19:55 | agents | Capacità di Linea 2, Cumana e bus calcolate dalle corse vere (GTFS ANM, EAV) al posto degli ordini di grandezza; sensibilità ricalcolata |
 | 2026-11-14 | 19:55 | webapp | Icona del sito dal badge tondo del team (favicon, icone della PWA e di iPhone); titolo della pagina iniziale in Cormorant Garamond Light |
