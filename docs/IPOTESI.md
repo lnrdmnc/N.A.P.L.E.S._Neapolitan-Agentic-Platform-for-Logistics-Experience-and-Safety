@@ -21,6 +21,10 @@
 | Percorsi pedonali alternativi: capacità a piedi × 1,3 | Ipotesi | Effetto della distribuzione su più direzioni | Indicatori «con coordinamento» |
 | Soglie sismiche: attenzione Md ≥ 2,5, moderato ≥ 3,0, severo ≥ 4,0; sciame = scosse entro 60 minuti | Ipotesi | Soglie di lavoro, non soglie ufficiali | Gravità degli avvisi del caso B |
 | Area dell'avviso: rettangolo intorno allo stadio | Simulato | Coordinate approssimate | Campo `area` degli avvisi |
+| Simulatore a zone: capienze di attesa (Piazzale Tecchio 6.000, Viale Giochi del Mediterraneo 4.000, stazione Campi Flegrei 1.500, stazione Mostra 1.000, fermata Marino - Stadio Maradona 800) | Simulato | Ordini di grandezza, da verificare voce per voce | Carico per zona sulla mappa |
+| Quote modali all'uscita dallo stadio: a piedi e mezzi propri 55%, Linea 2 20%, Cumana 10%, bus 15% | Ipotesi | Valori di lavoro, non misurati | Simulatore a zone |
+| Coordinate delle zone | Reale in parte | Fermate dal GTFS ANM (5001 Piazzale Tecchio, 6277 Campi Flegrei, 2299 Marino - Stadio Maradona); stadio, stazione Mostra e Viale Giochi approssimati | Mappa |
+| Chi è informato lascia le stazioni chiuse e le code oltre la capienza e ripiega su navette e piedi in proporzione alla capacità; chi non è informato aspetta | Ipotesi | Regola di comportamento del simulatore a zone | Code alle stazioni nel caso senza coordinamento |
 
 ## Sensibilità del confronto
 

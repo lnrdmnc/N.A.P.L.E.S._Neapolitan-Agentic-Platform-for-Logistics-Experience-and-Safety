@@ -34,7 +34,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
-| S0 — Simulatore a zone, funzione pura | Leonardo Monaco | sab 14/11 17:09 | Nuovi file `…/simulatore.py`, `…/data/rete_fuorigrotta.json`, test; contratto invariato. Poi B1 (collegamento alla sessione) |
 
 ## Fatto
 
@@ -56,6 +55,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **Viste allineate alle specifiche** (PROGETTO.md 6, 6.1, 6.2; contracts/README.md). Vista cittadino: avvisi letti da `/api/avvisi` (restano dopo una ricarica), con indicazioni operative, certezza, fonte, «simulato», caso A «Allarme ufficiale · testo non modificato» o caso B «Evento rilevato · in attesa di comunicazioni ufficiali», colore per gravità. Control room: tolto il pannello di prova del canale; aggiunti i riquadri «Messaggi tra agenti» (C2) e «Registro delle decisioni» (C4). Tolto `POST /api/events/test` (solo sviluppo); intestazione «Control room comunale · prototipo», non più «Comune di Napoli»; etichette «simulati» e «da verificare» su spettatori, partita e livello vulcanico.
 - **Profilo «pendolare flegreo».** **Contratto: `Alert.pubblico` e `GET /api/avvisi?pubblico=` ammettono anche `pendolare`.** Chi rientra verso l'area flegrea riceve la propria catena di avvisi: navette sostitutive «per Bagnoli e Pozzuoli» (destinazioni simulate), linee di nuovo in servizio, cessato allarme, e sempre «prima di rientrare segui la Protezione Civile e il tuo Comune», senza indicazioni sul rischio. 30 test.
 - **B2 — Modifica del piano.** `POST /api/piano/{id}/modifica` non è più uno stub: l'operatore esclude proposte, il piano passa a «modificato» (si approva o rifiuta come un piano proposto), si ricalcolano conflitti e sintesi, le proposte escluse non generano avvisi; la modifica va nel registro e sul bus. Si può reincludere una proposta rimodificando. Le allerte ufficiali (caso A) non si possono escludere (409); escludere lo sciame non fa partire il cessato allarme. **Contratto: `Piano` ha i campi `proposte_escluse` e `motivo_modifica`.** 38 test.
+- **S0 — Simulatore a zone** (`…/simulatore.py`, `…/data/rete_fuorigrotta.json`). Funzione pura e deterministica, a passi di un minuto: stadio, Piazzale Tecchio, Viale Giochi del Mediterraneo, stazioni Campi Flegrei (L2) e Mostra (Cumana), fermata Marino - Stadio Maradona; coordinate delle fermate dal GTFS ANM. Persone conservate a ogni passo, capienza superata = coda, linee riattivate che tornano a smaltire, persone informate o no. Restituisce già la `SerieSimulazione` del contratto. Risultato sullo scenario: area sgombra in 50 minuti con coordinamento contro 60 senza; le stazioni chiuse non si riempiono mai con coordinamento (senza: fino a 3,7 volte la capienza); picco su Piazzale Tecchio 3,8 contro 5,4 volte la capienza. Non ancora collegato alla sessione: è il compito B1. 47 test.
 
 ## Prossimi compiti liberi
 
@@ -63,7 +63,6 @@ Le schede complete, con file, dipendenze, verifica e prova a mano, sono in docs/
 
 Subito, in parallelo:
 
-- **S0** — Simulatore a zone, funzione pura (`…/simulatore.py`).
 - **L0** — Strato LLM: finto, compatibile OpenAI, Anthropic, cache (`…/llm/`).
 - **D1** — Dati: copie in cache e docs/DATI.md, 40 minuti al massimo.
 - **H1** — Persone: stand (docs/STAND.md), chiave del modello e chiave Google Maps in `.env`, nome del team, checkpoint con i mentor.

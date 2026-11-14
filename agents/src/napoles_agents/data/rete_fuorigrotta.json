@@ -1,0 +1,18 @@
+{
+  "nota": "Rete semplificata di Fuorigrotta per il simulatore a zone. Capienze, quote modali e capacità sono ipotesi (docs/IPOTESI.md). Coordinate: fermate dal GTFS ANM; stadio, Cumana Mostra e Viale Giochi del Mediterraneo approssimate.",
+  "zone": [
+    {"id": "stadio", "nome": "Stadio Maradona", "tipo": "stadio", "lat": 40.8279, "lon": 14.1930, "capienza": 54000, "fonte_coordinate": "approssimata"},
+    {"id": "piazzale_tecchio", "nome": "Piazzale Tecchio", "tipo": "piazza", "lat": 40.8227, "lon": 14.1944, "capienza": 6000, "fonte_coordinate": "GTFS ANM, fermata 5001"},
+    {"id": "viale_giochi_del_mediterraneo", "nome": "Viale Giochi del Mediterraneo", "tipo": "strada", "lat": 40.8296, "lon": 14.1902, "capienza": 4000, "fonte_coordinate": "approssimata"},
+    {"id": "stazione_campi_flegrei", "nome": "Stazione Campi Flegrei (Linea 2)", "tipo": "stazione", "lat": 40.8225, "lon": 14.1946, "capienza": 1500, "fonte_coordinate": "GTFS ANM, fermata 6277"},
+    {"id": "stazione_mostra", "nome": "Stazione Mostra (Cumana)", "tipo": "stazione", "lat": 40.8251, "lon": 14.1930, "capienza": 1000, "fonte_coordinate": "approssimata, vicino alla fermata bus 2153 «Tecchio - Mostra»"},
+    {"id": "fermata_marino_stadio", "nome": "Fermata bus Marino - Stadio Maradona", "tipo": "fermata", "lat": 40.8261, "lon": 14.1944, "capienza": 800, "fonte_coordinate": "GTFS ANM, fermata 2299"}
+  ],
+  "modi": [
+    {"id": "piedi", "zona": "piazzale_tecchio", "quota": 0.55, "linea": "piedi"},
+    {"id": "linea2", "zona": "stazione_campi_flegrei", "quota": 0.20, "linea": "linea2"},
+    {"id": "cumana", "zona": "stazione_mostra", "quota": 0.10, "linea": "cumana"},
+    {"id": "bus", "zona": "fermata_marino_stadio", "quota": 0.15, "linea": "bus"}
+  ],
+  "ripiego_senza_linea": "piazzale_tecchio"
+}
