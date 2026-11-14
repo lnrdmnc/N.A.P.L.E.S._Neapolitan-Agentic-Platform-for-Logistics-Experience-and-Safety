@@ -1903,6 +1903,7 @@
     },
     "/api/indicatori": {
       "get": {
+        "description": "Stessi indicatori, stesso simulatore a zone della mappa. Ogni numero ha la sua `origine`:\nil caso «con coordinamento» usa le decisioni vere dell'operatore appena ce n'è una dopo\nl'evento critico (`misurato_in_sessione`), prima usa i tempi ipotizzati (`ipotesi`).",
         "operationId": "indicatori_api_indicatori_get",
         "responses": {
           "200": {

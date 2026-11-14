@@ -66,9 +66,13 @@ def test_piano_ha_affidabilita_minima():
 
 
 def test_indicatori_dichiarano_l_origine():
+    client.post("/api/reset")
     c = client.get("/api/indicatori").json()["con_coordinamento"]
     assert c["origine"]["deflusso_min"] == "calcolato"
-    assert c["origine"]["minuti_decisione"] == "ipotesi"
+    assert c["origine"]["minuti_decisione"] == "ipotesi"  # nessuna decisione ancora
+    _percorso_demo()  # approvazione al minuto 72
+    c = client.get("/api/indicatori").json()["con_coordinamento"]
+    assert c["origine"]["minuti_decisione"] == "misurato_in_sessione"
 
 
 def test_stub_rispondono_con_la_forma_del_contratto():

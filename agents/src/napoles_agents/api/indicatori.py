@@ -11,4 +11,8 @@ router = APIRouter(tags=["indicatori"])
 
 @router.get("/api/indicatori", response_model=ConfrontoIndicatori)
 def indicatori() -> ConfrontoIndicatori:
-    return confronta(sessione().scenario)
+    """Stessi indicatori, stesso simulatore a zone della mappa. Ogni numero ha la sua `origine`:
+    il caso «con coordinamento» usa le decisioni vere dell'operatore appena ce n'è una dopo
+    l'evento critico (`misurato_in_sessione`), prima usa i tempi ipotizzati (`ipotesi`)."""
+    s = sessione()
+    return confronta(s.scenario, s.approvati, s.avvisi)

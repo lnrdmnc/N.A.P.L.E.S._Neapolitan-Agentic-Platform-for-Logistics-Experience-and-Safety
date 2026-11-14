@@ -109,19 +109,57 @@ def test_mobilita_senza_sospensioni_non_propone_nulla():
 
 
 def test_ritardo_informazione_senza_coordinamento_ha_effetto():
-    # Se il ritardo d'informazione non contasse, togliere il dimezzamento non cambierebbe nulla.
+    # Se le persone sapessero subito delle sospensioni, le stazioni chiuse si affollerebbero meno.
     from copy import deepcopy
 
     s = deepcopy(S)
     s["simulazione"]["senza_coordinamento_minuti_informazione"] = 0
-    assert confronta(s).senza_coordinamento.deflusso_min < confronta(S).senza_coordinamento.deflusso_min
+    subito = confronta(s).senza_coordinamento.congestione_zone["stazione_campi_flegrei"]
+    tardi = confronta(S).senza_coordinamento.congestione_zone["stazione_campi_flegrei"]
+    assert subito < tardi
 
 
-def test_coordinamento_vince_anche_senza_ipotesi_sui_percorsi_a_piedi():
+def test_coordinamento_riduce_sempre_il_picco_e_le_stazioni_chiuse_affollate():
+    # Risultato robusto: vale per ogni valore delle ipotesi discutibili.
     from napoles_agents.simulazione import sensibilita
 
     for r in sensibilita(S):
-        assert r["deflusso_con"] < r["deflusso_senza"] and r["picco_con"] < r["picco_senza"], r
+        assert r["picco_con"] < r["picco_senza"], r
+
+
+def test_il_deflusso_piu_rapido_dipende_dai_percorsi_a_piedi():
+    # Risultato onesto (docs/IPOTESI.md): senza l'ipotesi sui percorsi a piedi il coordinamento
+    # non accelera lo sgombero; lo accelera solo se i percorsi alternativi aumentano la capacità.
+    from napoles_agents.simulazione import sensibilita
+
+    for r in sensibilita(S):
+        if r["fattore_percorsi_piedi"] > 1.0:
+            assert r["deflusso_con"] < r["deflusso_senza"], r
+
+
+def test_indicatori_dichiarano_l_origine_e_la_congestione_per_zona():
+    c = confronta(S)
+    for i in (c.con_coordinamento, c.senza_coordinamento):
+        assert set(i.origine) >= {"deflusso_min", "picco_attesa_persone", "congestione_zone"}
+        assert i.congestione_zone
+    assert c.con_coordinamento.congestione_zone["stazione_campi_flegrei"] == 0
+    assert c.senza_coordinamento.congestione_zone["stazione_campi_flegrei"] > 1
+
+
+def test_tempi_misurati_in_sessione_dopo_l_approvazione():
+    from napoles_agents.motore import Sessione
+
+    s = Sessione()
+    s.avanza(72)
+    assert (
+        confronta(s.scenario, s.approvati, s.avvisi).con_coordinamento.origine["minuti_decisione"]
+        == "ipotesi"
+    )
+    s.avanza(75)
+    s.approva(s.piano_corrente.id)
+    c = confronta(s.scenario, s.approvati, s.avvisi).con_coordinamento
+    assert c.origine["minuti_decisione"] == "misurato_in_sessione"
+    assert c.minuti_decisione == 75 - 72 and c.minuti_evento_avviso == 75 - 72
 
 
 def test_coordinamento_migliora_gli_indicatori():

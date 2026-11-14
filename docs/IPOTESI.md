@@ -29,17 +29,18 @@
 
 ## Sensibilità del confronto
 
-Il beneficio va presentato come **intervallo**, non come numero unico. Calcolato con `make prova` sullo scenario attuale (deflusso in minuti dal fischio finale; picco di persone in attesa fuori dallo stadio):
+Dal 14/11 alle 17:25 gli indicatori vengono dal **simulatore a zone**, lo stesso della mappa (prima da un modello aggregato più semplice). Il beneficio va presentato come **intervallo**, non come numero unico. Calcolato con `make prova` sullo scenario attuale (deflusso: minuti dal fischio finale allo sgombero dell'area; picco: massimo di persone in attesa fuori dallo stadio):
 
 | Percorsi a piedi (fattore) | Decisione senza coordinamento | Deflusso con → senza | Picco con → senza |
 | --- | --- | --- | --- |
-| 1,0 (nessun effetto) | 10 min | 58 → 65 | 27.640 → 38.500 |
-| 1,0 (nessun effetto) | 20 min | 58 → 66 | 27.640 → 39.400 |
-| 1,3 (valore usato) | 20 min | 47 → 66 | 22.180 → 39.400 |
-| 1,5 | 20 min | 41 → 66 | 18.540 → 39.400 |
+| 1,0 (nessun effetto) | 10 min | 64 → 59 | 28.361 → 32.800 |
+| 1,0 (nessun effetto) | 20 min | 64 → 60 | 28.361 → 33.700 |
+| 1,3 (valore usato) | 20 min | 50 → 60 | 23.299 → 33.700 |
+| 1,5 | 20 min | 43 → 60 | 19.840 → 33.700 |
 
-Lettura onesta: anche senza alcun effetto dei percorsi a piedi il coordinamento riduce il deflusso di circa 7 minuti e il picco di circa il 28%, perché le persone sanno prima dell'uscita che le stazioni sono chiuse. Il tempo di decisione senza coordinamento pesa poco. Il dato più incerto resta il ritardo d'informazione senza coordinamento (15 minuti): è un'ipotesi e va detto.
-| Tempi in auto dallo stadio verso Stazione Centrale, Molo Beverello, Vomero, Pozzuoli e Capodichino | **Reale**, in tempo reale | Google Routes API (`TRAFFIC_AWARE`); se non risponde il pannello lo dice e non mostra numeri | Control room: pannello «Traffico in tempo reale» |
-| Percorsi monitorati e coordinate dei punti di arrivo | Scelta del team | Coordinate approssimate in `agents/src/napoles_agents/data/percorsi_traffico.json` | Pannello traffico |
-| Livello del traffico: scorrevole sotto 1,15 volte il tempo senza traffico, rallentato fino a 1,5, congestionato oltre | Ipotesi | Soglie di lavoro sul rapporto tra le due durate restituite da Google | Colore delle linee e dei pallini nel pannello traffico |
-| Livello traffico sulla mappa (colori delle strade) | **Reale**, in tempo reale | Google Maps JavaScript API, `TrafficLayer` | Mappa della control room |
+Lettura onesta:
+
+- **Robusto, vale con ogni ipotesi:** il coordinamento riduce il picco di persone in attesa (circa −14% anche senza l'ipotesi sui percorsi a piedi, −31% con il valore usato) e **nessuno si ammassa davanti alle stazioni chiuse** (con coordinamento 0; senza, la stazione Campi Flegrei arriva a 5 volte la capienza).
+- **Dipende da un'ipotesi:** lo sgombero più rapido (50 contro 60 minuti) esiste solo se i percorsi pedonali alternativi aumentano davvero la capacità a piedi. Senza quell'effetto il coordinamento non accelera lo sgombero, anzi lo allunga di qualche minuto, perché le ondate fanno uscire le curve più tardi. Va detto.
+- Il messaggio corretto per il pitch è quindi **meno affollamento e nessuna folla davanti alle stazioni chiuse**, non «sgomberiamo prima».
+- Nella sessione, appena l'operatore approva un piano dopo la sospensione, il caso «con coordinamento» usa le sue decisioni vere e i tempi diventano «misurati in sessione»; il caso «senza coordinamento» resta un'ipotesi.
