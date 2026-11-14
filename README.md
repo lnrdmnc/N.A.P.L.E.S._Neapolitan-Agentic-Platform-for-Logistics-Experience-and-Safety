@@ -1,1 +1,1 @@
-# CoScienzeTheBigHack2026
+# CoScienze-TheBigHack2026
