@@ -48,15 +48,15 @@ function Evento({ p }: { p: EventoPrevisto }) {
         </div>
         <div>
           <dt>Quando è affollata</dt>
-          <dd>{i.finestre.map((f) => `${f.da}–${f.a} ${f.motivo}`).join(' · ')}</dd>
+          <dd>{i.finestre.map((f) => `${f.da}–${f.a} ${f.motivo}`).join(', ')}</dd>
         </div>
         <div>
           <dt>Da evitare</dt>
-          <dd>{i.da_evitare.join(' · ')}</dd>
+          <dd>{i.da_evitare.join(', ')}</dd>
         </div>
         <div className="pg-alt">
           <dt>Usa invece</dt>
-          <dd>{i.alternative.join(' · ')}</dd>
+          <dd>{i.alternative.join(', ')}</dd>
         </div>
       </dl>
       {e.esempio && <p className="pg-source">Fonte: {e.fonte}</p>}
