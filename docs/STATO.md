@@ -34,6 +34,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
+| C2 — Control room: linea del tempo dei messaggi tra agenti | Leonardo Monaco | sab 14/11 18:00 | Nuovi `frontend/src/api/useMessaggi.ts` e `frontend/src/control-room/MessaggiAgenti.tsx` (+ .css); in `ControlRoom.tsx` solo il segnaposto C2 sostituito dal componente |
 | F5 — Partite al Maradona da football-data.org (dato reale, copia in cache per l'offline) | Francesco Sannella | sab 14/11 17:50 | Nuovi `…/fonti/partite_football.py`, `…/models/partite.py`, `…/api/partite.py`, una riga in api/__init__.py; contratto: `GET /api/partite` (commit dedicato); riquadro nella vista cittadino |
 
 ## Fatto
