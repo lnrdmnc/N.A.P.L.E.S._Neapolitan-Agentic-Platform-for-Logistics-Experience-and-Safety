@@ -5,11 +5,12 @@ P1 lo completa salvando messaggi, piano e indicatori in docs/prove/.
 """
 
 from .motore import Sessione
+from .registro import FILE_PREDEFINITO
 from .simulazione import confronta, sensibilita
 
 
 def main() -> None:
-    s = Sessione()
+    s = Sessione(file_registro=FILE_PREDEFINITO)
     for t in range(s.scenario["durata_min"] + 1):
         s.avanza(t)
         p = s.piano_corrente
@@ -20,6 +21,7 @@ def main() -> None:
     integro, _ = s.registro.verifica()
     c = confronta(s.scenario)
     print(f"\nRegistro integro: {integro}; voci: {len(s.registro.voci)}; avvisi: {len(s.avvisi)}")
+    print(f"Registro scritto in {FILE_PREDEFINITO}: verificalo con make verifica-registro")
     for i in (c.con_coordinamento, c.senza_coordinamento):
         print(f"{i.scenario}: deflusso {i.deflusso_min} min, picco {i.picco_attesa_persone} persone")
     print("\nSensibilità (fattore percorsi a piedi, decisione senza coordinamento):")

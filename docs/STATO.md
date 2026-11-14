@@ -34,7 +34,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Traffico reale da Google (Maps JavaScript con livello traffico, Routes API per i tempi) e messa online su Cloud Run | Leonardo Schiavo | sab 14/11 16:50 | Mappa e traffico fatti, resta il deploy (docs/DEPLOY.md). Era: Nuovo endpoint `/api/traffico` negli agenti (contratto), mappa in control room, Dockerfile |
-| R1 — Registro delle decisioni su file e `make verifica-registro` | Leonardo Monaco | sab 14/11 17:31 | Tocca registro.py, api/sessione_corrente.py, prova.py, Makefile (solo il target `verifica-registro`) e .gitignore (`agents/var/`) |
 
 ## Fatto
 
@@ -60,6 +59,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **Traffico reale da Google.** `GET /api/traffico` negli agenti (contratto: modelli `Traffico`, `PercorsoTraffico`, `LivelloTraffico`): tempi in auto dallo stadio verso cinque destinazioni con Google Routes API, mai simulati; in memoria 10 minuti, massimo 150 chiamate al giorno. Pannello «Traffico in tempo reale» nella control room con livello traffico di Google Maps al posto del segnaposto della mappa; `GET /api/config` nel backend per la chiave del browser. Chiavi in `.env` (`MAPS_API_KEY`, `MAPS_JS_API_KEY`), da chiedere in privato a Leonardo Schiavo. `Dockerfile` e docs/DEPLOY.md per Cloud Run: deploy non ancora eseguito.
 - **B1 — Simulatore nella sessione.** `GET /api/simulazione` non è più uno stub: `scenario=sessione` (predefinito) mostra la città secondo le decisioni approvate fin qui, proiettata fino a fine scenario; `con_coordinamento` e `senza_coordinamento` danno i due casi per lo schermo diviso. Solo ciò che è approvato cambia la città (`…/decisioni.py`): rifiutare o non decidere non attiva nessuna misura. Ogni piano, anche dopo una modifica, porta `impatto`: picco di carico e minuti alla normalità per zona, con e senza quel piano. Sullo scenario: area sgombra 70 minuti dopo il fischio senza approvazioni, 50 approvando al minuto 72, 55 approvando al minuto 101 (il costo del ritardo). 54 test.
 - **B4 — Indicatori.** `GET /api/indicatori` ora usa il simulatore a zone (lo stesso della mappa) invece del modello aggregato: deflusso, picco di persone in attesa e **congestione per zona** (`congestione_zone`), ciascuno con `origine`. Il caso «con coordinamento» usa le decisioni vere dell'operatore appena ce n'è una dopo la sospensione (`misurato_in_sessione`); prima, e per il caso «senza», i tempi sono `ipotesi`. **Il risultato è meno favorevole e va detto**: con le ipotesi attuali sgombero 50 contro 60 minuti e picco 23.299 contro 33.700; senza l'ipotesi sui percorsi a piedi lo sgombero non migliora (64 contro 60), mentre il picco cala sempre e le stazioni chiuse non si affollano mai. Dettaglio e messaggio per il pitch in docs/IPOTESI.md. 64 test.
+- **R1 — Registro su file.** Ogni voce del registro delle decisioni viene scritta subito in `agents/var/registro.jsonl` (una riga JSON per voce; percorso diverso con `NAPOLES_REGISTRO`, file escluso da git). `make verifica-registro` (o `FILE=percorso`) ricalcola la catena di hash senza fidarsi del programma: una riga cambiata, tolta, aggiunta o spostata fa fallire il comando e indica la riga. Provato a mano: «Cumana sospesa» cambiato in «Cumana regolare» alla riga 12 → «Registro ALTERATO alla riga 12». `make prova` scrive lo stesso file. 72 test.
 
 ## Prossimi compiti liberi
 
@@ -73,7 +73,7 @@ Subito, in parallelo:
 - Verificare con il team nomi delle stazioni, capacità e soglie in `scenario_maradona.json` e in docs/IPOTESI.md.
 - Dal check delle idee (docs/IDEE.md), con S0: **presenze aggregate per cella simulate** come input dell'agente Folla.
 
-B0 è su main: sbloccati, backend: **B3** conferma di ricezione, **B5** testi dal modello (serve L0), **F1–F4** fonti INGV, meteo, GTFS, mappe (serve D1), **B6** itinerario del turista, **P1** strumento di prova, **R1** registro su file e comando di verifica.
+B0 è su main: sbloccati, backend: **B3** conferma di ricezione, **B5** testi dal modello (serve L0), **F1–F4** fonti INGV, meteo, GTFS, mappe (serve D1), **B6** itinerario del turista, **P1** strumento di prova.
 
 Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Domenica dopo le 10:30: registrazione del video seguendo docs/VIDEO.md. Se avanza tempo: U2, C6, U3, X2, U4.
 

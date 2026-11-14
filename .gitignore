@@ -33,3 +33,6 @@ htmlcov/
 .vscode/
 .DS_Store
 *.log
+
+# Registro delle decisioni scritto dalla demo (si verifica con make verifica-registro)
+agents/var/

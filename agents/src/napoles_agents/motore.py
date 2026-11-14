@@ -1,5 +1,6 @@
 """Sessione demo: fa avanzare lo scenario, chiama gli agenti, gestisce approvazioni e registro."""
 
+from pathlib import Path
 from typing import Any
 
 from . import scenario as sc
@@ -24,13 +25,14 @@ NOMI_AGENTI = {
 
 
 class Sessione:
-    def __init__(self, nome_scenario: str = "scenario_maradona") -> None:
+    def __init__(self, nome_scenario: str = "scenario_maradona", file_registro: Path | None = None) -> None:
         self.nome_scenario = nome_scenario
         self.scenario: dict[str, Any] = sc.carica(nome_scenario)
         self.t_min = -1
         self.piani: list[Piano] = []
         self.avvisi: list[Alert] = []
-        self.registro = Registro()
+        self.file_registro = file_registro
+        self.registro = Registro(file_registro)
         self.bus = Bus()
         self._firma: tuple = ()
         self._eventi_visti: set[str] = set()
@@ -64,7 +66,7 @@ class Sessione:
     def avanza(self, t_min: int) -> StatoCitta:
         """Porta la simulazione al minuto t_min. Tornare indietro riparte da zero."""
         if t_min < self.t_min:
-            self.__init__(self.nome_scenario)
+            self.__init__(self.nome_scenario, self.file_registro)
         for minuto in range(max(self.t_min + 1, 0), t_min + 1):
             self.t_min = minuto
             self._passo()

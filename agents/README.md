@@ -8,5 +8,6 @@ Rischio, Mobilità, Folla, Comunicazione e Orchestratore, in Python. Le decision
 - **Stub** (forma definitiva, dati finti, campo `stub: true`): `/api/contesto` (F1, F2), `/api/itinerario` (B6), `/api/avvisi/ricezione` e `/visto` (B3).
 - **Traffico reale:** `GET /api/traffico`, tempi in auto con traffico da Google Routes API (`fonti/traffico_google.py`, chiave `MAPS_API_KEY`). Mai simulato: senza chiave o senza risposta `disponibile=false` e nessun numero. Risposte in memoria per `TRAFFICO_TTL_S` (600 s) e al massimo `TRAFFICO_MAX_CHIAMATE_GIORNO` (150) chiamate al giorno.
 - **Nuovo agente o router:** un file nella cartella e una riga nell'indice (`agenti/__init__.py`, `api/__init__.py`).
+- **Registro:** scritto in `agents/var/registro.jsonl` (o `NAPOLES_REGISTRO`); `make verifica-registro` lo verifica.
 - **Comandi:** `make agents-test`, `make prova`; dopo aver cambiato modelli o API, `make contracts`.
 - **Requisiti:** [uv](https://docs.astral.sh/uv/); al primo avvio crea `.venv` e installa le dipendenze.

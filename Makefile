@@ -36,9 +36,9 @@ contracts:
 prova:
 	cd agents && PYTHONPATH=src uv run --quiet python -m napoles_agents.prova
 
-# Verifica del registro su file (compito R1)
+# Verifica del registro su file: agents/var/registro.jsonl, oppure FILE=percorso (compito R1)
 verifica-registro:
-	@echo "verifica-registro: da implementare nel compito R1 (oggi la verifica è in GET /api/registro)"; exit 1
+	@cd agents && PYTHONPATH=src uv run --quiet python -m napoles_agents.registro verifica $(if $(FILE),$(abspath $(FILE)),)
 
 # Demo offline: web app compilata servita dall'API su una sola porta (compito X1)
 demo:
