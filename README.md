@@ -21,6 +21,7 @@ Repository appena preparato: regole di team, file di stato e concept. Non c'è a
 - `.env.example`: nomi delle variabili d'ambiente, senza valori
 - `docs/PROGETTO.md`: concept del progetto
 - `docs/GUIDA.md`: guida del team (prompt, template, regole per i tre PC)
+- `docs/TEAM.md`: componenti del team, utenti GitHub ed email per i commit
 - `docs/STATO.md`: scadenze, chi lavora su cosa, fatto e compiti liberi
 - `docs/IPOTESI.md`: dati simulati e ipotesi
 - `docs/STAND.md`: risposte dello sponsor e degli organizzatori
@@ -28,10 +29,11 @@ Repository appena preparato: regole di team, file di stato e concept. Non c'è a
 
 ## Team
 
-Nome del team: da definire.
+Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 ## Registro delle modifiche
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 14:22 | repo | Aggiunta docs/TEAM.md e regola dei Co-authored-by nei commit |
 | 2026-11-14 | 14:13 | repo | Preparazione del repository: regole, stato, ipotesi, concept, `make check` minimo |

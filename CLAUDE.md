@@ -55,6 +55,9 @@ Messaggio in formato Conventional Commits, `tipo(ambito): descrizione`: in ingle
 all'imperativo, al massimo 72 caratteri, tipi feat, fix, docs, test, refactor, chore, con il
 modulo come ambito. Nel corpo il perché, quando non è ovvio. Un commit contiene una sola
 modifica logica; niente segreti e niente file generati.
+Ogni commit, compresi quelli di presa in carico, termina con una riga vuota seguita da una riga
+`Co-authored-by: Nome <email>` per ciascun collaboratore di docs/TEAM.md diverso da chi fa il
+commit. Chi fa il commit si riconosce da `git config user.email`.
 
 ## Regole di lavoro
 - A inizio compito esegui `date` e confronta con le scadenze in docs/STATO.md. Se siamo in

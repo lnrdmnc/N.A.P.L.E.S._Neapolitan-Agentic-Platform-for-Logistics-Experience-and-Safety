@@ -21,6 +21,7 @@
 ## Fatto
 
 - Preparazione del repository: CLAUDE.md, .gitignore, .env.example, README.md, docs/STATO.md, docs/IPOTESI.md, docs/STAND.md, docs/FEEDBACK.md, Makefile con `make check`.
+- docs/TEAM.md con i componenti del team e regola dei Co-authored-by in CLAUDE.md.
 - docs/PROGETTO.md (concept) e docs/GUIDA.md (guida del team) aggiunti.
 
 ## Prossimi compiti liberi
