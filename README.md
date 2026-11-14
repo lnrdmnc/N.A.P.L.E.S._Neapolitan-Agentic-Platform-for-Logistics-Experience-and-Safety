@@ -47,6 +47,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
 | 2026-11-14 | 17:20 | agents, webapp | Traffico reale: `GET /api/traffico` da Google Routes API, mappa con livello traffico in control room, chiave del browser da `/api/config`; Dockerfile e docs/DEPLOY.md per Cloud Run |
+| 2026-11-14 | 17:19 | agents | B1: la simulazione della sessione segue le decisioni approvate; impatto stimato in ogni piano |
 | 2026-11-14 | 17:12 | agents | S0: simulatore a zone di Fuorigrotta, funzione pura con persone conservate, code e linee riattivate |
 | 2026-11-14 | 17:04 | agents | B2: modifica del piano reale (esclusione di proposte, registro, niente esclusione delle allerte ufficiali) |
 | 2026-11-14 | 17:04 | contracts | `Piano` ha `proposte_escluse` e `motivo_modifica` |

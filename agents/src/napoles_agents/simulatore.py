@@ -34,6 +34,7 @@ class Misure:
     navette_zona: str = "piazzale_tecchio"
     informati_dal_t: int | None = None
     fattore_piedi: float = 1.0
+    informati_da_avvisi: bool = False
     etichette: tuple[str, ...] = field(default_factory=tuple)
 
 
@@ -70,6 +71,7 @@ def misure_da_scenario(scenario: dict[str, Any], coordinato: bool) -> Misure:
             navette_zona=navette["punto_carico_alternativo"],
             informati_dal_t=critico + sim["con_coordinamento_minuti_informazione"],
             fattore_piedi=sim["con_coordinamento_fattore_percorsi_piedi"],
+            informati_da_avvisi=True,
             etichette=("ondate", "navette", "avvisi", "percorsi_alternativi"),
         )
     return Misure(
@@ -230,8 +232,8 @@ def _passo(
         attive.append("ondate")
     if navette_ok:
         attive.append(f"navette da {zone[misure.navette_zona]['nome']}")
-    if informati:
-        attive.append("persone informate delle sospensioni")
+    if informati and misure.informati_da_avvisi:
+        attive.append("avvisi inviati: persone informate delle sospensioni")
     if misure.fattore_piedi > 1:
         attive.append("percorsi pedonali alternativi")
     return PassoSimulazione(

@@ -7,8 +7,10 @@ from .agenti import AGENTI
 from .agenti.comunicazione import prepara_avvisi
 from .agenti.orchestratore import pianifica
 from .bus import Bus
-from .models import Alert, Caso, Piano, Proposta, StatoCitta
+from .decisioni import impatto, misure_da_decisioni
+from .models import Alert, Caso, Piano, Proposta, SerieSimulazione, StatoCitta
 from .registro import Registro
+from .simulatore import simula
 
 # Stati in cui il piano aspetta la decisione dell'operatore.
 IN_ATTESA = ("proposto", "modificato")
@@ -46,6 +48,14 @@ class Sessione:
     @property
     def piano_corrente(self) -> Piano | None:
         return self.piani[-1] if self.piani else None
+
+    @property
+    def approvati(self) -> list[Piano]:
+        return [p for p in self.piani if p.stato == "approvato"]
+
+    def simulazione(self) -> SerieSimulazione:
+        """La città secondo le decisioni approvate fin qui (proiezione fino a fine scenario)."""
+        return simula(self.scenario, misure_da_decisioni(self.scenario, self.approvati), "sessione")
 
     def proposte(self) -> list[Proposta]:
         stato = self.stato
@@ -102,6 +112,7 @@ class Sessione:
         if corrente and corrente.stato in IN_ATTESA:
             corrente.stato = "superato"
         piano = pianifica(proposte, self.t_min, len(self.piani) + 1)
+        piano.impatto = impatto(self.scenario, self.approvati, piano, self.t_min)
         self.piani.append(piano)
         self.registro.aggiungi(
             self.t_min,
@@ -163,6 +174,7 @@ class Sessione:
         piano.proposte_escluse = [p for p in tutte if p.id in escluse]
         piano.motivo_modifica = motivo or None
         piano.stato = "modificato"
+        piano.impatto = impatto(self.scenario, self.approvati, piano, self.t_min)
         titoli = ", ".join(p.titolo for p in piano.proposte_escluse) or "nessuna"
         self.registro.aggiungi(
             self.t_min,

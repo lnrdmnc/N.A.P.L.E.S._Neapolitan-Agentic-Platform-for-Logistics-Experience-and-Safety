@@ -73,7 +73,7 @@ def test_indicatori_dichiarano_l_origine():
 
 def test_stub_rispondono_con_la_forma_del_contratto():
     _percorso_demo()
-    assert client.get("/api/simulazione").json()["stub"] is True
+    assert client.get("/api/simulazione").json()["stub"] is False  # B1: non più stub
     assert client.get("/api/contesto").json()["stub"] is True
     it = client.get("/api/itinerario").json()
     assert it["stub"] is True and it["tratte"][0]["percorribile"] is False

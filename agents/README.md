@@ -5,7 +5,7 @@ Rischio, Mobilità, Folla, Comunicazione e Orchestratore, in Python. Le decision
 - **Espone:** API HTTP su `http://localhost:8001` (`make agents-run`, documentazione su `/docs`). Contratto: `contracts/agenti.openapi.json`.
 - **Percorso demo:** `POST /api/reset` → `POST /api/avanza {"t_min": 72}` → `GET /api/messaggi` → `GET /api/piano` → `POST /api/piano/{id}/approva` → `GET /api/avvisi?pubblico=tifoso` → `GET /api/indicatori` → `GET /api/registro`.
 - **Struttura:** `models/` e `api/` hanno un file per area con un indice; `bus.py` è la linea del tempo dei messaggi; `motore.py` la sessione; `agenti/` un file per agente.
-- **Stub** (forma definitiva, dati finti, campo `stub: true`): `/api/simulazione` (S0, B1), `/api/contesto` (F1, F2), `/api/itinerario` (B6), `/api/avvisi/ricezione` e `/visto` (B3).
+- **Stub** (forma definitiva, dati finti, campo `stub: true`): `/api/contesto` (F1, F2), `/api/itinerario` (B6), `/api/avvisi/ricezione` e `/visto` (B3).
 - **Traffico reale:** `GET /api/traffico`, tempi in auto con traffico da Google Routes API (`fonti/traffico_google.py`, chiave `MAPS_API_KEY`). Mai simulato: senza chiave o senza risposta `disponibile=false` e nessun numero. Risposte in memoria per `TRAFFICO_TTL_S` (600 s) e al massimo `TRAFFICO_MAX_CHIAMATE_GIORNO` (150) chiamate al giorno.
 - **Nuovo agente o router:** un file nella cartella e una riga nell'indice (`agenti/__init__.py`, `api/__init__.py`).
 - **Comandi:** `make agents-test`, `make prova`; dopo aver cambiato modelli o API, `make contracts`.

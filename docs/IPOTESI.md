@@ -25,6 +25,7 @@
 | Quote modali all'uscita dallo stadio: a piedi e mezzi propri 55%, Linea 2 20%, Cumana 10%, bus 15% | Ipotesi | Valori di lavoro, non misurati | Simulatore a zone |
 | Coordinate delle zone | Reale in parte | Fermate dal GTFS ANM (5001 Piazzale Tecchio, 6277 Campi Flegrei, 2299 Marino - Stadio Maradona); stadio, stazione Mostra e Viale Giochi approssimati | Mappa |
 | Chi è informato lascia le stazioni chiuse e le code oltre la capienza e ripiega su navette e piedi in proporzione alla capacità; chi non è informato aspetta | Ipotesi | Regola di comportamento del simulatore a zone | Code alle stazioni nel caso senza coordinamento |
+| Nella sessione conta solo ciò che è approvato: ondate solo se approvate entro il fischio finale; navette operative 12 minuti dopo l'approvazione; persone informate dal primo avviso approvato con le sospensioni. Senza approvazioni le persone scoprono le sospensioni da sole, 15 minuti dopo il fischio | Ipotesi | Regole di `decisioni.py` | Mappa della sessione, impatto del piano |
 
 ## Sensibilità del confronto
 

@@ -2309,7 +2309,7 @@
     },
     "/api/simulazione": {
       "get": {
-        "description": "STUB: valori finti che crescono e calano dopo il fischio finale.",
+        "description": "Passi da 5 minuti con lo stato di ogni zona.\n\n- `sessione`: la città secondo le decisioni approvate fin qui dall'operatore, proiettata\n  fino a fine scenario (la web app mostra i passi fino a `t_min` di `/api/stato`);\n- `con_coordinamento` e `senza_coordinamento`: i due casi del confronto, per lo schermo diviso.",
         "operationId": "simulazione_api_simulazione_get",
         "parameters": [
           {
