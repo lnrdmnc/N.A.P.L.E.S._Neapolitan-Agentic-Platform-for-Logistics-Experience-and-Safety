@@ -296,6 +296,58 @@
         "title": "ConfrontoIndicatori",
         "type": "object"
       },
+      "Contesto": {
+        "properties": {
+          "copia_del": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Data della copia in cache usata",
+            "title": "Copia Del"
+          },
+          "eventi_ingv": {
+            "items": {
+              "$ref": "#/components/schemas/EventoSismicoReale"
+            },
+            "title": "Eventi Ingv",
+            "type": "array"
+          },
+          "livelli_vulcanici": {
+            "items": {
+              "$ref": "#/components/schemas/LivelloVulcanico"
+            },
+            "title": "Livelli Vulcanici",
+            "type": "array"
+          },
+          "meteo": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Meteo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stub": {
+            "default": false,
+            "description": "True finché le fonti reali non sono collegate",
+            "title": "Stub",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "livelli_vulcanici",
+          "eventi_ingv"
+        ],
+        "title": "Contesto",
+        "type": "object"
+      },
       "Decisione": {
         "properties": {
           "motivo": {
@@ -394,6 +446,59 @@
         "title": "Evento",
         "type": "object"
       },
+      "EventoSismicoReale": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "lon": {
+            "title": "Lon",
+            "type": "number"
+          },
+          "luogo": {
+            "title": "Luogo",
+            "type": "string"
+          },
+          "magnitudo": {
+            "title": "Magnitudo",
+            "type": "number"
+          },
+          "profondita_km": {
+            "title": "Profondita Km",
+            "type": "number"
+          },
+          "simulato": {
+            "default": false,
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "tempo": {
+            "title": "Tempo",
+            "type": "string"
+          },
+          "tipo_magnitudo": {
+            "title": "Tipo Magnitudo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tempo",
+          "magnitudo",
+          "tipo_magnitudo",
+          "luogo",
+          "lat",
+          "lon",
+          "profondita_km"
+        ],
+        "title": "EventoSismicoReale",
+        "type": "object"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -407,9 +512,74 @@
         "title": "HTTPValidationError",
         "type": "object"
       },
+      "Impatto": {
+        "description": "Effetto stimato del piano, calcolato dal simulatore a zone (compito B1).",
+        "properties": {
+          "stub": {
+            "default": false,
+            "description": "True finché il simulatore a zone non è collegato",
+            "title": "Stub",
+            "type": "boolean"
+          },
+          "zone": {
+            "items": {
+              "$ref": "#/components/schemas/ImpattoZona"
+            },
+            "title": "Zone",
+            "type": "array"
+          }
+        },
+        "required": [
+          "zone"
+        ],
+        "title": "Impatto",
+        "type": "object"
+      },
+      "ImpattoZona": {
+        "properties": {
+          "deflusso_min_con_piano": {
+            "title": "Deflusso Min Con Piano",
+            "type": "integer"
+          },
+          "deflusso_min_senza_piano": {
+            "title": "Deflusso Min Senza Piano",
+            "type": "integer"
+          },
+          "picco_carico_con_piano": {
+            "description": "Persone / capienza della zona",
+            "title": "Picco Carico Con Piano",
+            "type": "number"
+          },
+          "picco_carico_senza_piano": {
+            "title": "Picco Carico Senza Piano",
+            "type": "number"
+          },
+          "zona": {
+            "title": "Zona",
+            "type": "string"
+          }
+        },
+        "required": [
+          "zona",
+          "deflusso_min_con_piano",
+          "deflusso_min_senza_piano",
+          "picco_carico_con_piano",
+          "picco_carico_senza_piano"
+        ],
+        "title": "ImpattoZona",
+        "type": "object"
+      },
       "Indicatori": {
         "description": "Stessi indicatori, stesso scenario: con e senza coordinamento.",
         "properties": {
+          "congestione_zone": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "description": "Picco di carico per zona (persone / capienza); compito B4",
+            "title": "Congestione Zone",
+            "type": "object"
+          },
           "deflusso_min": {
             "description": "Minuti dal fischio finale allo sgombero dell'area stadio",
             "title": "Deflusso Min",
@@ -429,6 +599,19 @@
             },
             "title": "Note",
             "type": "array"
+          },
+          "origine": {
+            "additionalProperties": {
+              "enum": [
+                "calcolato",
+                "misurato_in_sessione",
+                "ipotesi"
+              ],
+              "type": "string"
+            },
+            "description": "Da dove viene ogni numero: va mostrato accanto al valore",
+            "title": "Origine",
+            "type": "object"
           },
           "picco_attesa_persone": {
             "description": "Massimo di persone in attesa fuori dallo stadio",
@@ -454,9 +637,290 @@
         "title": "Indicatori",
         "type": "object"
       },
+      "Itinerario": {
+        "properties": {
+          "fonte": {
+            "title": "Fonte",
+            "type": "string"
+          },
+          "stub": {
+            "default": false,
+            "description": "True finché l'itinerario non è calcolato davvero",
+            "title": "Stub",
+            "type": "boolean"
+          },
+          "tappe": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tappe",
+            "type": "array"
+          },
+          "tratte": {
+            "items": {
+              "$ref": "#/components/schemas/Tratta"
+            },
+            "title": "Tratte",
+            "type": "array"
+          },
+          "verificato_al_t_min": {
+            "title": "Verificato Al T Min",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "tappe",
+          "tratte",
+          "fonte",
+          "verificato_al_t_min"
+        ],
+        "title": "Itinerario",
+        "type": "object"
+      },
+      "LivelloVulcanico": {
+        "properties": {
+          "area": {
+            "title": "Area",
+            "type": "string"
+          },
+          "fonte": {
+            "title": "Fonte",
+            "type": "string"
+          },
+          "livello": {
+            "title": "Livello",
+            "type": "string"
+          },
+          "verificato_il": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Data della verifica sulla fonte ufficiale",
+            "title": "Verificato Il"
+          }
+        },
+        "required": [
+          "area",
+          "livello",
+          "fonte"
+        ],
+        "title": "LivelloVulcanico",
+        "type": "object"
+      },
+      "Messaggio": {
+        "properties": {
+          "a": {
+            "description": "A chi: agente, orchestratore, operatore, pubblico",
+            "title": "A",
+            "type": "string"
+          },
+          "affidabilita": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Affidabilita"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "da": {
+            "description": "Chi parla: fonte, agente, orchestratore, operatore",
+            "title": "Da",
+            "type": "string"
+          },
+          "ora": {
+            "title": "Ora",
+            "type": "string"
+          },
+          "rif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Id dell'oggetto collegato: evento, proposta, piano, avviso",
+            "title": "Rif"
+          },
+          "seq": {
+            "description": "Numero progressivo nella sessione: usarlo con ?da_seq=",
+            "title": "Seq",
+            "type": "integer"
+          },
+          "simulato": {
+            "default": true,
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "t_min": {
+            "title": "T Min",
+            "type": "integer"
+          },
+          "testo": {
+            "title": "Testo",
+            "type": "string"
+          },
+          "tipo": {
+            "enum": [
+              "evento",
+              "proposta",
+              "conflitto",
+              "piano",
+              "decisione",
+              "avviso"
+            ],
+            "title": "Tipo",
+            "type": "string"
+          },
+          "titolo": {
+            "title": "Titolo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "seq",
+          "t_min",
+          "ora",
+          "da",
+          "a",
+          "tipo",
+          "titolo",
+          "testo"
+        ],
+        "title": "Messaggio",
+        "type": "object"
+      },
+      "Meteo": {
+        "properties": {
+          "codice_meteo": {
+            "title": "Codice Meteo",
+            "type": "integer"
+          },
+          "precipitazione_mm": {
+            "title": "Precipitazione Mm",
+            "type": "number"
+          },
+          "simulato": {
+            "default": false,
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "temperatura_c": {
+            "title": "Temperatura C",
+            "type": "number"
+          },
+          "tempo": {
+            "title": "Tempo",
+            "type": "string"
+          },
+          "vento_kmh": {
+            "title": "Vento Kmh",
+            "type": "number"
+          }
+        },
+        "required": [
+          "tempo",
+          "temperatura_c",
+          "precipitazione_mm",
+          "vento_kmh",
+          "codice_meteo"
+        ],
+        "title": "Meteo",
+        "type": "object"
+      },
+      "ModificaPiano": {
+        "properties": {
+          "motivo": {
+            "default": "",
+            "title": "Motivo",
+            "type": "string"
+          },
+          "operatore": {
+            "default": "operatore",
+            "title": "Operatore",
+            "type": "string"
+          },
+          "proposte_escluse": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Proposte Escluse",
+            "type": "array"
+          }
+        },
+        "required": [
+          "proposte_escluse"
+        ],
+        "title": "ModificaPiano",
+        "type": "object"
+      },
+      "PassoSimulazione": {
+        "properties": {
+          "arrivati": {
+            "description": "Persone che hanno lasciato l'area dello stadio",
+            "title": "Arrivati",
+            "type": "integer"
+          },
+          "dentro_stadio": {
+            "title": "Dentro Stadio",
+            "type": "integer"
+          },
+          "misure_attive": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Misure Attive",
+            "type": "array"
+          },
+          "ora": {
+            "title": "Ora",
+            "type": "string"
+          },
+          "t_min": {
+            "title": "T Min",
+            "type": "integer"
+          },
+          "zone": {
+            "items": {
+              "$ref": "#/components/schemas/StatoZona"
+            },
+            "title": "Zone",
+            "type": "array"
+          }
+        },
+        "required": [
+          "t_min",
+          "ora",
+          "zone",
+          "dentro_stadio",
+          "arrivati",
+          "misure_attive"
+        ],
+        "title": "PassoSimulazione",
+        "type": "object"
+      },
       "Piano": {
         "description": "Piano unico dell'Orchestratore, da approvare in control room.",
         "properties": {
+          "affidabilita_minima": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Affidabilita"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "L'affidabilità più bassa tra le proposte del piano"
+          },
           "conflitti": {
             "items": {
               "$ref": "#/components/schemas/Conflitto"
@@ -467,6 +931,16 @@
           "id": {
             "title": "Id",
             "type": "string"
+          },
+          "impatto": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Impatto"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "proposte": {
             "items": {
@@ -483,6 +957,7 @@
             "default": "proposto",
             "enum": [
               "proposto",
+              "modificato",
               "approvato",
               "rifiutato",
               "superato"
@@ -596,37 +1071,39 @@
         "title": "Proposta",
         "type": "object"
       },
-      "Registro": {
+      "Ricezione": {
+        "description": "Quante persone hanno visto un avviso (compito B3).",
         "properties": {
-          "integro": {
-            "title": "Integro",
+          "avviso": {
+            "title": "Avviso",
+            "type": "string"
+          },
+          "consegnati_stimati": {
+            "title": "Consegnati Stimati",
+            "type": "integer"
+          },
+          "simulato": {
+            "default": true,
+            "title": "Simulato",
             "type": "boolean"
           },
-          "prima_voce_alterata": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Prima Voce Alterata"
+          "visti_reali": {
+            "description": "Conferme arrivate dalla vista cittadino in questa sessione",
+            "title": "Visti Reali",
+            "type": "integer"
           },
-          "voci": {
-            "items": {
-              "$ref": "#/components/schemas/VoceRegistro"
-            },
-            "title": "Voci",
-            "type": "array"
+          "visti_stimati": {
+            "title": "Visti Stimati",
+            "type": "integer"
           }
         },
         "required": [
-          "integro",
-          "prima_voce_alterata",
-          "voci"
+          "avviso",
+          "visti_reali",
+          "visti_stimati",
+          "consegnati_stimati"
         ],
-        "title": "Registro",
+        "title": "Ricezione",
         "type": "object"
       },
       "Scenario": {
@@ -669,6 +1146,43 @@
           "timeline"
         ],
         "title": "Scenario",
+        "type": "object"
+      },
+      "SerieSimulazione": {
+        "properties": {
+          "passi": {
+            "items": {
+              "$ref": "#/components/schemas/PassoSimulazione"
+            },
+            "title": "Passi",
+            "type": "array"
+          },
+          "passo_min": {
+            "default": 5,
+            "title": "Passo Min",
+            "type": "integer"
+          },
+          "scenario": {
+            "enum": [
+              "sessione",
+              "con_coordinamento",
+              "senza_coordinamento"
+            ],
+            "title": "Scenario",
+            "type": "string"
+          },
+          "stub": {
+            "default": false,
+            "description": "True finché il simulatore a zone non è collegato",
+            "title": "Stub",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "scenario",
+          "passi"
+        ],
+        "title": "SerieSimulazione",
         "type": "object"
       },
       "StatoCitta": {
@@ -761,6 +1275,101 @@
         "title": "StatoLinea",
         "type": "object"
       },
+      "StatoRegistro": {
+        "properties": {
+          "integro": {
+            "title": "Integro",
+            "type": "boolean"
+          },
+          "prima_voce_alterata": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prima Voce Alterata"
+          },
+          "voci": {
+            "items": {
+              "$ref": "#/components/schemas/VoceRegistro"
+            },
+            "title": "Voci",
+            "type": "array"
+          }
+        },
+        "required": [
+          "integro",
+          "prima_voce_alterata",
+          "voci"
+        ],
+        "title": "StatoRegistro",
+        "type": "object"
+      },
+      "StatoZona": {
+        "properties": {
+          "capienza": {
+            "title": "Capienza",
+            "type": "integer"
+          },
+          "carico": {
+            "description": "persone / capienza",
+            "title": "Carico",
+            "type": "number"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "in_coda": {
+            "title": "In Coda",
+            "type": "integer"
+          },
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "lon": {
+            "title": "Lon",
+            "type": "number"
+          },
+          "nome": {
+            "title": "Nome",
+            "type": "string"
+          },
+          "persone": {
+            "title": "Persone",
+            "type": "integer"
+          },
+          "tipo": {
+            "enum": [
+              "stadio",
+              "piazza",
+              "stazione",
+              "fermata",
+              "strada",
+              "quartiere"
+            ],
+            "title": "Tipo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "tipo",
+          "lat",
+          "lon",
+          "capienza",
+          "persone",
+          "in_coda",
+          "carico"
+        ],
+        "title": "StatoZona",
+        "type": "object"
+      },
       "TipoEvento": {
         "enum": [
           "partita",
@@ -772,6 +1381,62 @@
         ],
         "title": "TipoEvento",
         "type": "string"
+      },
+      "Tratta": {
+        "properties": {
+          "a": {
+            "title": "A",
+            "type": "string"
+          },
+          "alternativa": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alternativa"
+          },
+          "da": {
+            "title": "Da",
+            "type": "string"
+          },
+          "mezzo": {
+            "title": "Mezzo",
+            "type": "string"
+          },
+          "minuti": {
+            "title": "Minuti",
+            "type": "integer"
+          },
+          "motivo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Perché non è percorribile: cita il servizio",
+            "title": "Motivo"
+          },
+          "percorribile": {
+            "title": "Percorribile",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "da",
+          "a",
+          "mezzo",
+          "minuti",
+          "percorribile"
+        ],
+        "title": "Tratta",
+        "type": "object"
       },
       "ValidationError": {
         "properties": {
@@ -856,7 +1521,7 @@
   },
   "info": {
     "title": "N.A.P.L.E.S. – agenti",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -895,7 +1560,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Avanza"
+        "summary": "Avanza",
+        "tags": [
+          "sessione"
+        ]
       }
     },
     "/api/avvisi": {
@@ -952,7 +1620,103 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Avvisi"
+        "summary": "Avvisi",
+        "tags": [
+          "avvisi"
+        ]
+      }
+    },
+    "/api/avvisi/ricezione": {
+      "get": {
+        "description": "STUB (compito B3): numeri finti, sempre marcati come simulati.",
+        "operationId": "ricezione_api_avvisi_ricezione_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Ricezione"
+                  },
+                  "title": "Response Ricezione Api Avvisi Ricezione Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Ricezione",
+        "tags": [
+          "avvisi"
+        ]
+      }
+    },
+    "/api/avvisi/{avviso_id}/visto": {
+      "post": {
+        "description": "STUB (compito B3): accetta la conferma ma non la conta ancora.",
+        "operationId": "visto_api_avvisi__avviso_id__visto_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "avviso_id",
+            "required": true,
+            "schema": {
+              "title": "Avviso Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Visto Api Avvisi  Avviso Id  Visto Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Visto",
+        "tags": [
+          "avvisi"
+        ]
+      }
+    },
+    "/api/contesto": {
+      "get": {
+        "description": "STUB: nessun dato reale ancora; il livello va verificato sulla fonte ufficiale.",
+        "operationId": "contesto_api_contesto_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contesto"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Contesto",
+        "tags": [
+          "contesto"
+        ]
       }
     },
     "/api/indicatori": {
@@ -970,7 +1734,80 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Indicatori"
+        "summary": "Indicatori",
+        "tags": [
+          "indicatori"
+        ]
+      }
+    },
+    "/api/itinerario": {
+      "get": {
+        "description": "STUB: itinerario fisso; la percorribilità segue solo lo stato delle linee.",
+        "operationId": "itinerario_api_itinerario_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Itinerario"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Itinerario",
+        "tags": [
+          "itinerario"
+        ]
+      }
+    },
+    "/api/messaggi": {
+      "get": {
+        "description": "Messaggi successivi a `da_seq`: la web app passa l'ultimo `seq` che ha già.",
+        "operationId": "messaggi_api_messaggi_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "da_seq",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "title": "Da Seq",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Messaggio"
+                  },
+                  "title": "Response Messaggi Api Messaggi Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Messaggi",
+        "tags": [
+          "messaggi"
+        ]
       }
     },
     "/api/piani": {
@@ -992,7 +1829,10 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Piani"
+        "summary": "Piani",
+        "tags": [
+          "piani"
+        ]
       }
     },
     "/api/piano": {
@@ -1018,7 +1858,10 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Piano"
+        "summary": "Piano",
+        "tags": [
+          "piani"
+        ]
       }
     },
     "/api/piano/{piano_id}/approva": {
@@ -1078,7 +1921,63 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Approva"
+        "summary": "Approva",
+        "tags": [
+          "piani"
+        ]
+      }
+    },
+    "/api/piano/{piano_id}/modifica": {
+      "post": {
+        "description": "STUB (compito B2): restituisce il piano senza le proposte escluse, ma non lo salva\ne non lo scrive nel registro. La forma della risposta è quella definitiva.",
+        "operationId": "modifica_api_piano__piano_id__modifica_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "piano_id",
+            "required": true,
+            "schema": {
+              "title": "Piano Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModificaPiano"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Piano"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Modifica",
+        "tags": [
+          "piani"
+        ]
       }
     },
     "/api/piano/{piano_id}/rifiuta": {
@@ -1134,7 +2033,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Rifiuta"
+        "summary": "Rifiuta",
+        "tags": [
+          "piani"
+        ]
       }
     },
     "/api/registro": {
@@ -1145,14 +2047,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Registro"
+                  "$ref": "#/components/schemas/StatoRegistro"
                 }
               }
             },
             "description": "Successful Response"
           }
         },
-        "summary": "Registro"
+        "summary": "Registro",
+        "tags": [
+          "registro"
+        ]
       }
     },
     "/api/reset": {
@@ -1170,7 +2075,10 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Reset"
+        "summary": "Reset",
+        "tags": [
+          "sessione"
+        ]
       }
     },
     "/api/salute": {
@@ -1190,7 +2098,10 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Salute"
+        "summary": "Salute",
+        "tags": [
+          "sessione"
+        ]
       }
     },
     "/api/scenario": {
@@ -1208,7 +2119,59 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Scenario"
+        "summary": "Scenario",
+        "tags": [
+          "sessione"
+        ]
+      }
+    },
+    "/api/simulazione": {
+      "get": {
+        "description": "STUB: valori finti che crescono e calano dopo il fischio finale.",
+        "operationId": "simulazione_api_simulazione_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scenario",
+            "required": false,
+            "schema": {
+              "default": "sessione",
+              "enum": [
+                "sessione",
+                "con_coordinamento",
+                "senza_coordinamento"
+              ],
+              "title": "Scenario",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SerieSimulazione"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Simulazione",
+        "tags": [
+          "simulazione"
+        ]
       }
     },
     "/api/stato": {
@@ -1226,7 +2189,10 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Stato"
+        "summary": "Stato",
+        "tags": [
+          "sessione"
+        ]
       }
     }
   }

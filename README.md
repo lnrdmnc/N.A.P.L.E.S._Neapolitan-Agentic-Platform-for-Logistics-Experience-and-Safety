@@ -13,7 +13,8 @@ Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del M
 Serve [uv](https://docs.astral.sh/uv/).
 
 - `make check`: file base, `.env` non tracciato, lint e test degli agenti, contratto API allineato.
-- `make agents-run`: API degli agenti su http://localhost:8000, documentazione su http://localhost:8000/docs.
+- `make agents-run`: API degli agenti su http://localhost:8001 (porta concordata con la web app), documentazione su http://localhost:8001/docs.
+- `make prova`: esegue lo scenario approvando ogni piano e stampa la linea del tempo dei messaggi tra agenti.
 - `make contracts`: rigenera `contracts/agenti.openapi.json` dopo aver cambiato modelli o API.
 
 ## Struttura del repository
@@ -41,6 +42,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 15:45 | agents | B0: models e api divisi per area, bus dei messaggi, stub dei contratti nuovi, `make prova`, API sulla porta 8001 |
 | 2026-11-14 | 15:40 | docs | Piano di lavoro in docs/PIANO.md, costruito sul modulo agenti; compiti liberi e orari aggiornati in docs/STATO.md |
 | 2026-11-14 | 15:30 | repo | Tolti i marcatori di conflitto rimasti in README.md e docs/STATO.md |
 | 2026-11-14 | 15:22 | repo | docs/TEAM.md: aggiornata l'email dei commit di Leonardo Monaco |

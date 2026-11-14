@@ -19,15 +19,24 @@ def proponi(stato: StatoCitta, scenario: dict[str, Any]) -> list[Proposta]:
     soglie = scenario["soglie_sisma"]
     proposte: list[Proposta] = []
 
-    # Caso B: sciame sismico rilevato. Le scosse vicine nel tempo diventano un solo evento.
-    scosse = [
+    # Caso B: sciame sismico rilevato. Le scosse a meno di `finestra_sciame_min` l'una dall'altra
+    # formano un solo sciame, che resta attivo fino a `finestra_sciame_min` dopo l'ultima scossa:
+    # così il conteggio non scende quando le prime scosse invecchiano (niente avvisi a raffica).
+    finestra = soglie["finestra_sciame_min"]
+    rilevanti = [
         e
         for e in stato.eventi
         if e.tipo == TipoEvento.SISMA
         and e.magnitudo is not None
         and e.magnitudo >= soglie["attenzione_magnitudo"]
-        and stato.t_min - e.t_min <= soglie["finestra_sciame_min"]
     ]
+    scosse: list = []
+    for e in rilevanti:
+        if scosse and e.t_min - scosse[-1].t_min > finestra:
+            scosse = []
+        scosse.append(e)
+    if scosse and stato.t_min - scosse[-1].t_min > finestra:
+        scosse = []
     if scosse:
         massima = max(e.magnitudo or 0 for e in scosse)
         severita = severita_sisma(massima, soglie)
@@ -36,7 +45,10 @@ def proponi(stato: StatoCitta, scenario: dict[str, Any]) -> list[Proposta]:
                 id="rischio_sciame_campi_flegrei",
                 agente=Ambito.RISCHIO,
                 t_min=stato.t_min,
-                titolo=f"Sciame sismico ai Campi Flegrei: {len(scosse)} scosse, massima Md {massima}",
+                titolo=(
+                    f"Sciame sismico ai Campi Flegrei: {len(scosse)} "
+                    f"{'scossa' if len(scosse) == 1 else 'scosse'}, massima Md {massima}"
+                ),
                 azione="livello_attenzione_sismica",
                 dettagli={
                     "numero_scosse": len(scosse),

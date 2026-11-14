@@ -2,7 +2,15 @@
 
 from collections import defaultdict
 
-from ..models import Conflitto, Piano, Proposta
+from ..models import Affidabilita, Conflitto, Piano, Proposta
+
+# Dalla più alla meno certa: serve a calcolare l'affidabilità minima del piano.
+ORDINE_AFFIDABILITA = [
+    Affidabilita.UFFICIALE,
+    Affidabilita.MISURATA,
+    Affidabilita.STIMATA,
+    Affidabilita.NON_VERIFICATA,
+]
 
 
 def pianifica(proposte: list[Proposta], t_min: int, numero: int) -> Piano:
@@ -41,6 +49,9 @@ def pianifica(proposte: list[Proposta], t_min: int, numero: int) -> Piano:
         proposte=finali,
         conflitti=conflitti,
         sintesi=sintesi(finali, conflitti),
+        affidabilita_minima=max(
+            (p.affidabilita for p in finali), key=ORDINE_AFFIDABILITA.index, default=None
+        ),
     )
 
 

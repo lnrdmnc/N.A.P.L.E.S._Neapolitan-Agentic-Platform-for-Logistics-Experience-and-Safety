@@ -75,6 +75,14 @@ def _simula(scenario: dict[str, Any], coordinato: bool) -> Indicatori:
         picco_attesa_persone=picco,
         minuti_evento_avviso=minuti_avviso,
         minuti_decisione=minuti_decisione,
+        # Deflusso e picco li calcola il modello, ma dipendono dai due tempi in ingresso (ipotesi).
+        # Il compito B4 misura i tempi «con coordinamento» nella sessione.
+        origine={
+            "deflusso_min": "calcolato",
+            "picco_attesa_persone": "calcolato",
+            "minuti_evento_avviso": "ipotesi",
+            "minuti_decisione": "ipotesi",
+        },
         note=[
             f"Navette operative al minuto {navette_pronte} (fischio finale al minuto {fine}).",
             "Uscita a ondate per settore." if coordinato else "Uscita simultanea di tutti i settori.",

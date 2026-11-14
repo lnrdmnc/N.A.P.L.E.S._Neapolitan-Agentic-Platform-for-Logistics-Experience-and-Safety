@@ -18,7 +18,7 @@ Challenge 05 di The Big Hack 2026, «Napoli Agentic City: la città che Ci pensa
 
 Su main alle 15:30 di sabato:
 
-- **Modulo agenti** (`agents/`, Python, di Leonardo Monaco): Rischio, Mobilità, Folla, Comunicazione e Orchestratore a regole deterministiche; scenario Maradona in un file; registro a catena di hash; indicatori con e senza coordinamento; API FastAPI sulla porta 8000; 12 test. Copre già i tre casi di alert di PROGETTO.md 6.2 e il formato CAP semplificato.
+- **Modulo agenti** (`agents/`, Python, di Leonardo Monaco): Rischio, Mobilità, Folla, Comunicazione e Orchestratore a regole deterministiche; scenario Maradona in un file; registro a catena di hash; indicatori con e senza coordinamento; API FastAPI sulla porta 8001 (concordata con la web app; era 8000); 12 test. Copre già i tre casi di alert di PROGETTO.md 6.2 e il formato CAP semplificato.
 - **Contratto** tra agenti e web app: `contracts/agenti.openapi.json`, generato dai modelli; `make check` fallisce se non è allineato.
 - **Web app** (`frontend/`): presa da Francesco Sannella alle 15:20, in corso.
 - **Non c'è ancora:** simulatore a zone, linea del tempo dei messaggi, strato LLM, dati reali, interfaccia, strumento di prova, test nel browser.
