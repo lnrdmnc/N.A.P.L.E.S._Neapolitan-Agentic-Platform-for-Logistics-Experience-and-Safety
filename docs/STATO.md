@@ -13,6 +13,17 @@
 | dom 15/11 11:30 | pacchetto di consegna pronto                                  |
 | dom 15/11 12:00 | consegna                                                      |
 
+## Consegna: regole che possono escluderci
+
+Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
+
+- [ ] Scheda progetto su hackathon.codemotion.com: titolo, descrizione, challenge scelta, link ai materiali, link al video pitch, nome e telefono del referente.
+- [ ] Video pitch di **massimo 3 minuti**: oltre si viene esclusi.
+- [ ] Link ai materiali accessibile alla giuria: repository pubblico.
+- [ ] Almeno **2 checkpoint** con i mentor: senza, il progetto non è valido.
+- [ ] Almeno una persona del team presente alla premiazione (dalle 16:00 di domenica).
+- [ ] Nome del team senza riferimenti, nemmeno parziali, a marchi o ragioni sociali.
+
 ## Chi sta lavorando su cosa
 
 | Compito | Chi | Da quando | Nota |
@@ -24,6 +35,7 @@
 - Preparazione del repository: CLAUDE.md, .gitignore, .env.example, README.md, docs/STATO.md, docs/IPOTESI.md, docs/STAND.md, docs/FEEDBACK.md, Makefile con `make check`.
 - docs/TEAM.md con i componenti del team e regola dei Co-authored-by in CLAUDE.md.
 - docs/PROGETTO.md (concept) e docs/GUIDA.md (guida del team) aggiunti.
+- Checklist di consegna dal regolamento; CLAUDE.md aggiornato a cinque persone. Sottotitolo della challenge verificato sulla pagina italiana: «la città che Ci pensa».
 
 ## Prossimi compiti liberi
 

@@ -4,7 +4,7 @@
 - Challenge 05 di Fastweb + Vodafone, «Napoli Agentic City». Il nostro progetto è N.A.P.L.E.S.:
   agenti AI per la resilienza urbana di Napoli, con la control room comunale. Il concept sta in
   docs/PROGETTO.md.
-- Tre persone, tre PC, stesso repository, branch main. Consegna domenica 15/11 alle 12:00.
+- Cinque persone (docs/TEAM.md) su tre PC, stesso repository, branch main. Consegna domenica 15/11 alle 12:00.
 - La giuria valuta: utilità e valore, attinenza alla challenge, chiarezza e completezza, design
   e user experience, creatività e innovazione. Lo sponsor guarda visione, originalità,
   concretezza e benefici misurabili.
