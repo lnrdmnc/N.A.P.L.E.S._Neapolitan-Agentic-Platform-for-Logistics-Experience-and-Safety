@@ -62,6 +62,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 19:15 | agents, webapp | «Napoli oggi e nei prossimi giorni»: eventi previsti (partite reali + elenco curato), zone, orari critici, fermate da evitare e alternative |
 | 2026-11-14 | 18:55 | webapp | Control room: il piano non scorre più sopra il registro, Approva/Modifica/Rifiuta in cima al piano, niente spazi vuoti in fondo alla pagina, registro leggibile nella colonna stretta |
 | 2026-11-14 | 18:56 | agents, contracts | F1 + F2: contesto reale in `/api/contesto` (terremoti INGV ai Campi Flegrei e al Vesuvio, meteo Open-Meteo), con stato di ogni fonte e copia di riserva |
 | 2026-11-14 | 18:51 | webapp | Regia del tempo in control room: l'orologio dello scenario avanza da solo e si ferma quando arriva un piano |

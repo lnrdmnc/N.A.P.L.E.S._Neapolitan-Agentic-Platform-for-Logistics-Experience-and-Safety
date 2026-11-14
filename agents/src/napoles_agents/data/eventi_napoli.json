@@ -1,0 +1,38 @@
+{
+  "nota": "Elenco curato dal team degli eventi previsti a Napoli (concerti, cortei, manifestazioni). Le partite al Maradona NON vanno qui: arrivano reali da football-data.org. Gli eventi con \"esempio\": true sono dimostrativi e vanno sostituiti con eventi verificati, indicando la fonte (sito del Comune, del locale, della Questura) e mettendo \"esempio\": false.",
+  "eventi": [
+    {
+      "id": "esempio_concerto_plebiscito",
+      "titolo": "Concerto in Piazza del Plebiscito",
+      "tipo": "concerto",
+      "luogo": "plebiscito",
+      "inizio": "2026-11-15T21:00:00+01:00",
+      "durata_min": 180,
+      "persone_attese": 30000,
+      "fonte": "Esempio dimostrativo inserito dal team: da sostituire con un evento verificato",
+      "esempio": true
+    },
+    {
+      "id": "esempio_corteo_lungomare",
+      "titolo": "Corteo sul Lungomare",
+      "tipo": "manifestazione",
+      "luogo": "lungomare",
+      "inizio": "2026-11-16T10:00:00+01:00",
+      "durata_min": 180,
+      "persone_attese": 5000,
+      "fonte": "Esempio dimostrativo inserito dal team: da sostituire con un evento verificato",
+      "esempio": true
+    },
+    {
+      "id": "esempio_concerto_palapartenope",
+      "titolo": "Concerto al Palapartenope",
+      "tipo": "concerto",
+      "luogo": "palapartenope",
+      "inizio": "2026-11-18T21:00:00+01:00",
+      "durata_min": 150,
+      "persone_attese": 6000,
+      "fonte": "Esempio dimostrativo inserito dal team: da sostituire con un evento verificato",
+      "esempio": true
+    }
+  ]
+}

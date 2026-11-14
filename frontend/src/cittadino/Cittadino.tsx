@@ -4,6 +4,7 @@ import { useAvvisiProfilo } from '../api/useAvvisiProfilo'
 import { useLiveEvents } from '../api/useLiveEvents'
 import { useStato } from '../api/useStato'
 import { LiveStatus } from '../components/LiveStatus'
+import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { AlertCard } from './AlertCard'
 import { PartiteMaradona } from './PartiteMaradona'
@@ -74,6 +75,8 @@ export function Cittadino() {
           </section>
 
           <PartiteMaradona />
+
+          <ProssimiGiorni variante="cittadino" />
 
           <section className="ct-card ct-card-weather">
             <h2>Meteo</h2>

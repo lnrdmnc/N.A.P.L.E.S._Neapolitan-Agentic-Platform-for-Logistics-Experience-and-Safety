@@ -2,6 +2,7 @@ import { useLiveEvents } from '../api/useLiveEvents'
 import { useStato } from '../api/useStato'
 import { Affidabilita } from '../components/Affidabilita'
 import { LiveStatus } from '../components/LiveStatus'
+import { ProssimiGiorni } from '../components/ProssimiGiorni'
 import { SimulationBadge } from '../components/SimulationBadge'
 import { MappaTraffico } from './MappaTraffico'
 import { Indicatori } from './Indicatori'
@@ -104,6 +105,8 @@ export function ControlRoom() {
         </section>
 
       </main>
+
+      <ProssimiGiorni variante="control-room" />
     </div>
   )
 }

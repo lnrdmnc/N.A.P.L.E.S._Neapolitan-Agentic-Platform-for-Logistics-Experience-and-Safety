@@ -6,6 +6,7 @@ e avvisa in docs/STATO.md. Un modello nuovo va nel file della sua area e qui sot
 
 from .alert import Alert, AreaAlert, ConfermaVisto, Pubblico, Ricezione
 from .base import Affidabilita, Ambito, Caso
+from .calendario import EventoCitta, EventoPrevisto, Finestra, ImpattoEvento, NapoliProssimiGiorni
 from .citta import Evento, StatoCitta, StatoLinea, TipoEvento
 from .contesto import Contesto, EventoSismicoReale, LivelloVulcanico, Meteo, StatoFonte
 from .indicatori import ConfrontoIndicatori, Indicatori, Origine
@@ -29,8 +30,12 @@ __all__ = [
     "ConfrontoIndicatori",
     "Contesto",
     "Evento",
+    "EventoCitta",
+    "EventoPrevisto",
     "EventoSismicoReale",
+    "Finestra",
     "Impatto",
+    "ImpattoEvento",
     "ImpattoZona",
     "Indicatori",
     "Itinerario",
@@ -39,6 +44,7 @@ __all__ = [
     "Messaggio",
     "Meteo",
     "ModificaPiano",
+    "NapoliProssimiGiorni",
     "Origine",
     "Partita",
     "Partite",

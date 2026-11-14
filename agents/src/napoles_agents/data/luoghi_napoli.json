@@ -1,0 +1,49 @@
+{
+  "nota": "Luoghi dei grandi eventi a Napoli e fermate vicine. Coordinate delle fermate dal GTFS ANM (id tra parentesi); coordinate dei luoghi e distanze a piedi approssimate. Raggi della zona interessata e alternative sono ipotesi (docs/IPOTESI.md).",
+  "luoghi": [
+    {
+      "id": "maradona",
+      "nome": "Stadio Diego Armando Maradona",
+      "quartiere": "Fuorigrotta",
+      "lat": 40.8279,
+      "lon": 14.1930,
+      "raggio_m": 900,
+      "zona": "Fuorigrotta: Piazzale Tecchio, Viale Giochi del Mediterraneo, Via Claudio",
+      "da_evitare": ["Linea 2 · Campi Flegrei (6277)", "Cumana · Mostra", "Bus a Piazzale Tecchio"],
+      "alternative": ["Linea 2 · Leopardi (circa 10 minuti a piedi)", "Linea 2 · Cavalleggeri Aosta (6278)", "Linea 2 · Mergellina per chi va verso il centro"]
+    },
+    {
+      "id": "plebiscito",
+      "nome": "Piazza del Plebiscito",
+      "quartiere": "San Ferdinando",
+      "lat": 40.8359,
+      "lon": 14.2486,
+      "raggio_m": 700,
+      "zona": "Plebiscito, Via Toledo bassa, Piazza Trieste e Trento, Via Chiaia",
+      "da_evitare": ["Linea 1 · Municipio (1243)", "Linea 1 · Toledo (6325)", "Funicolare Centrale · Augusteo (6211)"],
+      "alternative": ["Linea 1 · Dante (6324)", "Linea 1 · Museo (6323)", "Linea 2 · Montesanto (6207)"]
+    },
+    {
+      "id": "lungomare",
+      "nome": "Lungomare Caracciolo",
+      "quartiere": "Chiaia",
+      "lat": 40.8335,
+      "lon": 14.2345,
+      "raggio_m": 800,
+      "zona": "Via Caracciolo, Villa Comunale, Riviera di Chiaia",
+      "da_evitare": ["Linea 2 · Mergellina (2141)", "Bus sulla Riviera di Chiaia"],
+      "alternative": ["Linea 2 · Piazza Amedeo", "Linea 2 · Montesanto (6207)", "Linea 1 · Toledo (6325)"]
+    },
+    {
+      "id": "palapartenope",
+      "nome": "Palapartenope",
+      "quartiere": "Fuorigrotta",
+      "lat": 40.8233,
+      "lon": 14.1822,
+      "raggio_m": 600,
+      "zona": "Via Barbagallo, Via Terracina, Cavalleggeri d'Aosta",
+      "da_evitare": ["Linea 2 · Cavalleggeri Aosta (6278)"],
+      "alternative": ["Linea 2 · Campi Flegrei (6277)", "Linea 2 · Leopardi (6276)"]
+    }
+  ]
+}

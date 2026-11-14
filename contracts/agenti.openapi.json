@@ -486,6 +486,114 @@
         "title": "Evento",
         "type": "object"
       },
+      "EventoCitta": {
+        "properties": {
+          "affidabilita": {
+            "$ref": "#/components/schemas/Affidabilita"
+          },
+          "esempio": {
+            "default": false,
+            "description": "True se è un esempio dimostrativo, da sostituire",
+            "title": "Esempio",
+            "type": "boolean"
+          },
+          "fine": {
+            "title": "Fine",
+            "type": "string"
+          },
+          "fonte": {
+            "title": "Fonte",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "inizio": {
+            "description": "ISO 8601 con fuso orario di Roma",
+            "title": "Inizio",
+            "type": "string"
+          },
+          "luogo": {
+            "title": "Luogo",
+            "type": "string"
+          },
+          "luogo_id": {
+            "title": "Luogo Id",
+            "type": "string"
+          },
+          "persone_attese": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Persone Attese"
+          },
+          "quartiere": {
+            "title": "Quartiere",
+            "type": "string"
+          },
+          "simulato": {
+            "default": false,
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "tipo": {
+            "enum": [
+              "partita",
+              "concerto",
+              "manifestazione",
+              "altro"
+            ],
+            "title": "Tipo",
+            "type": "string"
+          },
+          "titolo": {
+            "title": "Titolo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "titolo",
+          "tipo",
+          "luogo_id",
+          "luogo",
+          "quartiere",
+          "inizio",
+          "fine",
+          "fonte",
+          "affidabilita"
+        ],
+        "title": "EventoCitta",
+        "type": "object"
+      },
+      "EventoPrevisto": {
+        "properties": {
+          "evento": {
+            "$ref": "#/components/schemas/EventoCitta"
+          },
+          "giorno": {
+            "description": "«oggi», «domani» oppure la data, per raggruppare",
+            "title": "Giorno",
+            "type": "string"
+          },
+          "impatto": {
+            "$ref": "#/components/schemas/ImpattoEvento"
+          }
+        },
+        "required": [
+          "evento",
+          "impatto",
+          "giorno"
+        ],
+        "title": "EventoPrevisto",
+        "type": "object"
+      },
       "EventoSismicoReale": {
         "properties": {
           "id": {
@@ -539,6 +647,30 @@
         "title": "EventoSismicoReale",
         "type": "object"
       },
+      "Finestra": {
+        "properties": {
+          "a": {
+            "title": "A",
+            "type": "string"
+          },
+          "da": {
+            "description": "Ora locale HH:MM",
+            "title": "Da",
+            "type": "string"
+          },
+          "motivo": {
+            "title": "Motivo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "da",
+          "a",
+          "motivo"
+        ],
+        "title": "Finestra",
+        "type": "object"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -573,6 +705,73 @@
           "zone"
         ],
         "title": "Impatto",
+        "type": "object"
+      },
+      "ImpattoEvento": {
+        "properties": {
+          "alternative": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Alternative",
+            "type": "array"
+          },
+          "consiglio": {
+            "title": "Consiglio",
+            "type": "string"
+          },
+          "da_evitare": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Da Evitare",
+            "type": "array"
+          },
+          "finestre": {
+            "items": {
+              "$ref": "#/components/schemas/Finestra"
+            },
+            "title": "Finestre",
+            "type": "array"
+          },
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "livello": {
+            "enum": [
+              "alto",
+              "medio",
+              "basso"
+            ],
+            "title": "Livello",
+            "type": "string"
+          },
+          "lon": {
+            "title": "Lon",
+            "type": "number"
+          },
+          "raggio_m": {
+            "title": "Raggio M",
+            "type": "integer"
+          },
+          "zona": {
+            "title": "Zona",
+            "type": "string"
+          }
+        },
+        "required": [
+          "livello",
+          "zona",
+          "lat",
+          "lon",
+          "raggio_m",
+          "finestre",
+          "da_evitare",
+          "alternative",
+          "consiglio"
+        ],
+        "title": "ImpattoEvento",
         "type": "object"
       },
       "ImpattoZona": {
@@ -910,6 +1109,41 @@
           "proposte_escluse"
         ],
         "title": "ModificaPiano",
+        "type": "object"
+      },
+      "NapoliProssimiGiorni": {
+        "properties": {
+          "eventi": {
+            "description": "Dal più vicino",
+            "items": {
+              "$ref": "#/components/schemas/EventoPrevisto"
+            },
+            "title": "Eventi",
+            "type": "array"
+          },
+          "fonti": {
+            "items": {
+              "$ref": "#/components/schemas/StatoFonte"
+            },
+            "title": "Fonti",
+            "type": "array"
+          },
+          "generato_al": {
+            "title": "Generato Al",
+            "type": "string"
+          },
+          "giorni": {
+            "title": "Giorni",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "eventi",
+          "giorni",
+          "generato_al",
+          "fonti"
+        ],
+        "title": "NapoliProssimiGiorni",
         "type": "object"
       },
       "Partita": {
@@ -2395,6 +2629,52 @@
         "summary": "Messaggi",
         "tags": [
           "messaggi"
+        ]
+      }
+    },
+    "/api/napoli/prossimi-giorni": {
+      "get": {
+        "description": "Partite reali al Maradona ed eventi dell'elenco curato da oggi a `giorni` giorni, ciascuno\ncon zona interessata, fasce orarie critiche, fermate da evitare e alternative.",
+        "operationId": "napoli_prossimi_giorni_api_napoli_prossimi_giorni_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "giorni",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "maximum": 30,
+              "minimum": 1,
+              "title": "Giorni",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NapoliProssimiGiorni"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Napoli Prossimi Giorni",
+        "tags": [
+          "napoli"
         ]
       }
     },
