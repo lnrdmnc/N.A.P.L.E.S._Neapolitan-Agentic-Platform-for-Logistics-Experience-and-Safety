@@ -62,6 +62,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 18:46 | docs | Checkpoint 1 con i mentor (14:50) in docs/FEEDBACK.md; copie iCloud escluse da git |
 | 2026-11-14 | 18:40 | deploy | `make deploy`: messa online su Cloud Run in un comando, chiavi in Secret Manager, account di servizio dedicato, container senza root, regione Milano |
 | 2026-11-14 | 18:35 | webapp | C3: piano in control room con Approva, Modifica e Rifiuta, sempre visibili su desktop; gli avvisi approvati arrivano in diretta alla vista cittadino; mappa non più allungata |
 | 2026-11-14 | 18:32 | webapp | U1: vista cittadino per profilo (tifoso, residente, pendolare, turista in inglese) e conferma di lettura anonima |

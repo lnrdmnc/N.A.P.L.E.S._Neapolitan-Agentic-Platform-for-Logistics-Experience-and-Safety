@@ -24,7 +24,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - [ ] Scheda progetto su hackathon.codemotion.com: titolo, descrizione, challenge scelta, link ai materiali, link al video pitch, nome e telefono del referente.
 - [ ] Video pitch di **massimo 3 minuti**: oltre si viene esclusi.
 - [ ] Link ai materiali accessibile alla giuria: repository pubblico.
-- [ ] Almeno **2 checkpoint** con i mentor: senza, il progetto non è valido.
+- [ ] Almeno **2 checkpoint** con i mentor: senza, il progetto non è valido. **1 di 2 fatto** (sab 14:50: affidabilità e tempo reale, vedi docs/FEEDBACK.md); manca il secondo.
 - [ ] Almeno una persona del team presente alla premiazione (dalle 16:00 di domenica).
 - [ ] Nome del team senza riferimenti, nemmeno parziali, a marchi o ragioni sociali.
 
@@ -99,6 +99,10 @@ B0 è su main: sbloccati, backend: **B5** testi dal modello (serve L0), **F1–F
 Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Domenica dopo le 10:30: registrazione del video seguendo docs/VIDEO.md. Se avanza tempo: U2, C6, U3, X2, U4.
 
 ## Problemi aperti
+
+- **Dal checkpoint delle 14:50 (affidabilità e tempo reale):** nessuna schermata fa avanzare il tempo dello scenario, quindi la demo resta ferma senza il terminale; serve una regia in control room (avvio, pausa, velocità, ricomincia). Contesto reale INGV e meteo (F1, F2) ancora stub. Dettaglio in docs/FEEDBACK.md.
+- Team: Jacopo Mariello e Angelo Di Bello supportano il gruppo (lavoro senza commit: mentor, stand, prove).
+- La sincronizzazione iCloud del Desktop crea copie «file 2.py» anche nel codice: tolte il 14/11 alle 18:50 (erano identiche e non tracciate) e ora escluse in `.gitignore`. Usare `git add` con i percorsi, non `git add -A`.
 
 - **Contratto cambiato il 14/11 alle 18:15:** `GET /api/llm` (`StatoLLM`) e `POST /api/llm/prova` (`ProvaLLM`). Nuova dipendenza degli agenti: `anthropic` (la installa da sé `uv run`). Compatibile OpenAI non fatto: si usa solo l'SDK di Anthropic.
 

@@ -40,3 +40,7 @@ agents/var/
 # Rapporti generati da make prova (si rigenerano in un secondo)
 docs/prove/*
 !docs/prove/README.md
+
+# Copie duplicate create dalla sincronizzazione iCloud del Desktop («file 2.py»): mai su git
+* 2.*
+* 2
