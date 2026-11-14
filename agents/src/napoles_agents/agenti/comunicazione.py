@@ -94,23 +94,39 @@ def prepara_avvisi(
             chiave = f"ufficiale_{p.dettagli['evento']}"
             if ultimo(chiave, "tutti"):
                 continue
+            originale = Alert(
+                identifier=f"{chiave}_{stato.t_min}",
+                sender=p.fonti[0],
+                sent_t_min=stato.t_min,
+                msgType="Alert",
+                severity="Moderate",
+                urgency="Expected",
+                certainty="Likely",
+                event="Allerta meteo",
+                headline=p.titolo.removeprefix("Inoltrare l'allerta ufficiale: "),
+                description=p.dettagli["testo_ufficiale"],
+                area=AREA_NAPOLI,
+                source=p.fonti[0],
+                ufficiale=True,
+                pubblico="tutti",
+                piano_id=piano.id,
+            )
+            avvisi.append(originale)
+            # Cornice in inglese per il turista: solo il titolo è nostro e lo dice; il testo
+            # ufficiale resta identico, in italiano, non tradotto né riassunto.
             avvisi.append(
-                Alert(
-                    identifier=f"{chiave}_{stato.t_min}",
-                    sender=p.fonti[0],
-                    sent_t_min=stato.t_min,
-                    msgType="Alert",
-                    severity="Moderate",
-                    urgency="Expected",
-                    certainty="Likely",
-                    event="Allerta meteo",
-                    headline=p.titolo.removeprefix("Inoltrare l'allerta ufficiale: "),
-                    description=p.dettagli["testo_ufficiale"],
-                    area=AREA_NAPOLI,
-                    source=p.fonti[0],
-                    ufficiale=True,
-                    pubblico="tutti",
-                    piano_id=piano.id,
+                originale.model_copy(
+                    update={
+                        "identifier": f"{chiave}_turista_{stato.t_min}",
+                        "references": originale.identifier,
+                        "headline": (
+                            ("SIMULATION – " if p.dettagli.get("simulato", True) else "")
+                            + f"Official alert from {p.fonti[0].replace(' (simulato)', '')}"
+                            + " – original Italian text below, not translated"
+                        ),
+                        "pubblico": "turista",
+                        "lingua": "en",
+                    }
                 )
             )
 

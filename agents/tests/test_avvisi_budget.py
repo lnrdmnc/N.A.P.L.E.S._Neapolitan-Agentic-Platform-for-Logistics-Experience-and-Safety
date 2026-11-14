@@ -41,7 +41,7 @@ def test_cessato_allarme_chiude_ogni_profilo_e_rimanda_alla_protezione_civile():
 def test_ogni_profilo_ha_una_catena_coerente():
     s = _scenario_completo()
     for pubblico in ("tifoso", "residente", "turista"):
-        catena = [a for a in s.avvisi if a.pubblico == pubblico]
+        catena = [a for a in s.avvisi if a.pubblico == pubblico and a.event == "Evento sismico"]
         assert catena[0].msgType == "Alert" and catena[-1].msgType == "Cancel"
         for prima, dopo in itertools.pairwise(catena):
             assert dopo.references == prima.identifier

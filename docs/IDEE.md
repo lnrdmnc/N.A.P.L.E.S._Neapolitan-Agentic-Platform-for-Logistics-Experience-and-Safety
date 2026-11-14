@@ -24,7 +24,7 @@ Quattro agenti esperti di smart city hanno letto il repository in sola lettura, 
 | 1 | ✅ Numeri credibili: bug del ritardo, capacità realistiche, sensibilità delle ipotesi | Telco, giuria | fatto | agenti |
 | 2 | ✅ Budget anti-allarme: aggiornamento solo se cambiano gravità o istruzioni; conflitto mostrato una volta sulla linea del tempo | Giuria | fatto | agenti |
 | 3 | ✅ Cessato allarme operativo (`Cancel`) quando lo sciame si chiude, `Update` quando le linee ripartono; rimanda sempre alla Protezione Civile per il rischio | Cittadini | fatto | agenti |
-| 4 | Allerta ufficiale con cornice in inglese: «Official alert – original Italian text», testo intatto | Turisti | ≤1h | agenti + web app |
+| 4 | ✅ Allerta ufficiale con cornice in inglese: «Official alert – original Italian text below, not translated», testo intatto | Turisti | fatto | agenti |
 | 5 | Veto dell'operatore che cambia la città: Approva, Modifica, Rifiuta cambiano mappa e coda | Giuria | B1 + B2 + C3 | backend + web app |
 | 6 | La notizia falsa fermata: control room e telefono nella stessa inquadratura | Giuria | solo UI | web app |
 | 7 | Presenze aggregate per cella (simulate, soglia di anonimato) come input dell'agente Folla: l'aggancio diretto con Fastweb + Vodafone | Telco | 1–3h | con S0 |

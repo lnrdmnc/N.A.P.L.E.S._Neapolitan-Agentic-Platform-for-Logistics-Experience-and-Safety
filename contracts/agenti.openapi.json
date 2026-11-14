@@ -1568,7 +1568,7 @@
     },
     "/api/avvisi": {
       "get": {
-        "description": "Avvisi inviati. Con `pubblico`, quelli per quel profilo più quelli per tutti.",
+        "description": "Avvisi inviati. Con `pubblico`, quelli per quel profilo più quelli per tutti, tranne gli\navvisi per tutti che hanno già una versione per quel profilo (es. l'allerta ufficiale con la\ncornice in inglese per il turista, che ha `references` all'originale).",
         "operationId": "avvisi_api_avvisi_get",
         "parameters": [
           {

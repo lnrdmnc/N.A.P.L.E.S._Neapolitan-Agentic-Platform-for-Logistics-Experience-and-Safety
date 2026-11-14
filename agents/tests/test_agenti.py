@@ -36,7 +36,24 @@ def test_allerta_ufficiale_inoltrata_senza_modifiche():
     s.approva(s.piano_corrente.id)
     ufficiali = [a for a in s.avvisi if a.ufficiale]
     testo = next(e["testo_ufficiale"] for e in S["eventi"] if e["id"] == "ev_meteo")
-    assert len(ufficiali) == 1 and ufficiali[0].description == testo
+    # originale per tutti + versione con cornice in inglese per il turista: testo identico in entrambi
+    assert {a.pubblico for a in ufficiali} == {"tutti", "turista"}
+    assert all(a.description == testo for a in ufficiali)
+
+
+def test_turista_riceve_l_allerta_ufficiale_con_cornice_in_inglese_senza_doppioni():
+    client = TestClient(app)
+    client.post("/api/reset")
+    client.post("/api/avanza", json={"t_min": 85})
+    client.post(f"/api/piano/{client.get('/api/piano').json()['id']}/approva")
+    turista = [a for a in client.get("/api/avvisi", params={"pubblico": "turista"}).json() if a["ufficiale"]]
+    assert len(turista) == 1
+    a = turista[0]
+    assert a["lingua"] == "en" and "not translated" in a["headline"] and a["references"]
+    residente = [
+        a for a in client.get("/api/avvisi", params={"pubblico": "residente"}).json() if a["ufficiale"]
+    ]
+    assert len(residente) == 1 and residente[0]["pubblico"] == "tutti"
 
 
 def test_nessuna_istruzione_di_evacuazione():
