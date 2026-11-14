@@ -100,6 +100,7 @@ Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
 | 2026-11-14 | 20:20 | webapp, docs | Nei testi visibili «Claude» diventa «AI» o «modello linguistico» (pannello del piano, README, STATO, FEEDBACK, script della demo); codice e configurazione invariati |
+| 2026-11-14 | 20:15 | agents, webapp | Scioperi dei trasporti ufficiali (Ministero) nei prossimi giorni: linee coinvolte, linee fuori, avviso se toccano una partita |
 | 2026-11-14 | 20:06 | demo | `make demo`: un comando avvia build, agenti e gateway, con controlli e indirizzi da aprire |
 | 2026-11-14 | 19:58 | agents | Scosse simulate ricalcate sullo sciame reale INGV del 1/8/2026 (magnitudo, profondità, epicentri); tempi compressi dichiarati |
 | 2026-11-14 | 19:55 | agents | Capacità di Linea 2, Cumana e bus calcolate dalle corse vere (GTFS ANM, EAV) al posto degli ordini di grandezza; sensibilità ricalcolata |

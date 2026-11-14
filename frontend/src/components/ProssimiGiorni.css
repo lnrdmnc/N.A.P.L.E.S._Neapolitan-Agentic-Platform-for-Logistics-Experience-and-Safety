@@ -129,6 +129,24 @@
   color: var(--ink-muted);
 }
 
+.pg-subtitle {
+  margin: var(--space-2) 0 0;
+  font-size: 19px;
+}
+
+.pg-capital::first-letter {
+  text-transform: uppercase;
+}
+
+.pg-sciopero {
+  --pg-level: var(--ink);
+}
+
+.pg-warn dd {
+  font-weight: 600;
+  color: var(--level-red);
+}
+
 @media (max-width: 640px) {
   .pg-cr {
     padding: var(--space-4);

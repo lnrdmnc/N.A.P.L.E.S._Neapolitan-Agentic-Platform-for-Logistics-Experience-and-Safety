@@ -3,6 +3,7 @@ import type { components } from './contratto'
 
 export type NapoliProssimiGiorni = components['schemas']['NapoliProssimiGiorni']
 export type EventoPrevisto = components['schemas']['EventoPrevisto']
+export type ScioperoPrevisto = components['schemas']['ScioperoPrevisto']
 
 const POLL_MS = 60_000
 

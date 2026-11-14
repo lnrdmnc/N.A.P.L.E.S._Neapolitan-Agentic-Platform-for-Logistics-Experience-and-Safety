@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 from .base import Affidabilita
 from .contesto import StatoFonte
+from .scioperi import ScioperoPrevisto
 
 TipoEventoCitta = Literal["partita", "concerto", "manifestazione", "altro"]
 
@@ -55,3 +56,7 @@ class NapoliProssimiGiorni(BaseModel):
     giorni: int
     generato_al: str
     fonti: list[StatoFonte]
+    scioperi: list[ScioperoPrevisto] = Field(
+        default_factory=list,
+        description="Scioperi dei trasporti ufficiali che toccano Napoli, dal più vicino",
+    )

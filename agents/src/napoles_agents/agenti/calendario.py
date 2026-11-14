@@ -6,7 +6,10 @@ e propone alternative prima che il problema si presenti.
 Fonti, sempre dichiarate:
 - partite in casa del Napoli al Maradona: reali, da football-data.org (fonti/partite_football.py);
 - concerti, cortei, manifestazioni: elenco curato dal team (data/eventi_napoli.json); gli eventi
-  con `esempio: true` sono dimostrativi e lo dicono a schermo.
+  con `esempio: true` sono dimostrativi e lo dicono a schermo;
+- scioperi dei trasporti: ufficiali, dal Ministero (fonti/scioperi.py). L'agente dice quali linee
+  tocca, quali restano fuori e quali eventi hanno arrivo o uscita durante lo sciopero; non inventa
+  fasce garantite né adesioni.
 
 Regole d'impatto (ipotesi, docs/IPOTESI.md): affollamento nei 90 minuti prima dell'inizio e nei
 60 dopo la fine; livello alto da 20.000 persone attese, medio da 5.000.
@@ -20,9 +23,11 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from ..fonti.partite_football import fonte as fonte_partite
+from ..fonti.scioperi import fonte as fonte_scioperi
 from ..models import Affidabilita
 from ..models.calendario import EventoCitta, EventoPrevisto, Finestra, ImpattoEvento, NapoliProssimiGiorni
 from ..models.contesto import StatoFonte
+from ..models.scioperi import Sciopero, ScioperoPrevisto
 from ..scenario import DATA
 
 ROMA = ZoneInfo("Europe/Rome")
@@ -121,6 +126,68 @@ def _giorno(inizio: datetime, oggi: datetime) -> str:
     return inizio.astimezone(ROMA).strftime("%d/%m")
 
 
+# Chi gestisce cosa a Napoli: serve a dire quali linee tocca uno sciopero e quali restano fuori.
+LINEE_ANM = ["Linea 1", "bus ANM", "funicolari"]
+LINEE_FS = ["Linea 2 (Trenitalia)", "treni regionali"]
+LINEE_EAV = ["Cumana", "Circumflegrea", "Circumvesuviana", "bus EAV"]
+
+
+def linee_di(s: Sciopero) -> tuple[list[str], list[str]]:
+    """(coinvolte, non coinvolte), dalla categoria e dal settore come pubblicati dal Ministero."""
+    cat = s.categoria.upper()
+    anche_tpl = "TPL" in s.orario.upper() or "TRASPORTO PUBBLICO LOCALE" in s.orario.upper()
+    if s.settore in {"Ferroviario", "Plurisettoriale"} and "FERROV" in cat and anche_tpl:
+        return LINEE_FS + ["anche il trasporto pubblico locale, come indicato nell'orario"], []
+    if "ANM" in cat:
+        return LINEE_ANM, ["Linea 2 (Trenitalia)", "Cumana (EAV)"]
+    if "EAV" in cat:
+        return LINEE_EAV, ["Linea 1 (ANM)", "Linea 2 (Trenitalia)"]
+    if s.settore in {"Ferroviario", "Plurisettoriale"} and "FERROV" in cat:
+        return LINEE_FS, ["Linea 1 e bus (ANM)", "Cumana (EAV)"]
+    if s.settore == "Taxi":
+        return ["taxi"], ["metropolitane e bus"]
+    if s.settore == "Marittimo":
+        return ["traghetti e aliscafi"], ["metropolitane e bus"]
+    if "ESCLUS" in cat or "ESCLUS" in s.orario.upper():
+        return ["più settori, con le esclusioni indicate nell'orario"], []
+    return ["tutti i mezzi, secondo le adesioni"], []
+
+
+def _sovrapposti(s: Sciopero, eventi: list[EventoPrevisto]) -> list[str]:
+    da, a = datetime.fromisoformat(s.inizio), datetime.fromisoformat(s.fine)
+    coinvolti = []
+    for p in eventi:
+        inizio, fine = datetime.fromisoformat(p.evento.inizio), datetime.fromisoformat(p.evento.fine)
+        arrivo = da < inizio and a > inizio - timedelta(minutes=PRIMA_MIN)
+        uscita = da < fine + timedelta(minutes=DOPO_MIN) and a > fine
+        if arrivo and uscita:
+            coinvolti.append(f"{p.evento.titolo}: arrivo e uscita del pubblico (sciopero per tutto l'evento)")
+        elif arrivo:
+            coinvolti.append(f"{p.evento.titolo}: arrivo del pubblico (sciopero fino alle {_ora(a)})")
+        elif uscita:
+            coinvolti.append(f"{p.evento.titolo}: uscita del pubblico (sciopero dalle {_ora(da)})")
+    return coinvolti
+
+
+def sciopero_previsto(s: Sciopero, eventi: list[EventoPrevisto], oggi: datetime) -> ScioperoPrevisto:
+    coinvolte, fuori = linee_di(s)
+    eventi_coinvolti = _sovrapposti(s, eventi)
+    consiglio = f"Sciopero ({s.orario}). Possibili disagi: {', '.join(coinvolte)}."
+    if fuori:
+        consiglio += f" Non sono coinvolte: {', '.join(fuori)}."
+    if eventi_coinvolti:
+        consiglio += " Attenzione: " + "; ".join(eventi_coinvolti) + "."
+    consiglio += " Fasce garantite e adesioni: verifica sul sito dell'azienda."
+    return ScioperoPrevisto(
+        sciopero=s,
+        giorno=_giorno(datetime.fromisoformat(s.inizio), oggi),
+        linee_coinvolte=coinvolte,
+        linee_non_coinvolte=fuori,
+        eventi_coinvolti=eventi_coinvolti,
+        consiglio=consiglio,
+    )
+
+
 def prossimi_giorni(oggi: datetime, giorni: int = 10) -> NapoliProssimiGiorni:
     limite = oggi + timedelta(days=giorni)
     eventi: list[EventoCitta] = []
@@ -179,9 +246,17 @@ def prossimi_giorni(oggi: datetime, giorni: int = 10) -> NapoliProssimiGiorni:
         if oggi <= datetime.fromisoformat(e.fine) and datetime.fromisoformat(e.inizio) <= limite
     ]
     previsti.sort(key=lambda p: p.evento.inizio)
+
+    scioperi, stato_scioperi = fonte_scioperi().leggi()
+    scioperi_previsti = [
+        sciopero_previsto(s, previsti, oggi)
+        for s in scioperi
+        if oggi <= datetime.fromisoformat(s.fine) and datetime.fromisoformat(s.inizio) <= limite
+    ]
     return NapoliProssimiGiorni(
         eventi=previsti,
         giorni=giorni,
         generato_al=oggi.astimezone(ROMA).isoformat(),
-        fonti=[stato_partite, stato_curati],
+        fonti=[stato_partite, stato_curati, stato_scioperi],
+        scioperi=scioperi_previsti,
     )

@@ -32,10 +32,10 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
-| Scioperi dei trasporti ufficiali (Ministero dei Trasporti) nei «prossimi giorni», con alternative | Leonardo Monaco | sab 14/11 20:11 | Nuovo `…/fonti/scioperi.py`; tocca `…/agenti/calendario.py`, `…/models/calendario.py`, `ProssimiGiorni.tsx` |
 
 ## Fatto
 
+- **Scioperi dei trasporti ufficiali (sab 20:15).** Nuova fonte `…/fonti/scioperi.py`: feed RSS del Ministero dei Trasporti, senza chiave, con copia salvata; tiene solo gli scioperi che toccano Napoli e unisce quelli identici proclamati da più sindacati. L'agente Calendario dice quali linee possono mancare, quali non sono coinvolte (ANM, EAV, gruppo FS) e quali eventi hanno arrivo o uscita durante lo sciopero: oggi segnala che lo sciopero FS del 20–21/11 finisce alle 20:00, durante l'arrivo per Napoli – Torino. Nessuna fascia garantita inventata. Nella sezione «Napoli oggi e nei prossimi giorni» (control room e vista cittadino) con «Dato ufficiale · Ministero dei Trasporti». **Contratto:** `NapoliProssimiGiorni.scioperi` (opzionale), modelli `Sciopero`, `ScioperoPrevisto`. 133 test; provato a 1280 px e a 375 px.
 - **X1, `make demo` (sab 20:06).** Un comando (`scripts/demo.py`, solo libreria standard, anche su Windows): controlla prerequisiti e porte libere, legge `.env` e dice quali chiavi ci sono (mai i valori), compila la PWA, avvia agenti e gateway, riporta lo scenario al minuto 0 e stampa gli indirizzi, anche per il telefono. Se un processo si ferma, si ferma anche l'altro; Ctrl+C chiude tutto. Provato da zero sul Mac con tutte e quattro le chiavi: control room e vista cittadino su http://localhost:8000, stato al minuto 0 con Napoli – Torino. Da provare su Windows.
 - **R3, scosse simulate ricalcate su uno sciame reale (sab 19:58).** Le tre scosse dello scenario hanno magnitudo, profondità ed epicentri delle repliche reali del 1/8/2026 (catalogo INGV: Md 3.1, 3.0 e 2.5, eventi indicati nella fonte di ogni scossa); restano simulate ed etichettate, con i tempi compressi dichiarati in docs/IPOTESI.md. Gravità invariate, quindi percorso demo, avvisi e indicatori uguali (prove: sgombero 55, 55, 70 minuti). Copione del video aggiornato a Md 3.1. Con la chiave del modello conviene rilanciare `make llm-cache`: i testi in cache citano ancora Md 3.2. 128 test.
 - **R2, capacità delle linee dagli orari veri (sab 19:55).** Corse reali tra le 22:20 e le 23:30 dal GTFS ANM (orari 2023): Linea 2 a Campi Flegrei 10 treni → 114 persone al minuto (era 80); bus alle fermate dello stadio 16 corse → 23 (era 60); Cumana ogni 15 minuti (EAV) → 30, capienza per treno stimata. Fonte e calcolo in `…/data/scenario_maradona.json` (`fonte_capacita`) e in docs/IPOTESI.md. Sensibilità ricalcolata: picco −13% / −30%, nessuna folla davanti alle stazioni chiuse; approvare 10 minuti dopo non allunga lo sgombero ma alza il picco. 128 test.
@@ -119,6 +119,7 @@ Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo,
 
 ## Problemi aperti
 
+- **Contratto cambiato il 14/11 alle 20:15:** `NapoliProssimiGiorni.scioperi` (opzionale) con i modelli `Sciopero` e `ScioperoPrevisto` (`GET /api/napoli/prossimi-giorni`). Compatibile.
 - **Contratto cambiato il 14/11 alle 19:50:** campo opzionale `partita_reale` in `StatoCitta` (`GET /api/stato`). Compatibile: chi non lo legge non cambia nulla.
 - **Foto del golfo nella pagina iniziale** (`frontend/public/img/golfo-*.jpg`): fonte e licenza non note. Il repository è pubblico: prima della consegna indicare l'autore o sostituirle con foto a licenza libera (per esempio Wikimedia Commons).
 

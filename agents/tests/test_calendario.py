@@ -118,5 +118,9 @@ def test_api_prossimi_giorni():
     r = TestClient(app).get("/api/napoli/prossimi-giorni", params={"giorni": 10})
     assert r.status_code == 200
     d = r.json()
-    assert d["eventi"] and {f["nome"] for f in d["fonti"]} == {"football-data.org", "Elenco curato dal team"}
+    assert d["eventi"] and {f["nome"] for f in d["fonti"]} == {
+        "football-data.org",
+        "Elenco curato dal team",
+        "Ministero dei Trasporti (scioperi)",
+    }
     assert TestClient(app).get("/api/napoli/prossimi-giorni", params={"giorni": 99}).status_code == 422

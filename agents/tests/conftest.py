@@ -13,7 +13,7 @@ import pytest
 @pytest.fixture(autouse=True)
 def _fonti_reali_senza_rete(tmp_path, monkeypatch):
     """Nei test le fonti reali (INGV, meteo, vulcani) non usano mai la rete: rispondono «non disponibile»."""
-    from napoles_agents.fonti import ingv, meteo, partite_football, vulcani
+    from napoles_agents.fonti import ingv, meteo, partite_football, scioperi, vulcani
 
     def senza_rete(*_args, **_kwargs):
         raise OSError("rete disattivata nei test")
@@ -26,4 +26,7 @@ def _fonti_reali_senza_rete(tmp_path, monkeypatch):
     # Partite: nessuna chiave e nessuna copia, quindi nessuna partita (i test che servono la iniettano).
     monkeypatch.setattr(
         partite_football, "_fonte", partite_football.FontePartite(chiave="", copia=tmp_path / "partite.json")
+    )
+    monkeypatch.setattr(
+        scioperi, "_fonte", scioperi.FonteScioperi(chiamata=senza_rete, copia=tmp_path / "scioperi.json")
     )

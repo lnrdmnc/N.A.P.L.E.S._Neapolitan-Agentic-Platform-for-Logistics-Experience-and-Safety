@@ -16,6 +16,7 @@ from .messaggi import Messaggio, TipoMessaggio
 from .partite import Partita, Partite
 from .piano import Conflitto, Impatto, ImpattoZona, ModificaPiano, Piano, Proposta
 from .registro import StatoRegistro, VoceRegistro
+from .scioperi import Sciopero, ScioperoPrevisto
 from .simulazione import PassoSimulazione, SerieSimulazione, StatoZona
 from .traffico import LivelloTraffico, PercorsoTraffico, Traffico
 
@@ -55,6 +56,8 @@ __all__ = [
     "ProvaLLM",
     "Pubblico",
     "Ricezione",
+    "Sciopero",
+    "ScioperoPrevisto",
     "SerieSimulazione",
     "StatoCitta",
     "StatoFonte",

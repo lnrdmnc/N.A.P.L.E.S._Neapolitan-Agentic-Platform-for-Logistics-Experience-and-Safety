@@ -1,0 +1,160 @@
+{
+  "scioperi": [
+    {
+      "id": "8603,8632,8636,8642",
+      "inizio": "2026-11-16T11:00:00+01:00",
+      "fine": "2026-11-16T15:00:00+01:00",
+      "orario": "4 ORE: DALLE 11.00 ALLE 15.00",
+      "settore": "Trasporto pubblico locale",
+      "rilevanza": "Locale",
+      "area": "Napoli",
+      "categoria": "PERSONALE SOC. ANM DI NAPOLI",
+      "sindacati": [
+        "OSR FILT-CGIL/FIT-CISL/UILT-UIL/UGL-FNA/FAISA-CISAL",
+        "OSR USB LAVORO PRIVATO/ORSA TPL/FAISA-CONFAIL",
+        "OSR FIT-CISL"
+      ],
+      "proclamato_il": "14/10/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8610",
+      "inizio": "2026-11-20T00:00:00+01:00",
+      "fine": "2026-11-21T00:00:00+01:00",
+      "orario": "INTERA GIORNATA DI LAVORO* - APPALTI FERROVIARI, TPL, TAXI, NCC, MARITTIMO, PORTI, CIRCOLAZIONE E SICUREZZA STRADALE, MERCI E LOGISTICA: VARIE MODALITA'",
+      "settore": "Generale",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "SCIOPERO GENERALE SETTORI PUBBLICI E PRIVATI ANCHE IN APPALTO E STRUMENTALI",
+      "sindacati": [
+        "CGIL"
+      ],
+      "proclamato_il": "19/10/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8633",
+      "inizio": "2026-11-20T00:00:00+01:00",
+      "fine": "2026-11-21T00:00:00+01:00",
+      "orario": "INTERA GIORNATA - ESCLUSO TRASPORTO FERROVIARIO, MERCI SU ROTAIA E VARIE AZIENDE TPL",
+      "settore": "Generale",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "SCIOPERO GENERALE CATEGORIE PUBBLICHE E PRIVATE CON ESCLUSIONE TRASPORTO FERROVIARIO, MERCI SU ROTAIA E VARIE AZIENDE TPL",
+      "sindacati": [
+        "CLAP/CONF. COBAS/SIAL-COBAS"
+      ],
+      "proclamato_il": "05/11/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8592",
+      "inizio": "2026-11-20T21:00:00+01:00",
+      "fine": "2026-11-22T00:00:00+01:00",
+      "orario": "SETTORE FERROVIARIO, TRASPORTO MERCI SU ROTAIA 23 ORE: DALLE 21.00 DEL 20/11 ALLE 20.00 DEL 21/11; *TPL: INTERA PRESTAZIONE DEL 21/11",
+      "settore": "Plurisettoriale",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "PERSONALE IMPRESE CHE SVOLGONO ATTIVITA' FERROVIARIA",
+      "sindacati": [
+        "CUB TRASPORTI/SGB FERROVIE"
+      ],
+      "proclamato_il": "07/10/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8635",
+      "inizio": "2026-11-20T21:00:00+01:00",
+      "fine": "2026-11-21T20:00:00+01:00",
+      "orario": "23 ORE: DALLE 21.00 DEL 20/11 ALLE 20.00 DEL 21/11",
+      "settore": "Ferroviario",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "PERSONALE DI MACCHINA E DI BORDO DEL GRUPPO FERROVIE DELLO STATO ITALIANE",
+      "sindacati": [
+        "ASSEMBLEA NAZIONALE PDM/PDB GRUPPO FSI"
+      ],
+      "proclamato_il": "05/11/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8638",
+      "inizio": "2026-11-20T21:00:00+01:00",
+      "fine": "2026-11-21T20:00:00+01:00",
+      "orario": "SETTORE FERROVIARIO, TRASPORTO MERCI SU ROTAIA 23 ORE: DALLE 21.00 DEL 20/11 ALLE 20.00 DEL 21/11",
+      "settore": "Plurisettoriale",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "PERSONALE IMPRESE CHE SVOLGONO ATTIVITA' FERROVIARIA",
+      "sindacati": [
+        "CAT"
+      ],
+      "proclamato_il": "09/11/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8575",
+      "inizio": "2026-12-03T21:00:00+01:00",
+      "fine": "2026-12-04T21:00:00+01:00",
+      "orario": "INTERA GIORNATA - AEREO: MODALITA' NON COMUNICATE; FERROVIARIO DALLE 21.00 DEL 3/12 ALLE 21.00 DEL 4/12; AUTOSTRADE: DALLE 22.00 DEL 3/12 ALLE 22.00 DEL 4/12, TPL: MODALITA' TERRITORIALI",
+      "settore": "Generale",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "SCIOPERO GENERALE CATEGORIE PUBBLICHE E PRIVATE",
+      "sindacati": [
+        "CUB/ADL VARESE/SGB/SBM/SGC/SI-COBAS"
+      ],
+      "proclamato_il": "27/09/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8626",
+      "inizio": "2026-12-04T00:00:00+01:00",
+      "fine": "2026-12-05T00:00:00+01:00",
+      "orario": "INTERA GIORNATA",
+      "settore": "Generale",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "SCIOPERO GENERALE PERS. A TEMPO DETERMINATO  E INDETERMINATO CON CONTRATTI PRECARI E ATIPICI DI TUTTI I COMPARTI CON ESCLUSIONE DEL SETTORE TRASPORTI",
+      "sindacati": [
+        "UNIONE SINDACALE ITALIANA USI 1912"
+      ],
+      "proclamato_il": "28/10/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    },
+    {
+      "id": "8629",
+      "inizio": "2026-12-15T08:00:00+01:00",
+      "fine": "2026-12-15T22:00:00+01:00",
+      "orario": "14 ORE: DALLE 08.00 ALLE 22.00",
+      "settore": "Taxi",
+      "rilevanza": "Nazionale",
+      "area": "Italia",
+      "categoria": "ADDETTI AL SERVIZIO TAXI",
+      "sindacati": [
+        "CLAAI/URITAXI/UTI/UNIMPRESA/ORSA TAXI/UGL TAXI/FEDERTAXI CISAL/SITAN/FAST CONFSAL TAXI/SATAM/TAM/USB TAXI/FILT CGIL TAXI/UILTRASPORTI/ATLT/CONSULTAXI/SUL TAXI/ATITAXI"
+      ],
+      "proclamato_il": "02/11/2026",
+      "fonte": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+      "affidabilita": "ufficiale",
+      "simulato": false
+    }
+  ],
+  "aggiornato_al": "2026-11-14T19:14:37.478533+00:00"
+}

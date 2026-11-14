@@ -1147,6 +1147,14 @@
           "giorni": {
             "title": "Giorni",
             "type": "integer"
+          },
+          "scioperi": {
+            "description": "Scioperi dei trasporti ufficiali che toccano Napoli, dal più vicino",
+            "items": {
+              "$ref": "#/components/schemas/ScioperoPrevisto"
+            },
+            "title": "Scioperi",
+            "type": "array"
           }
         },
         "required": [
@@ -1754,6 +1762,141 @@
           "timeline"
         ],
         "title": "Scenario",
+        "type": "object"
+      },
+      "Sciopero": {
+        "properties": {
+          "affidabilita": {
+            "$ref": "#/components/schemas/Affidabilita",
+            "default": "ufficiale"
+          },
+          "area": {
+            "description": "Provincia o «Italia»",
+            "title": "Area",
+            "type": "string"
+          },
+          "categoria": {
+            "description": "Categoria interessata, come pubblicata",
+            "title": "Categoria",
+            "type": "string"
+          },
+          "fine": {
+            "title": "Fine",
+            "type": "string"
+          },
+          "fonte": {
+            "default": "Ministero delle Infrastrutture e dei Trasporti (scioperi.mit.gov.it)",
+            "title": "Fonte",
+            "type": "string"
+          },
+          "id": {
+            "description": "Identificativi MIT degli scioperi uniti (stessa data, orario e categoria)",
+            "title": "Id",
+            "type": "string"
+          },
+          "inizio": {
+            "description": "ISO 8601, ora di Roma",
+            "title": "Inizio",
+            "type": "string"
+          },
+          "orario": {
+            "description": "Modalità come pubblicata dal Ministero, es. «4 ORE: DALLE 11.00 ALLE 15.00»",
+            "title": "Orario",
+            "type": "string"
+          },
+          "proclamato_il": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Proclamato Il"
+          },
+          "rilevanza": {
+            "description": "Locale o Nazionale",
+            "title": "Rilevanza",
+            "type": "string"
+          },
+          "settore": {
+            "title": "Settore",
+            "type": "string"
+          },
+          "simulato": {
+            "default": false,
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "sindacati": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sindacati",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "inizio",
+          "fine",
+          "orario",
+          "settore",
+          "rilevanza",
+          "area",
+          "categoria",
+          "sindacati"
+        ],
+        "title": "Sciopero",
+        "type": "object"
+      },
+      "ScioperoPrevisto": {
+        "properties": {
+          "consiglio": {
+            "title": "Consiglio",
+            "type": "string"
+          },
+          "eventi_coinvolti": {
+            "description": "Eventi dei prossimi giorni con l'arrivo o l'uscita durante lo sciopero",
+            "items": {
+              "type": "string"
+            },
+            "title": "Eventi Coinvolti",
+            "type": "array"
+          },
+          "giorno": {
+            "description": "«oggi», «domani» oppure la data",
+            "title": "Giorno",
+            "type": "string"
+          },
+          "linee_coinvolte": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Linee Coinvolte",
+            "type": "array"
+          },
+          "linee_non_coinvolte": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Linee Non Coinvolte",
+            "type": "array"
+          },
+          "sciopero": {
+            "$ref": "#/components/schemas/Sciopero"
+          }
+        },
+        "required": [
+          "sciopero",
+          "giorno",
+          "linee_coinvolte",
+          "linee_non_coinvolte",
+          "eventi_coinvolti",
+          "consiglio"
+        ],
+        "title": "ScioperoPrevisto",
         "type": "object"
       },
       "SerieSimulazione": {
