@@ -32,6 +32,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 
 | Compito | Chi | Da quando | Nota |
 | --- | --- | --- | --- |
+| Icona del sito (badge tondo del team) e font del titolo nella pagina iniziale | Leonardo Schiavo | sab 14/11 19:52 | Tocca `frontend/index.html`, `frontend/vite.config.ts` (icone della PWA), `frontend/public/`, `frontend/src/home/`, `frontend/package.json` (un font) |
 | R2 — Capacità delle linee calcolate dagli orari veri (GTFS ANM ed EAV, orari Linea 2) | Leonardo Monaco | sab 14/11 20:06 | Tocca `…/data/scenario_maradona.json` (capacità delle linee), docs/IPOTESI.md |
 
 ## Fatto
