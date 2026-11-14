@@ -6,19 +6,24 @@ Il repository si chiamava in precedenza `CoScienze-TheBigHack2026`.
 
 ## Stato attuale
 
-Repository appena preparato: regole di team, file di stato e concept. Non c'è ancora codice. Prossimo passo: il piano con moduli, contratti e compiti (docs/PIANO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
+Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. La web app non c'è ancora; il piano (docs/PIANO.md) è in corso. Il dettaglio è in [docs/STATO.md](docs/STATO.md).
 
 ## Come avviare
 
-- `make check`: verifica che esistano i file base e che `.env` non sia tracciato (verrà esteso con lint e test).
-- Installazione e avvio della demo: da compilare appena esistono.
+Serve [uv](https://docs.astral.sh/uv/).
+
+- `make check`: file base, `.env` non tracciato, lint e test degli agenti, contratto API allineato.
+- `make agents-run`: API degli agenti su http://localhost:8000, documentazione su http://localhost:8000/docs.
+- `make contracts`: rigenera `contracts/agenti.openapi.json` dopo aver cambiato modelli o API.
 
 ## Struttura del repository
 
 - `CLAUDE.md`: regole di lavoro per Claude Code, lette in automatico
 - `README.md`: stato e registro delle modifiche
-- `Makefile`: `make check`, eseguito prima di ogni commit
+- `Makefile`: `make check`, eseguito prima di ogni commit, e i comandi degli agenti
 - `.env.example`: nomi delle variabili d'ambiente, senza valori
+- `agents/`: modulo agenti in Python (API FastAPI, scenario, test); vedi [agents/README.md](agents/README.md)
+- `contracts/`: contratti tra i moduli; vedi [contracts/README.md](contracts/README.md)
 - `docs/PROGETTO.md`: concept del progetto
 - `docs/GUIDA.md`: guida del team (prompt, template, regole per i tre PC)
 - `docs/TEAM.md`: componenti del team, utenti GitHub ed email per i commit
@@ -35,6 +40,7 @@ Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 15:20 | agents | Modulo agenti in Python: cinque agenti, scenario Maradona simulato, registro a hash, indicatori, API e contratto OpenAPI |
 | 2026-11-14 | 15:00 | docs | Approccio quantistico tra gli sviluppi futuri in PROGETTO.md (ottimizzazione QUBO, firme post-quantum) |
 | 2026-11-14 | 14:55 | docs | Decisioni in PROGETTO.md: web app PWA con due viste e gestione degli alert con formato CAP |
 | 2026-11-14 | 14:40 | repo | Checklist di consegna in docs/STATO.md, team da cinque persone in CLAUDE.md |

@@ -1,0 +1,1233 @@
+{
+  "components": {
+    "schemas": {
+      "Affidabilita": {
+        "description": "Quanto è certa un'informazione: si mostra sempre a schermo.",
+        "enum": [
+          "ufficiale",
+          "misurata",
+          "stimata",
+          "non_verificata"
+        ],
+        "title": "Affidabilita",
+        "type": "string"
+      },
+      "Alert": {
+        "description": "Messaggio di allerta: versione semplificata del Common Alerting Protocol (OASIS CAP).",
+        "properties": {
+          "area": {
+            "$ref": "#/components/schemas/AreaAlert"
+          },
+          "certainty": {
+            "enum": [
+              "Observed",
+              "Likely",
+              "Possible",
+              "Unlikely",
+              "Unknown"
+            ],
+            "title": "Certainty",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "event": {
+            "title": "Event",
+            "type": "string"
+          },
+          "expires_t_min": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires T Min"
+          },
+          "headline": {
+            "title": "Headline",
+            "type": "string"
+          },
+          "identifier": {
+            "title": "Identifier",
+            "type": "string"
+          },
+          "instruction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instruction"
+          },
+          "lingua": {
+            "default": "it",
+            "enum": [
+              "it",
+              "en"
+            ],
+            "title": "Lingua",
+            "type": "string"
+          },
+          "msgType": {
+            "enum": [
+              "Alert",
+              "Update",
+              "Cancel"
+            ],
+            "title": "Msgtype",
+            "type": "string"
+          },
+          "piano_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Piano Id"
+          },
+          "pubblico": {
+            "enum": [
+              "tutti",
+              "tifoso",
+              "residente",
+              "turista"
+            ],
+            "title": "Pubblico",
+            "type": "string"
+          },
+          "references": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "References"
+          },
+          "sender": {
+            "title": "Sender",
+            "type": "string"
+          },
+          "sent_t_min": {
+            "title": "Sent T Min",
+            "type": "integer"
+          },
+          "severity": {
+            "enum": [
+              "Extreme",
+              "Severe",
+              "Moderate",
+              "Minor",
+              "Unknown"
+            ],
+            "title": "Severity",
+            "type": "string"
+          },
+          "simulato": {
+            "default": true,
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "source": {
+            "description": "Provenienza dell'informazione, mostrata all'utente",
+            "title": "Source",
+            "type": "string"
+          },
+          "ufficiale": {
+            "description": "True se è un'allerta ufficiale inoltrata senza modifiche",
+            "title": "Ufficiale",
+            "type": "boolean"
+          },
+          "urgency": {
+            "enum": [
+              "Immediate",
+              "Expected",
+              "Future",
+              "Past",
+              "Unknown"
+            ],
+            "title": "Urgency",
+            "type": "string"
+          }
+        },
+        "required": [
+          "identifier",
+          "sender",
+          "sent_t_min",
+          "msgType",
+          "severity",
+          "urgency",
+          "certainty",
+          "event",
+          "headline",
+          "description",
+          "area",
+          "source",
+          "ufficiale",
+          "pubblico"
+        ],
+        "title": "Alert",
+        "type": "object"
+      },
+      "Ambito": {
+        "enum": [
+          "rischio",
+          "mobilita",
+          "folla",
+          "comunicazione"
+        ],
+        "title": "Ambito",
+        "type": "string"
+      },
+      "AreaAlert": {
+        "properties": {
+          "descrizione": {
+            "title": "Descrizione",
+            "type": "string"
+          },
+          "poligono": {
+            "description": "Coppie (lat, lon)",
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Poligono",
+            "type": "array"
+          }
+        },
+        "required": [
+          "descrizione"
+        ],
+        "title": "AreaAlert",
+        "type": "object"
+      },
+      "Avanza": {
+        "properties": {
+          "t_min": {
+            "title": "T Min",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "t_min"
+        ],
+        "title": "Avanza",
+        "type": "object"
+      },
+      "Caso": {
+        "description": "I tre casi di gestione degli alert (docs/PROGETTO.md, 6.2).",
+        "enum": [
+          "A_allarme_ufficiale",
+          "B_evento_rilevato",
+          "C_notizia_non_verificata"
+        ],
+        "title": "Caso",
+        "type": "string"
+      },
+      "Conflitto": {
+        "properties": {
+          "proposte": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Proposte",
+            "type": "array"
+          },
+          "risoluzione": {
+            "title": "Risoluzione",
+            "type": "string"
+          },
+          "risorsa": {
+            "title": "Risorsa",
+            "type": "string"
+          }
+        },
+        "required": [
+          "risorsa",
+          "proposte",
+          "risoluzione"
+        ],
+        "title": "Conflitto",
+        "type": "object"
+      },
+      "ConfrontoIndicatori": {
+        "properties": {
+          "con_coordinamento": {
+            "$ref": "#/components/schemas/Indicatori"
+          },
+          "ipotesi": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Ipotesi",
+            "type": "array"
+          },
+          "senza_coordinamento": {
+            "$ref": "#/components/schemas/Indicatori"
+          }
+        },
+        "required": [
+          "con_coordinamento",
+          "senza_coordinamento",
+          "ipotesi"
+        ],
+        "title": "ConfrontoIndicatori",
+        "type": "object"
+      },
+      "Decisione": {
+        "properties": {
+          "motivo": {
+            "default": "",
+            "title": "Motivo",
+            "type": "string"
+          },
+          "operatore": {
+            "default": "operatore",
+            "title": "Operatore",
+            "type": "string"
+          }
+        },
+        "title": "Decisione",
+        "type": "object"
+      },
+      "Evento": {
+        "description": "Un fatto della timeline dello scenario.",
+        "properties": {
+          "affidabilita": {
+            "$ref": "#/components/schemas/Affidabilita"
+          },
+          "fonte": {
+            "title": "Fonte",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "linea": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Linea"
+          },
+          "magnitudo": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Magnitudo"
+          },
+          "simulato": {
+            "default": true,
+            "title": "Simulato",
+            "type": "boolean"
+          },
+          "t_min": {
+            "description": "Minuti dall'inizio dello scenario",
+            "title": "T Min",
+            "type": "integer"
+          },
+          "testo_ufficiale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Testo dell'allerta ufficiale, da inoltrare senza modifiche",
+            "title": "Testo Ufficiale"
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/TipoEvento"
+          },
+          "titolo": {
+            "title": "Titolo",
+            "type": "string"
+          },
+          "zona": {
+            "title": "Zona",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "t_min",
+          "tipo",
+          "titolo",
+          "zona",
+          "fonte",
+          "affidabilita"
+        ],
+        "title": "Evento",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Indicatori": {
+        "description": "Stessi indicatori, stesso scenario: con e senza coordinamento.",
+        "properties": {
+          "deflusso_min": {
+            "description": "Minuti dal fischio finale allo sgombero dell'area stadio",
+            "title": "Deflusso Min",
+            "type": "integer"
+          },
+          "minuti_decisione": {
+            "title": "Minuti Decisione",
+            "type": "integer"
+          },
+          "minuti_evento_avviso": {
+            "title": "Minuti Evento Avviso",
+            "type": "integer"
+          },
+          "note": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Note",
+            "type": "array"
+          },
+          "picco_attesa_persone": {
+            "description": "Massimo di persone in attesa fuori dallo stadio",
+            "title": "Picco Attesa Persone",
+            "type": "integer"
+          },
+          "scenario": {
+            "enum": [
+              "con_coordinamento",
+              "senza_coordinamento"
+            ],
+            "title": "Scenario",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scenario",
+          "deflusso_min",
+          "picco_attesa_persone",
+          "minuti_evento_avviso",
+          "minuti_decisione"
+        ],
+        "title": "Indicatori",
+        "type": "object"
+      },
+      "Piano": {
+        "description": "Piano unico dell'Orchestratore, da approvare in control room.",
+        "properties": {
+          "conflitti": {
+            "items": {
+              "$ref": "#/components/schemas/Conflitto"
+            },
+            "title": "Conflitti",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "proposte": {
+            "items": {
+              "$ref": "#/components/schemas/Proposta"
+            },
+            "title": "Proposte",
+            "type": "array"
+          },
+          "sintesi": {
+            "title": "Sintesi",
+            "type": "string"
+          },
+          "stato": {
+            "default": "proposto",
+            "enum": [
+              "proposto",
+              "approvato",
+              "rifiutato",
+              "superato"
+            ],
+            "title": "Stato",
+            "type": "string"
+          },
+          "t_decisione": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "T Decisione"
+          },
+          "t_min": {
+            "title": "T Min",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "t_min",
+          "proposte",
+          "sintesi"
+        ],
+        "title": "Piano",
+        "type": "object"
+      },
+      "Proposta": {
+        "description": "Quello che un agente propone all'Orchestratore.",
+        "properties": {
+          "affidabilita": {
+            "$ref": "#/components/schemas/Affidabilita"
+          },
+          "agente": {
+            "$ref": "#/components/schemas/Ambito"
+          },
+          "azione": {
+            "description": "Codice dell'azione, es. attiva_navette",
+            "title": "Azione",
+            "type": "string"
+          },
+          "caso": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Caso"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dettagli": {
+            "additionalProperties": true,
+            "title": "Dettagli",
+            "type": "object"
+          },
+          "fonti": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Fonti",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "motivazione": {
+            "title": "Motivazione",
+            "type": "string"
+          },
+          "priorita": {
+            "description": "5 = sicurezza delle persone",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Priorita",
+            "type": "integer"
+          },
+          "risorse": {
+            "description": "Luoghi o mezzi usati: servono a trovare i conflitti",
+            "items": {
+              "type": "string"
+            },
+            "title": "Risorse",
+            "type": "array"
+          },
+          "t_min": {
+            "title": "T Min",
+            "type": "integer"
+          },
+          "titolo": {
+            "title": "Titolo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "agente",
+          "t_min",
+          "titolo",
+          "azione",
+          "priorita",
+          "affidabilita",
+          "motivazione"
+        ],
+        "title": "Proposta",
+        "type": "object"
+      },
+      "Registro": {
+        "properties": {
+          "integro": {
+            "title": "Integro",
+            "type": "boolean"
+          },
+          "prima_voce_alterata": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prima Voce Alterata"
+          },
+          "voci": {
+            "items": {
+              "$ref": "#/components/schemas/VoceRegistro"
+            },
+            "title": "Voci",
+            "type": "array"
+          }
+        },
+        "required": [
+          "integro",
+          "prima_voce_alterata",
+          "voci"
+        ],
+        "title": "Registro",
+        "type": "object"
+      },
+      "Scenario": {
+        "properties": {
+          "durata_min": {
+            "title": "Durata Min",
+            "type": "integer"
+          },
+          "fine_partita_t_min": {
+            "title": "Fine Partita T Min",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "ora_inizio": {
+            "title": "Ora Inizio",
+            "type": "string"
+          },
+          "timeline": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Timeline",
+            "type": "array"
+          },
+          "titolo": {
+            "title": "Titolo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "titolo",
+          "ora_inizio",
+          "durata_min",
+          "fine_partita_t_min",
+          "timeline"
+        ],
+        "title": "Scenario",
+        "type": "object"
+      },
+      "StatoCitta": {
+        "description": "Fotografia della città al minuto t, vista da tutti gli agenti.",
+        "properties": {
+          "eventi": {
+            "description": "Eventi già avvenuti fino a t_min",
+            "items": {
+              "$ref": "#/components/schemas/Evento"
+            },
+            "title": "Eventi",
+            "type": "array"
+          },
+          "linee": {
+            "items": {
+              "$ref": "#/components/schemas/StatoLinea"
+            },
+            "title": "Linee",
+            "type": "array"
+          },
+          "livello_vulcanico_campi_flegrei": {
+            "title": "Livello Vulcanico Campi Flegrei",
+            "type": "string"
+          },
+          "ora": {
+            "title": "Ora",
+            "type": "string"
+          },
+          "partita_finita": {
+            "title": "Partita Finita",
+            "type": "boolean"
+          },
+          "spettatori": {
+            "title": "Spettatori",
+            "type": "integer"
+          },
+          "t_min": {
+            "title": "T Min",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "t_min",
+          "ora",
+          "eventi",
+          "linee",
+          "spettatori",
+          "partita_finita",
+          "livello_vulcanico_campi_flegrei"
+        ],
+        "title": "StatoCitta",
+        "type": "object"
+      },
+      "StatoLinea": {
+        "properties": {
+          "attiva": {
+            "title": "Attiva",
+            "type": "boolean"
+          },
+          "capacita_persone_min": {
+            "title": "Capacita Persone Min",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "motivo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motivo"
+          },
+          "nome": {
+            "title": "Nome",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "attiva",
+          "capacita_persone_min"
+        ],
+        "title": "StatoLinea",
+        "type": "object"
+      },
+      "TipoEvento": {
+        "enum": [
+          "partita",
+          "sisma",
+          "sospensione_linea",
+          "riattivazione_linea",
+          "allerta_meteo",
+          "notizia_non_verificata"
+        ],
+        "title": "TipoEvento",
+        "type": "string"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "VoceRegistro": {
+        "properties": {
+          "contenuto": {
+            "additionalProperties": true,
+            "title": "Contenuto",
+            "type": "object"
+          },
+          "hash": {
+            "title": "Hash",
+            "type": "string"
+          },
+          "hash_precedente": {
+            "title": "Hash Precedente",
+            "type": "string"
+          },
+          "indice": {
+            "title": "Indice",
+            "type": "integer"
+          },
+          "t_min": {
+            "title": "T Min",
+            "type": "integer"
+          },
+          "tipo": {
+            "title": "Tipo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "indice",
+          "t_min",
+          "tipo",
+          "contenuto",
+          "hash_precedente",
+          "hash"
+        ],
+        "title": "VoceRegistro",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "N.A.P.L.E.S. – agenti",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/avanza": {
+      "post": {
+        "operationId": "avanza_api_avanza_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Avanza"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatoCitta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Avanza"
+      }
+    },
+    "/api/avvisi": {
+      "get": {
+        "description": "Avvisi inviati. Con `pubblico`, quelli per quel profilo più quelli per tutti.",
+        "operationId": "avvisi_api_avvisi_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "pubblico",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "tutti",
+                    "tifoso",
+                    "residente",
+                    "turista"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Pubblico"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Alert"
+                  },
+                  "title": "Response Avvisi Api Avvisi Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Avvisi"
+      }
+    },
+    "/api/indicatori": {
+      "get": {
+        "operationId": "indicatori_api_indicatori_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfrontoIndicatori"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Indicatori"
+      }
+    },
+    "/api/piani": {
+      "get": {
+        "operationId": "piani_api_piani_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Piano"
+                  },
+                  "title": "Response Piani Api Piani Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Piani"
+      }
+    },
+    "/api/piano": {
+      "get": {
+        "operationId": "piano_api_piano_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Piano"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Piano Api Piano Get"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Piano"
+      }
+    },
+    "/api/piano/{piano_id}/approva": {
+      "post": {
+        "operationId": "approva_api_piano__piano_id__approva_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "piano_id",
+            "required": true,
+            "schema": {
+              "title": "Piano Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Decisione"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Decisione"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Alert"
+                  },
+                  "title": "Response Approva Api Piano  Piano Id  Approva Post",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approva"
+      }
+    },
+    "/api/piano/{piano_id}/rifiuta": {
+      "post": {
+        "operationId": "rifiuta_api_piano__piano_id__rifiuta_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "piano_id",
+            "required": true,
+            "schema": {
+              "title": "Piano Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Decisione"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Decisione"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Piano"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Rifiuta"
+      }
+    },
+    "/api/registro": {
+      "get": {
+        "operationId": "registro_api_registro_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Registro"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Registro"
+      }
+    },
+    "/api/reset": {
+      "post": {
+        "operationId": "reset_api_reset_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatoCitta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Reset"
+      }
+    },
+    "/api/salute": {
+      "get": {
+        "operationId": "salute_api_salute_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Salute Api Salute Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Salute"
+      }
+    },
+    "/api/scenario": {
+      "get": {
+        "operationId": "scenario_api_scenario_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scenario"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Scenario"
+      }
+    },
+    "/api/stato": {
+      "get": {
+        "operationId": "stato_api_stato_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatoCitta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Stato"
+      }
+    }
+  }
+}

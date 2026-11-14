@@ -1,0 +1,128 @@
+{
+  "id": "maradona_campi_flegrei",
+  "titolo": "Partita al Maradona, sciame sismico simulato ai Campi Flegrei",
+  "ora_inizio": "20:45",
+  "durata_min": 150,
+  "fine_partita_t_min": 95,
+  "spettatori": 50000,
+  "livello_vulcanico_campi_flegrei": "giallo (da verificare sulla fonte ufficiale)",
+  "settori": [
+    {"id": "curva_a", "nome": "Curva A", "spettatori": 12000},
+    {"id": "curva_b", "nome": "Curva B", "spettatori": 12000},
+    {"id": "tribuna_posillipo", "nome": "Tribuna Posillipo", "spettatori": 8000},
+    {"id": "tribuna_nisida", "nome": "Tribuna Nisida", "spettatori": 8000},
+    {"id": "distinti", "nome": "Distinti", "spettatori": 10000}
+  ],
+  "linee": [
+    {"id": "linea2", "nome": "Linea 2 – stazione Campi Flegrei", "capacita_persone_min": 400},
+    {"id": "cumana", "nome": "Cumana – stazione Mostra", "capacita_persone_min": 300},
+    {"id": "bus", "nome": "Bus ordinari Fuorigrotta", "capacita_persone_min": 150},
+    {"id": "piedi", "nome": "Deflusso a piedi verso i quartieri vicini", "capacita_persone_min": 450}
+  ],
+  "navette": {
+    "capacita_persone_min": 500,
+    "minuti_attivazione": 12,
+    "punto_carico_preferito": "piazzale_tecchio",
+    "punto_carico_alternativo": "viale_giochi_del_mediterraneo"
+  },
+  "simulazione": {
+    "uscita_massima_persone_min": 2500,
+    "ondate": [
+      {"settori": ["tribuna_posillipo", "tribuna_nisida"], "ritardo_min": 0},
+      {"settori": ["distinti"], "ritardo_min": 8},
+      {"settori": ["curva_a", "curva_b"], "ritardo_min": 16}
+    ],
+    "senza_coordinamento_minuti_informazione": 15,
+    "senza_coordinamento_minuti_decisione": 20,
+    "con_coordinamento_minuti_informazione": 3,
+    "con_coordinamento_minuti_decisione": 2,
+    "con_coordinamento_fattore_percorsi_piedi": 1.3,
+    "persone_soglia_area_sgombra": 500
+  },
+  "soglie_sisma": {
+    "attenzione_magnitudo": 2.5,
+    "moderato_magnitudo": 3.0,
+    "severo_magnitudo": 4.0,
+    "finestra_sciame_min": 60
+  },
+  "eventi": [
+    {
+      "id": "ev_partita",
+      "t_min": 0,
+      "tipo": "partita",
+      "titolo": "Calcio d'inizio al Maradona",
+      "zona": "Fuorigrotta",
+      "fonte": "Calendario eventi (simulato)",
+      "affidabilita": "ufficiale"
+    },
+    {
+      "id": "ev_sisma_1",
+      "t_min": 70,
+      "tipo": "sisma",
+      "titolo": "Scossa Md 3.2 – Campi Flegrei (Pozzuoli)",
+      "zona": "Campi Flegrei",
+      "fonte": "INGV (evento simulato)",
+      "affidabilita": "misurata",
+      "magnitudo": 3.2
+    },
+    {
+      "id": "ev_sisma_2",
+      "t_min": 71,
+      "tipo": "sisma",
+      "titolo": "Scossa Md 2.6 – Campi Flegrei (Pozzuoli)",
+      "zona": "Campi Flegrei",
+      "fonte": "INGV (evento simulato)",
+      "affidabilita": "misurata",
+      "magnitudo": 2.6
+    },
+    {
+      "id": "ev_stop_cumana",
+      "t_min": 72,
+      "tipo": "sospensione_linea",
+      "titolo": "Cumana sospesa per verifiche dopo l'evento sismico",
+      "zona": "Fuorigrotta",
+      "fonte": "Gestore del servizio (simulato)",
+      "affidabilita": "ufficiale",
+      "linea": "cumana"
+    },
+    {
+      "id": "ev_stop_linea2",
+      "t_min": 72,
+      "tipo": "sospensione_linea",
+      "titolo": "Linea 2 sospesa per verifiche dopo l'evento sismico",
+      "zona": "Fuorigrotta",
+      "fonte": "Gestore del servizio (simulato)",
+      "affidabilita": "ufficiale",
+      "linea": "linea2"
+    },
+    {
+      "id": "ev_voce_social",
+      "t_min": 76,
+      "tipo": "notizia_non_verificata",
+      "titolo": "Post social: «crolli a Bagnoli, evacuate lo stadio»",
+      "zona": "Bagnoli",
+      "fonte": "Social network (simulato)",
+      "affidabilita": "non_verificata"
+    },
+    {
+      "id": "ev_meteo",
+      "t_min": 85,
+      "tipo": "allerta_meteo",
+      "titolo": "Allerta meteo gialla per temporali",
+      "zona": "Napoli",
+      "fonte": "Protezione Civile Regione Campania (simulato)",
+      "affidabilita": "ufficiale",
+      "testo_ufficiale": "SIMULAZIONE – Allerta meteo gialla per temporali dalle 22:00 alle 06:00. Prestare attenzione a sottopassi e zone soggette ad allagamento."
+    },
+    {
+      "id": "ev_sisma_3",
+      "t_min": 101,
+      "tipo": "sisma",
+      "titolo": "Scossa Md 2.8 – Campi Flegrei (Pozzuoli)",
+      "zona": "Campi Flegrei",
+      "fonte": "INGV (evento simulato)",
+      "affidabilita": "misurata",
+      "magnitudo": 2.8
+    }
+  ]
+}
