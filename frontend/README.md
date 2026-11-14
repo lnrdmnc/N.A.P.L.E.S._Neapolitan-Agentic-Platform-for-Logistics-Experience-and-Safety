@@ -2,7 +2,7 @@
 
 Web app PWA di N.A.P.L.E.S. (Vite + React + TypeScript), installabile e funzionante offline.
 
-- `/control-room` (`src/control-room/`): dashboard per il proiettore. Oggi: ora della simulazione, stato della città, linee, eventi con affidabilità. Riquadri in costruzione: mappa (C1), messaggi tra agenti (C2), piano (C3), registro (C4), indicatori (C5).
+- `/control-room` (`src/control-room/`): dashboard per il proiettore. Oggi: ora della simulazione, stato della città, linee, eventi con affidabilità. Mappa con traffico reale di Google e tempi dallo stadio (`MappaTraffico.tsx`, etichetta «DATO REALE»). Riquadri in costruzione: mappa a zone (C1), messaggi tra agenti (C2), piano (C3), registro (C4), indicatori (C5).
 - `/cittadino` (`src/cittadino/`): emergenze e avvisi (`AlertCard.tsx`: caso A o B, certezza, fonte, indicazioni operative), traffico e trasporti, meteo (U2). Filtro per profilo e lingua: U1.
 - `/` (`src/home/`): scelta tra le due viste. Una pagina nuova si registra con una riga in `src/routes.ts`.
 - Dati: `src/api/useStato.ts` legge `/api/stato` ogni secondo; `src/api/useLiveEvents.ts` riceve gli eventi da `/api/events`.

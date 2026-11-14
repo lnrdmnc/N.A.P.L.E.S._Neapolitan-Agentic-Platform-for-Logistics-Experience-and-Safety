@@ -91,3 +91,10 @@ def test_spa_does_not_serve_files_outside_dist(tmp_path: Path):
     (tmp_path / "secret.txt").write_text("nope", encoding="utf-8")
     client = TestClient(create_app(frontend_dist=dist))
     assert "nope" not in client.get("/../secret.txt").text
+
+
+def test_config_exposes_only_the_browser_maps_key(monkeypatch):
+    monkeypatch.setenv("MAPS_JS_API_KEY", "browser-key")
+    monkeypatch.setenv("MAPS_API_KEY", "server-key")
+    body = TestClient(create_app()).get("/api/config").json()
+    assert body == {"maps_js_api_key": "browser-key"}
