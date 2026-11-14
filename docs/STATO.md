@@ -34,6 +34,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Web app: backend FastAPI (backend/) e frontend React PWA (frontend/, viste /control-room e /cittadino) | Francesco Sannella | sab 14/11 15:20 | W0 fatto (scheletro); poi C3 e U1. Il backend è un gateway senza logica propria: gli agenti restano sulla 8001 |
 | Script del video pitch (docs/VIDEO.md) | Leonardo Schiavo | sab 14/11 16:15 | Solo testo, massimo 3 minuti |
+| Sintesi delle idee (docs/IDEE.md) e numeri credibili nel confronto con e senza coordinamento | Leonardo Monaco | sab 14/11 16:22 | Dal check di 4 agenti esperti di smart city; tocca simulazione.py, scenario e IPOTESI.md |
 
 ## Fatto
 
