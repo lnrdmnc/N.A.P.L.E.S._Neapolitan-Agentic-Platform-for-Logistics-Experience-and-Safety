@@ -196,6 +196,15 @@ Gli operatori entrano in due punti:
 
 È il collegamento naturale con Fastweb + Vodafone.
 
+### Approccio quantistico
+
+Resta fuori dal prototipo: oggi non migliorerebbe nessuno degli indicatori misurati. Due agganci per il futuro:
+
+- **Ottimizzazione.** Allocazione delle navette, deflusso a ondate per settore dello stadio e assegnazione dei percorsi alternativi sono problemi di ottimizzazione combinatoria, formulabili come QUBO (*Quadratic Unconstrained Binary Optimization*). È il formato accettato dai quantum annealer e dagli algoritmi variazionali come QAOA. Sui problemi di dimensione realistica i risolutori classici restano oggi più veloci e affidabili: il modulo di ottimizzazione resta separato, con il problema già formulato in modo compatibile con i risolutori quantistici quando saranno competitivi.
+- **Crittografia post-quantum per il registro delle decisioni.** La catena di hash (SHA-256) resiste già bene a un computer quantistico; le firme digitali classiche (RSA, ECDSA) no. Un registro che deve fare da prova per anni, tra enti diversi, deve restare verificabile anche allora: le firme passerebbero a standard post-quantum del NIST come ML-DSA (FIPS 204). Si lega alla blockchain tra enti e al lavoro degli operatori di telecomunicazioni su reti e crittografia *quantum-safe*.
+
+Eventuale esperimento a parte, solo se la demo è già stabile prima dello stop di domenica alle 10:30: una piccola istanza di allocazione delle navette risolta in modo classico e con QAOA simulato, come appendice nel repository e non nella demo.
+
 ### Altro
 
 Prenotazioni e acquisti dall'assistente, citati dalla traccia, restano fuori dal prototipo e sono un possibile sviluppo futuro. Altri sviluppi: da definire.
