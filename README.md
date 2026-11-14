@@ -1,14 +1,49 @@
+<p align="center">
+  <img src="docs/img/logo-naples-coscienze.png" alt="N.A.P.L.E.S. · Team CoScienze · The Big Hack 2026" width="640">
+</p>
+
 # N.A.P.L.E.S. — Neapolitan Agentic Platform for Logistics, Experience and Safety
 
-Sistema di agenti AI per la resilienza urbana di Napoli: cinque agenti (Rischio, Mobilità, Folla, Comunicazione e un Orchestratore) gestiscono traffico ed eventi critici insieme alla control room comunale, e l'operatore approva sempre le decisioni. Progetto per la challenge 05 di Fastweb + Vodafone, The Big Hack 2026. Ogni evento sismico mostrato è una simulazione. Il concept completo è in [docs/PROGETTO.md](docs/PROGETTO.md).
+Agenti AI che si coordinano per la resilienza urbana di Napoli. Cinque agenti (Rischio, Mobilità, Folla, Comunicazione e un Orchestratore) leggono la città, si scambiano proposte, risolvono i conflitti e presentano un unico piano alla control room comunale: **l'operatore approva sempre**, il cittadino riceve sul telefono solo gli avvisi che lo riguardano, con la fonte, e ogni passo resta in un registro a catena di hash. Il beneficio si misura: stessi indicatori, stesso scenario, con e senza coordinamento.
 
-Il repository si chiamava in precedenza `CoScienze-TheBigHack2026`.
+Challenge 05 «Napoli Agentic City: la città che Ci pensa» (Fastweb + Vodafone), The Big Hack 2026, Team CoScienze. Il concept completo è in [docs/PROGETTO.md](docs/PROGETTO.md).
+
+## Guarda il progetto all'opera
+
+**Online, senza installare nulla: https://naples-coscienze.web.app**
+
+| Vista | Per chi | Indirizzo |
+| --- | --- | --- |
+| Control room | L'operatore del Comune, su uno schermo grande | https://naples-coscienze.web.app/control-room |
+| Vista cittadino | Chi è in città, sul telefono (si installa sulla home) | https://naples-coscienze.web.app/cittadino |
+
+Il percorso della demo, in tre minuti:
+
+1. Apri la **control room** sul computer e la **vista cittadino** sul telefono, e nella vista cittadino scegli un profilo (tifoso, residente, pendolare, turista in inglese).
+2. Nella control room premi **▶ Avvia** (o **⏭ Prossimo evento**): alle 21:55 dello scenario arriva uno sciame sismico **simulato** ai Campi Flegrei. Nella linea del tempo gli agenti si scambiano proposte, l'Orchestratore risolve il conflitto su Piazzale Tecchio e presenta il piano, con il grado di certezza di ogni dato e una spiegazione scritta da Claude.
+3. Premi **Approva**: in pochi secondi l'avviso arriva sul telefono, scritto per il profilo scelto e sempre con la fonte. Prova anche **Modifica** e **Rifiuta**.
+4. Guarda gli **indicatori con e senza coordinamento** e il **registro delle decisioni**, verificabile.
+
+La sessione è una sola per tutti quelli che aprono il link: se qualcuno avanza o approva, cambia anche per te. **↺ Ricomincia** riporta lo scenario all'inizio. Il primo caricamento dopo una pausa impiega qualche secondo.
+
+### Cosa è reale e cosa è simulato
+
+| Reale, dal vivo | Simulato, ed etichettato a schermo |
+| --- | --- |
+| Traffico sulle strade e tempi in auto dallo stadio (Google Maps) | Lo sciame sismico e la partita dello scenario |
+| Ultimi terremoti di Campi Flegrei e Vesuvio (INGV) | Il testo dell'allerta ufficiale e il post social non verificato |
+| Meteo allo stadio (Open-Meteo) | La sospensione di Cumana e Linea 2 |
+| Livello di allerta vulcanica ufficiale, verificato sull'Osservatorio Vesuviano | Presenze e flussi di persone (il simulatore a zone) |
+| Partite al Maradona (football-data.org) | Le stime di ricezione degli avvisi |
+| Fermate e coordinate (GTFS ANM ed EAV, OpenStreetMap) | |
+
+Ogni dato simulato e ogni ipotesi sono in [docs/IPOTESI.md](docs/IPOTESI.md). N.A.P.L.E.S. affianca INGV e Protezione Civile, non li sostituisce, e non dà mai istruzioni di evacuazione.
 
 ## Stato attuale
 
-Il modulo agenti funziona: i cinque agenti percorrono lo scenario simulato del Maradona e producono piani, avvisi, indicatori e registro, esposti via API. Lo scheletro della web app funziona: il backend sulla porta 8000 serve la PWA, inoltra le chiamate agli agenti sulla 8001 e spinge gli avvisi approvati ai telefoni in tempo reale; la control room mostra stato della città ed eventi, la vista cittadino linee e avvisi. Mappa, piano con Approva/Modifica/Rifiuta e indicatori sono ancora da costruire. Il piano di lavoro, con decisioni, contratti da aggiungere, compiti e orari, è in [docs/PIANO.md](docs/PIANO.md). La control room mostra il traffico reale di Google intorno allo stadio (chiavi in `.env`, messa online in [docs/DEPLOY.md](docs/DEPLOY.md)). Il contesto reale (terremoti INGV, meteo, livello di allerta vulcanica ufficiale della Protezione Civile) e i grandi eventi dei prossimi giorni arrivano da fonti vere, con fonte e ora a schermo. Lo script del video pitch di 3 minuti è in [docs/VIDEO.md](docs/VIDEO.md). Il dettaglio è in [docs/STATO.md](docs/STATO.md).
+Il percorso demo funziona dall'inizio alla fine, online e in locale: regia del tempo, linea del tempo dei messaggi tra agenti, piano con Approva/Modifica/Rifiuta, avvisi per profilo sul telefono in tempo reale, indicatori con e senza coordinamento dal simulatore a zone, registro delle decisioni verificabile. Testi del piano e degli avvisi scritti da Claude con controlli automatici (nessun numero nuovo, nessuna evacuazione, etichetta SIMULAZIONE) e cache; il testo ufficiale non passa mai dal modello. Contesto reale a schermo: traffico Google, terremoti INGV, meteo, livelli vulcanici ufficiali, partite e grandi eventi dei prossimi giorni. Online su https://naples-coscienze.web.app con `make deploy` ([docs/DEPLOY.md](docs/DEPLOY.md)). Script del video pitch in [docs/VIDEO.md](docs/VIDEO.md); dettaglio, compiti aperti e scadenze in [docs/STATO.md](docs/STATO.md).
 
-## Come avviare
+## Come avviare in locale
 
 Servono [uv](https://docs.astral.sh/uv/), Python 3.12+ e Node 22+. Alla prima volta: `make install` (dipendenze della web app).
 
@@ -51,17 +86,19 @@ Indirizzo pubblico: **https://naples-coscienze.web.app** (`/control-room`, `/cit
 - `docs/TEAM.md`: componenti del team, utenti GitHub ed email per i commit
 - `docs/STATO.md`: scadenze, chi lavora su cosa, fatto e compiti liberi
 - `docs/IPOTESI.md`: dati simulati e ipotesi
+- `docs/img/`: logo del team
 - `docs/STAND.md`: risposte dello sponsor e degli organizzatori
 - `docs/FEEDBACK.md`: prove fatte a mano dal team
 
 ## Team
 
-Nome del team: da definire. Componenti in [docs/TEAM.md](docs/TEAM.md).
+Team CoScienze. Componenti in [docs/TEAM.md](docs/TEAM.md).
 
 ## Registro delle modifiche
 
 | Data | Ora | Modulo | Modifica |
 | --- | --- | --- | --- |
+| 2026-11-14 | 19:40 | docs, webapp | Logo nel README, sezione «Guarda il progetto all'opera» con il percorso demo e cosa è reale o simulato; pagina iniziale con le foto del golfo, le due viste e i passi della demo |
 | 2026-11-14 | 19:45 | agents, webapp | Livello di allerta vulcanica ufficiale dal vivo (Protezione Civile), concerti veri al posto degli esempi, capienza reale del Maradona |
 | 2026-11-14 | 19:30 | agents | Luoghi reali: coordinate delle zone da GTFS ANM/EAV e OpenStreetMap, area degli avvisi sul contorno vero dello stadio e sulle fermate vicine |
 | 2026-11-14 | 19:25 | agents, webapp | Contesto reale a schermo: livello vulcanico verificato (Campi Flegrei giallo, Vesuvio verde, fonte INGV-OV), terremoti INGV e meteo veri in control room, meteo vero nella vista cittadino |

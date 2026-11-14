@@ -34,7 +34,6 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 | --- | --- | --- | --- |
 | Mappa nella vista cittadino (stadio, stazioni aperte o chiuse, punti delle navette, traffico reale) | Francesco Sannella | sab 14/11 19:42 | Nuovi `frontend/src/cittadino/MappaCittadino.tsx` e `.css`, una riga in Cittadino.tsx; riusa `api/googleMaps.ts`. Cambio a PROGETTO.md 6.1 concordato |
 | R1 — Scenario agganciato alla prossima partita vera al Maradona (football-data.org), sciame sempre simulato | Leonardo Monaco | sab 14/11 19:45 | Tocca `…/scenario.py`, `…/models/citta.py`, intestazione della control room e della vista cittadino |
-| Logo nel README, README su come vedere il progetto, pagina iniziale con le foto del golfo | Leonardo Schiavo | sab 14/11 19:36 | Tocca README.md, `frontend/src/home/`, nuove immagini in `docs/img/` e `frontend/public/img/` |
 
 ## Fatto
 
@@ -79,6 +78,7 @@ Dal regolamento ufficiale. Da spuntare prima delle 12:00 di domenica.
 - **«Napoli oggi e nei prossimi giorni»** (agente `…/agenti/calendario.py`, `GET /api/napoli/prossimi-giorni`, componente `frontend/src/components/ProssimiGiorni.tsx` nella vista cittadino e in control room): partite reali al Maradona più elenco curato (`…/data/eventi_napoli.json`, dal 14/11 eventi verificati con fonte), zona interessata, fasce di arrivo e uscita, fermate da evitare e alternative (fermate reali dal GTFS, `…/data/luoghi_napoli.json`). 115 test. Provato nel browser a 1440 px e da telefono senza scorrimento orizzontale; fermate separate da virgole per leggerle meglio.
 - **C6 e U2 — Contesto reale a schermo.** Livello vulcanico verificato il 14/11 sull'Osservatorio Vesuviano – INGV (Campi Flegrei giallo, Vesuvio verde) in `…/data/livelli_vulcanici.json`, letto da `/api/contesto` (**contratto:** `LivelloVulcanico.url`). Control room: riquadro «Contesto reale di oggi» con livelli ufficiali, ultimi terremoti INGV veri e meteo vero allo stadio, separato dallo scenario. Vista cittadino: «Meteo a Fuorigrotta» vero al posto del segnaposto U2. Lo stato della città non dice più «da verificare».
 - **Luoghi reali.** Coordinate delle zone da GTFS ANM ed EAV (Mostra, fermata 6804) e da OpenStreetMap (stadio); nessuna zona è più approssimata. Area degli avvisi del caso B calcolata sul contorno vero dello stadio e sulle fermate vicine (`…/data/area_avvisi.json`) al posto del rettangolo. **Scoperta:** Viale Giochi del Mediterraneo, punto di carico alternativo delle navette nello scenario, è a circa 1,1 km dallo stadio verso Bagnoli, non accanto: coordinate corrette; resta da decidere se è il punto giusto (scenario di Leonardo Monaco).
+- **Logo, README e pagina iniziale.** Logo del team in `docs/img/` e in cima al README; README con «Guarda il progetto all'opera» (link online, percorso demo in quattro passi, tabella reale/simulato) e stato aggiornato; nome del team: CoScienze. Pagina iniziale con le foto del golfo (tramonto e notte in dissolvenza, in `frontend/public/img/`), logo, le due viste spiegate e i passi della demo.
 
 ## Prossimi compiti liberi
 
@@ -108,6 +108,8 @@ B0 è su main: sbloccati, backend: **B5** testi dal modello (serve L0), **F1–F
 Dopo lo scheletro della web app, una schermata per file: **C2** linea del tempo, **C3** piano e decisioni, **U1** avvisi nella vista cittadino, **C5** indicatori, **C4** registro, **C1** mappa a zone, **X1** `make demo` offline, **E1** test nel browser, **N1** «Perché Napoli». Domenica dopo le 10:30: registrazione del video seguendo docs/VIDEO.md. Se avanza tempo: U2, C6, U3, X2, U4.
 
 ## Problemi aperti
+
+- **Foto del golfo nella pagina iniziale** (`frontend/public/img/golfo-*.jpg`): fonte e licenza non note. Il repository è pubblico: prima della consegna indicare l'autore o sostituirle con foto a licenza libera (per esempio Wikimedia Commons).
 
 - **Dal checkpoint delle 14:50 (affidabilità e tempo reale):** la regia del tempo c’è (sab 18:51). INGV, meteo e livello vulcanico ufficiale reali ci sono nell'API (F1, F2, sab 18:55 e 19:25); restano il riquadro in control room (C6) e la mappa a zone (C1). Dettaglio in docs/FEEDBACK.md.
 - Team: Jacopo Mariello e Angelo Di Bello supportano il gruppo (lavoro senza commit: mentor, stand, prove).

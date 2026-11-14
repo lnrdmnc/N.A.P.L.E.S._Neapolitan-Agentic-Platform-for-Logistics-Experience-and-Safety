@@ -1,40 +1,201 @@
+/* Home: the Gulf of Naples behind, a dark veil for contrast, content on top. */
 .home {
-  max-width: 720px;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--inverse-ink);
+  background: var(--inverse-canvas);
+  overflow: hidden;
+}
+
+.home-bg,
+.home-bg-img,
+.home-bg-velo {
+  position: absolute;
+  inset: 0;
+}
+
+.home-bg {
+  position: fixed;
+}
+
+.home-bg-img {
+  background-size: cover;
+  background-position: center 40%;
+}
+
+.home-bg-tramonto {
+  background-image: url('/img/golfo-tramonto.jpg');
+}
+
+/* Sunset to night and back, slowly. */
+.home-bg-notte {
+  background-image: url('/img/golfo-notte.jpg');
+  opacity: 0;
+  animation: home-notte 24s ease-in-out infinite;
+}
+
+@keyframes home-notte {
+  0%,
+  35% {
+    opacity: 0;
+  }
+  50%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-bg-notte {
+    animation: none;
+  }
+}
+
+.home-bg-velo {
+  background:
+    linear-gradient(90deg, rgba(10, 18, 40, 0.92) 0%, rgba(10, 18, 40, 0.72) 55%, rgba(10, 18, 40, 0.35) 100%),
+    linear-gradient(0deg, rgba(10, 18, 40, 0.85) 0%, rgba(10, 18, 40, 0) 45%);
+}
+
+.home-main {
+  position: relative;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: var(--space-7) var(--space-4);
+  padding: var(--space-7) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.home-hero {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 720px;
+}
+
+.home-logo {
+  width: min(420px, 100%);
+  height: auto;
+  margin-bottom: var(--space-3);
+}
+
+.home-hero h1 {
+  font-size: clamp(48px, 9vw, 88px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.home-sigla {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.home-claim {
+  margin: var(--space-2) 0 var(--space-2);
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.home-viste {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-4);
 }
 
-.home h1 {
-  font-size: var(--text-display);
-  font-weight: 300;
+.home-vista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  text-decoration: none;
+  border-top: 4px solid var(--primary);
+  min-height: 48px;
+  transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
-.home p {
-  margin: 0;
+.home-vista:hover,
+.home-vista:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.home-vista:focus-visible {
+  outline: 3px solid var(--level-yellow);
+  outline-offset: 2px;
+}
+
+.home-vista-per {
+  font-size: var(--text-small);
   color: var(--ink-muted);
 }
 
-.home-links {
+.home-vista-titolo {
+  font-size: var(--text-title);
+  color: var(--primary);
+}
+
+.home-vista-testo {
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.home-passi h2 {
+  font-size: var(--text-title);
+  font-weight: 300;
+  margin: 0 0 var(--space-3);
+}
+
+.home-passi ol {
+  margin: 0;
+  padding-left: var(--space-5);
   display: flex;
-  gap: 1px;
-  flex-wrap: wrap;
-  margin-top: var(--space-5);
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 760px;
+  line-height: 1.45;
 }
 
-.home-links a {
-  background: var(--primary);
-  color: var(--inverse-ink);
-  padding: var(--space-3) var(--space-5);
-  text-decoration: none;
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
+.home-footer {
+  font-size: var(--text-small);
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 760px;
 }
 
-.home-links a:hover {
-  background: var(--primary-hover);
+@media (max-width: 768px) {
+  .home-main {
+    padding: var(--space-6) var(--space-4);
+    gap: var(--space-6);
+  }
+
+  .home-viste {
+    grid-template-columns: 1fr;
+  }
+
+  .home-claim {
+    font-size: 18px;
+  }
+
+  .home-bg-velo {
+    background: rgba(10, 18, 40, 0.7);
+  }
+}
+
+/* Long labels wrap instead of overflowing on phones. */
+.home-hero .badge {
+  white-space: normal;
+  max-width: 100%;
 }
