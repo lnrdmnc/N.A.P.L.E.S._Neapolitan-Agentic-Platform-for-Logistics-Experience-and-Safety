@@ -1,17 +1,15 @@
 """Avvisi inviati e conferma di ricezione."""
 
-from typing import Literal
-
 from fastapi import APIRouter, HTTPException
 
-from ..models import Alert, Ricezione
+from ..models import Alert, Pubblico, Ricezione
 from .sessione_corrente import sessione
 
 router = APIRouter(tags=["avvisi"])
 
 
 @router.get("/api/avvisi", response_model=list[Alert])
-def avvisi(pubblico: Literal["tutti", "tifoso", "residente", "turista"] | None = None) -> list[Alert]:
+def avvisi(pubblico: Pubblico | None = None) -> list[Alert]:
     """Avvisi inviati. Con `pubblico`, quelli per quel profilo più quelli per tutti, tranne gli
     avvisi per tutti che hanno già una versione per quel profilo (es. l'allerta ufficiale con la
     cornice in inglese per il turista, che ha `references` all'originale)."""

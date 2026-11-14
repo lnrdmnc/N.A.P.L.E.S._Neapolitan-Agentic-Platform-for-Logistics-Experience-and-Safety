@@ -101,6 +101,7 @@
               "tutti",
               "tifoso",
               "residente",
+              "pendolare",
               "turista"
             ],
             "title": "Pubblico",
@@ -1582,6 +1583,7 @@
                     "tutti",
                     "tifoso",
                     "residente",
+                    "pendolare",
                     "turista"
                   ],
                   "type": "string"

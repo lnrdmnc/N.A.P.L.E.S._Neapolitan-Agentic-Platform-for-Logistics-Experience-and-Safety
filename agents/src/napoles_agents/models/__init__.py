@@ -4,7 +4,7 @@ Sono la fonte di contracts/agenti.openapi.json: chi li cambia esegue `make contr
 e avvisa in docs/STATO.md. Un modello nuovo va nel file della sua area e qui sotto.
 """
 
-from .alert import Alert, AreaAlert, Ricezione
+from .alert import Alert, AreaAlert, Pubblico, Ricezione
 from .base import Affidabilita, Ambito, Caso
 from .citta import Evento, StatoCitta, StatoLinea, TipoEvento
 from .contesto import Contesto, EventoSismicoReale, LivelloVulcanico, Meteo
@@ -38,6 +38,7 @@ __all__ = [
     "PassoSimulazione",
     "Piano",
     "Proposta",
+    "Pubblico",
     "Ricezione",
     "SerieSimulazione",
     "StatoCitta",

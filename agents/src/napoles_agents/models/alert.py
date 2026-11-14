@@ -4,6 +4,10 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+# Profili a cui si rivolge un avviso. «pendolare»: chi rientra verso l'area flegrea
+# (Bagnoli, Pozzuoli) con Cumana o Linea 2, anche se tifoso o residente.
+Pubblico = Literal["tutti", "tifoso", "residente", "pendolare", "turista"]
+
 
 class AreaAlert(BaseModel):
     descrizione: str
@@ -30,7 +34,7 @@ class Alert(BaseModel):
     source: str = Field(description="Provenienza dell'informazione, mostrata all'utente")
     ufficiale: bool = Field(description="True se è un'allerta ufficiale inoltrata senza modifiche")
     simulato: bool = True
-    pubblico: Literal["tutti", "tifoso", "residente", "turista"]
+    pubblico: Pubblico
     lingua: Literal["it", "en"] = "it"
     piano_id: str | None = None
 
